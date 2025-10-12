@@ -5,4 +5,6 @@ These papers have been collated by the help of a large number of students over t
 
 If you wish to contribute to the repository, make a pull request or contact the owners of this repository/part of the IISER-M Github organization.
 
-For an even older archive, see [link](https://iiserm.github.io/course_files/)
+For an even older archive, see [link](https://iiserm.github.io/course_files/).
+
+Studocu has more resources, see [link](https://www.studocu.com/in/institution/indian-institute-of-science-education-and-research-mohali/30483).
