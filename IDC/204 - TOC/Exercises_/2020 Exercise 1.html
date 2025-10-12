@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>exercises01 - MTH201</title>
+  <meta charset="utf-8" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../css/my.css">
+<link rel="stylesheet" href="../css/syntax.css">
+  <link rel="alternate" type="application/atom+xml" title="MTH 201" href="../atom.xml" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+  <div class="navbar">
+
+    <header>
+      <hgroup>
+        <h1><a href="../index.html" id="titlelink">Curves and Surfaces<br /> (MTH 201)</a></h1>
+      </hgroup>
+    </header>
+
+    <nav id="mainnav">
+      <div id="topmenu">
+        <menu>
+          <a href="../index.html">Course information</a>
+	  
+          <a href="../assignments.html">Exercise sheets</a>
+	  
+	  
+	  
+          <a href="../slides.html">Last year's slides</a>
+	  
+        </menu>
+	</div>
+    </nav>
+    </div>
+    <section id="pagecontent">
+        <article>
+    <section class="header">
+        <h1>Exercise sheet 1</h1>
+    </section>
+    <section>
+      <p>
+	
+	
+      </p>
+<p class="date"><strong>&nbsp;Last modified: 05:39 PM - 16 January, 2023 </strong></p>
+	  
+	  <a href="../assignments/pdfs/exercises01.pdf">PDF version</a>
+	  
+	  
+        <ol>
+<li><p>Verify the following using truth tables: a) <span class="math inline">\(P \lor P \land Q = P\)</span> b) <span class="math inline">\(P \land (P \lor Q) = P\)</span> c) <span class="math inline">\(P \lor (\neg P \land Q) = P \lor Q\)</span></p></li>
+<li><p>Find a boolean expression for the following truth table in terms of <span class="math inline">\(\land\)</span>, <span class="math inline">\(\lor\)</span>, and <span class="math inline">\(\neg\)</span> and then simplify it:</p>
+<p>| <span class="math inline">\(P\)</span> | <span class="math inline">\(Q\)</span> | <span class="math inline">\(R\)</span> | | |—–|—–|—–|—| | T | T | T | T | | T | T | F | T | | T | F | T | F | | T | F | F | F | | F | T | T | F | | F | T | F | F | | F | F | T | F | | F | F | F | F |</p></li>
+<li><p>Define the <span class="math inline">\(\mathrm{NOR}\)</span> operator by the rule, <span class="math inline">\(P\ \mathrm{NOR}\ Q\)</span> is true if and only if <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both false. a) Write a truth table for <span class="math inline">\(\mathrm{NOR}\)</span>. b) Find an expression for <span class="math inline">\(P\ \mathrm{NOR}\ Q\)</span> in terms of <span class="math inline">\(\land\)</span>, <span class="math inline">\(\lor\)</span>, and <span class="math inline">\(\neg\)</span>. c) Prove that <span class="math inline">\(\neg P\)</span> can be defined completely in terms of <span class="math inline">\(\mathrm{NOR}\)</span> *(Hint: since <span class="math inline">\(\mathrm{NOR}\)</span> takes two arguments but <span class="math inline">\(\neg P\)</span> involves just one variable, there is only one thing you can do!).* d) Prove that <span class="math inline">\(P \lor Q\)</span> can be expressed using only the <span class="math inline">\(\mathrm{NOR}\)</span> operator. *(Hint: <span class="math inline">\(\lor\)</span> is the negation of <span class="math inline">\(\mathrm{NOR}\)</span> and part c. shows how to express negation in terms of <span class="math inline">\(\mathrm{NOR}\)</span>).* e) Prove that <span class="math inline">\(P \land Q\)</span> can be expressed using only the <span class="math inline">\(\mathrm{NOR}\)</span> operator, and therefore, by c. and d. you can express any boolean function using only the <span class="math inline">\(\mathrm{NOR}\)</span> operator. *(Hint: compare the truth tables of <span class="math inline">\(\land\)</span> and <span class="math inline">\(\mathrm{NOR}\)</span>. How do you get one from the other?)*</p></li>
+<li><p>Write truth tables for the following expressions and based on that try to guess an equivalent but simpler expression (involving fewer terms): a) <span class="math inline">\(P \land P\)</span> a) <span class="math inline">\(P \lor P\)</span> a) <span class="math inline">\(P \land (P \lor Q)\)</span> a) <span class="math inline">\(P \lor (P \land Q)\)</span> a) <span class="math inline">\(T \land P\)</span> a) <span class="math inline">\(F \land P\)</span> a) <span class="math inline">\(T \lor P\)</span> a) <span class="math inline">\(F \lor P\)</span> a) <span class="math inline">\(P \land \neg P\)</span> a) <span class="math inline">\(P \lor \neg P\)</span></p></li>
+<li><p>Verify the following using truth tables: a) <span class="math inline">\(P \land Q = Q \land P\)</span> a) <span class="math inline">\(P \lor Q = Q \lor P\)</span> a) <span class="math inline">\(P \land (Q \lor R) = (P \land Q) \lor (P \land R)\)</span> a) <span class="math inline">\(P \lor (Q \land R) = (P \lor Q) \land (P \lor R)\)</span> a) <span class="math inline">\(\neg (P \land Q) = \neg P \lor \neg Q\)</span> a) <span class="math inline">\(\neg (P \lor Q) = \neg P \land \neg Q\)</span></p></li>
+<li><p>If you prove an equality of boolean expressions, for example, <span class="math inline">\(\neg (P \land Q) = \neg P \lor \neg Q\)</span>, then if you replace every <span class="math inline">\(\lor\)</span> with <span class="math inline">\(\land\)</span>, every <span class="math inline">\(\land\)</span> with <span class="math inline">\(\lor\)</span>, every <span class="math inline">\(T\)</span> with <span class="math inline">\(F\)</span>, and every <span class="math inline">\(F\)</span> with <span class="math inline">\(T\)</span> in that expression, you get a new equality of expressions called the "dual" which is also guaranteed to be true (in this example, <span class="math inline">\(\neg (P \lor Q) = \neg P \land \neg Q\)</span> is the dual of the example). a) Identify any pairs of dual expressions in the previous exercise. Therefore, you need only have verified one per pair. b) Why do you think this principle of duality holds?</p></li>
+<li><p>Now that you have verified many simple boolean equations using truth tables, try to use various combinations of them to simplify the following boolean expressions: a) <span class="math inline">\((\neg P \lor \neg Q) \land (\neg P \lor Q)\)</span> b) <span class="math inline">\(\neg P \land \neg (P \lor Q)\)</span></p></li>
+<li><p>During the lecture we discussed a method to derive a boolean expression from its truth table, by looking at the rows whose output is <span class="math inline">\(T\)</span>. Can you come up with an analogous method that involves looking at the rows whose output is <span class="math inline">\(F\)</span>?</p></li>
+</ol>
+    </section>
+</article>
+
+    </section>
+
+<section id="posts" class="sidenav">
+
+    <h2>Latest exercise sheet</h2>
+<ul>
+    
+        <li>
+          <a href="../assignments/exercises01.html">Exercise sheet 1</a>
+	   /
+	  <a href="../assignments/pdfs/exercises01.pdf">PDF version</a>
+	  
+	  
+        </li>
+    
+</ul>
+
+    <p><a href="../assignments.html">All exercise sheets&hellip;</a></p>
+
+
+
+
+
+
+
+</section>
+</body>
+</html>
