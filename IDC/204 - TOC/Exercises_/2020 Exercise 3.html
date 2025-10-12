@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Exercise sheet 3 - IDC 204</title>
+  <meta charset="utf-8" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../css/my.css">
+<link rel="stylesheet" href="../css/syntax.css">
+  <link rel="alternate" type="application/atom+xml" title="MTH 410" href="../atom.xml" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+  <div class="navbar">
+
+    <header>
+      <hgroup>
+        <h1><a href="../index.html" id="titlelink">The Theory of Computation <br /> (IDC 204)</a></h1>
+      </hgroup>
+    </header>
+
+    <nav id="mainnav">
+      <div id="topmenu">
+        <menu>
+          <a href="../index.html">Course information</a>
+	  
+	  
+          <a href="../assignments.html">Exercise sheets</a>
+	  
+	  
+          <a href="../posts.html">Comments</a>
+	  
+	  
+          <a href="../lecturenotes.html">Dhruva Sambrani's notes</a>
+	  
+        </menu>
+	</div>
+    </nav>
+    </div>
+    <section id="pagecontent">
+      <a href="../assignments/pdfs/exercises03.pdf">PDF version</a>
+        <article>
+<header>
+<h1>Exercise sheet 3</h1>
+
+</header>
+
+<section>
+<p><strong>Note:</strong> Some new questions have been added in the middle too</p>
+<ol type="1">
+<li>Design a deterministic finite state automaton over the alphabet <span class="math inline">\(\Sigma=\{0,1\}\)</span> that will accept a string if and only if it
+<ol type="a">
+<li>is the empty string</li>
+<li>iS not the empty string</li>
+<li>is precisely the string <span class="math inline">\(111\)</span></li>
+<li>begins with the substring <span class="math inline">\(111\)</span></li>
+<li>is the empty string or begins with the substring <span class="math inline">\(111\)</span></li>
+<li>ends with the substring <span class="math inline">\(111\)</span></li>
+<li>begins with <span class="math inline">\(0\)</span> and ends with <span class="math inline">\(1\)</span></li>
+<li>contains the substring <span class="math inline">\(111\)</span></li>
+</ol></li>
+<li><p>Show that if a language <span class="math inline">\(L\)</span> over some alphabet <span class="math inline">\(\Sigma\)</span> can be recognized by a finite state automaton, then even its complement, <span class="math inline">\(L^c\)</span> (where <span class="math inline">\(L^c := \{s \in \Sigma^* \ |\ s \not\in L\}\)</span>), can be recognized by some finite state automaton.</p></li>
+<li>We will be discussing this in the lecture, but try to think about it yourself first. Suppose we have an automaton that recognizes a language <span class="math inline">\(L_1\)</span>, and another that recognizes a language <span class="math inline">\(L_2\)</span>.
+<ol type="a">
+<li>How will you design an automaton that recognizes <span class="math inline">\(L_1 \cup L_2\)</span>?</li>
+<li>How will you design an automaton that recognizes <span class="math inline">\(L_1 \cap L_2\)</span>?</li>
+</ol></li>
+<li>For which of the following languages over the alphabet <span class="math inline">\(\Sigma=\{0, 1\}\)</span> do you feel it is impossible to design a deterministic finite state automaton that recognizes it. For each of the rest, design an automaton to recognize it.
+<ol type="a">
+<li><span class="math inline">\(L = \{ ss\ |\ s\ \mathrm{is\ a\ string\ over}\ \Sigma \}\)</span></li>
+<li>The language consisting of precisely those strings that have an even number of 0s and 1s</li>
+<li>a language consisting of strings with only 1s and that too a prime number of 1s</li>
+<li>The language of all strings with 2 consecutive 0s anywhere in the string</li>
+<li>The language consisting of strings with equal number of 0s and 1s</li>
+<li>The language consisting of precisesly those strings with more 1s than 0s.</li>
+</ol></li>
+<li><p>Consider the alphabet <span class="math inline">\(\Sigma = \{0,1,\ldots,n,(,),+,-,*,/\}\)</span>. Prove that it is impossible to build a finite state automaton that will reject precisely those strings over <span class="math inline">\(\Sigma\)</span> that have mis-matched parentheses but accept those with all their parentheses matched. For example, it should reject “(5 + 6 - 9” but should accept “(5+6)-9”</p></li>
+<li><p>Consider the alphabet <span class="math inline">\(\Sigma = \{1\}\)</span> and let <span class="math inline">\(L := \{1^p \ |\ p\ \mathrm{is\ a\ prime}\}\)</span>. Prove that <span class="math inline">\(L\)</span> cannot be recognized by a finite state automaton.</p></li>
+<li><p>Consider a finite state automaton, <span class="math inline">\(M\)</span>, that recognizes a language, <span class="math inline">\(L\)</span>, over an alphabet, <span class="math inline">\(\Sigma\)</span>. If we now enlarge the alphabet to <span class="math inline">\(\Sigma'\)</span>, i.e. <span class="math inline">\(\Sigma \subset \Sigma'\)</span>, but consider the same set strings as before as our language, how would you modify <span class="math inline">\(M\)</span> to recognize this language? Note that while it accepts exactly the same strings as before, it must reject a lot more strings.</p></li>
+<li><p>By our definition, a finite state automaton <em>must</em> read the entire input even if it is already clear that the string must be rejected (for example, if the language includes all strings beginning with a 0). Let us define a “haltable automaton” that can also reject and stop reading the string when there is no point in doing so. Such an automaton may be represented by <span class="math inline">\((Q, \Sigma, \delta, q_0, F, H)\)</span> where <span class="math inline">\(H\)</span> denotes the subset of “reject and halt states” and the other symbols carry their usual meanings. It works as usual except that if the automaton enters a state in <span class="math inline">\(H\)</span>, it immediately halts and rejects the string reading no more characters. Show that for any such “haltable automaton”, the language that it recognizes can also be recognized by a standard deterministic finite state automaton. Therefore, despite the improvement, “haltable automata” recognize no more languages than the usual deterministic finite state automata can.</p></li>
+</ol>
+<p><strong>To be completed</strong></p>
+</section>
+</article>
+
+    </section>
+<section id="posts" class="sidenav">
+
+
+    <h2>Latest exercise sheet</h2>
+    <ul>
+	  
+          <li><a href="../assignments/exercises09.html">Exercise sheet 9</a>
+&nbsp;    (<a href="../assignments/pdfs/exercises09.pdf">PDF version</a>)
+	  </li>
+	  
+    </ul>
+    <p><a href="../assignments.html">All exercise sheets&hellip;</a></p>
+
+
+
+    <h2>Recent comments</h2>
+    <ul>
+	  
+          <li><a href="../posts/2020-04-19-multitape.html">Multitape Turing Machine</a>
+	    &nbsp; 
+          </li>
+	  
+          <li><a href="../posts/2020-04-19-a-subroutine.html">A remark on subroutines</a>
+	    &nbsp; 
+          </li>
+	  
+          <li><a href="../posts/2020-04-03-example3.html">Turing machine example: Shifting</a>
+	    &nbsp; <a href="../posts/pdfs/2020-04-03-example3.pdf">PDF version</a>
+          </li>
+	  
+          <li><a href="../posts/2020-03-29-turing-example2.html">Turing machine example: Power of 2</a>
+	    &nbsp; 
+          </li>
+	  
+          <li><a href="../posts/2020-03-25-zoom.html">Questions during the 4th of March Zoom session</a>
+	    &nbsp; 
+          </li>
+	  
+    </ul>
+    <p><a href="../posts.html">All comments&hellip;</a></p>
+
+
+
+    
+
+    <h2>Dhruva Sambrani's recent notes</h2>
+    <ul>
+	  
+          <li><a href="../lecturenotes/lecture05.html">Regular Languages, Pumping Lemma and existance of an FSA for a Language</a>
+    
+    - <emph class="date">January 29, 2020
+    
+	    &nbsp; <a href="../lecturenotes/pdfs/lecture05.pdf">PDF version</a>
+          </li>
+	  
+          <li><a href="../lecturenotes/lecture04.html">Finite State Automata</a>
+    
+    - <emph class="date">January 27, 2020
+    
+	    &nbsp; <a href="../lecturenotes/pdfs/lecture04.pdf">PDF version</a>
+          </li>
+	  
+    </ul>
+    <p><a href="../lecturenotes.html">All lecture notes&hellip;</a></p>
+
+
+    
+</section>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Exercise sheet 4 - IDC 204</title>
+  <meta charset="utf-8" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../css/my.css">
+<link rel="stylesheet" href="../css/syntax.css">
+  <link rel="alternate" type="application/atom+xml" title="MTH 410" href="../atom.xml" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+  <div class="navbar">
+
+    <header>
+      <hgroup>
+        <h1><a href="../index.html" id="titlelink">The Theory of Computation <br /> (IDC 204)</a></h1>
+      </hgroup>
+    </header>
+
+    <nav id="mainnav">
+      <div id="topmenu">
+        <menu>
+          <a href="../index.html">Course information</a>
+	  
+	  
+          <a href="../assignments.html">Exercise sheets</a>
+	  
+	  
+          <a href="../posts.html">Comments</a>
+	  
+	  
+          <a href="../lecturenotes.html">Dhruva Sambrani's notes</a>
+	  
+        </menu>
+	</div>
+    </nav>
+    </div>
+    <section id="pagecontent">
+      <a href="../assignments/pdfs/exercises04.pdf">PDF version</a>
+        <article>
+<header>
+<h1>Exercise sheet 4</h1>
+
+</header>
+
+<section>
+<ol type="1">
+<li>Design a non-deterministic finite state automaton over the alphabet <span class="math inline">\(\Sigma=\{0,1\}\)</span> that will recognize the following languages (try to design a deterministic one too to get a feel for how much easier it is to design a non-deterministic one).
+<ol type="a">
+<li>Strings with the <span class="math inline">\(n\)</span>th last character 0, for any natural number <span class="math inline">\(n\)</span>.</li>
+<li>Strings that begin with <span class="math inline">\(01\)</span>.</li>
+</ol></li>
+<li>If <span class="math inline">\(w\)</span> is a string, let <span class="math inline">\(w^*\)</span> denote the string <span class="math inline">\(ww...w\)</span>, i.e. <span class="math inline">\(w\)</span> repeated any finite number of times. Design non-deterministic finite state automata to recognize the following languages over <span class="math inline">\(\Sigma:= \{0,1\}\)</span>.
+<ol type="a">
+<li>Strings of the form <span class="math inline">\(0^*\)</span></li>
+<li>Strings of the form <span class="math inline">\(11^*\)</span></li>
+<li>Strings of the form <span class="math inline">\(101(010)^*11\)</span></li>
+</ol></li>
+<li>If <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span> are regular languages, design a non-deterministic finite state automaton that recognizes:
+<ol type="a">
+<li><span class="math inline">\(L_1 \cup L_2\)</span></li>
+<li><span class="math inline">\(L_1 \circ L_2 := \{xy \ |\ x\in L_1,\ y\in L_2\}\)</span> (i.e. the concatentation of a string from <span class="math inline">\(L_1\)</span> with a string from <span class="math inline">\(L_2\)</span>)</li>
+<li><span class="math inline">\(L_1^* := \{x_1x_2\ldots x_n \ |\ x_i\in L_1\}\)</span> (i.e. concatenation of finitely many strings from the language)</li>
+</ol></li>
+<li><p>Prove that any language that can be recognized by a non-deterministic finite state automaton can also be recognized by a deterministic one. Therefore, a language is regular if and only if it can be recognized by a non-deterministic finite state automaton.</p></li>
+<li><p>Prove that if a language, <span class="math inline">\(L\)</span>, is regular then the language, <span class="math inline">\(L'\)</span>, obtained by reversing every string of <span class="math inline">\(L\)</span> is also regular.</p></li>
+<li><p>If <span class="math inline">\((Q_1,\Sigma,\delta_1,q_1, F_1)\)</span> and <span class="math inline">\((Q_2,\Sigma,\delta_2,q_2, F_2)\)</span> are non-deterministic finite state automata that recognize the languages <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span> respectively, then we have already seen that we can design an automaton <span class="math inline">\((Q,\Sigma,\delta,q_0, F)\)</span> to recognize <span class="math inline">\(L_1 \cup L_2\)</span> by taking <span class="math inline">\(Q=Q_1\cup Q_2\cup \{q_0\}\)</span>, where <span class="math inline">\(q_0\)</span> is a new state, <span class="math inline">\(F= F_1\cup F_2\)</span>, and <span class="math display">\[ \delta(q,c) = \begin{cases} 
+   \delta_1(q,c) &amp; q\in Q_1\\
+   \delta_2(q,c) &amp; q\in Q_2\\
+   \{q_1,q_2\} &amp; q = q_0, c = \epsilon \\
+   \emptyset &amp; \mathrm{otherwise}
+\end{cases}
+\]</span> Why did we need an entirely new initial state? What if we took either <span class="math inline">\(q_1\)</span> or <span class="math inline">\(q_2\)</span> to be the initial state? Does it then accept or reject more strings than it should?</p></li>
+</ol>
+</section>
+</article>
+
+    </section>
+<section id="posts" class="sidenav">
+
+
+    <h2>Latest exercise sheet</h2>
+    <ul>
+	  
+          <li><a href="../assignments/exercises09.html">Exercise sheet 9</a>
+&nbsp;    (<a href="../assignments/pdfs/exercises09.pdf">PDF version</a>)
+	  </li>
+	  
+    </ul>
+    <p><a href="../assignments.html">All exercise sheets&hellip;</a></p>
+
+
+
+    <h2>Recent comments</h2>
+    <ul>
+	  
+          <li><a href="../posts/2020-04-19-multitape.html">Multitape Turing Machine</a>
+	    &nbsp; 
+          </li>
+	  
+          <li><a href="../posts/2020-04-19-a-subroutine.html">A remark on subroutines</a>
+	    &nbsp; 
+          </li>
+	  
+          <li><a href="../posts/2020-04-03-example3.html">Turing machine example: Shifting</a>
+	    &nbsp; <a href="../posts/pdfs/2020-04-03-example3.pdf">PDF version</a>
+          </li>
+	  
+          <li><a href="../posts/2020-03-29-turing-example2.html">Turing machine example: Power of 2</a>
+	    &nbsp; 
+          </li>
+	  
+          <li><a href="../posts/2020-03-25-zoom.html">Questions during the 4th of March Zoom session</a>
+	    &nbsp; 
+          </li>
+	  
+    </ul>
+    <p><a href="../posts.html">All comments&hellip;</a></p>
+
+
+
+    
+
+    <h2>Dhruva Sambrani's recent notes</h2>
+    <ul>
+	  
+          <li><a href="../lecturenotes/lecture05.html">Regular Languages, Pumping Lemma and existance of an FSA for a Language</a>
+    
+    - <emph class="date">January 29, 2020
+    
+	    &nbsp; <a href="../lecturenotes/pdfs/lecture05.pdf">PDF version</a>
+          </li>
+	  
+          <li><a href="../lecturenotes/lecture04.html">Finite State Automata</a>
+    
+    - <emph class="date">January 27, 2020
+    
+	    &nbsp; <a href="../lecturenotes/pdfs/lecture04.pdf">PDF version</a>
+          </li>
+	  
+    </ul>
+    <p><a href="../lecturenotes.html">All lecture notes&hellip;</a></p>
+
+
+    
+</section>
+</body>
+</html>

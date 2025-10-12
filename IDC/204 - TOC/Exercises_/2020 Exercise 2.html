@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Exercise sheet 2 - IDC 204</title>
+  <meta charset="utf-8" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../css/my.css">
+<link rel="stylesheet" href="../css/syntax.css">
+  <link rel="alternate" type="application/atom+xml" title="MTH 410" href="../atom.xml" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+  <div class="navbar">
+
+    <header>
+      <hgroup>
+        <h1><a href="../index.html" id="titlelink">The Theory of Computation <br /> (IDC 204)</a></h1>
+      </hgroup>
+    </header>
+
+    <nav id="mainnav">
+      <div id="topmenu">
+        <menu>
+          <a href="../index.html">Course information</a>
+	  
+	  
+          <a href="../assignments.html">Exercise sheets</a>
+	  
+	  
+          <a href="../posts.html">Comments</a>
+	  
+	  
+          <a href="../lecturenotes.html">Dhruva Sambrani's notes</a>
+	  
+        </menu>
+	</div>
+    </nav>
+    </div>
+    <section id="pagecontent">
+      <a href="../assignments/pdfs/exercises02.pdf">PDF version</a>
+        <article>
+<header>
+<h1>Exercise sheet 2</h1>
+
+</header>
+
+<section>
+<ol type="1">
+<li>Prove that the following are tautologies.
+<ol type="a">
+<li><span class="math inline">\(P \land Q \Rightarrow P\)</span></li>
+<li><span class="math inline">\(((P \Rightarrow Q) \land (Q \Rightarrow R)) \Rightarrow (P \Rightarrow R)\)</span></li>
+<li><span class="math inline">\(((P_0 \Rightarrow P_1) \land (P_1 \Rightarrow P_2) \land \ldots \land (P_{n-1} \Rightarrow P_n)) \Rightarrow (P_0 \Rightarrow P_n)\)</span></li>
+<li><span class="math inline">\((P \Rightarrow Q) \land (Q \Rightarrow P) \Rightarrow (P \Leftrightarrow Q)\)</span></li>
+</ol></li>
+<li>Consider the predicate <span class="math inline">\(P(x,y,z) := ``2x + 5y - 6z = 1&quot;\)</span>. Which of the following propositions are true:
+<ol type="a">
+<li><span class="math inline">\(\forall x \forall y \forall z P(x, y, z)\)</span></li>
+<li><span class="math inline">\(\forall x \forall y \exists z P(x, y, z)\)</span></li>
+<li><span class="math inline">\(\forall x \exists y \exists z P(x, y, z)\)</span></li>
+<li><span class="math inline">\(\exists x \exists y \exists z P(x, y, z)\)</span></li>
+</ol></li>
+<li>Let <span class="math inline">\(Q(x, y)\)</span> denote the predicate “x is a question from Quiz y”. Let <span class="math inline">\(D(x)\)</span> denote the predicate “x is difficult”. Write expressions for the following statements using quantifiers, <span class="math inline">\(Q\)</span>, and <span class="math inline">\(D\)</span>:
+<ol type="a">
+<li>“Quiz 3 has exactly one difficult question”</li>
+<li>“Every quiz will have at least one difficult question”</li>
+<li>“For some quizzes, every question will be difficult”</li>
+<li>“For some quizzes, <em>at most one</em> question will be easy”</li>
+</ol></li>
+<li>Which of these are true no matter what the predicate <span class="math inline">\(P(x, y)\)</span> is. For each of the others, find an example for which it does not hold.
+<ol type="a">
+<li><span class="math inline">\(\forall x \exists y P(x,y) \equiv \exists y \forall x P(x,y)\)</span>.</li>
+<li><span class="math inline">\(\forall x \forall y P(x,y) \equiv \forall y \forall x P(x,y)\)</span>.</li>
+<li><span class="math inline">\(\exists x \exists y P(x,y) \equiv \exists y \exists x P(x,y)\)</span>.</li>
+</ol></li>
+<li>One can define a new quantifier <span class="math inline">\(\exists! x P(x)\)</span> to mean that “there exists a <em>unique</em> x such that <span class="math inline">\(P(x)\)</span> is true”. Show that this can always be expressed by an expression involving only the usual two quantifiers, <span class="math inline">\(\exists\)</span>, and <span class="math inline">\(\forall\)</span>. <em>(Hint: you want to say that it exists <strong>and</strong> is unique. What does it mean to say that there is a unique x satisfying a predicate? Try considering its negation if that helps. You may assume that there is some notion of equality between the objects under consideration so that it makes sense to ask if “<span class="math inline">\(a = b\)</span>” for any given <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>)</em></li>
+</ol>
+</section>
+</article>
+
+    </section>
+<section id="posts" class="sidenav">
+
+
+    <h2>Latest exercise sheet</h2>
+    <ul>
+	  
+          <li><a href="../assignments/exercises09.html">Exercise sheet 9</a>
+&nbsp;    (<a href="../assignments/pdfs/exercises09.pdf">PDF version</a>)
+	  </li>
+	  
+    </ul>
+    <p><a href="../assignments.html">All exercise sheets&hellip;</a></p>
+
+
+
+    <h2>Recent comments</h2>
+    <ul>
+	  
+          <li><a href="../posts/2020-04-19-multitape.html">Multitape Turing Machine</a>
+	    &nbsp; 
+          </li>
+	  
+          <li><a href="../posts/2020-04-19-a-subroutine.html">A remark on subroutines</a>
+	    &nbsp; 
+          </li>
+	  
+          <li><a href="../posts/2020-04-03-example3.html">Turing machine example: Shifting</a>
+	    &nbsp; <a href="../posts/pdfs/2020-04-03-example3.pdf">PDF version</a>
+          </li>
+	  
+          <li><a href="../posts/2020-03-29-turing-example2.html">Turing machine example: Power of 2</a>
+	    &nbsp; 
+          </li>
+	  
+          <li><a href="../posts/2020-03-25-zoom.html">Questions during the 4th of March Zoom session</a>
+	    &nbsp; 
+          </li>
+	  
+    </ul>
+    <p><a href="../posts.html">All comments&hellip;</a></p>
+
+
+
+    
+
+    <h2>Dhruva Sambrani's recent notes</h2>
+    <ul>
+	  
+          <li><a href="../lecturenotes/lecture05.html">Regular Languages, Pumping Lemma and existance of an FSA for a Language</a>
+    
+    - <emph class="date">January 29, 2020
+    
+	    &nbsp; <a href="../lecturenotes/pdfs/lecture05.pdf">PDF version</a>
+          </li>
+	  
+          <li><a href="../lecturenotes/lecture04.html">Finite State Automata</a>
+    
+    - <emph class="date">January 27, 2020
+    
+	    &nbsp; <a href="../lecturenotes/pdfs/lecture04.pdf">PDF version</a>
+          </li>
+	  
+    </ul>
+    <p><a href="../lecturenotes.html">All lecture notes&hellip;</a></p>
+
+
+    
+</section>
+</body>
+</html>
