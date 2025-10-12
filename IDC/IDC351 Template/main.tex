@@ -1,0 +1,41 @@
+%------------------------------------------------------------------------------------------------------
+%PACKAGES AND OTHER DOCUMENT CONFIGURATIONS (DO NOT MAKE CHANGES IF YOU ARE NOT SURE WHAT YOU ARE DOING)
+%------------------------------------------------------------------------------------------------------
+\documentclass[a4paper,12pt]{article}
+\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx} %don't remove this package, it loads the institute logo and other figures
+\usepackage{caption}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{centernot}
+\usepackage{mathrsfs}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref}
+\usepackage{lipsum} %comment out this package while writing your report
+%-----------------------------------------------------------------------------------------------------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+%-----------------------------------------------------------------------------------------------------
+
+\begin{document}
+%-----------------------------------------------------------------------------------------------------
+%COVER PAGE
+%-----------------------------------------------------------------------------------------------------
+\input{cover.tex} %insert the cover page
+%-----------------------------------------------------------------------------------------------------
+
+%-----------------------------------------------------------------------------------------------------
+%REPORT CONTENT
+%-----------------------------------------------------------------------------------------------------
+\input{edit/content.tex}
+%-----------------------------------------------------------------------------------------------------
+
+\end{document}
