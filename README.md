@@ -128,3 +128,6 @@ HSS/604/2022/Midsem I.jpeg
 * This is a student-run archive intended for learning and exam prep. Use at your own risk.
 
 ---
+
+## Commit leaderboard (metric: files)
+* [Soumadip (MS22)](https://github.com/SoumadipBhowmick): 33
