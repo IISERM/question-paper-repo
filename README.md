@@ -66,12 +66,14 @@ Pull requests welcome. Keep it simple, consistent, and legal.
 <img width="1281" height="170" alt="Screenshot 2025-11-13 121043" src="https://github.com/user-attachments/assets/16ed61cf-c451-47d2-bfa0-dbd8c2c57047" />
 This will make a copy of the repo in your account so u can make edits to it
 
+
 **2) Adding Files**
 
 <img width="1889" height="433" alt="image" src="https://github.com/user-attachments/assets/3e0ad01e-883f-4b80-a925-9f01e70050cb" />
 - In your desired folder click on add files button
 - After uploading the files click on `Commit changes` (The green button)
 * Optionally u can also add a title and a description of the files
+
 
 **3)Merging your Uploaded Files**
 
