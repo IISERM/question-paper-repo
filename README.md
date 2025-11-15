@@ -158,3 +158,4 @@ HSS/604/2022/Midsem I.jpeg
 
 ## Commit leaderboard (metric: files)
 * [Soumadip (MS22)](https://github.com/SoumadipBhowmick): 33
+* [Darsh](https://github.com/Darsh-A): 1
