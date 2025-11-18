@@ -1,0 +1,10 @@
+Bubble Chamber Cross Section Analysis}:
+Total beam tracks (N_0): 587
+Total interactions (N_i): 98
+Total cross section: 8.598e-02 barns
+Channel cross sections:
+  ◆ 1 Prong: 8.0254e-04 barns
+  ◆ 2 Prongs: 6.5263e-02 barns
+  ◆ 3 Prongs: 8.0254e-04 barns
+  ◆ 4 Prongs: 1.5487e-02 barns
+  ◆ 6 Prongs: 8.0254e-04 barns
