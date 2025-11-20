@@ -276,6 +276,7 @@ function addUploadGroup() {
                         <option value="">Select Subject</option>
                         <option value="Biology">Biology</option>
                         <option value="Chemistry">Chemistry</option>
+                        <option value="EES">EES</option>
                         <option value="HSS">HSS</option>
                         <option value="IDC">IDC</option>
                         <option value="Math">Math</option>
