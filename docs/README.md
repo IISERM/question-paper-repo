@@ -4,7 +4,7 @@ This directory contains the GitHub Pages website for the IISER Mohali Question P
 
 ## How it works
 
-1. **`generate-tree.js`** - A Node.js script that scans the repository and generates `data.json` with the folder structure
+1. **`generate-tree.js`** - A Node.js script that fetches the repository structure via GitHub API and generates `data.json`
 2. **`index.html`** - The main HTML page that displays the folder tree
 3. **`styles.css`** - CSS styling for the website
 4. **`script.js`** - JavaScript that loads and renders the folder tree dynamically
@@ -16,16 +16,22 @@ The website is automatically built and deployed on every push to the main branch
 
 The workflow:
 
-1. Checks out the repository
-2. Runs `generate-tree.js` to create the latest folder structure
+1. Checks out only the `docs/` directory (sparse checkout for speed)
+2. Runs `generate-tree.js` to fetch the folder structure via GitHub API
 3. Deploys the `docs/` directory to GitHub Pages
+
+**Note:** The build process uses GitHub's Tree API instead of cloning the entire repository, making builds fast regardless of repository size.
 
 ## Local testing
 
 To test the website locally:
 
 ```bash
-# Generate the folder structure
+# Set environment variables (optional, but recommended)
+export GITHUB_TOKEN="your_personal_access_token"
+export GITHUB_REPOSITORY="IISERM/question-paper-repo"
+
+# Generate the folder structure using GitHub API
 cd docs
 node generate-tree.js
 
@@ -36,6 +42,8 @@ npx serve .
 ```
 
 Then open http://localhost:8000 in your browser.
+
+**Note:** The script will work without `GITHUB_TOKEN`, but authenticated requests have higher rate limits (5000/hour vs 60/hour).
 
 ## Features
 

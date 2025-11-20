@@ -19,16 +19,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      # Only checkout the docs folder
+      - name: Checkout docs
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: docs/
+          fetch-depth: 1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      # This runs before the site is uploaded to ensure data.json is up to date
+      # Generate folder structure using GitHub API
       - name: Generate folder structure
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           cd docs
           node generate-tree.js
