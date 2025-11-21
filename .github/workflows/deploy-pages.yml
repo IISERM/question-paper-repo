@@ -1,10 +1,13 @@
 name: Deploy GitHub Pages
 
 on:
-  push:
+  workflow_dispatch:  # Manual trigger
+  workflow_run:
+    workflows: ["Update Contributor Leaderboard"]
+    types:
+      - completed
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,11 +21,14 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Only deploy if workflow_run was successful (not failed)
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
-      # Only checkout the docs folder
+      # Only checkout the docs folder (always get latest from main)
       - name: Checkout docs
         uses: actions/checkout@v4
         with:
+          ref: main
           sparse-checkout: docs/
           fetch-depth: 1
 
