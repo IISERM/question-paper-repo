@@ -46,6 +46,14 @@ async function loadLeaderboard() {
 function renderLeaderboard(data) {
   const { contributors, last_updated } = data;
 
+  // Handle empty contributors
+  if (!contributors || contributors.length === 0) {
+    const containerEl = document.getElementById("leaderboard-container");
+    containerEl.innerHTML = '<p style="text-align: center; padding: 2rem;">No contributors found yet. Be the first to contribute!</p>';
+    containerEl.style.display = "block";
+    return;
+  }
+
   // Update last updated time
   const updatedEl = document.getElementById("leaderboard-updated");
   const date = new Date(last_updated);

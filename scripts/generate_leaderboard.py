@@ -264,15 +264,39 @@ def generate_json(contributors):
 
 def main():
     try:
+        # Validate environment variables
+        if not GITHUB_TOKEN:
+            raise ValueError("GITHUB_TOKEN environment variable is required")
+        if not REPO_OWNER or not REPO_NAME:
+            raise ValueError("REPO_OWNER and REPO_NAME environment variables are required")
+        
+        print(f"Generating leaderboard for {REPO_OWNER}/{REPO_NAME}")
+        print(f"Excluding: {', '.join(EXCLUDED_USERNAMES)}")
+        print()
+        
         contributors = fetch_all_contributors()
+        
+        if not contributors:
+            print("⚠️  Warning: No contributors found!")
+            print("This might be a new repository or all contributors are excluded.")
+            # Still update with empty list
+        
         update_readme(contributors)
         generate_json(contributors)
         print("✅ Leaderboard updated successfully!")
+        return 0
+        
+    except requests.exceptions.RequestException as e:
+        print(f"❌ GitHub API Error: {e}")
+        print("Check your GITHUB_TOKEN and network connection")
+        return 1
     except Exception as e:
         print(f"❌ Error: {e}")
-        raise
+        import traceback
+        traceback.print_exc()
+        return 1
 
 
 if __name__ == '__main__':
-    main()
+    exit(main())
 
