@@ -20,6 +20,7 @@
 
   /* Consolidated Semantic Colors */
   --success-color: #56949f; /* Pine */
+  --pine-color: #56949f; /* Pine */
   --error-color: #b4637a; /* Love */
   --error-bg: rgba(180, 99, 122, 0.1);
   --error-border: rgba(180, 99, 122, 0.2);
@@ -62,6 +63,7 @@
 
   /* Consolidated Semantic Colors */
   --success-color: #9ccfd8; /* Foam */
+  --pine-color: #3e8fb0; /* Pine */
   --error-color: #eb6f92; /* Love */
   --error-bg: rgba(235, 111, 146, 0.1);
   --error-border: rgba(235, 111, 146, 0.2);
@@ -1482,6 +1484,18 @@ code {
 .btn-tool:hover {
   border-color: var(--primary-color);
   color: var(--primary-color);
+}
+
+.btn-tool-pine {
+  background: var(--pine-color);
+  color: var(--text-on-primary);
+  border-color: var(--pine-color);
+}
+
+.btn-tool-pine:hover {
+  opacity: 0.85;
+  border-color: var(--pine-color);
+  color: var(--text-on-primary);
 }
 
 /* Camera Preview */
