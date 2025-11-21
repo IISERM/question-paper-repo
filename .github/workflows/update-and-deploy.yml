@@ -1,0 +1,87 @@
+name: Update Leaderboard and Deploy Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request_target:
+    types: [closed]
+    branches:
+      - main
+  workflow_dispatch: # Manual trigger
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || (github.event_name == 'pull_request_target' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      # Step 1: Checkout repository with full history
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for accurate commit counts
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 2: Setup Node.js for both leaderboard and docs generation
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Step 3: Generate leaderboard
+      - name: Generate leaderboard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          node scripts/generate_leaderboard.js
+
+      # Step 4: Commit and push leaderboard changes if any
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add README.md docs/leaderboard.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update contributor leaderboard [skip ci]" && git push)
+
+      # Step 5: Pull latest changes to ensure we have updated files
+      - name: Pull latest changes
+        run: |
+          git pull --rebase
+
+      # Step 6: Generate folder structure using GitHub API
+      - name: Generate folder structure
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          cd docs
+          node generate-tree.js
+
+      # Step 7: Setup and deploy to GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
