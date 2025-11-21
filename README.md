@@ -169,7 +169,11 @@ Top contributors based on commit count:
 
 | Rank | Contributor | Commits |
 |------|-------------|--------:|
-| 🥇 | Soumadip Bhowmick | 33 |
+| 🥇 | PseudoFractal | 13 |
+| 🥈 | SASHVATH KRISHNAN S | 12 |
+| 🥉 | Arnav Metrani | 11 |
+| 4 | ACHALESH NIMBIWAL | 5 |
+| 5 | Darsh Suhas Ambade | 4 |
 
-*Last updated: 2025-11-21 09:54:11 UTC*
+*Last updated: 2025-11-21 10:04:26 UTC*
 
