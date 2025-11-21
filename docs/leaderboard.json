@@ -1,31 +1,7 @@
 {
-  "last_updated": "2025-11-21T15:14:49.393240Z",
-  "total_contributors": 13,
+  "last_updated": "2025-11-21T15:22:04.084Z",
+  "total_contributors": 4,
   "contributors": [
-    {
-      "username": "Jasmeen Kaur",
-      "name": "Jasmeen Kaur",
-      "email": "ms23199@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Jasmeen+Kaur&background=random&size=200",
-      "profile_url": null,
-      "commits": 94
-    },
-    {
-      "username": "HARSH VARDHAN SHRESHTH",
-      "name": "HARSH VARDHAN SHRESHTH",
-      "email": "ms24085@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=HARSH+VARDHAN+SHRESHTH&background=random&size=200",
-      "profile_url": null,
-      "commits": 29
-    },
-    {
-      "username": "SASHVATH KRISHNAN S",
-      "name": "SASHVATH KRISHNAN S",
-      "email": "ms24243@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=SASHVATH+KRISHNAN+S&background=random&size=200",
-      "profile_url": null,
-      "commits": 12
-    },
     {
       "username": "ArnavMetrani",
       "name": "Arnav Metrani",
@@ -35,58 +11,10 @@
       "commits": 11
     },
     {
-      "username": "ACHALESH NIMBIWAL",
-      "name": "ACHALESH NIMBIWAL",
-      "email": "ms24255@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=ACHALESH+NIMBIWAL&background=random&size=200",
-      "profile_url": null,
-      "commits": 5
-    },
-    {
-      "username": "Somesh Sharma",
-      "name": "Somesh Sharma",
-      "email": "ms22182@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Somesh+Sharma&background=random&size=200",
-      "profile_url": null,
-      "commits": 2
-    },
-    {
       "username": "Harsh Vardhan Shreshth",
       "name": "Harsh Vardhan Shreshth",
       "email": "hvshreshth@gmail.com",
-      "avatar_url": "https://ui-avatars.com/api/?name=Harsh+Vardhan+Shreshth&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "YASH SHARMA",
-      "name": "YASH SHARMA",
-      "email": "ms25230@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=YASH+SHARMA&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "Melwin Haris",
-      "name": "Melwin Haris",
-      "email": "ms22151@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Melwin+Haris&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "Kshitish Kumar Ratha",
-      "name": "Kshitish Kumar Ratha",
-      "email": "ms22174@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Kshitish+Kumar+Ratha&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "Gokul P Bharathan",
-      "name": "Gokul P Bharathan",
-      "email": "ms23027@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Gokul+P+Bharathan&background=random&size=200",
+      "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
       "profile_url": null,
       "commits": 1
     },
