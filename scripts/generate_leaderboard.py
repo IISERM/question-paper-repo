@@ -20,6 +20,7 @@ REPO_NAME = os.environ.get('REPO_NAME', 'question-paper-repo')
 EXCLUDED_USERNAMES = {
     'Darsh-A',
     'pseudofractal',
+    'Darsh Suhas Ambade',
 }
 
 # GitHub API headers
