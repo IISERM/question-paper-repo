@@ -171,6 +171,31 @@
 
       <div id="folder-tree" class="folder-tree"></div>
 
+      <!-- Contributor Leaderboard Section -->
+      <div class="leaderboard-section" id="leaderboard-section">
+        <h2 class="leaderboard-title">🏆 Contributor Leaderboard</h2>
+        <p class="leaderboard-subtitle">
+          Top contributors based on commit count
+        </p>
+
+        <div id="leaderboard-loading" class="leaderboard-loading">
+          Loading leaderboard...
+        </div>
+        <div id="leaderboard-error" class="leaderboard-error" style="display: none"></div>
+
+        <div id="leaderboard-container" class="leaderboard-container" style="display: none">
+          <div class="leaderboard-podium">
+            <!-- Top 3 will be inserted here -->
+          </div>
+          <div class="leaderboard-list">
+            <!-- Remaining contributors will be inserted here -->
+          </div>
+          <div class="leaderboard-footer">
+            <span id="leaderboard-updated">Last updated: -</span>
+          </div>
+        </div>
+      </div>
+
       <div class="info-section">
         <h3>About This Archive</h3>
         <p>
@@ -273,5 +298,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="leaderboard.js"></script>
   </body>
 </html>

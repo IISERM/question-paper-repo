@@ -163,6 +163,15 @@ HSS/604/2022/Midsem I.jpeg
 
 ---
 
-## Commit leaderboard (metric: files)
-* [Soumadip (MS22)](https://github.com/SoumadipBhowmick): 33
-* [Darsh](https://github.com/Darsh-A): 1
+## 🏆 Contributor Leaderboard
+
+Top contributors based on commit count:
+
+| Rank | Contributor | Commits |
+|------|-------------|--------:|
+| 🥇 | SoumadipBhowmick | 33 |
+| 🥈 | Darsh-A | 1 |
+
+*Last updated: 2025-11-21 00:00:00 UTC*
+
+*This leaderboard auto-updates on every push to main or merged PR*
