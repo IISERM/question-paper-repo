@@ -22,18 +22,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Fetch README (for editing) and docs (for site)
+          # Sparse checkout with a bit more history to be safe
           sparse-checkout: |
             docs/
             README.md
-          fetch-depth: 1
+          fetch-depth: 5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      # Run the Leaderboard Script
       - name: Generate Leaderboard
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -41,25 +40,19 @@ jobs:
         run: |
           node docs/scripts/generate-leaderboard.js
 
-      # Commit README (with safety rebase)
-      - name: Commit README updates
+      - name: Commit changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          
-          # Only commit if README changed
-          if git diff --quiet README.md; then
-            echo "No changes to README.md"
+          git add README.md docs/leaderboard.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
           else
-            git add README.md
             git commit -m "Update contributor leaderboard [skip ci]"
-            
-            # [NOTE] Pull latest changes before pushing to prevent conflicts
             git pull --rebase origin main
             git push
           fi
-
-      # Generate Tree
+      
       - name: Generate folder structure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
