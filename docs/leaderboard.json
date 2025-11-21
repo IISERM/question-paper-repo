@@ -1,18 +1,30 @@
 {
-  "last_updated": "2025-11-21T09:55:37.314777Z",
-  "total_contributors": 10,
+  "last_updated": "2025-11-21T10:06:40.937016Z",
+  "total_contributors": 14,
   "contributors": [
     {
-      "username": "jasmeeeenkaur",
-      "avatar_url": "https://avatars.githubusercontent.com/u/240477497?v=4",
-      "profile_url": "https://github.com/jasmeeeenkaur",
+      "username": "Jasmeen Kaur",
+      "name": "Jasmeen Kaur",
+      "email": "ms23199@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Jasmeen+Kaur&background=random&size=200",
+      "profile_url": null,
       "commits": 94
     },
     {
-      "username": "Darsh-A",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87588873?v=4",
-      "profile_url": "https://github.com/Darsh-A",
-      "commits": 91
+      "username": "Darsh Suhas Ambade",
+      "name": "Darsh Suhas Ambade",
+      "email": "ms22068@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Darsh+Suhas+Ambade&background=random&size=200",
+      "profile_url": null,
+      "commits": 14
+    },
+    {
+      "username": "PseudoFractal",
+      "name": "PseudoFractal",
+      "email": "kshitishkumarratha@gmail.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=PseudoFractal&background=random&size=200",
+      "profile_url": null,
+      "commits": 13
     },
     {
       "username": "SASHVATH KRISHNAN S",
@@ -37,14 +49,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=ACHALESH+NIMBIWAL&background=random&size=200",
       "profile_url": null,
       "commits": 5
-    },
-    {
-      "username": "Darsh Suhas Ambade",
-      "name": "Darsh Suhas Ambade",
-      "email": "ms22068@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Darsh+Suhas+Ambade&background=random&size=200",
-      "profile_url": null,
-      "commits": 4
     },
     {
       "username": "Somesh Sharma",
