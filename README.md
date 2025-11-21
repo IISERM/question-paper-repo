@@ -169,10 +169,11 @@ Top contributors based on commit count:
 
 | Rank | Contributor | Commits |
 |------|-------------|--------:|
-| 🥇 | Arnav Metrani | 11 |
-| 🥈 | Harsh Vardhan Shreshth | 1 |
-| 🥉 | Soumadip Bhowmick | 1 |
-| 4 | BoiledSoupVegetables | 1 |
+| 🥇 | Jasmeen Kaur | 100 |
+| 🥈 | HARSH VARDHAN SHRESHTH | 29 |
+| 🥉 | SASHVATH KRISHNAN S | 12 |
+| 4 | Arnav Metrani | 11 |
+| 5 | ACHALESH NIMBIWAL | 5 |
 
-*Last updated: 2025-11-21 16:14:50 UTC*
+*Last updated: 2025-11-21 17:11:53 UTC*
 
