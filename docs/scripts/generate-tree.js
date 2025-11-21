@@ -5,7 +5,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const IGNORE_DIRS = [".git", "node_modules", "docs", "cloudflare-worker"];
+const IGNORE_DIRS = [".git", "node_modules", "docs", "cloudflare-worker", "scripts"];
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_REPOSITORY = process.env.GITHUB_REPOSITORY || "IISERM/question-paper-repo";
 
@@ -113,7 +113,7 @@ async function main() {
     };
 
     // Write to data.json
-    const outputPath = path.join(__dirname, "data.json");
+    const outputPath = path.join(__dirname, "..", "data.json");
     fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
 
     console.log("Tree structure generated successfully!");

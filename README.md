@@ -169,7 +169,10 @@ Top contributors based on commit count:
 
 | Rank | Contributor | Commits |
 |------|-------------|--------:|
-| 🥇 | Soumadip Bhowmick | 33 |
+| 🥇 | Arnav Metrani | 11 |
+| 🥈 | Harsh Vardhan Shreshth | 1 |
+| 🥉 | Soumadip Bhowmick | 1 |
+| 4 | BoiledSoupVegetables | 1 |
 
-*Last updated: 2025-11-21 09:54:11 UTC*
+*Last updated: 2025-11-21 15:54:42 UTC*
 

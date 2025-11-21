@@ -1,61 +1,37 @@
 {
-  "last_updated": "2025-11-21T09:54:11.957332Z",
-  "total_contributors": 9,
-  "last_updated": "2025-11-21T00:00:00Z",
-  "total_contributors": 1,
+  "last_updated": "2025-11-21T15:54:42.992Z",
+  "total_contributors": 4,
   "contributors": [
     {
-      "username": "Darsh-A",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87588873?v=4",
-      "profile_url": "https://github.com/Darsh-A",
-      "commits": 63
-    },
-    {
-      "username": "pseudofractal",
-      "avatar_url": "https://avatars.githubusercontent.com/u/54537673?v=4",
-      "profile_url": "https://github.com/pseudofractal",
-      "commits": 14
-    },
-    {
-      "username": "Sashvath-KS",
-      "avatar_url": "https://avatars.githubusercontent.com/u/146335128?v=4",
-      "profile_url": "https://github.com/Sashvath-KS",
-      "commits": 12
-    },
-    {
       "username": "ArnavMetrani",
-      "avatar_url": "https://avatars.githubusercontent.com/u/115222861?v=4",
+      "name": "Arnav Metrani",
+      "email": "115222861+ArnavMetrani@users.noreply.github.com",
+      "avatar_url": "https://github.com/ArnavMetrani.png",
       "profile_url": "https://github.com/ArnavMetrani",
       "commits": 11
     },
     {
-      "username": "Someshiiser",
-      "avatar_url": "https://avatars.githubusercontent.com/u/118109638?v=4",
-      "profile_url": "https://github.com/Someshiiser",
-      "commits": 2
-    },
-    {
-      "username": "gokulpbkvr",
-      "avatar_url": "https://avatars.githubusercontent.com/u/157870408?v=4",
-      "profile_url": "https://github.com/gokulpbkvr",
-      "commits": 1
-    },
-    {
-      "username": "hrshvs",
-      "avatar_url": "https://avatars.githubusercontent.com/u/182629991?v=4",
-      "profile_url": "https://github.com/hrshvs",
-      "commits": 1
-    },
-    {
-      "username": "MelwinHaris",
-      "avatar_url": "https://avatars.githubusercontent.com/u/223933608?v=4",
-      "profile_url": "https://github.com/MelwinHaris",
+      "username": "Harsh Vardhan Shreshth",
+      "name": "Harsh Vardhan Shreshth",
+      "email": "hvshreshth@gmail.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
+      "profile_url": null,
       "commits": 1
     },
     {
       "username": "SoumadipBhowmick",
-      "avatar_url": "https://avatars.githubusercontent.com/u/108819359?v=4",
+      "name": "Soumadip Bhowmick",
+      "email": "108819359+SoumadipBhowmick@users.noreply.github.com",
+      "avatar_url": "https://github.com/SoumadipBhowmick.png",
       "profile_url": "https://github.com/SoumadipBhowmick",
+      "commits": 1
+    },
+    {
+      "username": "BoiledSoupVegetables",
+      "name": "BoiledSoupVegetables",
+      "email": "loviya1877@gta5hx.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=BoiledSoupVegetables&background=random&size=200",
+      "profile_url": null,
       "commits": 1
     }
   ]
