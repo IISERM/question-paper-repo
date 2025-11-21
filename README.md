@@ -170,10 +170,10 @@ Top contributors based on commit count:
 | Rank | Contributor | Commits |
 |------|-------------|--------:|
 | 🥇 | Jasmeen Kaur | 94 |
-| 🥈 | Darsh Suhas Ambade | 14 |
-| 🥉 | PseudoFractal | 13 |
-| 4 | SASHVATH KRISHNAN S | 12 |
-| 5 | Arnav Metrani | 11 |
+| 🥈 | PseudoFractal | 13 |
+| 🥉 | SASHVATH KRISHNAN S | 12 |
+| 4 | Arnav Metrani | 11 |
+| 5 | ACHALESH NIMBIWAL | 5 |
 
-*Last updated: 2025-11-21 10:06:40 UTC*
+*Last updated: 2025-11-21 10:10:30 UTC*
 

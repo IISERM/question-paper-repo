@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-11-21T10:06:40.937016Z",
-  "total_contributors": 14,
+  "last_updated": "2025-11-21T10:10:30.952839Z",
+  "total_contributors": 13,
   "contributors": [
     {
       "username": "Jasmeen Kaur",
@@ -9,14 +9,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Jasmeen+Kaur&background=random&size=200",
       "profile_url": null,
       "commits": 94
-    },
-    {
-      "username": "Darsh Suhas Ambade",
-      "name": "Darsh Suhas Ambade",
-      "email": "ms22068@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Darsh+Suhas+Ambade&background=random&size=200",
-      "profile_url": null,
-      "commits": 14
     },
     {
       "username": "PseudoFractal",
