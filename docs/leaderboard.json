@@ -1,14 +1,18 @@
 {
-  "last_updated": "2025-11-21T10:04:26.154855Z",
-  "total_contributors": 13,
+  "last_updated": "2025-11-21T09:55:37.314777Z",
+  "total_contributors": 10,
   "contributors": [
     {
-      "username": "PseudoFractal",
-      "name": "PseudoFractal",
-      "email": "kshitishkumarratha@gmail.com",
-      "avatar_url": "https://ui-avatars.com/api/?name=PseudoFractal&background=random&size=200",
-      "profile_url": null,
-      "commits": 13
+      "username": "jasmeeeenkaur",
+      "avatar_url": "https://avatars.githubusercontent.com/u/240477497?v=4",
+      "profile_url": "https://github.com/jasmeeeenkaur",
+      "commits": 94
+    },
+    {
+      "username": "Darsh-A",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87588873?v=4",
+      "profile_url": "https://github.com/Darsh-A",
+      "commits": 91
     },
     {
       "username": "SASHVATH KRISHNAN S",
