@@ -1679,3 +1679,330 @@ code {
     margin-top: 0;
   }
 }
+
+/* ============================================
+   LEADERBOARD STYLES
+   ============================================ */
+
+.leaderboard-section {
+  margin: 4rem 0 3rem;
+  padding: 2.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.leaderboard-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.leaderboard-subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.leaderboard-loading,
+.leaderboard-error {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.leaderboard-error {
+  color: var(--error-color);
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.leaderboard-container {
+  animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Podium for Top 3 */
+.leaderboard-podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--background);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+}
+
+.podium-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.podium-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.podium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.podium-card:hover::before {
+  opacity: 1;
+}
+
+/* First place styling */
+.podium-card.rank-1 {
+  border-color: var(--folder-color);
+}
+
+.podium-card.rank-1::before {
+  background: var(--folder-color);
+}
+
+/* Second place styling */
+.podium-card.rank-2 {
+  border-color: var(--text-muted);
+}
+
+.podium-card.rank-2::before {
+  background: var(--text-muted);
+}
+
+/* Third place styling */
+.podium-card.rank-3 {
+  border-color: var(--file-color-other);
+}
+
+.podium-card.rank-3::before {
+  background: var(--file-color-other);
+}
+
+.podium-rank {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.podium-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 3px solid var(--border);
+  transition: transform 0.3s ease;
+}
+
+.podium-card:hover .podium-avatar {
+  transform: scale(1.1);
+  border-color: var(--primary-color);
+}
+
+.podium-username {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  text-align: center;
+  word-break: break-word;
+}
+
+.podium-commits {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.podium-commits-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* List for remaining contributors */
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.leaderboard-item:hover {
+  background: var(--background);
+  border-color: var(--primary-color);
+  transform: translateX(4px);
+  box-shadow: var(--shadow);
+}
+
+.leaderboard-rank {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  min-width: 2.5rem;
+  text-align: center;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.leaderboard-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  transition: transform 0.2s ease;
+}
+
+.leaderboard-item:hover .leaderboard-avatar {
+  transform: scale(1.1);
+  border-color: var(--primary-color);
+}
+
+.leaderboard-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.leaderboard-username {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leaderboard-stats {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.leaderboard-commits {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  font-family: "Space Grotesk", sans-serif;
+  min-width: 4rem;
+  text-align: right;
+}
+
+.leaderboard-commits-suffix {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 0.25rem;
+}
+
+.leaderboard-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .leaderboard-section {
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .leaderboard-title {
+    font-size: 1.5rem;
+  }
+
+  .leaderboard-podium {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .podium-card {
+    padding: 1.25rem;
+  }
+
+  .podium-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .podium-rank {
+    font-size: 2rem;
+  }
+
+  .podium-commits {
+    font-size: 1.25rem;
+  }
+
+  .leaderboard-item {
+    padding: 0.875rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .leaderboard-rank {
+    min-width: 2rem;
+    font-size: 1rem;
+  }
+
+  .leaderboard-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .leaderboard-username {
+    font-size: 0.9375rem;
+  }
+
+  .leaderboard-commits {
+    font-size: 1.125rem;
+    min-width: 3.5rem;
+  }
+}
