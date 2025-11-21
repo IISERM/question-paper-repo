@@ -2,12 +2,14 @@ name: Deploy GitHub Pages
 
 on:
   workflow_dispatch:  # Manual trigger
-  workflow_run:
-    workflows: ["Update Contributor Leaderboard"]
-    types:
-      - completed
+  push:
     branches:
       - main
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - '.github/workflows/deploy-pages.yml'
+      - 'scripts/**'
 
 permissions:
   contents: write
@@ -21,18 +23,13 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    # Only deploy if workflow_run was successful (not failed)
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
-      # Only checkout the docs folder
-      - name: Checkout docs
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Sparse checkout with a bit more history to be safe
-          sparse-checkout: |
-            docs/
-            README.md
-          fetch-depth: 5
+          # Full checkout needed for git operations
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -46,17 +43,17 @@ jobs:
         run: |
           node docs/scripts/generate-leaderboard.js
 
-      - name: Commit changes
+      - name: Commit leaderboard changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add README.md docs/leaderboard.json
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "No changes to commit for leaderboard"
           else
             git commit -m "Update contributor leaderboard [skip ci]"
-            git pull --rebase origin main
-            git push
+            git pull --rebase origin main || echo "Pull failed, will try to push anyway"
+            git push || echo "Push failed - changes may not be persisted"
           fi
       
       - name: Generate folder structure
