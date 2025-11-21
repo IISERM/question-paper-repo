@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -16,14 +16,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # Only checkout the docs folder
-      - name: Checkout docs
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          sparse-checkout: docs/
+          # Fetch README (for editing) and docs (for site)
+          sparse-checkout: |
+            docs/
+            README.md
           fetch-depth: 1
 
       - name: Setup Node.js
@@ -31,14 +33,40 @@ jobs:
         with:
           node-version: '20'
 
-      # Generate folder structure using GitHub API
+      # Run the Leaderboard Script
+      - name: Generate Leaderboard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          node docs/scripts/generate-leaderboard.js
+
+      # Commit README (with safety rebase)
+      - name: Commit README updates
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Only commit if README changed
+          if git diff --quiet README.md; then
+            echo "No changes to README.md"
+          else
+            git add README.md
+            git commit -m "Update contributor leaderboard [skip ci]"
+            
+            # [NOTE] Pull latest changes before pushing to prevent conflicts
+            git pull --rebase origin main
+            git push
+          fi
+
+      # Generate Tree
       - name: Generate folder structure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           cd docs
-          node generate-tree.js
+          node scripts/generate-tree.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -48,13 +76,5 @@ jobs:
         with:
           path: './docs'
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
