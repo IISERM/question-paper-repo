@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-11-21T10:34:22.514647Z",
-  "total_contributors": 12,
+  "last_updated": "2025-11-21T14:23:44.012271Z",
+  "total_contributors": 13,
   "contributors": [
     {
       "username": "Jasmeen Kaur",
@@ -9,6 +9,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Jasmeen+Kaur&background=random&size=200",
       "profile_url": null,
       "commits": 94
+    },
+    {
+      "username": "HARSH VARDHAN SHRESHTH",
+      "name": "HARSH VARDHAN SHRESHTH",
+      "email": "ms24085@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=HARSH+VARDHAN+SHRESHTH&background=random&size=200",
+      "profile_url": null,
+      "commits": 29
     },
     {
       "username": "SASHVATH KRISHNAN S",
