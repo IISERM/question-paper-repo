@@ -19,6 +19,7 @@ REPO_NAME = os.environ.get('REPO_NAME', 'question-paper-repo')
 # Exclusion list - usernames/names to exclude from leaderboard
 EXCLUDED_USERNAMES = {
     'Darsh-A',
+    'PseudoFractal',
     'pseudofractal',
     'Darsh Suhas Ambade',
 }
