@@ -2,6 +2,7 @@
 """
 Generate contributor leaderboard based on commit counts
 Updates both README.md and docs/leaderboard.json
+Includes both GitHub users and email-only contributors (via Google Auth)
 """
 
 import os
@@ -15,6 +16,12 @@ GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 REPO_OWNER = os.environ.get('REPO_OWNER', 'IISERM')
 REPO_NAME = os.environ.get('REPO_NAME', 'question-paper-repo')
 
+# Exclusion list - usernames/names to exclude from leaderboard
+EXCLUDED_USERNAMES = {
+    'Darsh-A',
+    'pseudofractal',
+}
+
 # GitHub API headers
 headers = {
     'Authorization': f'token {GITHUB_TOKEN}',
@@ -22,51 +29,145 @@ headers = {
 }
 
 
-def fetch_all_contributors():
-    """Fetch all contributors with their commit counts from GitHub API"""
-    print("Fetching contributors from GitHub API...")
+def fetch_all_commits():
+    """Fetch all commits from the repository to count by author"""
+    print("Fetching all commits from repository...")
     
-    contributors = []
+    # Dictionary to store commit counts by author
+    # Key: (name, email) tuple, Value: count
+    author_commits = defaultdict(int)
+    
     page = 1
     per_page = 100
+    total_commits = 0
     
     while True:
-        url = f'https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contributors'
+        url = f'https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/commits'
         params = {
             'per_page': per_page,
-            'page': page,
-            'anon': 'false'  # Exclude anonymous contributors
+            'page': page
         }
         
         response = requests.get(url, headers=headers, params=params)
-        response.raise_for_status()
         
-        data = response.json()
-        if not data:
+        if response.status_code == 409:
+            # Repository is empty
+            print("Repository is empty or has no commits")
+            return []
+        
+        response.raise_for_status()
+        commits = response.json()
+        
+        if not commits:
             break
+        
+        for commit in commits:
+            # Get author info from commit
+            commit_data = commit.get('commit', {})
+            author_data = commit_data.get('author', {})
             
-        for contributor in data:
-            # Skip bots
-            if contributor.get('type') == 'Bot':
+            name = author_data.get('name', 'Unknown')
+            email = author_data.get('email', 'unknown@unknown.com')
+            
+            # Skip bot commits (by committer email)
+            committer_data = commit_data.get('committer', {})
+            committer_email = committer_data.get('email', '')
+            if 'bot@' in committer_email.lower() or '[bot]' in committer_email.lower():
+                # This is a bot commit, but we still want to count the author
+                pass
+            
+            # Skip if author is a bot
+            if '[bot]' in name.lower() or 'bot@' in email.lower():
                 continue
-                
-            contributors.append({
-                'username': contributor['login'],
-                'avatar_url': contributor['avatar_url'],
-                'profile_url': contributor['html_url'],
-                'commits': contributor['contributions']
-            })
+            
+            # Skip GitHub's noreply addresses for bots
+            if 'github-actions[bot]' in email or 'dependabot[bot]' in email:
+                continue
+            
+            # Count this commit for the author
+            author_key = (name, email)
+            author_commits[author_key] += 1
+            total_commits += 1
+        
+        print(f"  Processed page {page} ({len(commits)} commits)...")
         
         # Check if there are more pages
-        if len(data) < per_page:
+        if len(commits) < per_page:
             break
-            
+        
         page += 1
+        
+        # Safety limit to prevent infinite loops
+        if page > 1000:
+            print("  Warning: Reached page limit (1000)")
+            break
+    
+    print(f"Total commits processed: {total_commits}")
+    print(f"Unique authors found: {len(author_commits)}")
+    
+    return author_commits
+
+
+def create_contributor_list(author_commits):
+    """Convert author commits dictionary to sorted contributor list"""
+    contributors = []
+    
+    for (name, email), commits in author_commits.items():
+        # Try to get GitHub username if email matches
+        username = None
+        avatar_url = None
+        profile_url = None
+        
+        # Check if this is a GitHub email
+        if 'users.noreply.github.com' in email:
+            # Extract username from GitHub noreply email format
+            # Format: username@users.noreply.github.com or ID+username@users.noreply.github.com
+            parts = email.split('@')[0]
+            if '+' in parts:
+                username = parts.split('+')[1]
+            else:
+                username = parts
+        
+        # Check exclusion list
+        # Check both username and name against exclusion list
+        display_username = username or name
+        if display_username in EXCLUDED_USERNAMES or name in EXCLUDED_USERNAMES:
+            print(f"  Excluding: {display_username} ({name})")
+            continue
+        
+        # If we found a GitHub username, get their avatar
+        if username:
+            avatar_url = f'https://github.com/{username}.png'
+            profile_url = f'https://github.com/{username}'
+        else:
+            # For non-GitHub users, use initials or placeholder
+            # Use name for display
+            username = name
+            # Use a generated avatar based on name
+            avatar_url = f'https://ui-avatars.com/api/?name={name.replace(" ", "+")}&background=random&size=200'
+            profile_url = None
+        
+        contributors.append({
+            'username': username or name,
+            'name': name,
+            'email': email,
+            'avatar_url': avatar_url,
+            'profile_url': profile_url,
+            'commits': commits
+        })
     
     # Sort by commit count (descending)
     contributors.sort(key=lambda x: x['commits'], reverse=True)
     
-    print(f"Found {len(contributors)} contributors")
+    return contributors
+
+
+def fetch_all_contributors():
+    """Fetch all contributors including email-only contributors"""
+    author_commits = fetch_all_commits()
+    contributors = create_contributor_list(author_commits)
+    
+    print(f"Found {len(contributors)} total contributors")
     return contributors
 
 
@@ -84,7 +185,8 @@ def update_readme(contributors):
     leaderboard_md += "|------|-------------|--------:|\n"
     
     for i, contributor in enumerate(contributors[:5], 1):  # Top 5
-        username = contributor['username']
+        # Use name if available, otherwise username
+        display_name = contributor.get('name') or contributor['username']
         commits = contributor['commits']
         
         # Add medal emoji for top 3
@@ -96,7 +198,7 @@ def update_readme(contributors):
         elif i == 3:
             rank = "🥉"
         
-        leaderboard_md += f"| {rank} | {username} | {commits} |\n"
+        leaderboard_md += f"| {rank} | {display_name} | {commits} |\n"
     
     leaderboard_md += f"\n*Last updated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC*\n"
     

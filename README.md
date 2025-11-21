@@ -169,8 +169,7 @@ Top contributors based on commit count:
 
 | Rank | Contributor | Commits |
 |------|-------------|--------:|
-| 🥇 | SoumadipBhowmick | 33 |
-| 🥈 | Darsh-A | 1 |
+| 🥇 | Soumadip Bhowmick | 33 |
 
 *Last updated: 2025-11-21 00:00:00 UTC*
 

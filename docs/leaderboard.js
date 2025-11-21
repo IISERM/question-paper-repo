@@ -85,16 +85,19 @@ function createPodiumCard(contributor, rank, medal) {
   const card = document.createElement("div");
   card.className = `podium-card rank-${rank}`;
 
+  // Use name if available, otherwise username
+  const displayName = contributor.name || contributor.username;
+  
   card.innerHTML = `
     <div class="podium-rank">${medal}</div>
     <img 
       src="${contributor.avatar_url}" 
-      alt="${contributor.username}" 
+      alt="${displayName}" 
       class="podium-avatar"
-      onerror="this.src='https://github.com/identicons/${contributor.username}.png'"
+      onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&size=200'"
     />
     <div class="podium-username">
-      ${escapeHtml(contributor.username)}
+      ${escapeHtml(displayName)}
     </div>
     <div class="podium-commits">${contributor.commits.toLocaleString()}</div>
     <div class="podium-commits-label">commits</div>
@@ -124,17 +127,20 @@ function createListItem(contributor, rank) {
   const item = document.createElement("div");
   item.className = "leaderboard-item";
 
+  // Use name if available, otherwise username
+  const displayName = contributor.name || contributor.username;
+
   item.innerHTML = `
     <div class="leaderboard-rank">#${rank}</div>
     <img 
       src="${contributor.avatar_url}" 
-      alt="${contributor.username}" 
+      alt="${displayName}" 
       class="leaderboard-avatar"
-      onerror="this.src='https://github.com/identicons/${contributor.username}.png'"
+      onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&size=200'"
     />
     <div class="leaderboard-info">
       <div class="leaderboard-username">
-        ${escapeHtml(contributor.username)}
+        ${escapeHtml(displayName)}
       </div>
       <div class="leaderboard-stats">Contributor</div>
     </div>
