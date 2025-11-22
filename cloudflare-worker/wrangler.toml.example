@@ -40,6 +40,11 @@ FRONTEND_URL = "https://iiserm.github.io"
 # Domain restriction for Google Auth
 ALLOWED_EMAIL_DOMAIN = "iisermohali.ac.in"
 
+# [[kv_namespaces]]
+# binding = "PAGE_VIEW_STORE"
+# id = "YOUR_PROD_NAMESPACE_ID"
+# preview_id = "YOUR_PREVIEW_NAMESPACE_ID"
+
 # =============================================================================
 # DEPLOYMENT COMMANDS
 # =============================================================================
@@ -58,4 +63,3 @@ ALLOWED_EMAIL_DOMAIN = "iisermohali.ac.in"
 #    wrangler tail
 #
 # =============================================================================
-

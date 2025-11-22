@@ -54,3 +54,7 @@ Then open http://localhost:8000 in your browser.
 - 🌓 Dark mode support
 - ⚡ Fast and lightweight
 - 🔄 Auto-updates on every commit
+
+## Configuration
+
+`docs/config.js` defines shared frontend settings such as the Cloudflare Worker URL and the key used for the visit counter. Update this file whenever the worker endpoint or counter namespace changes so both `index.html` and `contribute.html` automatically pick up the new values.

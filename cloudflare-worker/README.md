@@ -285,8 +285,19 @@ The worker provides these endpoints:
 - `POST /api/create-branch` - Create a new branch
 - `POST /api/upload-file` - Upload a file to the branch
 - `POST /api/create-pr` - Create a pull request
+- `POST /api/pageview` - Increment & return anonymous visit counts (no auth)
 
-All API endpoints (except `/auth/callback`) require the `Authorization: Bearer <token>` header.
+All API endpoints (except `/auth/callback` and `/api/pageview`) require the `Authorization: Bearer <token>` header.
+
+### Page View Counter
+
+The docs footer displays a live visitor count using this worker. To enable it:
+
+1. Create a Cloudflare KV namespace (e.g., `qpr-pageviews`) and note the production + preview IDs.
+2. Bind it in `wrangler.toml` as `PAGE_VIEW_STORE` (see the commented `kv_namespaces` block).
+3. Deploy the worker. The frontend (via `docs/footer.js`) will POST `{ counter, path }` to `/api/pageview` and show the returned totals.
+
+If the KV binding is missing, the endpoint responds with `{ "disabled": true }` so the UI can fall back gracefully.
 
 ## Next Steps
 

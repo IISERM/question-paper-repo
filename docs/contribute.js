@@ -4,7 +4,9 @@
 
 // Configuration
 const CONFIG = {
-  WORKER_URL: "https://qpr-contribution-worker.turingclub.workers.dev",
+  WORKER_URL:
+    window.QPR_CONFIG?.WORKER_URL ||
+    "https://qpr-contribution-worker.turingclub.workers.dev",
   GITHUB_CLIENT_ID: "Ov23linzqUpdM2As790u",
   GITHUB_REPO_OWNER: "IISERM",
   GITHUB_REPO_NAME: "question-paper-repo",

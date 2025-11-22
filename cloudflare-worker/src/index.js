@@ -90,6 +90,10 @@ async function handleRequest(request, env) {
       return handleDirectContribution(request, env, responseHeaders);
     }
 
+    if (url.pathname === "/api/pageview") {
+      return handlePageView(request, env, responseHeaders);
+    }
+
     return new Response("Not Found", { status: 404, headers: responseHeaders });
   } catch (error) {
     console.error("Error:", error);
@@ -242,6 +246,84 @@ async function handleCheckFork(request, env, headers) {
       status: 500,
       headers: { ...headers, "Content-Type": "application/json" },
     });
+  }
+}
+
+/**
+ * Increment and return anonymous page view counts
+ */
+async function handlePageView(request, env, headers) {
+  if (request.method !== "POST") {
+    return new Response("Method Not Allowed", {
+      status: 405,
+      headers,
+    });
+  }
+
+  if (!env.PAGE_VIEW_STORE) {
+    return new Response(
+      JSON.stringify({
+        disabled: true,
+        reason: "PAGE_VIEW_STORE binding not configured",
+      }),
+      {
+        status: 200,
+        headers: { ...headers, "Content-Type": "application/json" },
+      }
+    );
+  }
+
+  let payload = {};
+  try {
+    payload = await request.json();
+  } catch (error) {
+    console.warn("Failed to parse page view payload:", error);
+  }
+
+  const counter = sanitizeCounter(payload?.counter);
+  const path = sanitizePath(payload?.path);
+
+  const totalKey = `counter:${counter}:total`;
+  const pageKey = `counter:${counter}:path:${path}`;
+
+  const [totalRaw, pageRaw] = await Promise.all([
+    env.PAGE_VIEW_STORE.get(totalKey),
+    env.PAGE_VIEW_STORE.get(pageKey),
+  ]);
+
+  const newTotal = (parseInt(totalRaw, 10) || 0) + 1;
+  const newPage = (parseInt(pageRaw, 10) || 0) + 1;
+
+  await Promise.all([
+    env.PAGE_VIEW_STORE.put(totalKey, String(newTotal)),
+    env.PAGE_VIEW_STORE.put(pageKey, String(newPage)),
+  ]);
+
+  return new Response(
+    JSON.stringify({
+      total: newTotal,
+      page: newPage,
+      path,
+    }),
+    {
+      status: 200,
+      headers: { ...headers, "Content-Type": "application/json" },
+    }
+  );
+}
+
+function sanitizeCounter(value) {
+  if (typeof value !== "string" || value.trim() === "") return "site:index";
+  return value.replace(/[^a-zA-Z0-9:_-]/g, "").slice(0, 64) || "site:index";
+}
+
+function sanitizePath(value) {
+  if (typeof value !== "string" || value.trim() === "") return "/";
+  try {
+    const url = new URL(value, "https://example.org");
+    return url.pathname.slice(0, 128) || "/";
+  } catch (error) {
+    return "/";
   }
 }
 
