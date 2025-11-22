@@ -25,6 +25,10 @@ Course-wise folders containing past quizzes, minors, majors, endsems, and exerci
 
 ---
 
+## RULES(!!!)
+- **DO NOT UPLOAD ANYTHING THAT IS COPYRIGHTED**
+- **Do not upload your personal notes/work** unless they are the solutions for the exercises, assignments, or exam papers.
+
 ## View and Download
 
 ### On GitHub (Web)
