@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-11-22T13:28:47.196Z",
-  "total_contributors": 13,
+  "last_updated": "2025-11-22T13:30:08.103Z",
+  "total_contributors": 14,
   "contributors": [
     {
       "username": "Jasmeen Kaur",
@@ -71,6 +71,14 @@
       "name": "YASH SHARMA",
       "email": "ms25230@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=YASH%20SHARMA&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
+    },
+    {
+      "username": "ImgBotApp",
+      "name": "ImgBotApp",
+      "email": "ImgBotHelp@gmail.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=ImgBotApp&background=random&size=200",
       "profile_url": null,
       "commits": 1
     },
