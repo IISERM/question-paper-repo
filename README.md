@@ -2,35 +2,41 @@
 
 https://github.com/user-attachments/assets/e4f24335-c6b0-49a4-a5f0-71db0b4f495b
 
+An archive of question papers and exercise sheets from IISER Mohali courses, collected by students over several years. Quality varies—some scans aren't OCR'd, and some files aren't PDFs.
 
-Archive of question papers and exercise sheets from IISER Mohali courses. Collected by students over several years. Expect mixed quality (some scans aren’t OCR’d; some files aren’t PDFs).
+## Access the Website
 
-Always prefer to use the webiste for viewing and uploading files. The git methods are for advanced users who want to keep a local copy or contribute via CLI.  
-The link to [the website](https://iiserm.github.io/question-paper-repo/):  
-https://iiserm.github.io/question-paper-repo/
+**Always prefer using the website** for viewing and uploading files. Git methods are for advanced users who want to keep a local copy or contribute via CLI.
 
-For an older archive, see the [course files mirror](https://iiserm.github.io/course_files/).
-For more resources, Studocu hosts additional material: [IISER Mohali on Studocu](https://www.studocu.com/in/institution/indian-institute-of-science-education-and-research-mohali/30483).
+**Website:** https://iiserm.github.io/question-paper-repo/
 
----
+### Additional Resources
 
-## What’s here
-
-* Course-wise folders containing past quizzes, minors, majors, endsems, and exercise sheets.
-* Formats: PDF (preferred), images (PNG/JPG), office docs (DOCX), and the occasional ZIP.
+- For an older archive, see the [course files mirror](https://iiserm.github.io/course_files/)
+- For more materials, check [IISER Mohali on Studocu](https://www.studocu.com/in/institution/indian-institute-of-science-education-and-research-mohali/30483)
 
 ---
 
-## View and download
+## What's Here
 
-**On GitHub (web):**
+Course-wise folders containing past quizzes, minors, majors, endsems, and exercise sheets.
 
-* Click a file to preview (PDFs/images render in-browser; DOCX requires download).
-* To download a single file: open it → **Download raw**.
-* To get the whole repository: **Code** → **Download ZIP**.
-* Want only a subfolder? Use Git (recommended) or sparse checkout (below).
+**Formats:** PDF (preferred), images (PNG/JPG), office docs (DOCX), and occasional ZIP files.
 
-**With Git (keeps you up to date):**
+---
+
+## View and Download
+
+### On GitHub (Web)
+
+- Click a file to preview (PDFs and images render in-browser; DOCX requires download)
+- **Download a single file:** Open it → click **Download raw**
+- **Download the whole repository:** Click **Code** → **Download ZIP**
+- **Want only a subfolder?** Use Git (recommended) or sparse checkout (see below)
+
+### With Git (Recommended)
+
+Keeps you up to date with the latest papers:
 
 ```bash
 # Clone everything
@@ -41,7 +47,7 @@ cd question-paper-repo
 git pull
 ```
 
-**Sparse checkout (download just one course folder):**
+### Sparse Checkout (One Course Folder Only)
 
 ```bash
 git clone --filter=blob:none https://github.com/iiserm/question-paper-repo.git
@@ -51,9 +57,9 @@ git sparse-checkout set <course_code_or/path>
 git pull
 ```
 
-**Large files / scans:**
+### Large Files / Scans
 
-* Files >50 MB must be tracked with Git LFS. If you see LFS pointers:
+Files larger than 50 MB are tracked with Git LFS. If you see LFS pointers instead of actual files:
 
 ```bash
 git lfs install
@@ -66,100 +72,117 @@ git lfs pull
 
 Pull requests welcome. Keep it simple, consistent, and legal.
 
-### Web
+### Web Method
 
-**1) Click on the Fork button**
+#### 1) Fork the Repository
 
 <img width="1281" height="170" alt="Screenshot 2025-11-13 121043" src="https://github.com/user-attachments/assets/16ed61cf-c451-47d2-bfa0-dbd8c2c57047" />
-This will make a copy of the repo in your account so u can make edits to it
 
+Click the **Fork** button to create a copy of the repository in your account so you can make edits.
 
-**2) Adding Files**
+#### 2) Add Files
 
 <img width="1889" height="433" alt="image" src="https://github.com/user-attachments/assets/3e0ad01e-883f-4b80-a925-9f01e70050cb" />
-- In your desired folder click on add files button
-- After uploading the files click on `Commit changes` (The green button)
-* Optionally u can also add a title and a description of the files
 
+- Navigate to your desired folder and click **Add files**
+- After uploading, click **Commit changes** (the green button)
+- Optionally add a title and description for your files
 
-**3)Merging your Uploaded Files**
+#### 3) Create a Pull Request
 
 <img width="950" height="409" alt="Screenshot 2025-11-13 121745" src="https://github.com/user-attachments/assets/934dbeba-4f91-49f1-a899-0515617b67d3" />
-After a successful commit you will see an option to `Contribute`. Click on the button and `Open a Pull Request`
 
-This will create a request for the mods of the actual repo to view your changes and then combine them to the origina repository.
+After a successful commit, you'll see a **Contribute** option. Click it and select **Open a Pull Request**.
 
-Now just sit back, relax and wait for the review ^^
+This creates a request for the maintainers to review your changes and merge them into the original repository.
 
+Now sit back, relax, and wait for the review!
 
-### CLI
-**1) Fork → branch → commit → PR**
+### CLI Method
+
+#### 1) Fork → Branch → Commit → PR
 
 ```bash
-# Fork on GitHub, then:
-git clone https://github.com/iiserm/question-paper-repo.git
+# Fork on GitHub, then clone your fork:
+git clone https://github.com/YOUR_USERNAME/question-paper-repo.git
 cd question-paper-repo
 git checkout -b add-<course>-<year>
-# add files under the correct folder (see structure below)
+
+# Add files under the correct folder (see structure below)
 git add .
 git commit -m "PHY403: Atomic and Molecular Physics (2025)"
 git push -u origin HEAD
+
 # Open a Pull Request on GitHub
 ```
 
-**2) Where to put files (structure):**
+#### 2) File Structure
 
 ```
 <SUBJECT>/<COURSE_CODE>/<YEAR>/<your-file.pdf>
 ```
 
-**Examples**
+**Examples:**
 
 ```
 Physics/101/2024/Quiz 3.pdf
 HSS/604/2022/Midsem I.jpeg
 ```
 
-**3) File rules**
+#### 3) File Guidelines
 
-* Prefer PDF. If you upload images/DOCX, convert to PDF when possible.
-* 300 dpi or better, cropped, de-skewed, legible. Avoid >100 MB per file; use LFS if >50 MB.
-* Remove personal identifiers (names/roll numbers) unless required by the paper itself.
+- **Prefer PDF.** Convert images/DOCX to PDF when possible
+- **Quality:** 300 dpi or better, cropped, de-skewed, and legible
+- **Size:** Avoid files larger than 100 MB; use LFS for files over 50 MB
+- **Privacy:** Remove personal identifiers (names/roll numbers) unless required by the paper
 
-**4) Commit message format**
+#### 4) Commit Message Format
 
 ```
 <COURSE_CODE>: <content> <year>
-# e.g., "PHY120: Endsem 2023"
 ```
 
-**5) PR checklist (Read before opening)**
+Example: `PHY120: Endsem 2023`
 
-* [ ] Files in correct folders and named correctly.
-* [ ] Viewable PDF (opens on GitHub) or clear reason otherwise.
-* [ ] OCR’d if possible (searchable text).
-* [ ] No personal data.
-* [ ] LFS used for large files.
+#### 5) Pull Request Checklist
 
-**6) Can’t contribute via PR?**
-[Open an Issue with](https://github.com/IISERM/question-paper-repo/issues/new): course code, year/semester, exam type, and a link to the files (drive link). Maintainers will ingest.
+Before opening a PR, ensure:
+
+- [ ] Files are in correct folders and named correctly
+- [ ] PDF is viewable (opens on GitHub) or clear reason otherwise
+- [ ] OCR'd if possible (searchable text)
+- [ ] No personal data included
+- [ ] LFS used for large files
+
+#### 6) Alternative Contribution Method
+
+Can't contribute via PR? [Open an Issue](https://github.com/IISERM/question-paper-repo/issues/new) with:
+
+- Course code
+- Year/semester
+- Exam type
+- Link to files (e.g., Google Drive)
+
+Maintainers will add the files for you.
 
 ---
 
-## Request fixes or removals
+## Request Fixes or Removals
 
 [Open an Issue](https://github.com/IISERM/question-paper-repo/issues/new) for:
 
-* Broken links/files, unreadable scans, wrong metadata.
-* Takedown requests (with justification).
-  Or contact the repo owners via the IISER-M GitHub organization.
+- Broken links/files, unreadable scans, or wrong metadata
+- Takedown requests (with justification)
+
+Or contact the repository owners via the IISER-M GitHub organization.
 
 ---
 
-## Notes
+## Important Notes
 
-* Quality varies; some scans are rough. Use OCR tools to improve search.
-* This is a student-run archive intended for learning and exam prep. Use at your own risk.
+- **Quality varies**—some scans are rough. Use OCR tools to improve searchability
+- This is a student-run archive intended for learning and exam preparation
+- Use at your own risk
 
 ---
 
