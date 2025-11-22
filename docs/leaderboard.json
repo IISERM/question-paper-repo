@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-11-22T08:57:11.382Z",
+  "last_updated": "2025-11-22T13:24:48.245Z",
   "total_contributors": 13,
   "contributors": [
     {
@@ -43,6 +43,14 @@
       "commits": 5
     },
     {
+      "username": "Kshitish Kumar Ratha",
+      "name": "Kshitish Kumar Ratha",
+      "email": "ms22174@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Kshitish%20Kumar%20Ratha&background=random&size=200",
+      "profile_url": null,
+      "commits": 2
+    },
+    {
       "username": "Somesh Sharma",
       "name": "Somesh Sharma",
       "email": "ms22182@iisermohali.ac.in",
@@ -71,14 +79,6 @@
       "name": "Melwin Haris",
       "email": "ms22151@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=Melwin%20Haris&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "Kshitish Kumar Ratha",
-      "name": "Kshitish Kumar Ratha",
-      "email": "ms22174@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Kshitish%20Kumar%20Ratha&background=random&size=200",
       "profile_url": null,
       "commits": 1
     },
