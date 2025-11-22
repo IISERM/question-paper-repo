@@ -1,7 +1,15 @@
 {
-  "last_updated": "2025-11-22T14:28:07.885Z",
-  "total_contributors": 14,
+  "last_updated": "2025-11-22T15:44:03.121Z",
+  "total_contributors": 15,
   "contributors": [
+    {
+      "username": "Manu A Sankaran",
+      "name": "Manu A Sankaran",
+      "email": "ms23029@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Manu%20A%20Sankaran&background=random&size=200",
+      "profile_url": null,
+      "commits": 106
+    },
     {
       "username": "Jasmeen Kaur",
       "name": "Jasmeen Kaur",
