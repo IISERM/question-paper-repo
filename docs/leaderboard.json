@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-11-23T13:44:48.946Z",
-  "total_contributors": 18,
+  "last_updated": "2025-11-23T17:43:55.738Z",
+  "total_contributors": 19,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -97,6 +97,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "hrshvs",
+      "name": "hrshvs",
+      "email": "hvshreshth@gmail.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=hrshvs&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "YASH SHARMA",
