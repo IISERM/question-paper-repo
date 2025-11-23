@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-11-23T18:13:16.679Z",
+  "last_updated": "2025-11-23T18:57:49.633Z",
   "total_contributors": 19,
   "contributors": [
     {
@@ -67,6 +67,14 @@
       "commits": 6
     },
     {
+      "username": "hrshvs",
+      "name": "hrshvs",
+      "email": "hvshreshth@gmail.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=hrshvs&background=random&size=200",
+      "profile_url": null,
+      "commits": 2
+    },
+    {
       "username": "EKLAVYA RAI",
       "name": "EKLAVYA RAI",
       "email": "ms25269@iisermohali.ac.in",
@@ -97,14 +105,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
-    },
-    {
-      "username": "hrshvs",
-      "name": "hrshvs",
-      "email": "hvshreshth@gmail.com",
-      "avatar_url": "https://ui-avatars.com/api/?name=hrshvs&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
     },
     {
       "username": "YASH SHARMA",
