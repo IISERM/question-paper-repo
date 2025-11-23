@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-11-23T13:39:43.705Z",
-  "total_contributors": 16,
+  "last_updated": "2025-11-23T13:42:54.951Z",
+  "total_contributors": 18,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -8,7 +8,7 @@
       "email": "ms23029@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=Manu%20A%20Sankaran&background=random&size=200",
       "profile_url": null,
-      "commits": 106
+      "commits": 118
     },
     {
       "username": "Jasmeen Kaur",
@@ -27,12 +27,20 @@
       "commits": 52
     },
     {
+      "username": "MANVENDRA SINGH",
+      "name": "MANVENDRA SINGH",
+      "email": "ms25137@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=MANVENDRA%20SINGH&background=random&size=200",
+      "profile_url": null,
+      "commits": 35
+    },
+    {
       "username": "SASHVATH KRISHNAN S",
       "name": "SASHVATH KRISHNAN S",
       "email": "ms24243@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=SASHVATH%20KRISHNAN%20S&background=random&size=200",
       "profile_url": null,
-      "commits": 23
+      "commits": 30
     },
     {
       "username": "ArnavMetrani",
@@ -43,6 +51,14 @@
       "commits": 12
     },
     {
+      "username": "Harsh Vardhan Shreshth",
+      "name": "Harsh Vardhan Shreshth",
+      "email": "hvshreshth@gmail.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
+      "profile_url": null,
+      "commits": 9
+    },
+    {
       "username": "ACHALESH NIMBIWAL",
       "name": "ACHALESH NIMBIWAL",
       "email": "ms24255@iisermohali.ac.in",
@@ -51,10 +67,10 @@
       "commits": 6
     },
     {
-      "username": "Harsh Vardhan Shreshth",
-      "name": "Harsh Vardhan Shreshth",
-      "email": "hvshreshth@gmail.com",
-      "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
+      "username": "EKLAVYA RAI",
+      "name": "EKLAVYA RAI",
+      "email": "ms25269@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=EKLAVYA%20RAI&background=random&size=200",
       "profile_url": null,
       "commits": 2
     },
