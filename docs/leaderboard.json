@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-11-23T13:42:54.951Z",
+  "last_updated": "2025-11-23T13:44:48.946Z",
   "total_contributors": 18,
   "contributors": [
     {
@@ -19,6 +19,14 @@
       "commits": 100
     },
     {
+      "username": "SASHVATH KRISHNAN S",
+      "name": "SASHVATH KRISHNAN S",
+      "email": "ms24243@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=SASHVATH%20KRISHNAN%20S&background=random&size=200",
+      "profile_url": null,
+      "commits": 70
+    },
+    {
       "username": "HARSH VARDHAN SHRESHTH",
       "name": "HARSH VARDHAN SHRESHTH",
       "email": "ms24085@iisermohali.ac.in",
@@ -35,12 +43,12 @@
       "commits": 35
     },
     {
-      "username": "SASHVATH KRISHNAN S",
-      "name": "SASHVATH KRISHNAN S",
-      "email": "ms24243@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=SASHVATH%20KRISHNAN%20S&background=random&size=200",
+      "username": "Harsh Vardhan Shreshth",
+      "name": "Harsh Vardhan Shreshth",
+      "email": "hvshreshth@gmail.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
       "profile_url": null,
-      "commits": 30
+      "commits": 13
     },
     {
       "username": "ArnavMetrani",
@@ -49,14 +57,6 @@
       "avatar_url": "https://github.com/ArnavMetrani.png",
       "profile_url": "https://github.com/ArnavMetrani",
       "commits": 12
-    },
-    {
-      "username": "Harsh Vardhan Shreshth",
-      "name": "Harsh Vardhan Shreshth",
-      "email": "hvshreshth@gmail.com",
-      "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
-      "profile_url": null,
-      "commits": 9
     },
     {
       "username": "ACHALESH NIMBIWAL",
