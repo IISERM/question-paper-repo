@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-11-23T02:43:21.203Z",
+  "last_updated": "2025-11-23T13:39:43.705Z",
   "total_contributors": 16,
   "contributors": [
     {
@@ -51,6 +51,22 @@
       "commits": 6
     },
     {
+      "username": "Harsh Vardhan Shreshth",
+      "name": "Harsh Vardhan Shreshth",
+      "email": "hvshreshth@gmail.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
+      "profile_url": null,
+      "commits": 2
+    },
+    {
+      "username": "Aditya Kumar",
+      "name": "Aditya Kumar",
+      "email": "ms23175@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Aditya%20Kumar&background=random&size=200",
+      "profile_url": null,
+      "commits": 2
+    },
+    {
       "username": "Kshitish Kumar Ratha",
       "name": "Kshitish Kumar Ratha",
       "email": "ms22174@iisermohali.ac.in",
@@ -65,22 +81,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
-    },
-    {
-      "username": "Aditya Kumar",
-      "name": "Aditya Kumar",
-      "email": "ms23175@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Aditya%20Kumar&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "Harsh Vardhan Shreshth",
-      "name": "Harsh Vardhan Shreshth",
-      "email": "hvshreshth@gmail.com",
-      "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
     },
     {
       "username": "YASH SHARMA",
