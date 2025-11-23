@@ -276,13 +276,13 @@ function addUploadGroup() {
                     <label for="${groupId}-subject">Subject <span class="required">*</span></label>
                     <select id="${groupId}-subject" class="form-select" required onchange="updatePathPreview('${groupId}')">
                         <option value="">Select Subject</option>
-                        <option value="Biology">Biology</option>
-                        <option value="Chemistry">Chemistry</option>
+                        <option value="BIO">BIO</option>
+                        <option value="CHM">CHM</option>
                         <option value="EES">EES</option>
                         <option value="HSS">HSS</option>
                         <option value="IDC">IDC</option>
-                        <option value="Math">Math</option>
-                        <option value="Physics">Physics</option>
+                        <option value="MTH">MTH</option>
+                        <option value="PHY">PHY</option>
                     </select>
                 </div>
                 <div class="form-group">
