@@ -198,9 +198,9 @@ Top contributors based on commit count:
 |------|-------------|--------:|
 | 🥇 | Manu A Sankaran | 118 |
 | 🥈 | Jasmeen Kaur | 100 |
-| 🥉 | SASHVATH KRISHNAN S | 70 |
-| 4 | HARSH VARDHAN SHRESHTH | 63 |
+| 🥉 | HARSH VARDHAN SHRESHTH | 74 |
+| 4 | SASHVATH KRISHNAN S | 70 |
 | 5 | MANVENDRA SINGH | 35 |
 
-*Last updated: 2025-11-23 18:10:40 UTC*
+*Last updated: 2025-11-23 18:13:16 UTC*
 
