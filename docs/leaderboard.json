@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-11-24T07:18:20.390Z",
-  "total_contributors": 19,
+  "last_updated": "2025-11-25T01:01:25.058Z",
+  "total_contributors": 21,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -16,7 +16,7 @@
       "email": "ms23199@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=Jasmeen%20Kaur&background=random&size=200",
       "profile_url": null,
-      "commits": 100
+      "commits": 107
     },
     {
       "username": "HARSH VARDHAN SHRESHTH",
@@ -105,6 +105,22 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "GADRE SHARDUL NIKHIL",
+      "name": "GADRE SHARDUL NIKHIL",
+      "email": "ms25091@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=GADRE%20SHARDUL%20NIKHIL&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
+    },
+    {
+      "username": "Soumadip Rabindranath Bhowmick",
+      "name": "Soumadip Rabindranath Bhowmick",
+      "email": "ms22074@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Soumadip%20Rabindranath%20Bhowmick&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "YASH SHARMA",
