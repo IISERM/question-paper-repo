@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-11-25T13:48:24.792Z",
-  "total_contributors": 21,
+  "last_updated": "2025-11-25T14:45:37.142Z",
+  "total_contributors": 22,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -48,7 +48,7 @@
       "email": "hvshreshth@gmail.com",
       "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
       "profile_url": null,
-      "commits": 17
+      "commits": 18
     },
     {
       "username": "ArnavMetrani",
@@ -57,6 +57,14 @@
       "avatar_url": "https://github.com/ArnavMetrani.png",
       "profile_url": "https://github.com/ArnavMetrani",
       "commits": 12
+    },
+    {
+      "username": "Aditya Sobham Bora",
+      "name": "Aditya Sobham Bora",
+      "email": "ms22181@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Aditya%20Sobham%20Bora&background=random&size=200",
+      "profile_url": null,
+      "commits": 7
     },
     {
       "username": "ACHALESH NIMBIWAL",
