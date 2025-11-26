@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-11-26T00:49:44.964Z",
+  "last_updated": "2025-11-26T11:51:33.238Z",
   "total_contributors": 23,
   "contributors": [
     {
@@ -48,7 +48,7 @@
       "email": "hvshreshth@gmail.com",
       "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
       "profile_url": null,
-      "commits": 19
+      "commits": 20
     },
     {
       "username": "ArnavMetrani",
@@ -81,6 +81,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Maninder%20Singh&background=random&size=200",
       "profile_url": null,
       "commits": 3
+    },
+    {
+      "username": "ImgBotApp",
+      "name": "ImgBotApp",
+      "email": "ImgBotHelp@gmail.com",
+      "avatar_url": "https://ui-avatars.com/api/?name=ImgBotApp&background=random&size=200",
+      "profile_url": null,
+      "commits": 2
     },
     {
       "username": "hrshvs",
@@ -143,14 +151,6 @@
       "name": "YASH SHARMA",
       "email": "ms25230@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=YASH%20SHARMA&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "ImgBotApp",
-      "name": "ImgBotApp",
-      "email": "ImgBotHelp@gmail.com",
-      "avatar_url": "https://ui-avatars.com/api/?name=ImgBotApp&background=random&size=200",
       "profile_url": null,
       "commits": 1
     },
