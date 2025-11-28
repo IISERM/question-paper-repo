@@ -226,6 +226,9 @@ async function loadSubmissions() {
     applyFilters();
     
     showContainer();
+    
+    // Fetch comments for all submissions (in background)
+    fetchAllComments();
   } catch (error) {
     console.error("Error loading submissions:", error);
     showError(error.message);
@@ -264,7 +267,64 @@ function processSubmission(pr) {
     contributorEmail: contributorInfo.email,
     files: filesInfo,
     body: pr.body,
+    comments: [], // Will be populated later
   };
+}
+
+/**
+ * Fetch comments for a specific PR
+ */
+async function fetchPRComments(prNumber) {
+  try {
+    // Fetch issue comments (general PR comments, not code review comments)
+    const response = await fetch(
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues/${prNumber}/comments`,
+      {
+        headers: {
+          Accept: "application/vnd.github.v3+json",
+        },
+      }
+    );
+    
+    if (!response.ok) {
+      console.warn(`Failed to fetch comments for PR #${prNumber}`);
+      return [];
+    }
+    
+    const comments = await response.json();
+    return comments.map(comment => ({
+      id: comment.id,
+      body: comment.body,
+      author: comment.user.login,
+      authorAvatar: comment.user.avatar_url,
+      createdAt: new Date(comment.created_at),
+      isBot: comment.user.type === "Bot",
+    }));
+  } catch (error) {
+    console.error(`Error fetching comments for PR #${prNumber}:`, error);
+    return [];
+  }
+}
+
+/**
+ * Fetch comments for all user's submissions
+ */
+async function fetchAllComments() {
+  // Fetch comments for each submission in parallel (with rate limit consideration)
+  const batchSize = 5; // Fetch 5 at a time to avoid rate limits
+  
+  for (let i = 0; i < allSubmissions.length; i += batchSize) {
+    const batch = allSubmissions.slice(i, i + batchSize);
+    const commentPromises = batch.map(async (submission) => {
+      const comments = await fetchPRComments(submission.number);
+      submission.comments = comments;
+    });
+    
+    await Promise.all(commentPromises);
+  }
+  
+  // Re-render to show comments
+  renderSubmissions();
 }
 
 /**
@@ -563,6 +623,9 @@ function createSubmissionCard(submission) {
     ? createFilesPreview(submission.files) 
     : "";
   
+  // Comments section
+  const commentsSection = createCommentsSection(submission.comments);
+  
   card.innerHTML = `
     <div class="contribution-header">
       <div class="contribution-meta">
@@ -576,6 +639,7 @@ function createSubmissionCard(submission) {
     
     <div class="contribution-body">
       ${filesPreview}
+      ${commentsSection}
       
       <div class="contribution-footer">
         <span class="contribution-date">
@@ -597,6 +661,71 @@ function createSubmissionCard(submission) {
   `;
   
   return card;
+}
+
+/**
+ * Create comments section HTML
+ */
+function createCommentsSection(comments) {
+  // Filter out bot comments and empty comments
+  const humanComments = comments.filter(c => !c.isBot && c.body.trim());
+  
+  if (humanComments.length === 0) {
+    return "";
+  }
+  
+  let html = `
+    <div class="pr-comments">
+      <div class="comments-header">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+        </svg>
+        <span>${humanComments.length} comment${humanComments.length !== 1 ? "s" : ""} from maintainers</span>
+      </div>
+      <div class="comments-list">`;
+  
+  humanComments.forEach(comment => {
+    const commentDate = formatDate(comment.createdAt);
+    const formattedBody = formatCommentBody(comment.body);
+    
+    html += `
+      <div class="comment-item">
+        <div class="comment-meta">
+          <img src="${comment.authorAvatar}" alt="${escapeHtml(comment.author)}" class="comment-avatar" loading="lazy" />
+          <span class="comment-author">${escapeHtml(comment.author)}</span>
+          <span class="comment-date">${commentDate}</span>
+        </div>
+        <div class="comment-body">${formattedBody}</div>
+      </div>`;
+  });
+  
+  html += `</div></div>`;
+  
+  return html;
+}
+
+/**
+ * Format comment body - simple markdown-like formatting
+ */
+function formatCommentBody(body) {
+  if (!body) return "";
+  
+  let formatted = escapeHtml(body);
+  
+  // Convert line breaks
+  formatted = formatted.replace(/\n/g, "<br>");
+  
+  // Bold text **text**
+  formatted = formatted.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  
+  // Italic text *text* or _text_
+  formatted = formatted.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  formatted = formatted.replace(/_([^_]+)_/g, "<em>$1</em>");
+  
+  // Inline code `code`
+  formatted = formatted.replace(/`([^`]+)`/g, "<code>$1</code>");
+  
+  return formatted;
 }
 
 /**
