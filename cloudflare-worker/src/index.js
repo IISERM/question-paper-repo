@@ -469,14 +469,9 @@ async function handleUploadFile(request, env, headers) {
   }
 
   const token = authHeader.replace("Bearer ", "");
-  let { owner, repo, path, content, message, branch } = await request.json();
+  const { owner, repo, path, content, message, branch } = await request.json();
   
-  // Apply folder name standardization to the path
-  const originalPath = path;
-  path = standardizeFolderPath(path);
-  if (originalPath !== path) {
-    console.log(`📁 Standardized file path: "${originalPath}" → "${path}"`);
-  }
+  // Frontend dropdown ensures correct folder names, path is already standardized
 
   try {
     // Create or update file
@@ -873,38 +868,9 @@ async function handleDirectContribution(request, env, headers) {
     console.log("📥 Direct contribution request received");
     console.log("  User:", userName, `(${userEmail})`);
     
-    // Apply folder name standardization to all upload groups
-    console.log("\n📁 Standardizing folder names...");
-    const uploadGroups = originalUploadGroups.map((group) => {
-      const originalPath = group.folderPath;
-      const correctedPath = standardizeFolderPath(originalPath);
-      if (originalPath !== correctedPath) {
-        console.log(`  ✓ "${originalPath}" → "${correctedPath}"`);
-      } else {
-        console.log(`  - "${originalPath}" (no change)`);
-      }
-      return {
-        ...group,
-        folderPath: correctedPath
-      };
-    });
-    
-    // Also apply standardization to uploadGroupsForPR if it exists
-    let correctedUploadGroupsForPR = uploadGroupsForPR;
-    if (uploadGroupsForPR) {
-      console.log("\n📁 Standardizing folder names in PR file list...");
-      correctedUploadGroupsForPR = uploadGroupsForPR.map((group) => {
-        const originalPath = group.folderPath;
-        const correctedPath = standardizeFolderPath(originalPath);
-        if (originalPath !== correctedPath) {
-          console.log(`  ✓ "${originalPath}" → "${correctedPath}"`);
-        }
-        return {
-          ...group,
-          folderPath: correctedPath
-        };
-      });
-    }
+    // Frontend dropdown ensures correct folder names, just use as-is
+    const uploadGroups = originalUploadGroups;
+    const correctedUploadGroupsForPR = uploadGroupsForPR;
     
     console.log("\n  Existing branch:", existingBranch || "NONE (will create new)");
     console.log("  Should create PR:", shouldCreatePR);
