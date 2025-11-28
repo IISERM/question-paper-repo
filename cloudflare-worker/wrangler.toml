@@ -13,6 +13,13 @@ account_id = "2a541d3bfd006a6bafac02bc4760031c"
 # GITHUB_APP_ID
 # GITHUB_APP_PRIVATE_KEY (full PEM format including headers)
 # GITHUB_APP_INSTALLATION_ID
+#
+# For GitHub Webhooks (PR comment notifications):
+# GITHUB_WEBHOOK_SECRET (secret configured in GitHub webhook settings)
+#
+# For Email Notifications (Resend):
+# RESEND_API_KEY (API key from Resend.com)
+# RESEND_FROM_EMAIL (optional, defaults to "QPR Bot <notifications@iiserm.github.io>")
 
 [vars]
 GITHUB_REPO_OWNER = "IISERM"

@@ -94,6 +94,10 @@ async function handleRequest(request, env) {
       return handlePageView(request, env, responseHeaders);
     }
 
+    if (url.pathname === "/api/webhook/github") {
+      return handleGitHubWebhook(request, env, responseHeaders);
+    }
+
     return new Response("Not Found", { status: 404, headers: responseHeaders });
   } catch (error) {
     console.error("Error:", error);
@@ -1166,6 +1170,369 @@ ${filesList}
       JSON.stringify({
         error: error.message || "Failed to process direct contribution",
       }),
+      {
+        status: 500,
+        headers: { ...headers, "Content-Type": "application/json" },
+      }
+    );
+  }
+}
+
+/**
+ * Verify GitHub webhook signature
+ */
+async function verifyWebhookSignature(payload, signature, secret) {
+  if (!signature || !secret) {
+    return false;
+  }
+
+  // GitHub sends signature as "sha256=<hash>"
+  const algorithm = { name: "HMAC", hash: "SHA-256" };
+  const keyData = new TextEncoder().encode(secret);
+  const key = await crypto.subtle.importKey(
+    "raw",
+    keyData,
+    algorithm,
+    false,
+    ["sign"]
+  );
+
+  const signatureHash = signature.replace("sha256=", "");
+  const expectedHash = await crypto.subtle.sign(
+    algorithm.name,
+    key,
+    new TextEncoder().encode(payload)
+  );
+
+  // Convert ArrayBuffer to hex string
+  const expectedHashHex = Array.from(new Uint8Array(expectedHash))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+
+  // Compare case-insensitively (GitHub sends lowercase, but be safe)
+  return expectedHashHex.toLowerCase() === signatureHash.toLowerCase();
+}
+
+/**
+ * Extract contributor email from PR body
+ */
+function extractEmailFromPRBody(prBody) {
+  if (!prBody) return null;
+
+  // Look for "Contributed by:" pattern
+  const contributedByMatch = prBody.match(/\*\*Contributed by:\*\*\s*(.+)/i);
+  if (contributedByMatch) {
+    const email = contributedByMatch[1].trim();
+    // Validate it's an email
+    if (email.includes("@") && email.includes(".")) {
+      return email;
+    }
+  }
+
+  // Fallback: look for email pattern
+  const emailMatch = prBody.match(/([a-zA-Z0-9._%+-]+@iisermohali\.ac\.in)/i);
+  if (emailMatch) {
+    return emailMatch[1];
+  }
+
+  return null;
+}
+
+/**
+ * Send email notification via Resend
+ */
+async function sendEmailNotification(env, recipientEmail, prNumber, prTitle, commentAuthor, commentBody, prUrl) {
+  if (!env.RESEND_API_KEY) {
+    console.error("RESEND_API_KEY not configured");
+    return false;
+  }
+
+  try {
+    const emailHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.6; color: #24292f; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background-color: #0969da; color: white; padding: 20px; border-radius: 6px 6px 0 0; }
+    .content { background-color: #ffffff; border: 1px solid #d0d7de; border-top: none; padding: 20px; border-radius: 0 0 6px 6px; }
+    .pr-info { background-color: #f6f8fa; padding: 15px; border-radius: 6px; margin: 20px 0; }
+    .comment-box { background-color: #f6f8fa; border-left: 3px solid #0969da; padding: 15px; margin: 20px 0; border-radius: 4px; }
+    .button { display: inline-block; background-color: #0969da; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
+    .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #d0d7de; font-size: 12px; color: #656d76; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2 style="margin: 0;">New Comment on Your Pull Request</h2>
+    </div>
+    <div class="content">
+      <p>Hello,</p>
+      <p>Your pull request has received a new comment from <strong>${escapeHtml(commentAuthor)}</strong>.</p>
+      
+      <div class="pr-info">
+        <strong>PR #${prNumber}:</strong> ${escapeHtml(prTitle)}
+      </div>
+
+      <div class="comment-box">
+        <strong>Comment:</strong><br>
+        ${formatCommentForEmail(commentBody)}
+      </div>
+
+      <a href="${prUrl}" class="button">View Pull Request</a>
+
+      <div class="footer">
+        <p>This is an automated notification from the QPR Contribution Portal.</p>
+        <p>If you have any questions, please contact the repository maintainers.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+    `.trim();
+
+    const emailText = `
+New Comment on Your Pull Request
+
+Hello,
+
+Your pull request has received a new comment from ${commentAuthor}.
+
+PR #${prNumber}: ${prTitle}
+
+Comment:
+${commentBody}
+
+View Pull Request: ${prUrl}
+
+---
+This is an automated notification from the QPR Contribution Portal.
+    `.trim();
+
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: env.RESEND_FROM_EMAIL || "QPR Bot <notifications@iiserm.github.io>",
+        to: [recipientEmail],
+        subject: `New comment on PR #${prNumber}: ${prTitle}`,
+        html: emailHtml,
+        text: emailText,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.error("Resend API error:", response.status, errorData);
+      return false;
+    }
+
+    const result = await response.json();
+    console.log("Email sent successfully:", result.id);
+    return true;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return false;
+  }
+}
+
+/**
+ * Escape HTML for email
+ */
+function escapeHtml(text) {
+  if (!text) return "";
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
+/**
+ * Format comment body for email (simple markdown to HTML)
+ */
+function formatCommentForEmail(body) {
+  if (!body) return "";
+  
+  let formatted = escapeHtml(body);
+  
+  // Convert line breaks
+  formatted = formatted.replace(/\n/g, "<br>");
+  
+  // Bold text **text**
+  formatted = formatted.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  
+  // Italic text *text*
+  formatted = formatted.replace(/\*([^*\n]+)\*/g, "<em>$1</em>");
+  
+  // Inline code `code`
+  formatted = formatted.replace(/`([^`]+)`/g, "<code style='background-color: #f6f8fa; padding: 2px 4px; border-radius: 3px; font-family: monospace;'>$1</code>");
+  
+  // Links [text](url)
+  formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color: #0969da;">$1</a>');
+  
+  return formatted;
+}
+
+/**
+ * Handle GitHub webhook events
+ */
+async function handleGitHubWebhook(request, env, headers) {
+  if (request.method !== "POST") {
+    return new Response("Method not allowed", {
+      status: 405,
+      headers: { ...headers, "Content-Type": "text/plain" },
+    });
+  }
+
+  try {
+    // Get webhook payload
+    const payload = await request.text();
+    const signature = request.headers.get("X-Hub-Signature-256") || request.headers.get("x-hub-signature-256");
+
+    // Verify webhook signature
+    const webhookSecret = env.GITHUB_WEBHOOK_SECRET;
+    if (webhookSecret) {
+      const isValid = await verifyWebhookSignature(payload, signature, webhookSecret);
+      if (!isValid) {
+        console.error("Invalid webhook signature");
+        return new Response("Invalid signature", {
+          status: 401,
+          headers: { ...headers, "Content-Type": "text/plain" },
+        });
+      }
+    } else {
+      console.warn("GITHUB_WEBHOOK_SECRET not configured, skipping signature verification");
+    }
+
+    // Parse payload
+    const event = JSON.parse(payload);
+    const eventType = request.headers.get("X-GitHub-Event");
+
+    console.log(`Received GitHub webhook: ${eventType}`);
+
+    // Handle issue_comment event (PR comments are issue comments)
+    if (eventType === "issue_comment" && event.action === "created") {
+      const comment = event.comment;
+      const issue = event.issue;
+
+      // Only process comments on pull requests (not issues)
+      if (!issue.pull_request) {
+        console.log("Comment is on an issue, not a PR. Skipping.");
+        return new Response("OK", {
+          status: 200,
+          headers: { ...headers, "Content-Type": "text/plain" },
+        });
+      }
+
+      // Skip bot comments
+      if (comment.user.type === "Bot") {
+        console.log("Comment is from a bot. Skipping.");
+        return new Response("OK", {
+          status: 200,
+          headers: { ...headers, "Content-Type": "text/plain" },
+        });
+      }
+
+      // Skip empty comments
+      if (!comment.body || !comment.body.trim()) {
+        console.log("Comment is empty. Skipping.");
+        return new Response("OK", {
+          status: 200,
+          headers: { ...headers, "Content-Type": "text/plain" },
+        });
+      }
+
+      // Get PR details to extract email
+      const appToken = await getInstallationToken(
+        env.GITHUB_APP_ID,
+        env.GITHUB_APP_PRIVATE_KEY,
+        env.GITHUB_APP_INSTALLATION_ID
+      );
+
+      const prResponse = await fetch(
+        `https://api.github.com/repos/${env.GITHUB_REPO_OWNER}/${env.GITHUB_REPO_NAME}/pulls/${issue.number}`,
+        {
+          headers: {
+            Authorization: `Bearer ${appToken}`,
+            Accept: "application/vnd.github.v3+json",
+            "User-Agent": "QPR-Contribution-Bot",
+          },
+        }
+      );
+
+      if (!prResponse.ok) {
+        console.error(`Failed to fetch PR #${issue.number}:`, prResponse.status);
+        return new Response("OK", {
+          status: 200,
+          headers: { ...headers, "Content-Type": "text/plain" },
+        });
+      }
+
+      const pr = await prResponse.json();
+
+      // Extract contributor email from PR body
+      const contributorEmail = extractEmailFromPRBody(pr.body);
+
+      if (!contributorEmail) {
+        console.log(`No contributor email found in PR #${issue.number} body. Skipping.`);
+        return new Response("OK", {
+          status: 200,
+          headers: { ...headers, "Content-Type": "text/plain" },
+        });
+      }
+
+      // Don't send email if commenter is the PR author
+      if (pr.user && pr.user.login === comment.user.login) {
+        console.log("Commenter is the PR author. Skipping notification.");
+        return new Response("OK", {
+          status: 200,
+          headers: { ...headers, "Content-Type": "text/plain" },
+        });
+      }
+
+      // Send email notification
+      console.log(`Sending email notification to ${contributorEmail} for PR #${issue.number}`);
+      const emailSent = await sendEmailNotification(
+        env,
+        contributorEmail,
+        issue.number,
+        issue.title,
+        comment.user.login,
+        comment.body,
+        pr.html_url
+      );
+
+      if (emailSent) {
+        console.log(`✅ Email notification sent successfully to ${contributorEmail}`);
+      } else {
+        console.error(`❌ Failed to send email notification to ${contributorEmail}`);
+      }
+
+      return new Response("OK", {
+        status: 200,
+        headers: { ...headers, "Content-Type": "text/plain" },
+      });
+    }
+
+    // For other event types, just acknowledge
+    return new Response("OK", {
+      status: 200,
+      headers: { ...headers, "Content-Type": "text/plain" },
+    });
+  } catch (error) {
+    console.error("Webhook processing error:", error);
+    return new Response(
+      JSON.stringify({ error: error.message }),
       {
         status: 500,
         headers: { ...headers, "Content-Type": "application/json" },

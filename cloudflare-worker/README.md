@@ -286,6 +286,7 @@ The worker provides these endpoints:
 - `POST /api/upload-file` - Upload a file to the branch
 - `POST /api/create-pr` - Create a pull request
 - `POST /api/pageview` - Increment & return anonymous visit counts (no auth)
+- `POST /api/webhook/github` - GitHub webhook endpoint for PR comment notifications
 
 All API endpoints (except `/auth/callback` and `/api/pageview`) require the `Authorization: Bearer <token>` header.
 
@@ -298,6 +299,89 @@ The docs footer displays a live visitor count using this worker. To enable it:
 3. Deploy the worker. The frontend (via `docs/footer.js`) will POST `{ counter, path }` to `/api/pageview` and show the returned totals.
 
 If the KV binding is missing, the endpoint responds with `{ "disabled": true }` so the UI can fall back gracefully.
+
+## Email Notifications Setup (PR Comments)
+
+The worker can send email notifications to contributors when their PRs receive comments. This uses GitHub webhooks and Resend.
+
+### Step 1: Create Resend Account
+
+1. Go to https://resend.com and sign up (free tier: 3,000 emails/month)
+2. Verify your domain or use the default domain for testing
+3. Go to **API Keys** and create a new API key
+4. Save the API key (starts with `re_`)
+
+### Step 2: Add Resend Secrets
+
+```bash
+wrangler secret put RESEND_API_KEY
+# Paste your Resend API key when prompted
+
+wrangler secret put RESEND_FROM_EMAIL
+# Optional: Set sender email (e.g., "QPR Bot <notifications@iiserm.github.io>")
+# If not set, defaults to "QPR Bot <notifications@iiserm.github.io>"
+```
+
+**Note:** The sender email must be verified in your Resend dashboard.
+
+### Step 3: Set Up GitHub Webhook
+
+1. Go to your repository: `https://github.com/IISERM/question-paper-repo`
+2. Navigate to **Settings** → **Webhooks** → **Add webhook**
+3. Configure the webhook:
+   - **Payload URL:** `https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev/api/webhook/github`
+     - Replace with your actual worker URL
+   - **Content type:** `application/json`
+   - **Secret:** Generate a strong random secret (save this!)
+   - **Events:** Select **"Let me select individual events"**
+     - Check only: **"Issue comments"**
+   - **Active:** ✅ Checked
+4. Click **"Add webhook"**
+
+### Step 4: Add Webhook Secret
+
+```bash
+wrangler secret put GITHUB_WEBHOOK_SECRET
+# Paste the secret you configured in GitHub webhook settings
+```
+
+### Step 5: Redeploy Worker
+
+```bash
+wrangler deploy
+```
+
+### How It Works
+
+1. When someone comments on a PR, GitHub sends a webhook to your worker
+2. The worker verifies the webhook signature for security
+3. It extracts the contributor's email from the PR body
+4. It sends an email notification via Resend
+5. The email includes the comment, PR details, and a link to view the PR
+
+### Testing
+
+1. Create a test PR (or use an existing one)
+2. Add a comment to the PR from a different account
+3. Check the contributor's email inbox
+4. Check worker logs: `wrangler tail` to see webhook processing
+
+### Troubleshooting
+
+- **No emails received?**
+  - Check worker logs: `wrangler tail`
+  - Verify Resend API key is correct
+  - Check Resend dashboard for delivery status
+  - Ensure sender email is verified in Resend
+
+- **Webhook not working?**
+  - Check webhook delivery in GitHub Settings → Webhooks → Recent Deliveries
+  - Verify webhook secret matches in both GitHub and Cloudflare
+  - Check worker logs for errors
+
+- **Email not in PR body?**
+  - The system looks for `**Contributed by:** email@domain.com` in PR body
+  - Ensure PRs are created via the contribution portal (which includes this)
 
 ## Next Steps
 
