@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Track your submitted pull requests to IISER Mohali Question Paper Repository"
+    />
+    <title>My Submissions - IISER Mohali Question Paper Repository</title>
+
+    <link rel="icon" type="image/png" href="icon.png" />
+    <link rel="apple-touch-icon" href="icon.png" />
+
+    <link rel="preload" as="image" href="icon_nobg.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container header-row">
+        <img
+          src="icon_nobg.png"
+          alt="QPR Logo"
+          class="header-logo"
+          loading="eager"
+          width="60"
+          height="60"
+        />
+        <div class="header-content">
+          <h1>QPR</h1>
+          <p class="subtitle">IISER-M Question Paper Repository</p>
+        </div>
+        <div class="header-actions">
+          <!-- Auth Button (shown when logged out) -->
+          <button id="header-login-btn" class="btn-header-auth">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+              <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+            <span>Sign In</span>
+          </button>
+          <!-- User Info (shown when logged in) -->
+          <div id="header-user-info" class="header-user" style="display: none;">
+            <span id="header-username" class="header-username"></span>
+            <button id="header-logout-btn" class="btn-header-logout" title="Sign out">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+              </svg>
+            </button>
+          </div>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <svg
+              id="theme-icon-sun"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              style="display: none"
+            >
+              <path
+                d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+              />
+            </svg>
+            <svg
+              id="theme-icon-moon"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+            >
+              <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"
+              />
+            </svg>
+            <span id="theme-text">Dark</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav-bar">
+      <div class="container">
+        <a href="index.html" class="nav-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+          </svg>
+          Home
+        </a>
+        <a href="contribute.html" class="nav-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+          </svg>
+          Contribute
+        </a>
+        <a href="submissions.html" class="nav-link nav-active">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm3-8.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5z"/>
+          </svg>
+          My Submissions
+        </a>
+        <a href="https://github.com/IISERM/question-paper-repo" target="_blank" class="nav-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="https://github.com/IISERM/question-paper-repo/issues/new" target="_blank" class="nav-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+          </svg>
+          Report Issue
+        </a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <div class="intro-section">
+        <h2>My Submissions</h2>
+        <p>
+          Track the status of your submitted pull requests to the Question Paper Repository.
+        </p>
+      </div>
+
+      <!-- Sign-in prompt (shown when logged out) -->
+      <div id="signin-prompt" class="signin-prompt">
+        <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+          <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+        </svg>
+        <p>Sign in with your IISER Mohali Google account to view your submissions</p>
+      </div>
+
+      <!-- Main Content (shown when logged in) -->
+      <div id="main-content" style="display: none">
+        <!-- Filter Controls -->
+        <div class="contributions-filters">
+          <div class="filter-group">
+            <label for="status-filter">Status:</label>
+            <select id="status-filter" class="form-select filter-select">
+              <option value="all">All</option>
+              <option value="open">Open</option>
+              <option value="merged">Merged</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="search-files">Search:</label>
+            <input 
+              type="text" 
+              id="search-files" 
+              class="form-input filter-input" 
+              placeholder="Search by title or file..."
+            />
+          </div>
+          <button id="refresh-btn" class="btn-secondary btn-refresh">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+              <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+            </svg>
+            Refresh
+          </button>
+        </div>
+
+        <!-- Stats Summary -->
+        <div class="contributions-stats">
+          <div class="stat-mini">
+            <span class="stat-mini-value" id="total-prs">-</span>
+            <span class="stat-mini-label">Total</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-mini-value stat-open" id="open-prs">-</span>
+            <span class="stat-mini-label">Open</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-mini-value stat-merged" id="merged-prs">-</span>
+            <span class="stat-mini-label">Merged</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-mini-value stat-closed" id="closed-prs">-</span>
+            <span class="stat-mini-label">Closed</span>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="submissions-loading" class="contributions-loading">
+          <div class="loading-spinner"></div>
+          <p>Loading your submissions...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="submissions-error" class="contributions-error" style="display: none">
+          <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+          </svg>
+          <p id="error-message">Failed to load submissions</p>
+          <button id="retry-btn" class="btn-secondary">Try Again</button>
+        </div>
+
+        <!-- Submissions List -->
+        <div id="submissions-container" class="contributions-container" style="display: none">
+          <div id="submissions-list" class="contributions-list">
+            <!-- Submissions will be dynamically inserted here -->
+          </div>
+          
+          <!-- Pagination -->
+          <div id="pagination" class="pagination" style="display: none">
+            <!-- Pagination controls will be dynamically inserted -->
+          </div>
+          
+          <div id="no-results" class="no-results" style="display: none">
+            <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+            </svg>
+            <p>No submissions found</p>
+            <a href="contribute.html" class="btn-primary" style="margin-top: 1rem">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>
+              Make Your First Contribution
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Section -->
+      <div class="info-section" style="margin-top: 2rem;">
+        <h3>About Submissions</h3>
+        <p>
+          This page shows pull requests you've submitted to the QPR repository. 
+          Each submission represents files you've uploaded to help build this archive.
+        </p>
+        
+        <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem">Status Meanings</h4>
+        <ul>
+          <li><strong style="color: var(--success-color);">Merged:</strong> Your contribution has been reviewed and added to the repository</li>
+          <li><strong style="color: var(--folder-color);">Open:</strong> Your contribution is awaiting review by maintainers</li>
+          <li><strong style="color: var(--error-color);">Closed:</strong> Contribution was closed without merging (may be duplicate or need changes)</li>
+        </ul>
+
+        <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem">Want to contribute more?</h4>
+        <p>
+          Visit the <a href="contribute.html" style="color: var(--primary-color);">Contribute page</a> to upload more question papers and study materials!
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>Maintained by the IISER Mohali student community</p>
+        <p class="footer-links">
+          <a
+            href="https://github.com/IISERM/question-paper-repo"
+            target="_blank"
+            >GitHub Repository</a
+          >
+          <span class="separator">•</span>
+          <a href="https://iiserm.github.io/course_files/" target="_blank"
+            >Course Files Mirror</a
+          >
+          <span class="separator">•</span>
+          <a href="https://www.iisermohali.ac.in/" target="_blank"
+            >IISER Mohali</a
+          >
+        </p>
+        <div class="footer-meta">
+          <p class="footer-views">
+            Visits recorded: <span id="visit-count">—</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="config.js"></script>
+    <script src="submissions.js"></script>
+    <script src="header-auth.js"></script>
+    <script src="footer.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6734e745d21b45bf857e38bfebe04d0f"}'></script><!-- End Cloudflare Web Analytics -->
+  </body>
+</html>
