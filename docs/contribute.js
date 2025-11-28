@@ -968,6 +968,170 @@ function getFolderPath(groupId) {
 }
 
 // ==========================================
+// PRE-SUBMISSION CHECKS
+// ==========================================
+
+/**
+ * Check if there are multiple images that could be merged to PDF
+ * Returns array of groups with multiple images
+ */
+function detectMultipleImages() {
+  const groupsWithMultipleImages = [];
+  
+  for (const group of state.uploadGroups) {
+    if (group.files.length < 2) continue;
+    
+    const imageFiles = group.files.filter((file, index) => {
+      const name = group.fileNames[index] || file.name;
+      return file.type.startsWith("image/") || name.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+    });
+    
+    if (imageFiles.length >= 2) {
+      groupsWithMultipleImages.push({
+        groupId: group.id,
+        imageCount: imageFiles.length,
+        folderPath: getFolderPath(group.id)
+      });
+    }
+  }
+  
+  return groupsWithMultipleImages;
+}
+
+/**
+ * Check if a filename looks like gibberish (random characters)
+ * Returns true if the filename appears to be meaningless
+ */
+function isGibberishFilename(filename) {
+  // Remove extension for analysis
+  const nameWithoutExt = filename.replace(/\.[^/.]+$/, "");
+  
+  // If the name is too short, it's not necessarily gibberish
+  if (nameWithoutExt.length < 5) return false;
+  
+  // Check for common patterns that indicate gibberish:
+  
+  // 1. Pure numbers (like "2387489273")
+  if (/^\d+$/.test(nameWithoutExt)) return true;
+  
+  // 2. Random alphanumeric with no vowels (like "sfd98s7d89f7s6d298" or "xkcd123abc")
+  const vowelCount = (nameWithoutExt.match(/[aeiouAEIOU]/g) || []).length;
+  const letterCount = (nameWithoutExt.match(/[a-zA-Z]/g) || []).length;
+  
+  // If there are letters but vowel ratio is very low, likely gibberish
+  if (letterCount > 4 && vowelCount / letterCount < 0.1) return true;
+  
+  // 3. Mix of numbers and letters with high digit ratio and no clear pattern
+  const digitCount = (nameWithoutExt.match(/\d/g) || []).length;
+  const totalChars = nameWithoutExt.length;
+  
+  // If more than 60% digits mixed with letters, likely gibberish like "abc123def456"
+  if (digitCount > 0 && letterCount > 0 && digitCount / totalChars > 0.5 && !nameWithoutExt.match(/^\d{4}[-_]?/)) {
+    return true;
+  }
+  
+  // 4. UUID-like patterns
+  if (/^[a-f0-9]{8,}$/i.test(nameWithoutExt)) return true;
+  
+  // 5. Base64-like strings (mix of upper, lower, numbers with specific patterns)
+  if (nameWithoutExt.length > 10 && /^[A-Za-z0-9+/=_-]+$/.test(nameWithoutExt)) {
+    // Check if it looks like base64 or random string
+    const hasUpper = /[A-Z]/.test(nameWithoutExt);
+    const hasLower = /[a-z]/.test(nameWithoutExt);
+    const hasDigit = /\d/.test(nameWithoutExt);
+    if (hasUpper && hasLower && hasDigit && vowelCount / letterCount < 0.2) {
+      return true;
+    }
+  }
+  
+  // 6. Very long names without spaces or separators that aren't common words
+  if (nameWithoutExt.length > 15 && !/[-_ ]/.test(nameWithoutExt) && vowelCount / letterCount < 0.25) {
+    return true;
+  }
+  
+  return false;
+}
+
+/**
+ * Detect files with gibberish filenames
+ * Returns array of files that need renaming
+ */
+function detectGibberishFilenames() {
+  const gibberishFiles = [];
+  
+  for (const group of state.uploadGroups) {
+    for (let i = 0; i < group.files.length; i++) {
+      const fileName = group.fileNames[i] || group.files[i].name;
+      if (isGibberishFilename(fileName)) {
+        gibberishFiles.push({
+          groupId: group.id,
+          fileIndex: i,
+          fileName: fileName,
+          folderPath: getFolderPath(group.id)
+        });
+      }
+    }
+  }
+  
+  return gibberishFiles;
+}
+
+/**
+ * Show a confirmation modal and return a promise that resolves with the user's choice
+ */
+function showConfirmationModal(title, message, confirmText = "Yes", cancelText = "No, Continue") {
+  return new Promise((resolve) => {
+    // Create modal if it doesn't exist
+    let modal = document.getElementById("confirmation-modal");
+    if (!modal) {
+      document.body.insertAdjacentHTML("beforeend", `
+        <div id="confirmation-modal" class="preview-overlay" style="z-index: 10000;">
+          <div class="confirmation-dialog" style="
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+          ">
+            <h3 id="confirm-title" style="margin-bottom: 1rem; color: var(--text-primary);"></h3>
+            <p id="confirm-message" style="margin-bottom: 1.5rem; color: var(--text-secondary); line-height: 1.6;"></p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+              <button id="confirm-yes" class="btn-primary" style="min-width: 120px;"></button>
+              <button id="confirm-no" class="btn-secondary" style="min-width: 120px;"></button>
+            </div>
+          </div>
+        </div>
+      `);
+      modal = document.getElementById("confirmation-modal");
+    }
+    
+    document.getElementById("confirm-title").textContent = title;
+    document.getElementById("confirm-message").innerHTML = message;
+    document.getElementById("confirm-yes").textContent = confirmText;
+    document.getElementById("confirm-no").textContent = cancelText;
+    
+    modal.style.display = "flex";
+    
+    const yesBtn = document.getElementById("confirm-yes");
+    const noBtn = document.getElementById("confirm-no");
+    
+    const cleanup = () => {
+      modal.style.display = "none";
+      yesBtn.removeEventListener("click", onYes);
+      noBtn.removeEventListener("click", onNo);
+    };
+    
+    const onYes = () => { cleanup(); resolve(true); };
+    const onNo = () => { cleanup(); resolve(false); };
+    
+    yesBtn.addEventListener("click", onYes);
+    noBtn.addEventListener("click", onNo);
+  });
+}
+
+// ==========================================
 // SUBMISSION LOGIC
 // ==========================================
 
@@ -978,6 +1142,59 @@ async function handleSubmit(e) {
     alert(validation.message);
     return;
   }
+  
+  // Check for multiple images that could be merged
+  const groupsWithImages = detectMultipleImages();
+  if (groupsWithImages.length > 0) {
+    const totalImages = groupsWithImages.reduce((sum, g) => sum + g.imageCount, 0);
+    const folderList = groupsWithImages.map(g => `• ${g.folderPath} (${g.imageCount} images)`).join("<br>");
+    
+    const shouldMerge = await showConfirmationModal(
+      "📸 Multiple Images Detected",
+      `You have <strong>${totalImages} images</strong> that could be merged into PDF files:<br><br>${folderList}<br><br>Would you like to merge them before submitting?`,
+      "Yes, Open Merge Tool",
+      "No, Submit As-Is"
+    );
+    
+    if (shouldMerge) {
+      // Open merge tool for the first group with images
+      openMergeTool(groupsWithImages[0].groupId);
+      return; // Stop submission, user will submit after merging
+    }
+  }
+  
+  // Check for gibberish filenames
+  const gibberishFiles = detectGibberishFilenames();
+  if (gibberishFiles.length > 0) {
+    const fileList = gibberishFiles.slice(0, 5).map(f => `• <code>${f.fileName}</code>`).join("<br>");
+    const moreText = gibberishFiles.length > 5 ? `<br>...and ${gibberishFiles.length - 5} more` : "";
+    
+    const shouldRename = await showConfirmationModal(
+      "📝 Unclear Filenames Detected",
+      `Some filenames appear to be random/gibberish:<br><br>${fileList}${moreText}<br><br>Would you like to rename them to something more descriptive?`,
+      "Yes, Let Me Rename",
+      "No, Submit As-Is"
+    );
+    
+    if (shouldRename) {
+      // Scroll to and highlight the first gibberish file
+      const firstFile = gibberishFiles[0];
+      const groupElement = document.getElementById(firstFile.groupId);
+      if (groupElement) {
+        groupElement.scrollIntoView({ behavior: "smooth", block: "center" });
+        // Flash the file list to draw attention
+        const fileList = document.getElementById(`${firstFile.groupId}-file-list`);
+        if (fileList) {
+          fileList.style.animation = "none";
+          fileList.offsetHeight; // Trigger reflow
+          fileList.style.animation = "flash-highlight 1s ease-out";
+        }
+      }
+      return; // Stop submission, let user rename
+    }
+  }
+  
+  // Proceed with submission
   const prTitle = document.getElementById("pr-title").value.trim();
   const prDescription = document.getElementById("pr-description").value.trim();
   if (state.authType === "google") {
