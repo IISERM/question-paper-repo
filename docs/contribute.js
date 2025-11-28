@@ -40,7 +40,6 @@ let state = {
   userPhoto: null,
   uploadGroups: [],
   userForkName: null,
-  repositoryData: null, // Store loaded repo structure for folder matching
 };
 
 function injectDynamicStyles() {
@@ -81,17 +80,13 @@ function injectDynamicStyles() {
 }
 
 // Initialize page
-document.addEventListener("DOMContentLoaded", async () => {
-  console.log("🚀 QPR Contribution Portal - Initialized");
+document.addEventListener("DOMContentLoaded", () => {
   injectDynamicStyles();
   initThemeToggle();
   checkAuthStatus();
   setupEventListeners();
   addInitialUploadGroup();
   setupPreviewModal();
-  
-  // Load repository structure for smart folder matching
-  await loadRepositoryData();
 });
 
 // Theme Toggle
@@ -298,9 +293,20 @@ function addUploadGroup() {
                     <input type="text" id="${groupId}-year" class="form-input" placeholder="e.g., 2025" pattern="[0-9]{4}" maxlength="4" required oninput="validateYear('${groupId}')" onchange="updatePathPreview('${groupId}')"/>
                 </div>
                 <div class="form-group">
-                    <label for="${groupId}-customfolder">Additional Folder (optional)</label>
-                    <input type="text" id="${groupId}-customfolder" class="form-input" placeholder="e.g., Endsem, Quiz, Assignments" onchange="updatePathPreview('${groupId}')"/>
-                    <small class="form-hint">Any folder name you want.</small>
+                    <label for="${groupId}-foldertype">Folder Type (optional)</label>
+                    <select id="${groupId}-foldertype" class="form-select" onchange="handleFolderTypeChange('${groupId}')">
+                        <option value="">None</option>
+                        <option value="Midsem">Midsem</option>
+                        <option value="Endsem">Endsem</option>
+                        <option value="Quiz">Quiz</option>
+                        <option value="Custom">Custom...</option>
+                    </select>
+                    <small class="form-hint">Choose a standard folder or create a custom one</small>
+                </div>
+                <div class="form-group" id="${groupId}-custom-folder-group" style="display: none;">
+                    <label for="${groupId}-customfolder">Custom Folder Name</label>
+                    <input type="text" id="${groupId}-customfolder" class="form-input" placeholder="e.g., Assignments, Notes" oninput="handleCustomFolderInput('${groupId}')" onchange="updatePathPreview('${groupId}')"/>
+                    <div id="${groupId}-folder-suggestion" class="folder-suggestion" style="display: none;"></div>
                 </div>
                 <div class="path-preview">
                     <strong>Path:</strong> <code id="${groupId}-path-display">Select options above</code>
@@ -774,94 +780,113 @@ function rotateImageOnCanvas(img, angle) {
   return canvas.toDataURL("image/jpeg", 0.9);
 }
 
-// ==========================================
-// SMART FOLDER NAME STANDARDIZATION
-// ==========================================
-
-/**
- * Get canonical (standardized) folder name
- * Automatically corrects common variations like "endsems" -> "Endsem"
- * This works even for new courses that don't exist in the repository yet
- */
-function getCanonicalFolderName(folderName) {
-  if (!folderName) return folderName;
-  
-  const normalized = folderName.toLowerCase().trim();
-  
-  // Define canonical folder names and their variations
-  const canonicalNames = {
-    'Endsem': ['endsem', 'endsems', 'end-sem', 'end sem', 'endterm', 'endterms', 'end', 'final', 'finals', 'final-exam', 'final exam'],
-    'Midsem': ['midsem', 'midsems', 'mid-sem', 'mid sem', 'midterm', 'midterms', 'mid', 'mid-exam', 'mid exam'],
-    'Quiz': ['quiz', 'quizzes', 'quizs', 'test', 'tests']
-  };
-  
-  // Check if input matches any canonical name or its variations
-  for (const [canonical, variations] of Object.entries(canonicalNames)) {
-    if (normalized === canonical.toLowerCase()) {
-      return canonical; // Already canonical
-    }
-    
-    // Check if it matches any variation
-    for (const variation of variations) {
-      if (normalized === variation) {
-        console.log(`📁 Folder name standardized: "${folderName}" → "${canonical}"`);
-        return canonical;
-      }
-      
-      // Also match if starts with variation (e.g., "Endsem2024" -> "Endsem")
-      if (normalized.startsWith(variation + ' ') || normalized.startsWith(variation + '-')) {
-        const suffix = folderName.substring(variation.length);
-        console.log(`📁 Folder name standardized: "${folderName}" → "${canonical}${suffix}"`);
-        return canonical + suffix;
-      }
-    }
-  }
-  
-  // No match found, return with proper capitalization if it's a single word
-  // This ensures consistency even for custom folder names
-  return folderName.charAt(0).toUpperCase() + folderName.slice(1);
-}
-
-async function loadRepositoryData() {
-  try {
-    const response = await fetch("data.json");
-    if (response.ok) {
-      state.repositoryData = await response.json();
-      console.log("✅ Repository structure loaded");
-    } else {
-      console.warn("⚠️ Could not load repository structure");
-    }
-  } catch (error) {
-    console.warn("⚠️ Error loading repository structure:", error);
-  }
-}
+// Note: Folder type selection is now handled via dropdown (Midsem/Endsem/Quiz/Custom)
+// No need for complex folder name standardization logic
 
 // ==========================================
 // UTILITIES & PATH HELPERS
 // ==========================================
 
+// Handle folder type dropdown change
+window.handleFolderTypeChange = function (groupId) {
+  const folderType = document.getElementById(`${groupId}-foldertype`).value;
+  const customFolderGroup = document.getElementById(`${groupId}-custom-folder-group`);
+  const customFolderInput = document.getElementById(`${groupId}-customfolder`);
+  
+  if (folderType === 'Custom') {
+    // Show custom input field
+    customFolderGroup.style.display = 'block';
+    customFolderInput.value = '';
+    customFolderInput.focus();
+  } else {
+    // Hide custom input field
+    customFolderGroup.style.display = 'none';
+    customFolderInput.value = '';
+    // Hide any suggestion
+    document.getElementById(`${groupId}-folder-suggestion`).style.display = 'none';
+  }
+  
+  updatePathPreview(groupId);
+};
+
+// Detect if user is typing something similar to Midsem/Endsem/Quiz in custom field
+window.handleCustomFolderInput = function (groupId) {
+  const customFolder = document.getElementById(`${groupId}-customfolder`).value.trim();
+  const suggestionDiv = document.getElementById(`${groupId}-folder-suggestion`);
+  const folderTypeSelect = document.getElementById(`${groupId}-foldertype`);
+  
+  if (!customFolder) {
+    suggestionDiv.style.display = 'none';
+    updatePathPreview(groupId);
+    return;
+  }
+  
+  // Check if the input matches any standard folder variations
+  const detectedType = detectStandardFolderType(customFolder);
+  
+  if (detectedType) {
+    // Show suggestion to use dropdown instead
+    suggestionDiv.innerHTML = `
+      <span style="color: var(--warning-color);">⚠️ Did you mean "${detectedType}"?</span>
+      <button type="button" class="btn-suggestion" onclick="useSuggestedFolder('${groupId}', '${detectedType}')">
+        Use ${detectedType}
+      </button>
+    `;
+    suggestionDiv.style.display = 'block';
+  } else {
+    suggestionDiv.style.display = 'none';
+  }
+  
+  updatePathPreview(groupId);
+};
+
+// Auto-switch to suggested folder type
+window.useSuggestedFolder = function (groupId, folderType) {
+  const folderTypeSelect = document.getElementById(`${groupId}-foldertype`);
+  folderTypeSelect.value = folderType;
+  handleFolderTypeChange(groupId);
+};
+
+// Detect if custom input matches standard folder types
+function detectStandardFolderType(input) {
+  const normalized = input.toLowerCase().trim();
+  
+  const variations = {
+    'Endsem': ['endsem', 'endsems', 'end-sem', 'end sem', 'endterm', 'endterms', 'end', 'final', 'finals', 'final-exam', 'final exam'],
+    'Midsem': ['midsem', 'midsems', 'mid-sem', 'mid sem', 'midterm', 'midterms', 'mid', 'mid-exam', 'mid exam'],
+    'Quiz': ['quiz', 'quizzes', 'quizs', 'test', 'tests']
+  };
+  
+  for (const [canonical, varList] of Object.entries(variations)) {
+    if (varList.includes(normalized)) {
+      return canonical;
+    }
+  }
+  
+  return null;
+}
+
 window.updatePathPreview = function (groupId) {
   const subject = document.getElementById(`${groupId}-subject`).value;
   const courseCode = document.getElementById(`${groupId}-coursecode`).value;
   const year = document.getElementById(`${groupId}-year`).value;
-  const customFolder = document
-    .getElementById(`${groupId}-customfolder`)
-    .value.trim();
+  const folderType = document.getElementById(`${groupId}-foldertype`).value;
   const pathDisplay = document.getElementById(`${groupId}-path-display`);
 
   if (subject && courseCode && year) {
     let path = `${subject}/${courseCode}/${year}`;
     
-    // Apply smart folder name correction
-    if (customFolder) {
-      const correctedFolder = getCanonicalFolderName(customFolder);
-      path += `/${correctedFolder}`;
-      
-      // Show warning if folder name was corrected
-      if (correctedFolder !== customFolder) {
-        pathDisplay.innerHTML = `<span style="color: var(--success-color);">${path}</span> <span style="color: var(--warning-color); font-size: 0.85em;">⚠️ Renamed: "${customFolder}" → "${correctedFolder}"</span>`;
-        pathDisplay.style.color = "var(--success-color)";
-        return;
+    // Add folder based on selection
+    if (folderType && folderType !== 'Custom') {
+      // Standard folder (Midsem/Endsem/Quiz)
+      path += `/${folderType}`;
+    } else if (folderType === 'Custom') {
+      // Custom folder
+      const customFolder = document.getElementById(`${groupId}-customfolder`).value.trim();
+      if (customFolder) {
+        // Capitalize first letter for consistency
+        const formattedFolder = customFolder.charAt(0).toUpperCase() + customFolder.slice(1);
+        path += `/${formattedFolder}`;
       }
     }
     
@@ -918,21 +943,24 @@ function getFolderPath(groupId) {
   const subject = document.getElementById(`${groupId}-subject`).value;
   const courseCode = document.getElementById(`${groupId}-coursecode`).value;
   const year = document.getElementById(`${groupId}-year`).value;
-  const customFolder = document
-    .getElementById(`${groupId}-customfolder`)
-    .value.trim();
+  const folderType = document.getElementById(`${groupId}-foldertype`).value;
 
   if (!subject || !courseCode || !year) return null;
   let path = `${subject}/${courseCode}/${year}`;
   
-  // Apply canonical folder name correction
-  if (customFolder) {
-    const correctedFolder = getCanonicalFolderName(customFolder);
-    path += `/${correctedFolder}`;
-    
-    // Log if folder name was corrected
-    if (correctedFolder !== customFolder) {
-      console.log(`📁 Folder name corrected: "${customFolder}" → "${correctedFolder}"`);
+  // Add folder based on selection
+  if (folderType && folderType !== 'Custom') {
+    // Standard folder (Midsem/Endsem/Quiz)
+    path += `/${folderType}`;
+    console.log(`📁 Using standard folder: ${folderType}`);
+  } else if (folderType === 'Custom') {
+    // Custom folder
+    const customFolder = document.getElementById(`${groupId}-customfolder`).value.trim();
+    if (customFolder) {
+      // Capitalize first letter for consistency
+      const formattedFolder = customFolder.charAt(0).toUpperCase() + customFolder.slice(1);
+      path += `/${formattedFolder}`;
+      console.log(`📁 Using custom folder: ${formattedFolder}`);
     }
   }
   
