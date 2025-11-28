@@ -40,6 +40,7 @@ let state = {
   userPhoto: null,
   uploadGroups: [],
   userForkName: null,
+  repositoryData: null, // Store loaded repo structure for folder matching
 };
 
 function injectDynamicStyles() {
@@ -80,7 +81,7 @@ function injectDynamicStyles() {
 }
 
 // Initialize page
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   console.log("🚀 QPR Contribution Portal - Initialized");
   injectDynamicStyles();
   initThemeToggle();
@@ -88,6 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   addInitialUploadGroup();
   setupPreviewModal();
+  
+  // Load repository structure for smart folder matching
+  await loadRepositoryData();
 });
 
 // Theme Toggle
@@ -771,6 +775,68 @@ function rotateImageOnCanvas(img, angle) {
 }
 
 // ==========================================
+// SMART FOLDER NAME STANDARDIZATION
+// ==========================================
+
+/**
+ * Get canonical (standardized) folder name
+ * Automatically corrects common variations like "endsems" -> "Endsem"
+ * This works even for new courses that don't exist in the repository yet
+ */
+function getCanonicalFolderName(folderName) {
+  if (!folderName) return folderName;
+  
+  const normalized = folderName.toLowerCase().trim();
+  
+  // Define canonical folder names and their variations
+  const canonicalNames = {
+    'Endsem': ['endsem', 'endsems', 'end-sem', 'end sem', 'endterm', 'endterms', 'end', 'final', 'finals', 'final-exam', 'final exam'],
+    'Midsem': ['midsem', 'midsems', 'mid-sem', 'mid sem', 'midterm', 'midterms', 'mid', 'mid-exam', 'mid exam'],
+    'Quiz': ['quiz', 'quizzes', 'quizs', 'test', 'tests']
+  };
+  
+  // Check if input matches any canonical name or its variations
+  for (const [canonical, variations] of Object.entries(canonicalNames)) {
+    if (normalized === canonical.toLowerCase()) {
+      return canonical; // Already canonical
+    }
+    
+    // Check if it matches any variation
+    for (const variation of variations) {
+      if (normalized === variation) {
+        console.log(`📁 Folder name standardized: "${folderName}" → "${canonical}"`);
+        return canonical;
+      }
+      
+      // Also match if starts with variation (e.g., "Endsem2024" -> "Endsem")
+      if (normalized.startsWith(variation + ' ') || normalized.startsWith(variation + '-')) {
+        const suffix = folderName.substring(variation.length);
+        console.log(`📁 Folder name standardized: "${folderName}" → "${canonical}${suffix}"`);
+        return canonical + suffix;
+      }
+    }
+  }
+  
+  // No match found, return with proper capitalization if it's a single word
+  // This ensures consistency even for custom folder names
+  return folderName.charAt(0).toUpperCase() + folderName.slice(1);
+}
+
+async function loadRepositoryData() {
+  try {
+    const response = await fetch("data.json");
+    if (response.ok) {
+      state.repositoryData = await response.json();
+      console.log("✅ Repository structure loaded");
+    } else {
+      console.warn("⚠️ Could not load repository structure");
+    }
+  } catch (error) {
+    console.warn("⚠️ Error loading repository structure:", error);
+  }
+}
+
+// ==========================================
 // UTILITIES & PATH HELPERS
 // ==========================================
 
@@ -785,7 +851,20 @@ window.updatePathPreview = function (groupId) {
 
   if (subject && courseCode && year) {
     let path = `${subject}/${courseCode}/${year}`;
-    if (customFolder) path += `/${customFolder}`;
+    
+    // Apply smart folder name correction
+    if (customFolder) {
+      const correctedFolder = getCanonicalFolderName(customFolder);
+      path += `/${correctedFolder}`;
+      
+      // Show warning if folder name was corrected
+      if (correctedFolder !== customFolder) {
+        pathDisplay.innerHTML = `<span style="color: var(--success-color);">${path}</span> <span style="color: var(--warning-color); font-size: 0.85em;">⚠️ Renamed: "${customFolder}" → "${correctedFolder}"</span>`;
+        pathDisplay.style.color = "var(--success-color)";
+        return;
+      }
+    }
+    
     pathDisplay.textContent = path;
     pathDisplay.style.color = "var(--success-color)";
   } else {
@@ -845,7 +924,18 @@ function getFolderPath(groupId) {
 
   if (!subject || !courseCode || !year) return null;
   let path = `${subject}/${courseCode}/${year}`;
-  if (customFolder) path += `/${customFolder}`;
+  
+  // Apply canonical folder name correction
+  if (customFolder) {
+    const correctedFolder = getCanonicalFolderName(customFolder);
+    path += `/${correctedFolder}`;
+    
+    // Log if folder name was corrected
+    if (correctedFolder !== customFolder) {
+      console.log(`📁 Folder name corrected: "${customFolder}" → "${correctedFolder}"`);
+    }
+  }
+  
   return path;
 }
 

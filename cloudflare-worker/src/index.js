@@ -469,7 +469,14 @@ async function handleUploadFile(request, env, headers) {
   }
 
   const token = authHeader.replace("Bearer ", "");
-  const { owner, repo, path, content, message, branch } = await request.json();
+  let { owner, repo, path, content, message, branch } = await request.json();
+  
+  // Apply folder name standardization to the path
+  const originalPath = path;
+  path = standardizeFolderPath(path);
+  if (originalPath !== path) {
+    console.log(`📁 Standardized file path: "${originalPath}" → "${path}"`);
+  }
 
   try {
     // Create or update file
@@ -562,6 +569,280 @@ async function handleCreatePR(request, env, headers) {
 }
 
 /**
+ * Smart folder matching helper for user-contributed files (GitHub OAuth flow)
+ * Uses user's token and checks their fork
+ */
+async function findMatchingFolderPathForUser(token, owner, repo, filePath) {
+  if (!filePath) return filePath;
+  
+  try {
+    const parts = filePath.split('/');
+    if (parts.length < 4) return filePath; // Need at least Subject/Code/Year/filename
+    
+    const fileName = parts[parts.length - 1];
+    const lastFolder = parts[parts.length - 2];
+    const parentPath = parts.slice(0, -2).join('/');
+    
+    // Check if parent path exists and get its contents
+    const contentsResponse = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/contents/${parentPath}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/vnd.github.v3+json",
+          "User-Agent": "QPR-Contribution-Portal",
+        },
+      }
+    );
+    
+    if (!contentsResponse.ok) {
+      // Parent path doesn't exist, return original
+      return filePath;
+    }
+    
+    const contents = await contentsResponse.json();
+    const existingFolders = contents
+      .filter(item => item.type === 'dir')
+      .map(item => item.name);
+    
+    if (existingFolders.length === 0) return filePath;
+    
+    // Normalize input for comparison
+    const normalizedInput = lastFolder.toLowerCase().trim();
+    
+    // Check for exact match first (case-insensitive)
+    const exactMatch = existingFolders.find(f => f.toLowerCase() === normalizedInput);
+    if (exactMatch) {
+      console.log(`📂 Exact folder match found: "${lastFolder}" -> "${exactMatch}"`);
+      return `${parentPath}/${exactMatch}/${fileName}`;
+    }
+    
+    // Check for common variations (Midsem, Endsem, Quiz)
+    const commonFolderVariations = {
+      'midsem': ['midsems', 'mid-sem', 'mid sem', 'midterm', 'midterms', 'mid'],
+      'endsem': ['endsems', 'end-sem', 'end sem', 'endterm', 'endterms', 'end', 'final', 'finals'],
+      'quiz': ['quizzes', 'quizs', 'test', 'tests']
+    };
+    
+    // Find if the input matches any variations
+    for (const [canonical, variations] of Object.entries(commonFolderVariations)) {
+      const existingCanonical = existingFolders.find(f => f.toLowerCase() === canonical);
+      
+      if (existingCanonical) {
+        // Check if input matches any variation
+        if (variations.some(v => normalizedInput === v || normalizedInput.startsWith(v))) {
+          console.log(`🔄 Smart folder match: "${lastFolder}" -> "${existingCanonical}"`);
+          return `${parentPath}/${existingCanonical}/${fileName}`;
+        }
+        
+        // Also check if canonical matches the input
+        if (normalizedInput.includes(canonical)) {
+          console.log(`🔄 Smart folder match: "${lastFolder}" -> "${existingCanonical}"`);
+          return `${parentPath}/${existingCanonical}/${fileName}`;
+        }
+      }
+    }
+    
+    // Try fuzzy match - find closest matching folder name
+    for (const existingFolder of existingFolders) {
+      const normalizedExisting = existingFolder.toLowerCase();
+      
+      // Check if they're very similar (e.g., just case or plural difference)
+      if (normalizedExisting === normalizedInput + 's' || 
+          normalizedExisting + 's' === normalizedInput ||
+          normalizedExisting === normalizedInput.replace(/s$/, '')) {
+        console.log(`🔄 Smart folder match: "${lastFolder}" -> "${existingFolder}"`);
+        return `${parentPath}/${existingFolder}/${fileName}`;
+      }
+    }
+    
+  } catch (error) {
+    console.error('Error in smart folder matching:', error);
+    // On error, return original path
+  }
+  
+  return filePath; // No match found, use original
+}
+
+/**
+ * Get canonical (standardized) folder name
+ * Automatically corrects common variations like "endsems" -> "Endsem"
+ */
+function getCanonicalFolderName(folderName) {
+  if (!folderName) return folderName;
+  
+  const normalized = folderName.toLowerCase().trim();
+  
+  // Define canonical folder names and their variations
+  const canonicalNames = {
+    'Endsem': ['endsem', 'endsems', 'end-sem', 'end sem', 'endterm', 'endterms', 'end', 'final', 'finals', 'final-exam', 'final exam'],
+    'Midsem': ['midsem', 'midsems', 'mid-sem', 'mid sem', 'midterm', 'midterms', 'mid', 'mid-exam', 'mid exam'],
+    'Quiz': ['quiz', 'quizzes', 'quizs', 'test', 'tests']
+  };
+  
+  // Check if input matches any canonical name or its variations
+  for (const [canonical, variations] of Object.entries(canonicalNames)) {
+    if (normalized === canonical.toLowerCase()) {
+      return canonical; // Already canonical
+    }
+    
+    // Check if it matches any variation
+    for (const variation of variations) {
+      if (normalized === variation) {
+        console.log(`    📁 Standardized: "${folderName}" → "${canonical}"`);
+        return canonical;
+      }
+      
+      // Also match if starts with variation (e.g., "Endsem2024" -> "Endsem")
+      if (normalized.startsWith(variation + ' ') || normalized.startsWith(variation + '-')) {
+        const suffix = folderName.substring(variation.length);
+        console.log(`    📁 Standardized: "${folderName}" → "${canonical}${suffix}"`);
+        return canonical + suffix;
+      }
+    }
+  }
+  
+  // No match found, return with proper capitalization
+  return folderName.charAt(0).toUpperCase() + folderName.slice(1);
+}
+
+/**
+ * Apply canonical folder name standardization to a path
+ * E.g., "PHY/403/2025/endsems/file.pdf" -> "PHY/403/2025/Endsem/file.pdf"
+ * or "PHY/403/2025/endsems" -> "PHY/403/2025/Endsem"
+ */
+function standardizeFolderPath(folderPath) {
+  if (!folderPath) return folderPath;
+  
+  const parts = folderPath.split('/');
+  
+  // For file paths: Subject/Code/Year/Folder/file.pdf
+  // For folder paths: Subject/Code/Year/Folder
+  
+  // Find the custom folder (4th element in the path)
+  if (parts.length >= 4) {
+    const customFolderIndex = 3; // 0=Subject, 1=Code, 2=Year, 3=CustomFolder
+    const originalFolder = parts[customFolderIndex];
+    const correctedFolder = getCanonicalFolderName(originalFolder);
+    
+    if (correctedFolder !== originalFolder) {
+      parts[customFolderIndex] = correctedFolder;
+      return parts.join('/');
+    }
+  }
+  
+  return folderPath;
+}
+
+/**
+ * OLD: Smart folder matching helper - finds existing folder that matches variations
+ * This is kept for reference but replaced by simpler standardization above
+ */
+async function findMatchingFolderPath_OLD(env, folderPath) {
+  if (!folderPath) return folderPath;
+  
+  try {
+    const parts = folderPath.split('/');
+    if (parts.length < 3) return folderPath; // Need at least Subject/Code/Year
+    
+    const lastFolder = parts[parts.length - 1];
+    const parentPath = parts.slice(0, -1).join('/');
+    
+    // Get GitHub App token
+    const appToken = await getInstallationToken(
+      env.GITHUB_APP_ID,
+      env.GITHUB_APP_PRIVATE_KEY,
+      env.GITHUB_APP_INSTALLATION_ID
+    );
+    
+    // Check if parent path exists and get its contents
+    const contentsResponse = await fetch(
+      `https://api.github.com/repos/${env.GITHUB_REPO_OWNER}/${env.GITHUB_REPO_NAME}/contents/${parentPath}`,
+      {
+        headers: {
+          Authorization: `Bearer ${appToken}`,
+          Accept: "application/vnd.github.v3+json",
+          "User-Agent": "QPR-Contribution-Bot",
+        },
+      }
+    );
+    
+    if (!contentsResponse.ok) {
+      // Parent path doesn't exist, return original
+      console.log(`    ⓘ Parent path "${parentPath}" not found in main repo, using original path`);
+      return folderPath;
+    }
+    
+    const contents = await contentsResponse.json();
+    const existingFolders = contents
+      .filter(item => item.type === 'dir')
+      .map(item => item.name);
+    
+    if (existingFolders.length === 0) {
+      console.log(`    ⓘ No existing folders in "${parentPath}", using original path`);
+      return folderPath;
+    }
+    
+    console.log(`    ⓘ Found ${existingFolders.length} folder(s) in "${parentPath}": [${existingFolders.join(', ')}]`);
+    
+    // Normalize input for comparison
+    const normalizedInput = lastFolder.toLowerCase().trim();
+    
+    // Check for exact match first (case-insensitive)
+    const exactMatch = existingFolders.find(f => f.toLowerCase() === normalizedInput);
+    if (exactMatch) {
+      console.log(`📂 Exact folder match found: "${lastFolder}" -> "${exactMatch}"`);
+      return `${parentPath}/${exactMatch}`;
+    }
+    
+    // Check for common variations (Midsem, Endsem, Quiz)
+    const commonFolderVariations = {
+      'midsem': ['midsems', 'mid-sem', 'mid sem', 'midterm', 'midterms', 'mid'],
+      'endsem': ['endsems', 'end-sem', 'end sem', 'endterm', 'endterms', 'end', 'final', 'finals'],
+      'quiz': ['quizzes', 'quizs', 'test', 'tests']
+    };
+    
+    // Find if the input matches any variations
+    for (const [canonical, variations] of Object.entries(commonFolderVariations)) {
+      const existingCanonical = existingFolders.find(f => f.toLowerCase() === canonical);
+      
+      if (existingCanonical) {
+        // Check if input matches any variation
+        if (variations.some(v => normalizedInput === v || normalizedInput.startsWith(v))) {
+          console.log(`🔄 Smart folder match: "${lastFolder}" -> "${existingCanonical}"`);
+          return `${parentPath}/${existingCanonical}`;
+        }
+        
+        // Also check if canonical matches the input
+        if (normalizedInput.includes(canonical)) {
+          console.log(`🔄 Smart folder match: "${lastFolder}" -> "${existingCanonical}"`);
+          return `${parentPath}/${existingCanonical}`;
+        }
+      }
+    }
+    
+    // Try fuzzy match - find closest matching folder name
+    for (const existingFolder of existingFolders) {
+      const normalizedExisting = existingFolder.toLowerCase();
+      
+      // Check if they're very similar (e.g., just case or plural difference)
+      if (normalizedExisting === normalizedInput + 's' || 
+          normalizedExisting + 's' === normalizedInput ||
+          normalizedExisting === normalizedInput.replace(/s$/, '')) {
+        console.log(`🔄 Smart folder match: "${lastFolder}" -> "${existingFolder}"`);
+        return `${parentPath}/${existingFolder}`;
+      }
+    }
+    
+  } catch (error) {
+    console.error('Error in smart folder matching:', error);
+    // On error, return original path
+  }
+  
+  return folderPath; // No match found, use original
+}
+
+/**
  * Handle direct contribution (Firebase Google Auth flow)
  * Creates PR directly on main repo using GitHub App token
  * Supports batching for large uploads
@@ -579,7 +860,7 @@ async function handleDirectContribution(request, env, headers) {
     const {
       userEmail,
       userName,
-      uploadGroups,
+      uploadGroups: originalUploadGroups,
       uploadGroupsForPR, // Complete list of all files for PR description (only on last batch)
       prTitle,
       prDescription,
@@ -587,24 +868,55 @@ async function handleDirectContribution(request, env, headers) {
       shouldCreatePR = true, // Whether to create PR at the end
       batchInfo, // Optional: { current: 1, total: 3 }
     } = data;
-
+    
     console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     console.log("📥 Direct contribution request received");
     console.log("  User:", userName, `(${userEmail})`);
-    console.log(
-      "  Existing branch:",
-      existingBranch || "NONE (will create new)"
-    );
+    
+    // Apply folder name standardization to all upload groups
+    console.log("\n📁 Standardizing folder names...");
+    const uploadGroups = originalUploadGroups.map((group) => {
+      const originalPath = group.folderPath;
+      const correctedPath = standardizeFolderPath(originalPath);
+      if (originalPath !== correctedPath) {
+        console.log(`  ✓ "${originalPath}" → "${correctedPath}"`);
+      } else {
+        console.log(`  - "${originalPath}" (no change)`);
+      }
+      return {
+        ...group,
+        folderPath: correctedPath
+      };
+    });
+    
+    // Also apply standardization to uploadGroupsForPR if it exists
+    let correctedUploadGroupsForPR = uploadGroupsForPR;
+    if (uploadGroupsForPR) {
+      console.log("\n📁 Standardizing folder names in PR file list...");
+      correctedUploadGroupsForPR = uploadGroupsForPR.map((group) => {
+        const originalPath = group.folderPath;
+        const correctedPath = standardizeFolderPath(originalPath);
+        if (originalPath !== correctedPath) {
+          console.log(`  ✓ "${originalPath}" → "${correctedPath}"`);
+        }
+        return {
+          ...group,
+          folderPath: correctedPath
+        };
+      });
+    }
+    
+    console.log("\n  Existing branch:", existingBranch || "NONE (will create new)");
     console.log("  Should create PR:", shouldCreatePR);
     console.log("  Upload groups (this batch):", uploadGroups.length);
     console.log(
       "  Files in this batch:",
       uploadGroups.reduce((sum, g) => sum + g.files.length, 0)
     );
-    if (uploadGroupsForPR) {
+    if (correctedUploadGroupsForPR) {
       console.log(
         "  Complete file list for PR:",
-        uploadGroupsForPR.reduce((sum, g) => sum + g.files.length, 0),
+        correctedUploadGroupsForPR.reduce((sum, g) => sum + g.files.length, 0),
         "files"
       );
     }
@@ -737,6 +1049,7 @@ async function handleDirectContribution(request, env, headers) {
 
     // Upload files with custom author
     const uploadedFiles = [];
+    console.log("\n📤 Starting file uploads...");
     for (const group of uploadGroups) {
       const { folderPath, files } = group;
 
@@ -744,7 +1057,7 @@ async function handleDirectContribution(request, env, headers) {
         const { name, content } = file; // content should be base64
         const filePath = `${folderPath}/${name}`;
 
-        console.log(`Uploading file: ${filePath}`);
+        console.log(`  Uploading: ${filePath}`);
 
         const uploadResponse = await fetch(
           `https://api.github.com/repos/${env.GITHUB_REPO_OWNER}/${env.GITHUB_REPO_NAME}/contents/${filePath}`,
@@ -805,7 +1118,7 @@ async function handleDirectContribution(request, env, headers) {
       const defaultBranch = repoData.default_branch;
 
       // Build PR body using complete file list if provided, otherwise use current batch
-      const groupsForDescription = uploadGroupsForPR || uploadGroups;
+      const groupsForDescription = correctedUploadGroupsForPR || uploadGroups;
       console.log(
         `  Building PR description with ${groupsForDescription.length} group(s)`
       );

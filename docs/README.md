@@ -24,26 +24,65 @@ The workflow:
 
 ## Local testing
 
-To test the website locally:
+To test the website locally, you need to:
+1. Generate the `data.json` file from the repository structure
+2. Serve the website using a local server
 
+### Step 1: Generate data.json
+
+**On Linux/Mac (bash/zsh):**
 ```bash
-# Set environment variables (optional, but recommended)
+# Optional: Set environment variables for higher API rate limits
 export GITHUB_TOKEN="your_personal_access_token"
 export GITHUB_REPOSITORY="IISERM/question-paper-repo"
 
-# Generate the folder structure using GitHub API
-cd docs
+# Generate the folder structure
+cd docs/scripts
 node generate-tree.js
+```
 
-# Serve the website (use any static file server)
+**On Windows (PowerShell):**
+```powershell
+# Optional: Set environment variables for higher API rate limits
+$env:GITHUB_TOKEN="your_personal_access_token"
+$env:GITHUB_REPOSITORY="IISERM/question-paper-repo"
+
+# Generate the folder structure
+cd docs/scripts
+node generate-tree.js
+```
+
+This will create `docs/data.json` with the repository structure fetched from GitHub API.
+
+**Note:** The script will work without `GITHUB_TOKEN`, but authenticated requests have higher rate limits (5000/hour vs 60/hour).
+
+### Step 2: Serve the website
+
+Navigate to the docs folder and start a local server:
+
+**Using Python:**
+```bash
+cd docs
 python -m http.server 8000
-# or
+```
+
+**Using Node.js:**
+```bash
+cd docs
 npx serve .
 ```
 
 Then open http://localhost:8000 in your browser.
 
-**Note:** The script will work without `GITHUB_TOKEN`, but authenticated requests have higher rate limits (5000/hour vs 60/hour).
+### Troubleshooting
+
+**Error: "Failed to load data: 404"**
+- Make sure you've run `node generate-tree.js` first to create the `data.json` file
+- The script should output: "Tree structure generated successfully!"
+
+**Error: "GitHub API error: 403" or rate limit errors**
+- Set a `GITHUB_TOKEN` environment variable with a personal access token
+- You can create one at: https://github.com/settings/tokens (no special permissions needed)
 
 ## Features
 
