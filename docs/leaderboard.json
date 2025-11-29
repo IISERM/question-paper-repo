@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-11-28T16:26:26.072Z",
-  "total_contributors": 23,
+  "last_updated": "2025-11-29T04:47:02.065Z",
+  "total_contributors": 24,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -129,6 +129,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "RIYA",
+      "name": "RIYA",
+      "email": "ms25278@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=RIYA&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "GADRE SHARDUL NIKHIL",
