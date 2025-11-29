@@ -1239,58 +1239,230 @@ function extractEmailFromPRBody(prBody) {
 }
 
 /**
- * Send email notification via Resend
+ * Send email notification via EmailJS
+ * Uses EmailJS REST API: https://www.emailjs.com/docs/rest-api/send-email/
+ *
+ * Required Worker secrets:
+ * - EMAILJS_SERVICE_ID
+ * - EMAILJS_TEMPLATE_ID
+ * - EMAILJS_PUBLIC_KEY
+ *
+ * The EmailJS template should define variables that match the template_params
+ * we send below (e.g., to_email, pr_number, pr_title, comment_author, etc.).
  */
-async function sendEmailNotification(env, recipientEmail, prNumber, prTitle, commentAuthor, commentBody, prUrl) {
-  if (!env.RESEND_API_KEY) {
-    console.error("RESEND_API_KEY not configured");
+async function sendEmailNotification(
+  env,
+  recipientEmail,
+  prNumber,
+  prTitle,
+  commentAuthor,
+  commentBody,
+  prUrl,
+  commentAuthorAvatar
+) {
+  const serviceId = env.EMAILJS_SERVICE_ID;
+  const templateId = env.EMAILJS_TEMPLATE_ID;
+  const publicKey = env.EMAILJS_PUBLIC_KEY;
+  const privateKey = env.EMAILJS_PRIVATE_KEY; // optional but required if strict mode enabled
+
+  if (!serviceId || !templateId || !publicKey) {
+    console.error("EmailJS configuration missing. Please set EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, and EMAILJS_PUBLIC_KEY.");
     return false;
   }
 
   try {
+    const safeAvatar =
+      commentAuthorAvatar ||
+      "https://avatars.githubusercontent.com/u/9919?s=200&v=4"; // fallback GitHub logo
+
     const emailHtml = `
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.6; color: #24292f; }
-    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background-color: #0969da; color: white; padding: 20px; border-radius: 6px 6px 0 0; }
-    .content { background-color: #ffffff; border: 1px solid #d0d7de; border-top: none; padding: 20px; border-radius: 0 0 6px 6px; }
-    .pr-info { background-color: #f6f8fa; padding: 15px; border-radius: 6px; margin: 20px 0; }
-    .comment-box { background-color: #f6f8fa; border-left: 3px solid #0969da; padding: 15px; margin: 20px 0; border-radius: 4px; }
-    .button { display: inline-block; background-color: #0969da; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
-    .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #d0d7de; font-size: 12px; color: #656d76; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h2 style="margin: 0;">New Comment on Your Pull Request</h2>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #191724;
+        color: #e0def4;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+          -system-ui, sans-serif;
+        line-height: 1.5;
+      }
+
+      .container {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+
+      .card {
+        background-color: #1f1d2e;
+        border-radius: 16px;
+        border: 1px solid #26233a;
+        overflow: hidden;
+        box-shadow: 0 18px 40px rgba(15, 10, 24, 0.6);
+      }
+
+      .header {
+        background: radial-gradient(circle at top left, #eb6f92, #26233a);
+        padding: 18px 20px;
+      }
+
+      .header-title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: #f5e9f7;
+      }
+
+      .header-subtitle {
+        margin: 4px 0 0 0;
+        font-size: 13px;
+        color: #e0def4;
+        opacity: 0.85;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .pr-meta {
+        background-color: #26233a;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 13px;
+        color: #e0def4;
+      }
+
+      .pr-meta strong {
+        color: #9ccfd8;
+      }
+
+      .comment {
+        margin-top: 18px;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        border: 2px solid #eb6f92;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background-color: #191724;
+        object-fit: cover;
+        image-rendering: auto;
+      }
+
+      .comment-body {
+        background-color: #26233a;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 13px;
+      }
+
+      .comment-author {
+        font-weight: 600;
+        color: #eb6f92;
+        margin-bottom: 4px;
+      }
+
+      .comment-text {
+        color: #e0def4;
+      }
+
+      .button-row {
+        margin-top: 22px;
+      }
+
+      .button {
+        display: inline-block;
+        background-color: #31748f;
+        color: #e0def4 !important;
+        padding: 10px 18px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      .button:hover {
+        background-color: #28627a;
+      }
+
+      .footer {
+        margin-top: 14px;
+        border-top: 1px solid #26233a;
+        padding-top: 10px;
+        font-size: 11px;
+        color: #6e6a86;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="header">
+          <h2 class="header-title">New comment on your pull request</h2>
+          <p class="header-subtitle">
+            Someone just replied to your contribution on QPR.
+          </p>
+        </div>
+        <div class="content">
+          <div class="pr-meta">
+            <div>
+              <strong>PR #${prNumber}</strong>
+            </div>
+            <div>${escapeHtml(prTitle)}</div>
+          </div>
+
+          <div class="comment">
+            <div class="avatar">
+              <img
+                src="${safeAvatar}"
+                alt="${escapeHtml(commentAuthor)}"
+              />
+            </div>
+            <div class="comment-body">
+              <div class="comment-author">${escapeHtml(commentAuthor)}</div>
+              <div class="comment-text">
+                ${formatCommentForEmail(commentBody)}
+              </div>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <a
+              href="${prUrl}"
+              class="button"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View pull request on GitHub
+            </a>
+          </div>
+
+          <div class="footer">
+            This is an automated notification from the QPR Contribution
+            Portal, please do not reply to this email. If this wasn't
+            expected, you can safely ignore it.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="content">
-      <p>Hello,</p>
-      <p>Your pull request has received a new comment from <strong>${escapeHtml(commentAuthor)}</strong>.</p>
-      
-      <div class="pr-info">
-        <strong>PR #${prNumber}:</strong> ${escapeHtml(prTitle)}
-      </div>
-
-      <div class="comment-box">
-        <strong>Comment:</strong><br>
-        ${formatCommentForEmail(commentBody)}
-      </div>
-
-      <a href="${prUrl}" class="button">View Pull Request</a>
-
-      <div class="footer">
-        <p>This is an automated notification from the QPR Contribution Portal.</p>
-        <p>If you have any questions, please contact the repository maintainers.</p>
-      </div>
-    </div>
-  </div>
-</body>
+  </body>
 </html>
     `.trim();
 
@@ -1312,29 +1484,49 @@ View Pull Request: ${prUrl}
 This is an automated notification from the QPR Contribution Portal.
     `.trim();
 
-    const response = await fetch("https://api.resend.com/emails", {
+    // EmailJS REST API payload
+    const payload = {
+      service_id: serviceId,
+      template_id: templateId,
+      user_id: publicKey,
+      template_params: {
+        // Required recipient
+        to_email: recipientEmail,
+
+        // PR + comment context (configure these in your EmailJS template)
+        pr_number: prNumber,
+        pr_title: prTitle,
+        comment_author: commentAuthor,
+        comment_author_avatar: safeAvatar,
+        comment_body: commentBody,
+        pr_url: prUrl,
+
+        // Pre-rendered content (you can use either html_content or text_content)
+        subject: `[QPR Support]New comment on PR #${prNumber}: ${prTitle}`,
+        html_content: emailHtml,
+        text_content: emailText,
+      },
+    };
+
+    if (privateKey) {
+      payload.accessToken = privateKey;
+    }
+
+    const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${env.RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        from: env.RESEND_FROM_EMAIL || "QPR Bot <notifications@iiserm.github.io>",
-        to: [recipientEmail],
-        subject: `New comment on PR #${prNumber}: ${prTitle}`,
-        html: emailHtml,
-        text: emailText,
-      }),
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
       const errorData = await response.text();
-      console.error("Resend API error:", response.status, errorData);
+      console.error("EmailJS API error:", response.status, errorData);
       return false;
     }
 
-    const result = await response.json();
-    console.log("Email sent successfully:", result.id);
+    console.log("Email sent successfully via EmailJS");
     return true;
   } catch (error) {
     console.error("Error sending email:", error);
@@ -1509,7 +1701,8 @@ async function handleGitHubWebhook(request, env, headers) {
         issue.title,
         comment.user.login,
         comment.body,
-        pr.html_url
+        pr.html_url,
+        comment.user.avatar_url
       );
 
       if (emailSent) {

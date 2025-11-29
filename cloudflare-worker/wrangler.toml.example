@@ -31,11 +31,11 @@ compatibility_date = "2024-01-01"
 #   GITHUB_WEBHOOK_SECRET     - Secret configured in GitHub webhook settings
 #                               Used to verify webhook payload authenticity
 #
-# For Email Notifications (Resend):
-#   RESEND_API_KEY            - API key from Resend.com (get from https://resend.com/api-keys)
-#   RESEND_FROM_EMAIL         - (Optional) Sender email address
-#                               Defaults to "QPR Bot <notifications@iiserm.github.io>"
-#                               Must be verified in Resend dashboard
+# For Email Notifications (EmailJS):
+#   EMAILJS_SERVICE_ID        - EmailJS service ID (e.g., "service_xxxxxx")
+#   EMAILJS_TEMPLATE_ID       - EmailJS template ID (e.g., "template_xxxxxx")
+#   EMAILJS_PUBLIC_KEY        - EmailJS public key (used as user_id in API calls)
+#   EMAILJS_PRIVATE_KEY       - (Optional) EmailJS private key (required if strict mode enabled)
 #
 # -----------------------------------------------------------------------------
 
@@ -66,8 +66,10 @@ ALLOWED_EMAIL_DOMAIN = "iisermohali.ac.in"
 #    wrangler secret put GITHUB_APP_PRIVATE_KEY
 #    wrangler secret put GITHUB_APP_INSTALLATION_ID
 #    wrangler secret put GITHUB_WEBHOOK_SECRET
-#    wrangler secret put RESEND_API_KEY
-#    wrangler secret put RESEND_FROM_EMAIL  # Optional
+#    wrangler secret put EMAILJS_SERVICE_ID
+#    wrangler secret put EMAILJS_TEMPLATE_ID
+#    wrangler secret put EMAILJS_PUBLIC_KEY
+#    wrangler secret put EMAILJS_PRIVATE_KEY   # Optional (required for strict mode)
 #
 # 2. Deploy the worker:
 #    wrangler deploy

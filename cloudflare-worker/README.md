@@ -302,29 +302,66 @@ If the KV binding is missing, the endpoint responds with `{ "disabled": true }` 
 
 ## Email Notifications Setup (PR Comments)
 
-The worker can send email notifications to contributors when their PRs receive comments. This uses GitHub webhooks and Resend.
+The worker can send email notifications to contributors when their PRs receive comments. This uses GitHub webhooks and EmailJS.
 
-### Step 1: Create Resend Account
+### Step 1: Create EmailJS Account & Connect Gmail
 
-1. Go to https://resend.com and sign up (free tier: 3,000 emails/month)
-2. Verify your domain or use the default domain for testing
-3. Go to **API Keys** and create a new API key
-4. Save the API key (starts with `re_`)
+1. Go to https://www.emailjs.com/ and sign up (use `qpr.contact@gmail.com` or another support email).
+2. In the EmailJS dashboard, create an **Email Service** connected to your Gmail account.
+   - Note the **Service ID** (looks like `service_xxxxxx`).
+3. Create an **Email Template** for PR comment notifications.
+   - Note the **Template ID** (looks like `template_xxxxxx`).
+4. In **Account → API keys**, copy your **Public Key** (looks like `public_xxxxxx`).
 
-### Step 2: Add Resend Secrets
+### Step 2: Configure EmailJS Secrets in the Worker
+
+Add the following secrets (from the `cloudflare-worker` directory):
 
 ```bash
-wrangler secret put RESEND_API_KEY
-# Paste your Resend API key when prompted
+wrangler secret put EMAILJS_SERVICE_ID
+# Paste your EmailJS service ID (e.g., service_xxxxxx)
 
-wrangler secret put RESEND_FROM_EMAIL
-# Optional: Set sender email (e.g., "QPR Bot <notifications@iiserm.github.io>")
-# If not set, defaults to "QPR Bot <notifications@iiserm.github.io>"
+wrangler secret put EMAILJS_TEMPLATE_ID
+# Paste your EmailJS template ID (e.g., template_xxxxxx)
+
+wrangler secret put EMAILJS_PUBLIC_KEY
+# Paste your EmailJS public key (e.g., public_xxxxxx)
+
+wrangler secret put EMAILJS_PRIVATE_KEY
+# Optional, but required if you enabled "strict mode" / server requests in EmailJS
 ```
 
-**Note:** The sender email must be verified in your Resend dashboard.
+### Step 3: Configure the EmailJS Template
 
-### Step 3: Set Up GitHub Webhook
+In your EmailJS template, you can use these variables (coming from `template_params`):
+
+- **to_email** – recipient's email (contributor)
+- **pr_number** – PR number (e.g., `136`)
+- **pr_title** – PR title
+- **comment_author** – GitHub username of the commenter
+- **comment_body** – raw comment text
+- **pr_url** – link to the PR on GitHub
+- **subject** – suggested email subject
+- **html_content** – pre-rendered HTML body (optional, if you want to inject full HTML)
+- **text_content** – plain-text fallback (optional)
+
+A simple template body could be:
+
+```text
+Subject: {{subject}}
+
+Hello,
+
+Your pull request #{{pr_number}} ({{pr_title}}) has a new comment from {{comment_author}}:
+
+{{comment_body}}
+
+View PR: {{pr_url}}
+```
+
+Or, for HTML templates, you can use `{{{html_content}}}` as the main body.
+
+### Step 4: Set Up GitHub Webhook
 
 1. Go to your repository: `https://github.com/IISERM/question-paper-repo`
 2. Navigate to **Settings** → **Webhooks** → **Add webhook**
@@ -338,14 +375,14 @@ wrangler secret put RESEND_FROM_EMAIL
    - **Active:** ✅ Checked
 4. Click **"Add webhook"**
 
-### Step 4: Add Webhook Secret
+### Step 5: Add Webhook Secret
 
 ```bash
 wrangler secret put GITHUB_WEBHOOK_SECRET
 # Paste the secret you configured in GitHub webhook settings
 ```
 
-### Step 5: Redeploy Worker
+### Step 6: Redeploy Worker
 
 ```bash
 wrangler deploy
@@ -356,7 +393,7 @@ wrangler deploy
 1. When someone comments on a PR, GitHub sends a webhook to your worker
 2. The worker verifies the webhook signature for security
 3. It extracts the contributor's email from the PR body
-4. It sends an email notification via Resend
+4. It sends an email notification via EmailJS
 5. The email includes the comment, PR details, and a link to view the PR
 
 ### Testing
