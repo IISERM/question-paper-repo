@@ -17,9 +17,11 @@ account_id = "2a541d3bfd006a6bafac02bc4760031c"
 # For GitHub Webhooks (PR comment notifications):
 # GITHUB_WEBHOOK_SECRET (secret configured in GitHub webhook settings)
 #
-# For Email Notifications (Resend):
-# RESEND_API_KEY (API key from Resend.com)
-# RESEND_FROM_EMAIL (optional, defaults to "QPR Bot <notifications@iiserm.github.io>")
+# For Email Notifications (EmailJS):
+# EMAILJS_SERVICE_ID   (EmailJS service ID, e.g. "service_xxxxxx")
+# EMAILJS_TEMPLATE_ID  (EmailJS template ID, e.g. "template_xxxxxx")
+# EMAILJS_PUBLIC_KEY   (EmailJS public key, used as user_id in API calls)
+# EMAILJS_PRIVATE_KEY  (Optional: required if EmailJS strict mode / server requests enabled)
 
 [vars]
 GITHUB_REPO_OWNER = "IISERM"
