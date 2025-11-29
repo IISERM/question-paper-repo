@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-11-29T04:47:02.065Z",
+  "last_updated": "2025-11-29T13:21:25.785Z",
   "total_contributors": 24,
   "contributors": [
     {
@@ -57,6 +57,14 @@
       "avatar_url": "https://github.com/ArnavMetrani.png",
       "profile_url": "https://github.com/ArnavMetrani",
       "commits": 12
+    },
+    {
+      "username": "Melwin Haris",
+      "name": "Melwin Haris",
+      "email": "ms22151@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Melwin%20Haris&background=random&size=200",
+      "profile_url": null,
+      "commits": 7
     },
     {
       "username": "Aditya Sobham Bora",
@@ -159,14 +167,6 @@
       "name": "YASH SHARMA",
       "email": "ms25230@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=YASH%20SHARMA&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "Melwin Haris",
-      "name": "Melwin Haris",
-      "email": "ms22151@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Melwin%20Haris&background=random&size=200",
       "profile_url": null,
       "commits": 1
     },
