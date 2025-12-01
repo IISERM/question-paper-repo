@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-11-29T13:21:25.785Z",
-  "total_contributors": 24,
+  "last_updated": "2025-12-01T10:13:49.478Z",
+  "total_contributors": 25,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -137,6 +137,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "Parvesh Garg",
+      "name": "Parvesh Garg",
+      "email": "mp25007@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Parvesh%20Garg&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "RIYA",
