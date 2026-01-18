@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-12-24T13:26:57.189Z",
-  "total_contributors": 26,
+  "last_updated": "2026-01-18T04:38:03.229Z",
+  "total_contributors": 27,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -81,6 +81,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=ACHALESH%20NIMBIWAL&background=random&size=200",
       "profile_url": null,
       "commits": 6
+    },
+    {
+      "username": "Ishita Chaudhry",
+      "name": "Ishita Chaudhry",
+      "email": "ms22192@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Ishita%20Chaudhry&background=random&size=200",
+      "profile_url": null,
+      "commits": 4
     },
     {
       "username": "Parvesh Garg",
