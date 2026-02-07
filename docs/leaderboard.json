@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-02-02T05:05:13.153Z",
-  "total_contributors": 27,
+  "last_updated": "2026-02-07T15:10:31.091Z",
+  "total_contributors": 29,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -57,6 +57,14 @@
       "avatar_url": "https://github.com/ArnavMetrani.png",
       "profile_url": "https://github.com/ArnavMetrani",
       "commits": 12
+    },
+    {
+      "username": "RAGHAVENDRA N.D SALIAN",
+      "name": "RAGHAVENDRA N.D SALIAN",
+      "email": "ms25099@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=RAGHAVENDRA%20N.D%20SALIAN&background=random&size=200",
+      "profile_url": null,
+      "commits": 7
     },
     {
       "username": "Melwin Haris",
@@ -153,6 +161,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "ARNAB NANDI",
+      "name": "ARNAB NANDI",
+      "email": "ms24260@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=ARNAB%20NANDI&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "TAMAGHNA DEY",
