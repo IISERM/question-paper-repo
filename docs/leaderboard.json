@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-02-07T15:15:12.229Z",
-  "total_contributors": 29,
+  "last_updated": "2026-02-08T09:37:18.463Z",
+  "total_contributors": 30,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -105,6 +105,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Parvesh%20Garg&background=random&size=200",
       "profile_url": null,
       "commits": 4
+    },
+    {
+      "username": "ARGHA PATRA",
+      "name": "ARGHA PATRA",
+      "email": "ms24159@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=ARGHA%20PATRA&background=random&size=200",
+      "profile_url": null,
+      "commits": 3
     },
     {
       "username": "Maninder Singh",
