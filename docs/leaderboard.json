@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-02-08T09:37:18.463Z",
-  "total_contributors": 30,
+  "last_updated": "2026-02-09T09:35:08.810Z",
+  "total_contributors": 33,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -40,7 +40,7 @@
       "email": "ms25137@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=MANVENDRA%20SINGH&background=random&size=200",
       "profile_url": null,
-      "commits": 35
+      "commits": 55
     },
     {
       "username": "Harsh Vardhan Shreshth",
@@ -107,6 +107,22 @@
       "commits": 4
     },
     {
+      "username": "Tanmayii Tushar Kolhe",
+      "name": "Tanmayii Tushar Kolhe",
+      "email": "ms23034@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Tanmayii%20Tushar%20Kolhe&background=random&size=200",
+      "profile_url": null,
+      "commits": 3
+    },
+    {
+      "username": "BALAKUMARAN S",
+      "name": "BALAKUMARAN S",
+      "email": "ms25062@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
+      "profile_url": null,
+      "commits": 3
+    },
+    {
       "username": "ARGHA PATRA",
       "name": "ARGHA PATRA",
       "email": "ms24159@iisermohali.ac.in",
@@ -169,6 +185,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "NIKUNJ MUNDHRA",
+      "name": "NIKUNJ MUNDHRA",
+      "email": "ms24249@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=NIKUNJ%20MUNDHRA&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "ARNAB NANDI",
