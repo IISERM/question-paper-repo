@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-02-09T09:35:08.810Z",
-  "total_contributors": 33,
+  "last_updated": "2026-02-17T14:34:09.334Z",
+  "total_contributors": 34,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -137,6 +137,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Maninder%20Singh&background=random&size=200",
       "profile_url": null,
       "commits": 3
+    },
+    {
+      "username": "Sriharsh Mishra",
+      "name": "Sriharsh Mishra",
+      "email": "ms23178@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Sriharsh%20Mishra&background=random&size=200",
+      "profile_url": null,
+      "commits": 2
     },
     {
       "username": "ImgBotApp",
