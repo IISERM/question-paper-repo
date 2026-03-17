@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-03-03T15:10:19.475Z",
-  "total_contributors": 34,
+  "last_updated": "2026-03-17T16:26:43.443Z",
+  "total_contributors": 35,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -193,6 +193,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "Nithin Rajesh",
+      "name": "Nithin Rajesh",
+      "email": "ms23086@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Nithin%20Rajesh&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "NIKUNJ MUNDHRA",
