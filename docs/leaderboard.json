@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-17T16:26:43.443Z",
+  "last_updated": "2026-04-15T12:35:42.735Z",
   "total_contributors": 35,
   "contributors": [
     {
@@ -48,7 +48,15 @@
       "email": "hvshreshth@gmail.com",
       "avatar_url": "https://ui-avatars.com/api/?name=Harsh%20Vardhan%20Shreshth&background=random&size=200",
       "profile_url": null,
-      "commits": 22
+      "commits": 35
+    },
+    {
+      "username": "BALAKUMARAN S",
+      "name": "BALAKUMARAN S",
+      "email": "ms25062@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
+      "profile_url": null,
+      "commits": 17
     },
     {
       "username": "ArnavMetrani",
@@ -89,14 +97,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=ACHALESH%20NIMBIWAL&background=random&size=200",
       "profile_url": null,
       "commits": 6
-    },
-    {
-      "username": "BALAKUMARAN S",
-      "name": "BALAKUMARAN S",
-      "email": "ms25062@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
-      "profile_url": null,
-      "commits": 4
     },
     {
       "username": "Ishita Chaudhry",
