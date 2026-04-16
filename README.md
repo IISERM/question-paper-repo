@@ -200,7 +200,7 @@ Top contributors based on commit count:
 | 🥈 | Jasmeen Kaur | 108 |
 | 🥉 | HARSH VARDHAN SHRESHTH | 99 |
 | 4 | SASHVATH KRISHNAN S | 70 |
-| 5 | MANVENDRA SINGH | 55 |
+| 5 | Harsh Vardhan Shreshth | 64 |
 
-*Last updated: 2026-04-16 13:54:42 UTC*
+*Last updated: 2026-04-16 14:08:22 UTC*
 
