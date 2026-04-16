@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-15T12:46:55.310Z",
-  "total_contributors": 35,
+  "last_updated": "2026-04-16T12:17:03.168Z",
+  "total_contributors": 36,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -139,6 +139,14 @@
       "commits": 3
     },
     {
+      "username": "Gokul P Bharathan",
+      "name": "Gokul P Bharathan",
+      "email": "ms23027@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Gokul%20P%20Bharathan&background=random&size=200",
+      "profile_url": null,
+      "commits": 2
+    },
+    {
       "username": "Sriharsh Mishra",
       "name": "Sriharsh Mishra",
       "email": "ms23178@iisermohali.ac.in",
@@ -193,6 +201,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "Gokul2406",
+      "name": "Gokul P Bharathan",
+      "email": "67820068+Gokul2406@users.noreply.github.com",
+      "avatar_url": "https://github.com/Gokul2406.png",
+      "profile_url": "https://github.com/Gokul2406",
+      "commits": 1
     },
     {
       "username": "Nithin Rajesh",
@@ -255,14 +271,6 @@
       "name": "YASH SHARMA",
       "email": "ms25230@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=YASH%20SHARMA&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "Gokul P Bharathan",
-      "name": "Gokul P Bharathan",
-      "email": "ms23027@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Gokul%20P%20Bharathan&background=random&size=200",
       "profile_url": null,
       "commits": 1
     },
