@@ -19,6 +19,8 @@ const EXCLUDED_USERNAMES = new Set([
     'PseudoFractal',
     'pseudofractal',
     'Darsh Suhas Ambade',
+    'Harsh Vardhan Shreshth',
+    'hrshvs',
 ]);
 
 // GitHub API headers
