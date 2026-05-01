@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-30T16:28:54.545Z",
+  "last_updated": "2026-05-01T12:22:34.846Z",
   "total_contributors": 36,
   "contributors": [
     {
@@ -27,20 +27,20 @@
       "commits": 99
     },
     {
+      "username": "BALAKUMARAN S",
+      "name": "BALAKUMARAN S",
+      "email": "ms25062@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
+      "profile_url": null,
+      "commits": 72
+    },
+    {
       "username": "SASHVATH KRISHNAN S",
       "name": "SASHVATH KRISHNAN S",
       "email": "ms24243@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=SASHVATH%20KRISHNAN%20S&background=random&size=200",
       "profile_url": null,
       "commits": 70
-    },
-    {
-      "username": "BALAKUMARAN S",
-      "name": "BALAKUMARAN S",
-      "email": "ms25062@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
-      "profile_url": null,
-      "commits": 68
     },
     {
       "username": "MANVENDRA SINGH",
