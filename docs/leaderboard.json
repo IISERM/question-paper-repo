@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-05-06T11:16:54.133Z",
-  "total_contributors": 36,
+  "last_updated": "2026-05-06T14:06:11.394Z",
+  "total_contributors": 37,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -32,7 +32,7 @@
       "email": "ms25062@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
       "profile_url": null,
-      "commits": 72
+      "commits": 75
     },
     {
       "username": "SASHVATH KRISHNAN S",
@@ -51,20 +51,20 @@
       "commits": 55
     },
     {
+      "username": "VISHESH",
+      "name": "VISHESH",
+      "email": "ms25151@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=VISHESH&background=random&size=200",
+      "profile_url": null,
+      "commits": 21
+    },
+    {
       "username": "ArnavMetrani",
       "name": "Arnav Metrani",
       "email": "115222861+ArnavMetrani@users.noreply.github.com",
       "avatar_url": "https://github.com/ArnavMetrani.png",
       "profile_url": "https://github.com/ArnavMetrani",
       "commits": 15
-    },
-    {
-      "username": "VISHESH",
-      "name": "VISHESH",
-      "email": "ms25151@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=VISHESH&background=random&size=200",
-      "profile_url": null,
-      "commits": 11
     },
     {
       "username": "NIKUNJ MUNDHRA",
@@ -131,6 +131,14 @@
       "commits": 4
     },
     {
+      "username": "SIDDHANT PANDA",
+      "name": "SIDDHANT PANDA",
+      "email": "ms24129@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
+      "profile_url": null,
+      "commits": 3
+    },
+    {
       "username": "Tanmayii Tushar Kolhe",
       "name": "Tanmayii Tushar Kolhe",
       "email": "ms23034@iisermohali.ac.in",
@@ -153,6 +161,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Maninder%20Singh&background=random&size=200",
       "profile_url": null,
       "commits": 3
+    },
+    {
+      "username": "ARNAB NANDI",
+      "name": "ARNAB NANDI",
+      "email": "ms24260@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=ARNAB%20NANDI&background=random&size=200",
+      "profile_url": null,
+      "commits": 2
     },
     {
       "username": "Gokul P Bharathan",
@@ -223,14 +239,6 @@
       "name": "Nithin Rajesh",
       "email": "ms23086@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=Nithin%20Rajesh&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "ARNAB NANDI",
-      "name": "ARNAB NANDI",
-      "email": "ms24260@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=ARNAB%20NANDI&background=random&size=200",
       "profile_url": null,
       "commits": 1
     },
