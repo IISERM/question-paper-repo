@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-05-06T14:06:11.394Z",
-  "total_contributors": 37,
+  "last_updated": "2026-05-22T10:33:50.464Z",
+  "total_contributors": 38,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -32,7 +32,7 @@
       "email": "ms25062@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
       "profile_url": null,
-      "commits": 75
+      "commits": 78
     },
     {
       "username": "SASHVATH KRISHNAN S",
@@ -49,6 +49,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=MANVENDRA%20SINGH&background=random&size=200",
       "profile_url": null,
       "commits": 55
+    },
+    {
+      "username": "SIDDHANT PANDA",
+      "name": "SIDDHANT PANDA",
+      "email": "ms24129@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
+      "profile_url": null,
+      "commits": 46
     },
     {
       "username": "VISHESH",
@@ -80,7 +88,7 @@
       "email": "ms25099@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=RAGHAVENDRA%20N.D%20SALIAN&background=random&size=200",
       "profile_url": null,
-      "commits": 7
+      "commits": 8
     },
     {
       "username": "Melwin Haris",
@@ -115,6 +123,14 @@
       "commits": 6
     },
     {
+      "username": "Maninder Singh",
+      "name": "Maninder Singh",
+      "email": "ms23074@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Maninder%20Singh&background=random&size=200",
+      "profile_url": null,
+      "commits": 4
+    },
+    {
       "username": "Ishita Chaudhry",
       "name": "Ishita Chaudhry",
       "email": "ms22192@iisermohali.ac.in",
@@ -129,14 +145,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Parvesh%20Garg&background=random&size=200",
       "profile_url": null,
       "commits": 4
-    },
-    {
-      "username": "SIDDHANT PANDA",
-      "name": "SIDDHANT PANDA",
-      "email": "ms24129@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
-      "profile_url": null,
-      "commits": 3
     },
     {
       "username": "Tanmayii Tushar Kolhe",
@@ -155,12 +163,12 @@
       "commits": 3
     },
     {
-      "username": "Maninder Singh",
-      "name": "Maninder Singh",
-      "email": "ms23074@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Maninder%20Singh&background=random&size=200",
+      "username": "MEHAL KUMAR",
+      "name": "MEHAL KUMAR",
+      "email": "ms25152@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=MEHAL%20KUMAR&background=random&size=200",
       "profile_url": null,
-      "commits": 3
+      "commits": 2
     },
     {
       "username": "ARNAB NANDI",
