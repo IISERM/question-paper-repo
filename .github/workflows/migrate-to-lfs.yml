@@ -54,7 +54,13 @@ jobs:
 
       - name: Commit and push changes
         if: github.event.inputs.dry_run != 'true'
+        env:
+          GIT_LFS_SKIP_PUSH: "1"
         run: |
+          # Disable LFS clean/smudge filters — we write pointers directly
+          git config --local filter.lfs.clean true
+          git config --local filter.lfs.smudge true
+          git config --local filter.lfs.process true
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .

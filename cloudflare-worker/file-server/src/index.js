@@ -256,7 +256,25 @@ async function handleLFSObjectUpload(request, env, url) {
   }
 
   try {
-    await env.R2_BUCKET.put(oid, request.body, {
+    // Read the full body as an ArrayBuffer
+    const body = await request.arrayBuffer();
+
+    // Verify content hash matches the OID in the URL
+    // This prevents silent corruption from storing garbage under a valid OID key
+    const hashBuffer = await crypto.subtle.digest("SHA-256", body);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+    const expectedOid = `sha256:${hashHex}`;
+
+    if (expectedOid !== oid) {
+      console.error(`Hash mismatch for ${oid}: computed ${expectedOid}`);
+      return new Response(
+        JSON.stringify({ error: `Content hash mismatch: expected ${oid}, computed ${expectedOid}` }),
+        { status: 422, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    await env.R2_BUCKET.put(oid, body, {
       httpMetadata: {
         contentType: "application/octet-stream",
       },

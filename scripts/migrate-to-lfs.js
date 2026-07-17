@@ -33,7 +33,10 @@ const SKIP_DIRS = new Set([".git", "node_modules", "cloudflare-worker", "scripts
 
 const FILE_SERVER_URL = process.env.FILE_SERVER_URL || "https://files.qpr.turingclub.workers.dev";
 const DRY_RUN = process.env.DRY_RUN === "1";
-const CONCURRENCY = parseInt(process.env.CONCURRENCY || "10", 10);
+const CONCURRENCY = Math.max(1, parseInt(process.env.CONCURRENCY || "10", 10) || 10);
+const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE || "0", 10) || 0; // 0 = no limit
+const UPLOAD_RETRIES = parseInt(process.env.UPLOAD_RETRIES || "3", 10) || 3;
+const VERIFY_UPLOADS = process.env.VERIFY_UPLOADS !== "0"; // download and re-hash after upload
 
 // ═══════════════════════════════════════════════════════════════
 // Helpers
@@ -65,16 +68,38 @@ function createLFSPointer(binaryContent) {
   return { pointer, oid, size, binary: binaryContent };
 }
 
-async function uploadToR2(oid, binaryContent) {
+async function uploadToR2(oid, binaryContent, retries = UPLOAD_RETRIES) {
   const url = `${FILE_SERVER_URL}/lfs/objects/${encodeURIComponent(oid)}`;
-  const response = await fetch(url, {
-    method: "PUT",
-    headers: { "Content-Type": "application/octet-stream" },
-    body: binaryContent,
-  });
-  if (!response.ok) {
+
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: { "Content-Type": "application/octet-stream" },
+      body: binaryContent,
+    });
+    if (response.ok) break;
     const text = await response.text().catch(() => "");
-    throw new Error(`HTTP ${response.status}: ${text.slice(0, 200)}`);
+    if (attempt === retries) {
+      throw new Error(`HTTP ${response.status}: ${text.slice(0, 200)}`);
+    }
+    const delay = Math.min(1000 * Math.pow(2, attempt), 15000);
+    console.log(`    Retry ${attempt}/${retries} in ${delay}ms...`);
+    await new Promise((r) => setTimeout(r, delay));
+  }
+
+  // Verify upload by downloading and re-hashing
+  if (VERIFY_UPLOADS) {
+    const dlUrl = `${FILE_SERVER_URL}/lfs/objects/${encodeURIComponent(oid)}`;
+    const dlResp = await fetch(dlUrl);
+    if (!dlResp.ok) {
+      throw new Error(`Verification download failed: HTTP ${dlResp.status}`);
+    }
+    const dlBuf = Buffer.from(await dlResp.arrayBuffer());
+    const dlHash = crypto.createHash("sha256").update(dlBuf).digest("hex");
+    const expectedOid = `sha256:${dlHash}`;
+    if (expectedOid !== oid) {
+      throw new Error(`Upload verification failed: expected ${oid}, got ${expectedOid}`);
+    }
   }
 }
 
@@ -82,6 +107,8 @@ function walkFiles(dir) {
   const results = [];
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
+    // Skip symlinks — following them could replace them with regular files
+    if (entry.isSymbolicLink()) continue;
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       if (!SKIP_DIRS.has(entry.name)) {
@@ -160,6 +187,14 @@ async function main() {
         console.log(`  SKIP (empty) : ${relPath}`);
         skipped++;
         reportLines.push(`${relPath} | SKIPPED | empty file`);
+        return;
+      }
+
+      // Skip files exceeding size limit
+      if (MAX_FILE_SIZE > 0 && binaryContent.length > MAX_FILE_SIZE) {
+        console.log(`  SKIP (too large: ${(binaryContent.length / 1024 / 1024).toFixed(1)}MB) : ${relPath}`);
+        skipped++;
+        reportLines.push(`${relPath} | SKIPPED | exceeds size limit (${binaryContent.length} bytes)`);
         return;
       }
 
