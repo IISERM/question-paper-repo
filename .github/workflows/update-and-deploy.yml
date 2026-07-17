@@ -55,13 +55,6 @@ jobs:
           git add README.md docs/leaderboard.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update contributor leaderboard [skip ci]" && git push)
 
-      # Step 5: Pull latest changes to ensure we have updated files
-      - name: Pull latest changes
-        run: |
-          git stash
-          git pull --rebase
-          git stash pop || true
-
       # Step 6: Generate folder structure using GitHub API
       # Skip slow LFS OID extraction on non-main branches
       - name: Generate folder structure
