@@ -75,7 +75,7 @@ async function isLFSPointer(sha) {
       content.startsWith("version https://qpr-lfs-r2.internal/spec") ||
       content.startsWith("version https://git-lfs.github.com/spec")) {
     const lines = content.split("\n");
-    const oidMatch = lines[1] && lines[1].match(/^oid sha256:([a-f0-9]{64})/);
+    const oidMatch = lines[1] && lines[1].match(/^oid[: ]sha256:([a-f0-9]{64})/);
     if (oidMatch) {
       return `sha256:${oidMatch[1]}`;
     }
