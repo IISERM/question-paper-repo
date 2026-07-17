@@ -40,7 +40,7 @@ jobs:
       - name: Run migration
         env:
           FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://files.qpr.turingclub.workers.dev' }}
-          DRY_RUN: ${{ github.event.inputs.dry_run && '1' || '0' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
           CONCURRENCY: ${{ github.event.inputs.concurrency }}
         run: node scripts/migrate-to-lfs.js
 
