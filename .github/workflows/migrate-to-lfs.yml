@@ -56,6 +56,7 @@ jobs:
         if: github.event.inputs.dry_run != 'true'
         env:
           GIT_LFS_SKIP_PUSH: "1"
+          TARGET_BRANCH: ${{ github.event.inputs.target_branch }}
         run: |
           # Disable LFS clean/smudge filters — we write pointers directly
           git config --local filter.lfs.clean true
@@ -63,8 +64,40 @@ jobs:
           git config --local filter.lfs.process true
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          # Increase push buffer for large migrations
+          git config http.postBuffer 524288000
           git add .
-          git diff --quiet && git diff --staged --quiet || (
-            git commit -m "Migrate binary files to LFS pointers (R2 backend)" &&
-            git push origin ${{ github.event.inputs.target_branch }}
-          )
+
+          # Check if there are changes to commit
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          echo "Staged $(git diff --cached --name-only | wc -l) files."
+
+          # Commit in batches to avoid push size limits
+          STAGED=$(git diff --cached --name-only)
+          BATCH_SIZE=500
+          COUNT=0
+          BATCH=1
+
+          while IFS= read -r file; do
+            git reset -q HEAD -- "$file" 2>/dev/null || true
+            git add "$file"
+            COUNT=$((COUNT + 1))
+            if [ $COUNT -ge $BATCH_SIZE ]; then
+              git commit -m "Migrate binary files to LFS pointers (batch $BATCH) [skip ci]" || true
+              git push origin "$TARGET_BRANCH" || { echo "Push failed on batch $BATCH"; exit 1; }
+              COUNT=0
+              BATCH=$((BATCH + 1))
+            fi
+          done <<< "$STAGED"
+
+          # Final batch
+          if [ $COUNT -gt 0 ]; then
+            git commit -m "Migrate binary files to LFS pointers (batch $BATCH) [skip ci]" || true
+            git push origin "$TARGET_BRANCH" || { echo "Push failed on final batch"; exit 1; }
+          fi
+
+          echo "Migration committed and pushed in $((BATCH)) batch(es)."
