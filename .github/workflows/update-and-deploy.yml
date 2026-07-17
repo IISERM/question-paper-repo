@@ -62,9 +62,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/lfs-oid-cache.json
-          key: lfs-oid-cache-${{ github.sha }}
+          key: lfs-oid-cache-v2-${{ github.sha }}
           restore-keys: |
-            lfs-oid-cache-
+            lfs-oid-cache-v2-
 
       - name: Generate folder structure
         env:
