@@ -36,6 +36,7 @@ const DRY_RUN = process.env.DRY_RUN === "1";
 const CONCURRENCY = Math.max(1, parseInt(process.env.CONCURRENCY || "10", 10) || 10);
 const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE || "0", 10) || 0; // 0 = no limit
 const UPLOAD_RETRIES = parseInt(process.env.UPLOAD_RETRIES || "3", 10) || 3;
+const ALLOW_PARTIAL_FAILURES = process.env.ALLOW_PARTIAL_FAILURES === "1";
 const VERIFY_UPLOADS = process.env.VERIFY_UPLOADS !== "0"; // download and re-hash after upload
 
 // ═══════════════════════════════════════════════════════════════
@@ -265,7 +266,10 @@ async function main() {
 
   if (errors > 0) {
     console.error(`\n⚠️  ${errors} file(s) had errors. Check the report for details.`);
-    process.exit(1);
+    if (!ALLOW_PARTIAL_FAILURES) {
+      process.exit(1);
+    }
+    console.error("ALLOW_PARTIAL_FAILURES is set — exiting 0 so workflow continues with successful files.");
   }
 }
 

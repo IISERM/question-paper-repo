@@ -42,6 +42,7 @@ jobs:
           FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://qpr-file-server.turingclub.workers.dev' }}
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
           CONCURRENCY: ${{ github.event.inputs.concurrency }}
+          ALLOW_PARTIAL_FAILURES: "1"
         run: node scripts/migrate-to-lfs.js
 
       - name: Upload migration report
