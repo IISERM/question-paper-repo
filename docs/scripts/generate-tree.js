@@ -95,21 +95,51 @@ async function buildLfsOidMap(apiTree) {
     return LFS_BINARY_EXTENSIONS.has(ext);
   });
 
+  // Load OID cache from previous runs (set via LFS_OID_CACHE_PATH or default)
+  const cachePath = process.env.LFS_OID_CACHE_PATH || path.join(__dirname, "..", "lfs-oid-cache.json");
+  let cache = {};
+  try {
+    cache = JSON.parse(fs.readFileSync(cachePath, "utf-8"));
+  } catch {
+    // No cache yet — first run
+  }
+
+  let cached = 0;
+  let fetched = 0;
+  let skipped = 0;
+
   console.log(`Checking ${blobItems.length} binary files for LFS pointers...`);
 
   for (let i = 0; i < blobItems.length; i++) {
     const item = blobItems[i];
-    if (i > 0) {
+    const cacheKey = `${item.path}@${item.sha}`;
+
+    // Use cached result if SHA matches (file hasn't changed)
+    if (cache[cacheKey] !== undefined) {
+      if (cache[cacheKey]) {
+        lfsOidMap.set(item.path, cache[cacheKey]);
+      }
+      cached++;
+      continue;
+    }
+
+    // New or changed file — fetch from API
+    fetched++;
+    if (fetched > 1) {
       await new Promise((r) => setTimeout(r, 100)); // Rate limiting
     }
     const oid = await isLFSPointer(item.sha);
+    cache[cacheKey] = oid || null;
     if (oid) {
       lfsOidMap.set(item.path, oid);
       console.log(`  LFS: ${item.path} -> ${oid}`);
     }
   }
 
-  console.log(`Found ${lfsOidMap.size} LFS files.`);
+  // Save updated cache
+  fs.writeFileSync(cachePath, JSON.stringify(cache, null, 2));
+
+  console.log(`Found ${lfsOidMap.size} LFS files (${cached} cached, ${fetched} fetched).`);
   return lfsOidMap;
 }
 

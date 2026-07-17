@@ -57,11 +57,21 @@ jobs:
 
       # Step 6: Generate folder structure using GitHub API
       # Skip slow LFS OID extraction on non-main branches
+      - name: Restore LFS OID cache
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/lfs-oid-cache.json
+          key: lfs-oid-cache-${{ github.sha }}
+          restore-keys: |
+            lfs-oid-cache-
+
       - name: Generate folder structure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           SKIP_LFS_OID: ${{ github.ref_name != 'main' && '1' || '0' }}
+          LFS_OID_CACHE_PATH: /tmp/lfs-oid-cache.json
         run: |
           cd docs
           node scripts/generate-tree.js
