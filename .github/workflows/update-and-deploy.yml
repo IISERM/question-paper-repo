@@ -30,16 +30,6 @@ jobs:
           fetch-depth: 0 # Fetch all history for accurate commit counts
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Step 1b: Pull LFS objects from custom backend
-      - name: Pull LFS objects
-        env:
-          LFS_READ_KEY: ${{ secrets.LFS_READ_KEY }}
-          LFS_READ_SECRET: ${{ secrets.LFS_READ_SECRET }}
-        run: |
-          git config lfs.url "https://${LFS_READ_KEY}:${LFS_READ_SECRET}@qpr-file-server.turingclub.workers.dev/lfs"
-          git lfs fetch --all
-          git lfs checkout
-
       # Step 2: Setup Node.js for both leaderboard and docs generation
       - name: Setup Node.js
         uses: actions/setup-node@v4
