@@ -36,7 +36,7 @@ jobs:
           LFS_READ_KEY: ${{ secrets.LFS_READ_KEY }}
           LFS_READ_SECRET: ${{ secrets.LFS_READ_SECRET }}
         run: |
-          git config lfs.url "https://${LFS_READ_KEY}:${LFS_READ_SECRET}@files.qpr.turingclub.workers.dev/lfs"
+          git config lfs.url "https://${LFS_READ_KEY}:${LFS_READ_SECRET}@qpr-file-server.turingclub.workers.dev/lfs"
           git lfs fetch --all
           git lfs checkout
 

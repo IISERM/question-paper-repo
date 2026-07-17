@@ -9,7 +9,7 @@
  * Running: node scripts/migrate-to-lfs.js
  *
  * Env vars:
- *   FILE_SERVER_URL  - Base URL of the LFS file-server worker (default: https://files.qpr.turingclub.workers.dev)
+ *   FILE_SERVER_URL  - Base URL of the LFS file-server worker (default: https://qpr-file-server.turingclub.workers.dev)
  *   DRY_RUN          - Set to "1" to preview without making changes
  *   CONCURRENCY      - Max parallel uploads (default: 10)
  */
@@ -31,7 +31,7 @@ const LFS_POINTER_HEADER = "version https://git-lfs.github.com/spec/v1";
 
 const SKIP_DIRS = new Set([".git", "node_modules", "cloudflare-worker", "scripts", "docs"]);
 
-const FILE_SERVER_URL = process.env.FILE_SERVER_URL || "https://files.qpr.turingclub.workers.dev";
+const FILE_SERVER_URL = process.env.FILE_SERVER_URL || "https://qpr-file-server.turingclub.workers.dev";
 const DRY_RUN = process.env.DRY_RUN === "1";
 const CONCURRENCY = Math.max(1, parseInt(process.env.CONCURRENCY || "10", 10) || 10);
 const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE || "0", 10) || 0; // 0 = no limit
