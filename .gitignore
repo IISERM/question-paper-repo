@@ -41,3 +41,4 @@ out/
 .mnemosyne.ignore
 
 docs/data.json
+scripts/lfs-migration-report.txt

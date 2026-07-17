@@ -1,0 +1,64 @@
+name: Migrate Files to LFS (R2)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Branch to migrate (where binary files live)'
+        required: true
+        default: 'main'
+      dry_run:
+        description: 'Dry run (preview only, no changes)'
+        required: false
+        type: boolean
+        default: false
+      concurrency:
+        description: 'Max parallel uploads'
+        required: false
+        default: '10'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate-to-lfs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository (full)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.target_branch }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run migration
+        env:
+          FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://files.qpr.turingclub.workers.dev' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run && '1' || '0' }}
+          CONCURRENCY: ${{ github.event.inputs.concurrency }}
+        run: node scripts/migrate-to-lfs.js
+
+      - name: Upload migration report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lfs-migration-report
+          path: scripts/lfs-migration-report.txt
+          if-no-files-found: ignore
+
+      - name: Commit and push changes
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Migrate binary files to LFS pointers (R2 backend)" &&
+            git push origin ${{ github.event.inputs.target_branch }}
+          )
