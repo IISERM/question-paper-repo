@@ -62,10 +62,11 @@ jobs:
           MIGRATION_BRANCH: lfs-migration-${{ github.run_id }}
         run: |
           # Disable LFS clean/smudge filters — we write pointers directly
-          # Use 'cat' (passthrough), NOT 'true' (which outputs nothing)
+          # 'cat' passes content through unchanged (unlike 'true' which outputs nothing)
+          # Unset process filter — cat doesn't speak git's filter protocol
+          git config --local --unset filter.lfs.process 2>/dev/null || true
           git config --local filter.lfs.clean cat
           git config --local filter.lfs.smudge cat
-          git config --local filter.lfs.process cat
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
