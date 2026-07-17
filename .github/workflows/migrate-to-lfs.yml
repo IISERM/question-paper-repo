@@ -68,13 +68,6 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-          # Strip LFS attributes from .gitattributes — GitHub server rejects
-          # pushes with LFS pointers unless the OIDs exist on GitHub's LFS server.
-          # Since we use R2, strip filter=lfs so GitHub skips validation.
-          # Restore .gitattributes in a follow-up commit after merging.
-          sed -i 's/filter=lfs diff=lfs merge=lfs //g' .gitattributes
-          git add .gitattributes
-
           git add .
           echo "add done"
 
@@ -118,10 +111,4 @@ jobs:
           fi
 
           echo "Migration pushed in $((BATCH)) batch(es) to $MIGRATION_BRANCH."
-          echo ""
-          echo "================================================================"
-          echo "NEXT: Create a PR from $MIGRATION_BRANCH to $TARGET_BRANCH."
-          echo "After merging, .gitattributes will be stripped of LFS attributes."
-          echo "Then create a follow-up PR restoring 'filter=lfs diff=lfs merge=lfs'"
-          echo "to .gitattributes on $TARGET_BRANCH."
-          echo "================================================================"
+          echo "Create a PR from $MIGRATION_BRANCH to $TARGET_BRANCH to complete."
