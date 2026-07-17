@@ -93,6 +93,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Check domain restriction
     if (!user.email || !user.email.endsWith("@iisermohali.ac.in")) {
       firebase.auth().signOut().then(() => {
+        // Clear auth state from localStorage so header + other pages sync
+        localStorage.removeItem("auth_type");
+        localStorage.removeItem("user_email");
+        localStorage.removeItem("user_name");
         authGate.style.display = "";
         authContent.style.display = "none";
         introSection.style.display = "none";
@@ -108,7 +112,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Valid user — hide auth gate and load content
+    // Valid user — store auth state for other pages (header, contribute, submissions)
+    localStorage.setItem("auth_type", "google");
+    localStorage.setItem("user_email", user.email);
+    localStorage.setItem("user_name", user.displayName || user.email.split("@")[0]);
+
+    // Hide auth gate and load content
     authGate.style.display = "none";
     authContent.style.display = "";
     introSection.style.display = "";
