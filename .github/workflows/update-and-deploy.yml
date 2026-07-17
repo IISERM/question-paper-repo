@@ -69,10 +69,12 @@ jobs:
           git pull --rebase
 
       # Step 6: Generate folder structure using GitHub API
+      # Skip slow LFS OID extraction on non-main branches
       - name: Generate folder structure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          SKIP_LFS_OID: ${{ github.ref_name != 'main' && '1' || '0' }}
         run: |
           cd docs
           node scripts/generate-tree.js

@@ -182,9 +182,14 @@ async function main() {
     const apiTree = await fetchGitHubTree();
     console.log(`Fetched ${apiTree.length} items from GitHub API`);
 
-    // Extract LFS OIDs for binary files
-    console.log("Extracting LFS OIDs...");
-    const lfsOidMap = await buildLfsOidMap(apiTree);
+    // Extract LFS OIDs for binary files (skipped when SKIP_LFS_OID is set)
+    let lfsOidMap = new Map();
+    if (process.env.SKIP_LFS_OID === "1") {
+      console.log("Skipping LFS OID extraction (SKIP_LFS_OID=1)");
+    } else {
+      console.log("Extracting LFS OIDs...");
+      lfsOidMap = await buildLfsOidMap(apiTree);
+    }
 
     // Build nested structure
     const tree = buildTreeStructure(apiTree, lfsOidMap);
