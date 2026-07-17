@@ -62,13 +62,19 @@ jobs:
           MIGRATION_BRANCH: lfs-migration-${{ github.run_id }}
         run: |
           # Disable LFS clean/smudge filters — we write pointers directly
-          # 'cat' passes content through unchanged (unlike 'true' which outputs nothing)
-          # Unset process filter — cat doesn't speak git's filter protocol
           git config --local --unset filter.lfs.process 2>/dev/null || true
           git config --local filter.lfs.clean cat
           git config --local filter.lfs.smudge cat
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+
+          # Strip LFS attributes from .gitattributes — GitHub server rejects
+          # pushes with LFS pointers unless the OIDs exist on GitHub's LFS server.
+          # Since we use R2, strip filter=lfs so GitHub skips validation.
+          # Restore .gitattributes in a follow-up commit after merging.
+          sed -i 's/filter=lfs diff=lfs merge=lfs //g' .gitattributes
+          git add .gitattributes
+
           git add .
           echo "add done"
 
@@ -112,4 +118,10 @@ jobs:
           fi
 
           echo "Migration pushed in $((BATCH)) batch(es) to $MIGRATION_BRANCH."
-          echo "Create a PR from $MIGRATION_BRANCH to $TARGET_BRANCH to complete."
+          echo ""
+          echo "================================================================"
+          echo "NEXT: Create a PR from $MIGRATION_BRANCH to $TARGET_BRANCH."
+          echo "After merging, .gitattributes will be stripped of LFS attributes."
+          echo "Then create a follow-up PR restoring 'filter=lfs diff=lfs merge=lfs'"
+          echo "to .gitattributes on $TARGET_BRANCH."
+          echo "================================================================"
