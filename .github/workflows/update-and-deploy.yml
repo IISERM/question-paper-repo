@@ -21,6 +21,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      GIT_LFS_SKIP_SMUDGE: "1"
     
     steps:
       # Step 1: Checkout repository with full history
@@ -56,7 +58,9 @@ jobs:
       # Step 5: Pull latest changes to ensure we have updated files
       - name: Pull latest changes
         run: |
+          git stash
           git pull --rebase
+          git stash pop || true
 
       # Step 6: Generate folder structure using GitHub API
       # Skip slow LFS OID extraction on non-main branches
