@@ -82,8 +82,9 @@ async function handleHeaderLogin() {
     headerUserInfo.style.display = "flex";
     headerUsername.textContent = user.email.split("@")[0];
 
-    // Reload page if on submissions to load data
-    if (window.location.pathname.includes("submissions.html")) {
+    // Reload page if on index or submissions to reflect auth state
+    const pathname = window.location.pathname;
+    if (pathname.includes("submissions.html") || pathname.includes("index.html") || pathname === "/" || pathname.endsWith("/")) {
       window.location.reload();
     }
   } catch (error) {
@@ -119,8 +120,9 @@ async function handleHeaderLogout() {
   headerLoginBtn.style.display = "flex";
   headerUserInfo.style.display = "none";
 
-  // Reload page if on submissions
-  if (window.location.pathname.includes("submissions.html")) {
+  // Reload page if on index or submissions to reflect auth state
+  const pathname = window.location.pathname;
+  if (pathname.includes("submissions.html") || pathname.includes("index.html") || pathname === "/" || pathname.endsWith("/")) {
     window.location.reload();
   }
 }

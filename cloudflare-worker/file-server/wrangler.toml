@@ -1,0 +1,19 @@
+name = "qpr-file-server"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+account_id = "2a541d3bfd006a6bafac02bc4760031c"
+
+# R2 bucket binding — stores LFS objects by OID key
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "qpr-lfs"
+
+# Secrets to add via: wrangler secret put SECRET_NAME
+#
+# For LFS upload authentication (optional, for write access):
+# LFS_UPLOAD_KEY
+# LFS_UPLOAD_SECRET
+
+[vars]
+GITHUB_REPO_OWNER = "IISERM"
+GITHUB_REPO_NAME = "question-paper-repo"

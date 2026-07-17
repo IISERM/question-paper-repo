@@ -30,6 +30,16 @@ jobs:
           fetch-depth: 0 # Fetch all history for accurate commit counts
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # Step 1b: Pull LFS objects from custom backend
+      - name: Pull LFS objects
+        env:
+          LFS_READ_KEY: ${{ secrets.LFS_READ_KEY }}
+          LFS_READ_SECRET: ${{ secrets.LFS_READ_SECRET }}
+        run: |
+          git config lfs.url "https://${LFS_READ_KEY}:${LFS_READ_SECRET}@files.qpr.turingclub.workers.dev/lfs"
+          git lfs fetch --all
+          git lfs checkout
+
       # Step 2: Setup Node.js for both leaderboard and docs generation
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -41,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO_OWNER: ${{ github.repository_owner }}
-          REPO_NAME: ${{ github.event.repository.name }}
+          REPO_NAME: ${{ github.event.repository && github.event.repository.name || 'question-paper-repo' }}
         run: |
           node scripts/generate_leaderboard.js
 
@@ -59,10 +69,12 @@ jobs:
           git pull --rebase
 
       # Step 6: Generate folder structure using GitHub API
+      # Skip slow LFS OID extraction on non-main branches
       - name: Generate folder structure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          SKIP_LFS_OID: ${{ github.ref_name != 'main' && '1' || '0' }}
         run: |
           cd docs
           node scripts/generate-tree.js

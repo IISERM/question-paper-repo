@@ -9,6 +9,11 @@ const IGNORE_DIRS = [".git", "node_modules", "docs", "cloudflare-worker", "scrip
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_REPOSITORY = process.env.GITHUB_REPOSITORY || "IISERM/question-paper-repo";
 
+const LFS_BINARY_EXTENSIONS = new Set([
+  ".pdf", ".doc", ".docx", ".ppt", ".pptx", ".xls", ".xlsx",
+  ".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp", ".svg", ".zip",
+]);
+
 async function fetchGitHubTree() {
   const url = `https://api.github.com/repos/${GITHUB_REPOSITORY}/git/trees/main?recursive=1`;
   
@@ -37,7 +42,76 @@ async function fetchGitHubTree() {
   return data.tree; // Array of {path, type, sha, size, ...}
 }
 
-function buildTreeStructure(apiTree) {
+async function isLFSPointer(sha) {
+  const url = `https://api.github.com/repos/${GITHUB_REPOSITORY}/git/blobs/${sha}`;
+
+  const headers = {
+    "Accept": "application/vnd.github+json",
+    "User-Agent": "GitHub-Pages-Generator",
+  };
+
+  if (GITHUB_TOKEN) {
+    headers["Authorization"] = `Bearer ${GITHUB_TOKEN}`;
+  }
+
+  const response = await fetch(url, { headers });
+
+  if (!response.ok) {
+    console.warn(`  Failed to fetch blob ${sha}: ${response.status}`);
+    return null;
+  }
+
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    // Response may not be JSON (e.g., rate-limit HTML page)
+    return null;
+  }
+  // GitHub API returns blob content as base64 encoded
+  const content = Buffer.from(data.content, data.encoding || "base64").toString("utf-8");
+
+  if (content.startsWith("version https://git-lfs.github.com/spec")) {
+    const lines = content.split("\n");
+    const oidMatch = lines[1] && lines[1].match(/^oid sha256:([a-f0-9]{64})/);
+    if (oidMatch) {
+      return `sha256:${oidMatch[1]}`;
+    }
+  }
+
+  return null;
+}
+
+async function buildLfsOidMap(apiTree) {
+  const lfsOidMap = new Map();
+
+  const blobItems = apiTree.filter((item) => {
+    if (item.type !== "blob") return false;
+    const lastDot = item.path.lastIndexOf(".");
+    if (lastDot === -1) return false;
+    const ext = item.path.slice(lastDot).toLowerCase();
+    return LFS_BINARY_EXTENSIONS.has(ext);
+  });
+
+  console.log(`Checking ${blobItems.length} binary files for LFS pointers...`);
+
+  for (let i = 0; i < blobItems.length; i++) {
+    const item = blobItems[i];
+    if (i > 0) {
+      await new Promise((r) => setTimeout(r, 100)); // Rate limiting
+    }
+    const oid = await isLFSPointer(item.sha);
+    if (oid) {
+      lfsOidMap.set(item.path, oid);
+      console.log(`  LFS: ${item.path} -> ${oid}`);
+    }
+  }
+
+  console.log(`Found ${lfsOidMap.size} LFS files.`);
+  return lfsOidMap;
+}
+
+function buildTreeStructure(apiTree, lfsOidMap) {
   const root = {};
 
   // Filter out ignored directories and build tree
@@ -62,6 +136,9 @@ function buildTreeStructure(apiTree) {
       // If this is the last part and it's a file
       if (index === parts.length - 1 && item.type === "blob") {
         current[part].isFile = true;
+        if (lfsOidMap && lfsOidMap.has(item.path)) {
+          current[part].lfsOid = lfsOidMap.get(item.path);
+        }
         delete current[part].children; // Files don't have children
       } else {
         current = current[part].children;
@@ -81,7 +158,11 @@ function convertToArray(tree) {
 
     if (item.isFile) {
       result.isFile = true;
-    } else if (item.children) {
+    }
+    if (item.lfsOid) {
+      result.lfsOid = item.lfsOid;
+    }
+    if (item.children) {
       result.children = convertToArray(item.children);
       // Sort children: directories first, then files, both alphabetically
       result.children.sort((a, b) => {
@@ -101,8 +182,17 @@ async function main() {
     const apiTree = await fetchGitHubTree();
     console.log(`Fetched ${apiTree.length} items from GitHub API`);
 
+    // Extract LFS OIDs for binary files (skipped when SKIP_LFS_OID is set)
+    let lfsOidMap = new Map();
+    if (process.env.SKIP_LFS_OID === "1") {
+      console.log("Skipping LFS OID extraction (SKIP_LFS_OID=1)");
+    } else {
+      console.log("Extracting LFS OIDs...");
+      lfsOidMap = await buildLfsOidMap(apiTree);
+    }
+
     // Build nested structure
-    const tree = buildTreeStructure(apiTree);
+    const tree = buildTreeStructure(apiTree, lfsOidMap);
 
     // Convert to array format and filter to only folders at root level
     const folders = convertToArray(tree).filter((item) => !item.isFile);

@@ -5,6 +5,47 @@
 
 import { getInstallationToken } from "./github-app.js";
 
+// File extensions tracked by Git LFS (must match .gitattributes)
+const LFS_EXTENSIONS = new Set([
+  "pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx",
+  "jpg", "jpeg", "png", "gif", "webp", "bmp", "svg", "zip",
+]);
+
+/**
+ * Check if a filename should be stored via LFS
+ */
+function isLFSTracked(filename) {
+  const ext = (filename.split(".").pop() || "").toLowerCase();
+  return LFS_EXTENSIONS.has(ext);
+}
+
+/**
+ * Compute SHA-256 hash of binary content and return LFS pointer string
+ * @param {string} base64Content - Base64-encoded file content
+ * @returns {Promise<{pointer: string, oid: string, size: number}>}
+ */
+async function createLFSPointer(base64Content) {
+  // Decode base64 to binary
+  const binaryString = atob(base64Content);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+
+  // Compute SHA-256
+  const hashBuffer = await crypto.subtle.digest("SHA-256", bytes.buffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+
+  const oid = `sha256:${hashHex}`;
+  const size = bytes.length;
+
+  // Build LFS pointer content
+  const pointer = `version https://git-lfs.github.com/spec/v1\noid ${oid}\nsize ${size}\n`;
+
+  return { pointer, oid, size, binary: bytes };
+}
+
 // CORS headers for all responses
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*", // Will be restricted in handleRequest
@@ -474,6 +515,25 @@ async function handleUploadFile(request, env, headers) {
 
   const token = authHeader.replace("Bearer ", "");
   const { owner, repo, path, content, message, branch } = await request.json();
+
+    // Check if this file should be stored via LFS
+    const fileName = path.split("/").pop();
+    let uploadContent = content; // default: upload base64 directly to GitHub
+
+    if (isLFSTracked(fileName) && env.R2_BUCKET) {
+      console.log(`📦 LFS-tracked file detected: ${fileName}`);
+      const { pointer, oid, size, binary } = await createLFSPointer(content);
+
+      // Upload binary to R2
+      console.log(`  Uploading ${size} bytes to R2 (OID: ${oid})`);
+      await env.R2_BUCKET.put(oid, binary, {
+        httpMetadata: { contentType: "application/octet-stream" },
+      });
+
+      // Replace content with LFS pointer (base64-encoded for GitHub API)
+      uploadContent = btoa(pointer);
+      console.log(`  ✅ Stored in R2, will commit LFS pointer to GitHub`);
+    }
   
   // Frontend dropdown ensures correct folder names, path is already standardized
 
@@ -491,7 +551,7 @@ async function handleUploadFile(request, env, headers) {
         },
         body: JSON.stringify({
           message: message,
-          content: content, // Base64 encoded
+          content: uploadContent, // Base64 encoded (may be LFS pointer)
           branch: branch,
         }),
       }
@@ -1027,6 +1087,24 @@ async function handleDirectContribution(request, env, headers) {
         const { name, content } = file; // content should be base64
         const filePath = `${folderPath}/${name}`;
 
+        // Check if this file should be stored via LFS
+        let uploadContent = content; // default: upload base64 directly to GitHub
+
+        if (isLFSTracked(name) && env.R2_BUCKET) {
+          console.log(`  📦 LFS-tracked: ${name}`);
+          const { pointer, oid, size, binary } = await createLFSPointer(content);
+
+          // Upload binary to R2
+          console.log(`    Uploading ${size} bytes to R2 (OID: ${oid})`);
+          await env.R2_BUCKET.put(oid, binary, {
+            httpMetadata: { contentType: "application/octet-stream" },
+          });
+
+          // Replace content with LFS pointer
+          uploadContent = btoa(pointer);
+          console.log(`    ✅ Stored in R2, committing pointer to GitHub`);
+        }
+
         console.log(`  Uploading: ${filePath}`);
 
         const uploadResponse = await fetch(
@@ -1041,7 +1119,7 @@ async function handleDirectContribution(request, env, headers) {
             },
             body: JSON.stringify({
               message: `Add ${name}`,
-              content: content,
+              content: uploadContent,
               branch: branchName,
               author: {
                 name: userName,

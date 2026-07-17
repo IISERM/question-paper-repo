@@ -180,110 +180,136 @@
         </div>
       </div>
 
-      <div id="loading" class="loading">Loading folder structure...</div>
-      <div id="error" class="error" style="display: none"></div>
-
-      <div id="folder-tree" class="folder-tree"></div>
-
-      <!-- Contributor Leaderboard Section -->
-      <div class="leaderboard-section" id="leaderboard-section">
-        <h2 class="leaderboard-title">🏆 Contributor Leaderboard</h2>
-        <p class="leaderboard-subtitle">
-          Top contributors based on commit count
+      <!-- Auth Gate: sign-in prompt shown when not authenticated -->
+      <div id="auth-gate" class="signin-prompt" style="display: none;">
+        <!-- Lock icon SVG -->
+        <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+        </svg>
+        <h3>Sign in to browse the repository</h3>
+        <p style="margin-bottom: 1.5rem;">Please sign in with your IISER Mohali email to access question papers.</p>
+        <button id="auth-gate-signin-btn" class="btn-primary btn-large">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="margin-right: 0.5rem;">
+            <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+          </svg>
+          Sign in with Google
+        </button>
+        <div id="auth-gate-loading" style="display: none;">
+          <div class="loading-spinner"></div>
+          <p style="color: var(--text-secondary);">Initializing authentication…</p>
+        </div>
+        <p class="auth-note" style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+          Only @iisermohali.ac.in accounts are allowed
         </p>
-
-        <div id="leaderboard-loading" class="leaderboard-loading">
-          Loading leaderboard...
-        </div>
-        <div id="leaderboard-error" class="leaderboard-error" style="display: none"></div>
-
-        <div id="leaderboard-container" class="leaderboard-container" style="display: none">
-          <div class="leaderboard-podium">
-            <!-- Top 3 will be inserted here -->
-          </div>
-          <div class="leaderboard-list">
-            <!-- Remaining contributors will be inserted here -->
-          </div>
-          <div class="leaderboard-footer">
-            <span id="leaderboard-updated">Last updated: -</span>
-          </div>
-        </div>
       </div>
 
-      <div class="info-section">
-        <h3>About This Archive</h3>
-        <p>
-          Archive of question papers and exercise sheets from IISER Mohali
-          courses. Collected by students over several years.
-        </p>
+      <!-- Wrapper for authenticated-only content -->
+      <div id="authenticated-content" style="display: none;">
+        <div id="loading" class="loading">Loading folder structure...</div>
+        <div id="error" class="error" style="display: none"></div>
 
-        <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem">What's here</h4>
-        <ul>
-          <li>
-            Course-wise folders containing past quizzes, minors, majors,
-            endsems, and exercise sheets
-          </li>
-          <li>
-            Formats: PDF (preferred), images (PNG/JPG), office docs (DOCX), and
-            the occasional ZIP
-          </li>
-          <li>
-            Materials from Biology, Chemistry, HSS, IDC, Math, and Physics
-            departments
-          </li>
-        </ul>
+        <div id="folder-tree" class="folder-tree"></div>
 
-        <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem">Contributing</h4>
-        <p>Pull requests welcome! You can contribute via:</p>
-        <ul>
-          <li>
-            <strong>Web:</strong> Use our
-            <a href="contribute.html" style="color: var(--primary-color)"
-              >Contribution Portal</a
-            >
-            to upload files easily
-          </li>
-          <li>
-            <strong>GitHub:</strong> Fork the repository on GitHub, upload
-            files, and open a pull request
-          </li>
-          <li>
-            File structure:
-            <code
-              style="
-                background: var(--surface);
-                padding: 0.2rem 0.5rem;
-                border-radius: 0.25rem;
-              "
-              >&lt;SUBJECT&gt;/&lt;COURSE_CODE&gt;/&lt;YEAR&gt;/&lt;file.pdf&gt;</code
-            >
-          </li>
-        </ul>
+        <!-- Contributor Leaderboard Section -->
+        <div class="leaderboard-section" id="leaderboard-section">
+          <h2 class="leaderboard-title">🏆 Contributor Leaderboard</h2>
+          <p class="leaderboard-subtitle">
+            Top contributors based on commit count
+          </p>
 
-        <p class="note" style="margin-top: 1.5rem">
-          Quality varies; some scans are rough. This is a student-run archive
-          intended for learning and exam prep. Use at your own risk.
-        </p>
+          <div id="leaderboard-loading" class="leaderboard-loading">
+            Loading leaderboard...
+          </div>
+          <div id="leaderboard-error" class="leaderboard-error" style="display: none"></div>
 
-        <h3 style="margin-top: 2rem">Additional Resources</h3>
-        <p>
-          For an older archive, see the
-          <a
-            href="https://iiserm.github.io/course_files/"
-            target="_blank"
-            style="color: var(--primary-color)"
-            >course files mirror</a
-          >.
-        </p>
-        <p>
-          For more resources, Studocu hosts additional material:
-          <a
-            href="https://www.studocu.com/in/institution/indian-institute-of-science-education-and-research-mohali/30483"
-            target="_blank"
-            style="color: var(--primary-color)"
-            >IISER Mohali on Studocu</a
-          >.
-        </p>
+          <div id="leaderboard-container" class="leaderboard-container" style="display: none">
+            <div class="leaderboard-podium">
+              <!-- Top 3 will be inserted here -->
+            </div>
+            <div class="leaderboard-list">
+              <!-- Remaining contributors will be inserted here -->
+            </div>
+            <div class="leaderboard-footer">
+              <span id="leaderboard-updated">Last updated: -</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h3>About This Archive</h3>
+          <p>
+            Archive of question papers and exercise sheets from IISER Mohali
+            courses. Collected by students over several years.
+          </p>
+
+          <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem">What's here</h4>
+          <ul>
+            <li>
+              Course-wise folders containing past quizzes, minors, majors,
+              endsems, and exercise sheets
+            </li>
+            <li>
+              Formats: PDF (preferred), images (PNG/JPG), office docs (DOCX), and
+              the occasional ZIP
+            </li>
+            <li>
+              Materials from Biology, Chemistry, HSS, IDC, Math, and Physics
+              departments
+            </li>
+          </ul>
+
+          <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem">Contributing</h4>
+          <p>Pull requests welcome! You can contribute via:</p>
+          <ul>
+            <li>
+              <strong>Web:</strong> Use our
+              <a href="contribute.html" style="color: var(--primary-color)"
+                >Contribution Portal</a
+              >
+              to upload files easily
+            </li>
+            <li>
+              <strong>GitHub:</strong> Fork the repository on GitHub, upload
+              files, and open a pull request
+            </li>
+            <li>
+              File structure:
+              <code
+                style="
+                  background: var(--surface);
+                  padding: 0.2rem 0.5rem;
+                  border-radius: 0.25rem;
+                "
+                >&lt;SUBJECT&gt;/&lt;COURSE_CODE&gt;/&lt;YEAR&gt;/&lt;file.pdf&gt;</code
+              >
+            </li>
+          </ul>
+
+          <p class="note" style="margin-top: 1.5rem">
+            Quality varies; some scans are rough. This is a student-run archive
+            intended for learning and exam prep. Use at your own risk.
+          </p>
+
+          <h3 style="margin-top: 2rem">Additional Resources</h3>
+          <p>
+            For an older archive, see the
+            <a
+              href="https://iiserm.github.io/course_files/"
+              target="_blank"
+              style="color: var(--primary-color)"
+              >course files mirror</a
+            >.
+          </p>
+          <p>
+            For more resources, Studocu hosts additional material:
+            <a
+              href="https://www.studocu.com/in/institution/indian-institute-of-science-education-and-research-mohali/30483"
+              target="_blank"
+              style="color: var(--primary-color)"
+              >IISER Mohali on Studocu</a
+            >.
+          </p>
+        </div>
       </div>
     </main>
 
@@ -316,6 +342,9 @@
       </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
     <script src="config.js"></script>
     <script src="script.js"></script>
     <script src="leaderboard.js"></script>

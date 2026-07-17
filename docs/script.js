@@ -46,6 +46,85 @@ document.addEventListener("DOMContentLoaded", async () => {
   let fullData = null;
   let allItems = []; // Flattened list for search
 
+  // --- AUTH GATE ---
+  const authGate = document.getElementById("auth-gate");
+  const authContent = document.getElementById("authenticated-content");
+  const introSection = document.getElementById("intro-section");
+  const authGateLoading = document.getElementById("auth-gate-loading");
+  const authGateSigninBtn = document.getElementById("auth-gate-signin-btn");
+
+  // Show loading state while Firebase initializes
+  authGate.style.display = "";
+  authGateLoading.style.display = "";
+  authGateSigninBtn.style.display = "none";
+  introSection.style.display = "none";
+
+  // Auth gate sign-in button handler
+  authGateSigninBtn.addEventListener("click", async () => {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({
+        hd: "iisermohali.ac.in",
+      });
+      await firebase.auth().signInWithPopup(provider);
+      // onAuthStateChanged will pick up the new user
+    } catch (error) {
+      console.error("Auth gate login error:", error);
+      if (error.code !== "auth/popup-closed-by-user") {
+        alert("Login failed: " + error.message);
+      }
+    }
+  });
+
+  // Wait for Firebase auth state before showing anything
+  firebase.auth().onAuthStateChanged((user) => {
+    authGateLoading.style.display = "none";
+    authGateSigninBtn.style.display = "";
+
+    if (!user) {
+      // No user signed in — show auth gate
+      authGate.style.display = "";
+      authContent.style.display = "none";
+      introSection.style.display = "none";
+      loadingEl.style.display = "none";
+      return;
+    }
+
+    // Check domain restriction
+    if (!user.email || !user.email.endsWith("@iisermohali.ac.in")) {
+      firebase.auth().signOut().then(() => {
+        // Clear auth state from localStorage so header + other pages sync
+        localStorage.removeItem("auth_type");
+        localStorage.removeItem("user_email");
+        localStorage.removeItem("user_name");
+        authGate.style.display = "";
+        authContent.style.display = "none";
+        introSection.style.display = "none";
+        loadingEl.style.display = "none";
+        // Show subtle error hint
+        const existingHint = authGate.querySelector(".auth-error-hint");
+        if (existingHint) existingHint.remove();
+        const errorHint = document.createElement("p");
+        errorHint.className = "auth-error-hint";
+        errorHint.textContent = "Please sign in with an @iisermohali.ac.in email address.";
+        authGate.appendChild(errorHint);
+      });
+      return;
+    }
+
+    // Valid user — store auth state for other pages (header, contribute, submissions)
+    localStorage.setItem("auth_type", "google");
+    localStorage.setItem("user_email", user.email);
+    localStorage.setItem("user_name", user.displayName || user.email.split("@")[0]);
+
+    // Hide auth gate and load content
+    authGate.style.display = "none";
+    authContent.style.display = "";
+    introSection.style.display = "";
+
+    loadRepositoryData();
+  });
+
   // --- HISTORY HANDLING (Back Button) ---
   window.addEventListener("popstate", (event) => {
     const state = event.state;
@@ -58,66 +137,68 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // --- INITIALIZATION ---
-  try {
-    // 1. Load Data (Cache -> Network)
-    fullData = await getRepositoryData();
+  // --- DATA LOADING (called after auth verification) ---
+  async function loadRepositoryData() {
+    try {
+      // 1. Load Data (Cache -> Network)
+      fullData = await getRepositoryData();
 
-    // 2. Flatten data for search index
-    if (fullData && fullData.folders) {
-      allItems = flattenRepository(fullData.folders);
-    }
-
-    loadingEl.style.display = "none";
-
-    if (fullData.generated) {
-      const date = new Date(fullData.generated);
-      lastUpdatedEl.textContent = date.toLocaleString();
-    }
-
-    // 3. Render Initial View based on URL
-    const urlParams = new URLSearchParams(window.location.search);
-    renderCurrentView(urlParams.get("path") || "");
-
-    // 4. Setup Search Listener
-    searchInput.addEventListener("input", (e) => {
-      const query = e.target.value.trim();
-
-      if (query.length > 0) {
-        // Search Mode
-        clearSearchBtn.style.display = "block";
-        const results = searchRepository(allItems, query);
-
-        treeEl.innerHTML = "";
-        treeEl.classList.add("search-mode");
-
-        if (results.length === 0) {
-          treeEl.innerHTML =
-            '<p class="empty-message">No matching items found.</p>';
-        } else {
-          // Render top 100 results for performance
-          renderSearchResults(results.slice(0, 100), treeEl);
-        }
-      } else {
-        // Restore Navigation Mode
-        clearSearchBtn.style.display = "none";
-        treeEl.classList.remove("search-mode");
-
-        // Get current path from URL state, not input
-        const currentUrlParams = new URLSearchParams(window.location.search);
-        renderCurrentView(currentUrlParams.get("path") || "");
+      // 2. Flatten data for search index
+      if (fullData && fullData.folders) {
+        allItems = flattenRepository(fullData.folders);
       }
-    });
 
-    clearSearchBtn.addEventListener("click", () => {
-      searchInput.value = "";
-      searchInput.dispatchEvent(new Event("input"));
-    });
-  } catch (error) {
-    console.error("Error:", error);
-    loadingEl.style.display = "none";
-    errorEl.textContent = "Failed to load repository data. Please refresh.";
-    errorEl.style.display = "block";
+      loadingEl.style.display = "none";
+
+      if (fullData.generated) {
+        const date = new Date(fullData.generated);
+        lastUpdatedEl.textContent = date.toLocaleString();
+      }
+
+      // 3. Render Initial View based on URL
+      const urlParams = new URLSearchParams(window.location.search);
+      renderCurrentView(urlParams.get("path") || "");
+
+      // 4. Setup Search Listener
+      searchInput.addEventListener("input", (e) => {
+        const query = e.target.value.trim();
+
+        if (query.length > 0) {
+          // Search Mode
+          clearSearchBtn.style.display = "block";
+          const results = searchRepository(allItems, query);
+
+          treeEl.innerHTML = "";
+          treeEl.classList.add("search-mode");
+
+          if (results.length === 0) {
+            treeEl.innerHTML =
+              '<p class="empty-message">No matching items found.</p>';
+          } else {
+            // Render top 100 results for performance
+            renderSearchResults(results.slice(0, 100), treeEl);
+          }
+        } else {
+          // Restore Navigation Mode
+          clearSearchBtn.style.display = "none";
+          treeEl.classList.remove("search-mode");
+
+          // Get current path from URL state, not input
+          const currentUrlParams = new URLSearchParams(window.location.search);
+          renderCurrentView(currentUrlParams.get("path") || "");
+        }
+      });
+
+      clearSearchBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        searchInput.dispatchEvent(new Event("input"));
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      loadingEl.style.display = "none";
+      errorEl.textContent = "Failed to load repository data. Please refresh.";
+      errorEl.style.display = "block";
+    }
   }
 
   // --- NAVIGATION FUNCTION (SPA) ---
@@ -483,7 +564,11 @@ function createFileElement(file) {
   const isPdf = fileName.endsWith(".pdf");
 
   link.className = isPdf ? "file-link" : "file-link file-link-other";
-  link.href = `https://github.com/IISERM/question-paper-repo/raw/main/${file.path}`;
+  if (file.lfsOid) {
+    link.href = `${QPR_CONFIG.FILE_SERVER_URL}/file/${encodeURIComponent(file.path)}?oid=${file.lfsOid}`;
+  } else {
+    link.href = `https://github.com/IISERM/question-paper-repo/raw/main/${file.path}`;
+  }
   link.target = "_blank";
   link.rel = "noopener noreferrer";
 
@@ -534,7 +619,11 @@ function createFileSearchElement(file) {
   const isPdf = fileName.endsWith(".pdf");
 
   link.className = isPdf ? "file-link" : "file-link file-link-other";
-  link.href = `https://github.com/IISERM/question-paper-repo/raw/main/${file.path}`;
+  if (file.lfsOid) {
+    link.href = `${QPR_CONFIG.FILE_SERVER_URL}/file/${encodeURIComponent(file.path)}?oid=${file.lfsOid}`;
+  } else {
+    link.href = `https://github.com/IISERM/question-paper-repo/raw/main/${file.path}`;
+  }
   link.target = "_blank";
   link.rel = "noopener noreferrer";
 
