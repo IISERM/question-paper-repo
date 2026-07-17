@@ -292,6 +292,14 @@ header h1 {
   border-radius: 0.75rem;
   text-align: center;
   margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.signin-prompt h3 {
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0.5rem;
 }
 
 .signin-prompt svg {
@@ -304,6 +312,33 @@ header h1 {
   color: var(--text-secondary);
   font-size: 1rem;
   margin: 0;
+}
+
+.signin-prompt .btn-primary {
+  margin-top: 0.25rem;
+}
+
+.signin-prompt .loading-spinner {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+  margin-bottom: 0.75rem;
+}
+
+/* Auth gate loading state */
+#auth-gate-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0;
+}
+
+/* Auth error hint */
+.auth-error-hint {
+  color: var(--error-color) !important;
+  font-size: 0.875rem !important;
+  margin-top: 0.75rem !important;
 }
 
 /* Navigation */

@@ -32,3 +32,7 @@ ALLOWED_EMAIL_DOMAIN = "iisermohali.ac.in"
 [[kv_namespaces]]
 binding = "PAGE_VIEW_STORE"
 id = "c0f6433e94c743719f17e96d2f6b9987"
+
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "qpr-lfs"

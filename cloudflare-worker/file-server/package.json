@@ -1,0 +1,16 @@
+{
+  "name": "qpr-file-server",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for QPR file serving and LFS proxy",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^4.83.0"
+  }
+}
