@@ -41,7 +41,7 @@ async function createLFSPointer(base64Content) {
   const size = bytes.length;
 
   // Build LFS pointer content
-  const pointer = `version https://qpr-lfs-r2.internal/spec/v1\noid ${oid}\nsize ${size}\n`;
+  const pointer = `# QPR-LFS-R2 v1\noid:${oid}\nsize:${size}\n`;
 
   return { pointer, oid, size, binary: bytes };
 }

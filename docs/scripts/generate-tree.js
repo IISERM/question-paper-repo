@@ -71,7 +71,8 @@ async function isLFSPointer(sha) {
   // GitHub API returns blob content as base64 encoded
   const content = Buffer.from(data.content, data.encoding || "base64").toString("utf-8");
 
-  if (content.startsWith("version https://qpr-lfs-r2.internal/spec") ||
+  if (content.startsWith("# QPR-LFS-R2") ||
+      content.startsWith("version https://qpr-lfs-r2.internal/spec") ||
       content.startsWith("version https://git-lfs.github.com/spec")) {
     const lines = content.split("\n");
     const oidMatch = lines[1] && lines[1].match(/^oid sha256:([a-f0-9]{64})/);

@@ -27,7 +27,7 @@ const LFS_EXTENSIONS = new Set([
   "jpg", "jpeg", "png", "gif", "webp", "bmp", "svg", "zip",
 ]);
 
-const LFS_POINTER_HEADER = "version https://qpr-lfs-r2.internal/spec/v1";
+const LFS_POINTER_HEADER = "# QPR-LFS-R2 v1";
 
 const SKIP_DIRS = new Set([".git", "node_modules", "cloudflare-worker", "scripts", "docs"]);
 
@@ -66,7 +66,7 @@ function createLFSPointer(binaryContent) {
   const hash = crypto.createHash("sha256").update(binaryContent).digest("hex");
   const oid = `sha256:${hash}`;
   const size = binaryContent.length;
-  const pointer = `version https://qpr-lfs-r2.internal/spec/v1\noid ${oid}\nsize ${size}\n`;
+  const pointer = `# QPR-LFS-R2 v1\noid:${oid}\nsize:${size}\n`;
   return { pointer, oid, size, binary: binaryContent };
 }
 
