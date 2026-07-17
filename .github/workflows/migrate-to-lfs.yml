@@ -78,7 +78,7 @@ jobs:
 
           # Commit in batches to avoid push size limits
           STAGED=$(git diff --cached --name-only)
-          BATCH_SIZE=500
+          BATCH_SIZE=100
           COUNT=0
           BATCH=1
 
@@ -88,6 +88,7 @@ jobs:
             COUNT=$((COUNT + 1))
             if [ $COUNT -ge $BATCH_SIZE ]; then
               git commit -m "Migrate binary files to LFS pointers (batch $BATCH) [skip ci]" || true
+              git pull --rebase origin "$TARGET_BRANCH" || { echo "Pull failed on batch $BATCH"; exit 1; }
               git push origin "$TARGET_BRANCH" || { echo "Push failed on batch $BATCH"; exit 1; }
               COUNT=0
               BATCH=$((BATCH + 1))
@@ -97,6 +98,7 @@ jobs:
           # Final batch
           if [ $COUNT -gt 0 ]; then
             git commit -m "Migrate binary files to LFS pointers (batch $BATCH) [skip ci]" || true
+            git pull --rebase origin "$TARGET_BRANCH" || { echo "Pull failed on final batch"; exit 1; }
             git push origin "$TARGET_BRANCH" || { echo "Push failed on final batch"; exit 1; }
           fi
 
