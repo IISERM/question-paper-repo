@@ -38,6 +38,7 @@ const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE || "0", 10) || 0; // 0 
 const UPLOAD_RETRIES = parseInt(process.env.UPLOAD_RETRIES || "3", 10) || 3;
 const ALLOW_PARTIAL_FAILURES = process.env.ALLOW_PARTIAL_FAILURES === "1";
 const VERIFY_UPLOADS = process.env.VERIFY_UPLOADS !== "0"; // download and re-hash after upload
+const SKIP_UPLOAD = process.env.SKIP_UPLOAD === "1"; // skip R2 upload (objects already exist)
 
 // ═══════════════════════════════════════════════════════════════
 // Helpers
@@ -218,9 +219,13 @@ async function main() {
         return;
       }
 
-      // Upload to R2
-      console.log(`  UPLOAD ${relPath} → ${oid} (${(size / 1024).toFixed(1)} KB)`);
-      await uploadToR2(oid, binaryContent);
+      // Upload to R2 (skip if already done)
+      if (SKIP_UPLOAD) {
+        console.log(`  SKIP_UPLOAD ${relPath} → ${oid} (${(size / 1024).toFixed(1)} KB)`);
+      } else {
+        console.log(`  UPLOAD ${relPath} → ${oid} (${(size / 1024).toFixed(1)} KB)`);
+        await uploadToR2(oid, binaryContent);
+      }
 
       // Replace file with pointer
       fs.writeFileSync(filePath, pointer, "utf-8");

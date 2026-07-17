@@ -44,6 +44,7 @@ jobs:
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
           CONCURRENCY: ${{ github.event.inputs.concurrency }}
           ALLOW_PARTIAL_FAILURES: "1"
+          SKIP_UPLOAD: "1"
         run: node scripts/migrate-to-lfs.js
 
       - name: Upload migration report
