@@ -29,8 +29,6 @@ GITHUB_REPO_NAME = "question-paper-repo"
 FRONTEND_URL = "https://iiserm.github.io"
 ALLOWED_EMAIL_DOMAIN = "iisermohali.ac.in"
 
-# Shared secret for signing file URLs (use wrangler secret put in production)
-SIGNING_SECRET = "change-me-in-production-use-wrangler-secret-put"
 # Firebase project ID for token validation
 FIREBASE_PROJECT_ID = "qpr-iiserm"
 
