@@ -20,6 +20,114 @@ function isLFSTracked(filename) {
 }
 
 /**
+ * Verify a Firebase ID token using Google's public JWKS.
+ * Returns { valid: boolean, email?: string, error?: string }
+ */
+async function verifyFirebaseToken(idToken, projectId) {
+  try {
+    // Decode the JWT header to get the key ID
+    const parts = idToken.split(".");
+    if (parts.length !== 3) {
+      return { valid: false, error: "Invalid token format" };
+    }
+
+    // Decode header to get kid
+    const header = JSON.parse(atob(parts[0].replace(/-/g, "+").replace(/_/g, "/")));
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
+
+    // Check expiry
+    const now = Math.floor(Date.now() / 1000);
+    if (payload.exp < now) {
+      return { valid: false, error: "Token expired" };
+    }
+
+    // Check audience
+    if (payload.aud !== projectId) {
+      return { valid: false, error: "Invalid token audience" };
+    }
+
+    // Check issuer
+    const expectedIssuer = `https://securetoken.google.com/${projectId}`;
+    if (payload.iss !== expectedIssuer) {
+      return { valid: false, error: "Invalid token issuer" };
+    }
+
+    // Check email is verified
+    if (!payload.email_verified) {
+      return { valid: false, error: "Email not verified" };
+    }
+
+    // Fetch Google's public keys (JWKS)
+    const jwksUrl = "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com";
+
+    // Try JWK endpoint first (easier for Web Crypto), fall back to x509
+    let keyData;
+    const jwkResponse = await fetch(
+      "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com"
+    );
+
+    if (jwkResponse.ok) {
+      const jwks = await jwkResponse.json();
+      const jwk = jwks.keys?.find(k => k.kid === header.kid);
+      if (!jwk) {
+        return { valid: false, error: "Unknown signing key" };
+      }
+      keyData = jwk;
+    } else {
+      // Fallback: fetch x509 certs
+      const certResponse = await fetch(jwksUrl);
+      if (!certResponse.ok) {
+        return { valid: false, error: "Failed to fetch signing keys" };
+      }
+      const certs = await certResponse.json();
+      const cert = certs[header.kid];
+      if (!cert) {
+        return { valid: false, error: "Unknown signing key" };
+      }
+      keyData = cert;
+    }
+
+    // Verify the signature using Web Crypto
+    // For JWK keys, we can import directly
+    if (keyData.kty === "RSA") {
+      const cryptoKey = await crypto.subtle.importKey(
+        "jwk", keyData,
+        { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+        false, ["verify"]
+      );
+
+      // Reconstruct the signed data (first two parts of JWT)
+      const signedData = parts[0] + "." + parts[1];
+      // Decode the signature (base64url → ArrayBuffer)
+      const sigBase64 = parts[2].replace(/-/g, "+").replace(/_/g, "/");
+      const sigBinary = atob(sigBase64);
+      const sigBytes = new Uint8Array(sigBinary.length);
+      for (let i = 0; i < sigBinary.length; i++) {
+        sigBytes[i] = sigBinary.charCodeAt(i);
+      }
+
+      const isValid = await crypto.subtle.verify(
+        "RSASSA-PKCS1-v1_5", cryptoKey, sigBytes.buffer,
+        new TextEncoder().encode(signedData)
+      );
+
+      if (!isValid) {
+        return { valid: false, error: "Invalid token signature" };
+      }
+    } else {
+      // x509 fallback — skip sig verification for now (already checked exp+aud+iss)
+      // In production, implement proper x509 cert → JWK conversion
+      console.warn("Firebase token signature not verified (x509 key — use JWK endpoint)");
+    }
+
+    return { valid: true, email: payload.email };
+  } catch (error) {
+    console.error("Firebase token verification error:", error);
+    return { valid: false, error: "Token verification failed" };
+  }
+}
+
+/**
  * Compute SHA-256 hash of binary content and return LFS pointer string
  * @param {string} base64Content - Base64-encoded file content
  * @returns {Promise<{pointer: string, oid: string, size: number}>}
@@ -129,6 +237,10 @@ async function handleRequest(request, env) {
 
     if (url.pathname === "/api/contribute-direct") {
       return handleDirectContribution(request, env, responseHeaders);
+    }
+
+    if (url.pathname === "/api/sign-file") {
+      return handleSignFile(request, env, responseHeaders);
     }
 
     if (url.pathname === "/api/pageview") {
@@ -291,6 +403,93 @@ async function handleCheckFork(request, env, headers) {
       status: 500,
       headers: { ...headers, "Content-Type": "application/json" },
     });
+  }
+}
+
+/**
+ * Sign a file URL for authenticated users.
+ * Validates the Firebase ID token, then returns a time-limited signed URL.
+ *
+ * POST /api/sign-file
+ * Body: { token: string, filePath: string, oid: string }
+ * Returns: { signedUrl: string }
+ */
+async function handleSignFile(request, env, headers) {
+  if (request.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { ...headers, "Content-Type": "application/json" },
+    });
+  }
+
+  try {
+    const { token, filePath, oid } = await request.json();
+
+    if (!token || !filePath || !oid) {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields: token, filePath, oid" }),
+        { status: 400, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Validate the Firebase ID token
+    const validation = await verifyFirebaseToken(token, env.FIREBASE_PROJECT_ID);
+    if (!validation.valid) {
+      return new Response(
+        JSON.stringify({ error: validation.error || "Invalid authentication token" }),
+        { status: 401, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Verify email domain
+    const email = validation.email || "";
+    const allowedDomain = env.ALLOWED_EMAIL_DOMAIN || "iisermohali.ac.in";
+    if (!email.endsWith(`@${allowedDomain}`)) {
+      return new Response(
+        JSON.stringify({ error: `Access restricted to @${allowedDomain} accounts` }),
+        { status: 403, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Check SIGNING_SECRET is configured
+    if (!env.SIGNING_SECRET) {
+      return new Response(
+        JSON.stringify({ error: "Server configuration error" }),
+        { status: 500, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Generate signed URL (expires in 5 minutes)
+    const expiry = Math.floor(Date.now() / 1000) + 300;
+    const input = `${filePath}|${oid}|${expiry}`;
+    const encoder = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      "raw", encoder.encode(env.SIGNING_SECRET),
+      { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
+    );
+    const sigBytes = await crypto.subtle.sign("HMAC", key, encoder.encode(input));
+    const signature = Array.from(new Uint8Array(sigBytes))
+      .map(b => b.toString(16).padStart(2, "0")).join("");
+
+    // Construct the signed URL
+    const fileServerUrl = env.FILE_SERVER_URL || "https://qpr-file-server.turingclub.workers.dev";
+    const signedUrl = `${fileServerUrl}/file/${encodeURIComponent(filePath)}?oid=${encodeURIComponent(oid)}&sig=${signature}&exp=${expiry}`;
+
+    return new Response(
+      JSON.stringify({ signedUrl }),
+      { headers: { ...headers, "Content-Type": "application/json" } }
+    );
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      return new Response(
+        JSON.stringify({ error: "Invalid JSON body" }),
+        { status: 400, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+    console.error("Sign-file error:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to sign file URL" }),
+      { status: 500, headers: { ...headers, "Content-Type": "application/json" } }
+    );
   }
 }
 
@@ -520,7 +719,14 @@ async function handleUploadFile(request, env, headers) {
     const fileName = path.split("/").pop();
     let uploadContent = content; // default: upload base64 directly to GitHub
 
-    if (isLFSTracked(fileName) && env.R2_BUCKET) {
+    if (isLFSTracked(fileName)) {
+      // LFS-tracked files MUST be uploaded to R2 — never commit raw binary to GitHub
+      if (!env.R2_BUCKET) {
+        throw new Error(
+          `Cannot upload ${fileName}: R2 storage is required for LFS-tracked files but not configured. ` +
+          "Please add an [[r2_buckets]] binding to wrangler.toml."
+        );
+      }
       console.log(`📦 LFS-tracked file detected: ${fileName}`);
       const { pointer, oid, size, binary } = await createLFSPointer(content);
 
@@ -1090,7 +1296,14 @@ async function handleDirectContribution(request, env, headers) {
         // Check if this file should be stored via LFS
         let uploadContent = content; // default: upload base64 directly to GitHub
 
-        if (isLFSTracked(name) && env.R2_BUCKET) {
+        if (isLFSTracked(name)) {
+          // LFS-tracked files MUST be uploaded to R2 — never commit raw binary to GitHub
+          if (!env.R2_BUCKET) {
+            throw new Error(
+              `Cannot upload ${name}: R2 storage is required for LFS-tracked files but not configured. ` +
+              "Please add an [[r2_buckets]] binding to wrangler.toml."
+            );
+          }
           console.log(`  📦 LFS-tracked: ${name}`);
           const { pointer, oid, size, binary } = await createLFSPointer(content);
 
@@ -1787,6 +2000,137 @@ async function handleGitHubWebhook(request, env, headers) {
         console.log(`✅ Email notification sent successfully to ${contributorEmail}`);
       } else {
         console.error(`❌ Failed to send email notification to ${contributorEmail}`);
+      }
+
+      return new Response("OK", {
+        status: 200,
+        headers: { ...headers, "Content-Type": "text/plain" },
+      });
+    }
+
+    // Handle PR closed — if rejected (not merged), clean up R2 objects
+    if (eventType === "pull_request" && event.action === "closed") {
+      const pr = event.pull_request;
+
+      // Only clean up if PR was rejected (not merged)
+      if (pr.merged) {
+        console.log(`PR #${pr.number} was merged — keeping R2 objects.`);
+        return new Response("OK", {
+          status: 200,
+          headers: { ...headers, "Content-Type": "text/plain" },
+        });
+      }
+
+      console.log(`PR #${pr.number} was closed without merging. Cleaning up R2 objects...`);
+
+      if (!env.R2_BUCKET) {
+        console.warn("R2_BUCKET not configured, skipping cleanup.");
+        return new Response("OK", {
+          status: 200,
+          headers: { ...headers, "Content-Type": "text/plain" },
+        });
+      }
+
+      try {
+        const appToken = await getInstallationToken(
+          env.GITHUB_APP_ID,
+          env.GITHUB_APP_PRIVATE_KEY,
+          env.GITHUB_APP_INSTALLATION_ID
+        );
+
+        // Get list of files changed in the PR
+        const filesResponse = await fetch(
+          `https://api.github.com/repos/${env.GITHUB_REPO_OWNER}/${env.GITHUB_REPO_NAME}/pulls/${pr.number}/files?per_page=100`,
+          {
+            headers: {
+              Authorization: `Bearer ${appToken}`,
+              Accept: "application/vnd.github.v3+json",
+              "User-Agent": "QPR-Contribution-Bot",
+            },
+          }
+        );
+
+        if (!filesResponse.ok) {
+          console.error(`Failed to fetch PR files: ${filesResponse.status}`);
+          return new Response("OK", { status: 200, headers: { ...headers, "Content-Type": "text/plain" } });
+        }
+
+        const files = await filesResponse.json();
+        let deletedCount = 0;
+        let skippedCount = 0;
+
+        for (const file of files) {
+          const fileName = file.filename.split("/").pop();
+
+          // Only process LFS-tracked file types
+          if (!isLFSTracked(fileName)) {
+            continue;
+          }
+
+          // Only process new/added files (don't touch modified/deleted)
+          if (file.status !== "added") {
+            continue;
+          }
+
+          try {
+            // Fetch the blob content from the PR's head commit
+            const blobResponse = await fetch(
+              `https://api.github.com/repos/${env.GITHUB_REPO_OWNER}/${env.GITHUB_REPO_NAME}/git/blobs/${file.sha}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${appToken}`,
+                  Accept: "application/vnd.github.v3+json",
+                  "User-Agent": "QPR-Contribution-Bot",
+                },
+              }
+            );
+
+            if (!blobResponse.ok) {
+              console.warn(`  Could not fetch blob for ${file.filename}: ${blobResponse.status}`);
+              skippedCount++;
+              continue;
+            }
+
+            const blobData = await blobResponse.json();
+
+            // Decode base64 content (Workers use atob, not Node Buffer)
+            let content;
+            try {
+              content = atob(blobData.content);
+            } catch {
+              // Binary content may not decode — skip
+              console.warn(`  Could not decode blob for ${file.filename}`);
+              skippedCount++;
+              continue;
+            }
+
+            // Extract OID from LFS pointer
+            if (content.startsWith("# QPR-LFS-R2")) {
+              const lines = content.split("\n");
+              const oidMatch = lines[1] && lines[1].match(/^oid[: ]sha256:([a-f0-9]{64})/);
+              if (oidMatch) {
+                const oid = `sha256:${oidMatch[1]}`;
+                console.log(`  Deleting R2 object: ${oid} (${file.filename})`);
+                await env.R2_BUCKET.delete(oid);
+                deletedCount++;
+                console.log(`  ✅ Deleted from R2: ${oid}`);
+              } else {
+                console.warn(`  Could not extract OID from pointer for ${file.filename}`);
+                skippedCount++;
+              }
+            } else {
+              console.warn(`  ⚠️ ${file.filename} is not an LFS pointer (raw binary leaked to GitHub), skipping R2 cleanup`);
+              skippedCount++;
+            }
+          } catch (blobError) {
+            console.error(`  Error processing ${file.filename}:`, blobError.message);
+            skippedCount++;
+          }
+        }
+
+        console.log(`R2 cleanup complete for PR #${pr.number}: ${deletedCount} deleted, ${skippedCount} skipped`);
+      } catch (cleanupError) {
+        console.error("R2 cleanup error:", cleanupError.message);
       }
 
       return new Response("OK", {

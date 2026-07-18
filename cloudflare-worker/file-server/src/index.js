@@ -341,6 +341,39 @@ async function handleLFSObjectDownload(request, env, url) {
 // ═══════════════════════════════════════════════════════════════
 
 /**
+ * Validate a signed file URL.
+ * Verifies the HMAC signature and checks expiry.
+ * Returns { valid: boolean, error?: string }
+ */
+async function validateSignedUrl(filePath, oid, sig, exp, secret) {
+  if (!sig || !exp) {
+    return { valid: false, error: "Missing signature" };
+  }
+
+  const expiry = parseInt(exp, 10);
+  if (isNaN(expiry) || Date.now() > expiry * 1000) {
+    return { valid: false, error: "Signature expired" };
+  }
+
+  // Recompute the expected signature
+  const input = `${decodeURIComponent(filePath)}|${oid}|${exp}`;
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw", encoder.encode(secret),
+    { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
+  );
+  const sigBytes = await crypto.subtle.sign("HMAC", key, encoder.encode(input));
+  const expectedSig = Array.from(new Uint8Array(sigBytes))
+    .map(b => b.toString(16).padStart(2, "0")).join("");
+
+  if (sig !== expectedSig) {
+    return { valid: false, error: "Invalid signature" };
+  }
+
+  return { valid: true };
+}
+
+/**
  * Handle file serving (GET /file/{path}?oid={sha256:...})
  *
  * Two modes:
@@ -360,6 +393,28 @@ async function handleFileServe(request, env, url) {
   const oid = url.searchParams.get("oid");
 
   if (oid) {
+    // ── Signed URL validation ─────────────────────────────────
+    const sig = url.searchParams.get("sig");
+    const exp = url.searchParams.get("exp");
+
+    if (sig && exp) {
+      // Signed URL mode: validate signature before serving
+      if (!env.SIGNING_SECRET) {
+        return new Response(
+          JSON.stringify({ error: "Server configuration error: SIGNING_SECRET not set" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      const validation = await validateSignedUrl(filePath, oid, sig, exp, env.SIGNING_SECRET);
+      if (!validation.valid) {
+        return new Response(
+          JSON.stringify({ error: validation.error }),
+          { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+    }
+    // If no sig/exp params: fall through to existing behavior (backward compat during rollout)
+
     // ── LFS file: serve from R2 ───────────────────────────────
     try {
       const object = await env.R2_BUCKET.get(oid);

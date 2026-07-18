@@ -47,13 +47,23 @@ jobs:
         run: |
           node scripts/generate_leaderboard.js
 
-      # Step 4: Commit and push leaderboard changes if any
+      # Step 4: Upload new binary files to R2 and convert to LFS pointers
+      # Detects files that should be LFS-tracked but are still raw binary,
+      # uploads them to R2, and replaces them with LFS pointer text.
+      - name: Migrate new files to LFS
+        env:
+          FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://qpr-file-server.turingclub.workers.dev' }}
+          ALLOW_PARTIAL_FAILURES: "1"
+        run: |
+          node scripts/migrate-to-lfs.js
+
+      # Step 5: Commit and push leaderboard + LFS pointer changes if any
       - name: Commit and push if changed
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add README.md docs/leaderboard.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update contributor leaderboard [skip ci]" && git push)
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update leaderboard and LFS pointers [skip ci]" && git push)
 
       # Step 6: Generate folder structure using GitHub API
       # Skip slow LFS OID extraction on non-main branches

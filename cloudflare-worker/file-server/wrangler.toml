@@ -17,3 +17,6 @@ bucket_name = "qpr-lfs"
 [vars]
 GITHUB_REPO_OWNER = "IISERM"
 GITHUB_REPO_NAME = "question-paper-repo"
+
+# Shared secret for signing file URLs (must match qpr-contribution-worker)
+SIGNING_SECRET = "change-me-in-production-use-wrangler-secret-put"

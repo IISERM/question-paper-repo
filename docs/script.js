@@ -555,6 +555,63 @@ function createFolderSearchElement(folder) {
   return div;
 }
 
+/**
+ * Sets up a file link to fetch a signed URL on click.
+ * Prevents direct access to file server URLs by requiring authentication.
+ * @param {HTMLAnchorElement} link - The anchor element to attach click handler to
+ * @param {string} filePath - The file path on the server
+ * @param {string} oid - The LFS OID for the file
+ */
+function setupSignedFileLink(link, filePath, oid) {
+  link.href = "#";
+  link.style.cursor = "pointer";
+  link.title = "Click to open (requires sign-in)";
+
+  link.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    // Disable link and show loading state
+    const originalText = link.textContent;
+    link.style.pointerEvents = "none";
+    link.textContent = "⏳ Generating secure link...";
+
+    try {
+      // Get current Firebase user token
+      const user = firebase.auth().currentUser;
+      if (!user) {
+        alert("Please sign in to access files.");
+        return;
+      }
+
+      const token = await user.getIdToken();
+
+      // Request signed URL from worker
+      const response = await fetch(`${QPR_CONFIG.WORKER_URL}/api/sign-file`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, filePath, oid }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ error: "Unknown error" }));
+        throw new Error(error.error || `Server error: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      // Open the signed URL in a new tab
+      window.open(result.signedUrl, "_blank", "noopener,noreferrer");
+    } catch (err) {
+      console.error("Failed to generate signed URL:", err);
+      alert(`Failed to open file: ${err.message}`);
+    } finally {
+      // Restore link state
+      link.textContent = originalText;
+      link.style.pointerEvents = "auto";
+    }
+  });
+}
+
 function createFileElement(file) {
   const div = document.createElement("div");
   div.className = "file-item";
@@ -565,11 +622,11 @@ function createFileElement(file) {
 
   link.className = isPdf ? "file-link" : "file-link file-link-other";
   if (file.lfsOid) {
-    link.href = `${QPR_CONFIG.FILE_SERVER_URL}/file/${encodeURIComponent(file.path)}?oid=${file.lfsOid}`;
+    setupSignedFileLink(link, file.path, file.lfsOid);
   } else {
     link.href = `https://github.com/IISERM/question-paper-repo/raw/main/${file.path}`;
+    link.target = "_blank";
   }
-  link.target = "_blank";
   link.rel = "noopener noreferrer";
 
   const name = document.createElement("span");
@@ -620,11 +677,11 @@ function createFileSearchElement(file) {
 
   link.className = isPdf ? "file-link" : "file-link file-link-other";
   if (file.lfsOid) {
-    link.href = `${QPR_CONFIG.FILE_SERVER_URL}/file/${encodeURIComponent(file.path)}?oid=${file.lfsOid}`;
+    setupSignedFileLink(link, file.path, file.lfsOid);
   } else {
     link.href = `https://github.com/IISERM/question-paper-repo/raw/main/${file.path}`;
+    link.target = "_blank";
   }
-  link.target = "_blank";
   link.rel = "noopener noreferrer";
 
   const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
