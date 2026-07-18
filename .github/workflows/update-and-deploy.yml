@@ -47,32 +47,15 @@ jobs:
         run: |
           node scripts/generate_leaderboard.js
 
-      # Step 3.5: Find files changed in this push with LFS-tracked extensions
-      - name: Detect changed LFS files
-        id: changed-files
-        run: |
-          FILES=$(git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.sha }} 2>/dev/null | grep -iE '\.(pdf|doc|docx|ppt|pptx|xls|xlsx|jpg|jpeg|png|gif|webp|bmp|svg|zip)$' | tr '\n' ',' | sed 's/,$//')
-          echo "lfs_files=$FILES" >> $GITHUB_OUTPUT
-
-      # Step 4: Upload new/changed binary files to R2 and convert to LFS pointers
-      # Only scans files changed in this push, not the entire repo.
-      - name: Migrate new files to LFS
-        env:
-          FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://qpr-file-server.turingclub.workers.dev' }}
-          ALLOW_PARTIAL_FAILURES: "1"
-          FILE_LIST: ${{ steps.changed-files.outputs.lfs_files }}
-        run: |
-          node scripts/migrate-to-lfs.js
-
-      # Step 5: Commit and push leaderboard + LFS pointer changes if any
+      # Step 4: Commit and push leaderboard changes if any
       - name: Commit and push if changed
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update leaderboard and LFS pointers [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update leaderboard [skip ci]" && git push)
 
-      # Step 6: Generate folder structure using GitHub API
+      # Step 5: Generate folder structure using GitHub API
       # Skip slow LFS OID extraction on non-main branches
       - name: Restore LFS OID cache
         id: cache
