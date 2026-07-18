@@ -39,6 +39,7 @@ const UPLOAD_RETRIES = parseInt(process.env.UPLOAD_RETRIES || "3", 10) || 3;
 const ALLOW_PARTIAL_FAILURES = process.env.ALLOW_PARTIAL_FAILURES === "1";
 const VERIFY_UPLOADS = process.env.VERIFY_UPLOADS !== "0"; // download and re-hash after upload
 const SKIP_UPLOAD = process.env.SKIP_UPLOAD === "1"; // skip R2 upload (objects already exist)
+const FILE_LIST = process.env.FILE_LIST; // comma-separated paths — when set, only process these files (skips full repo scan)
 
 // ═══════════════════════════════════════════════════════════════
 // Helpers
@@ -136,9 +137,16 @@ async function main() {
   if (DRY_RUN) console.log("DRY RUN     : No files will be modified\n");
 
   // 1. Find candidate files
-  console.log("Scanning repository for binary files...");
-  const allFiles = walkFiles(".");
-  const candidates = allFiles.filter((f) => isLFSExtension(f) && !shouldSkipPath(f));
+  let candidates;
+  if (FILE_LIST) {
+    const paths = FILE_LIST.split(",").map(p => p.trim()).filter(Boolean);
+    console.log(`Scanning ${paths.length} changed files for LFS-tracked types...`);
+    candidates = paths.filter((f) => isLFSExtension(f) && !shouldSkipPath(f));
+  } else {
+    console.log("Scanning repository for binary files...");
+    const allFiles = walkFiles(".");
+    candidates = allFiles.filter((f) => isLFSExtension(f) && !shouldSkipPath(f));
+  }
   console.log(`Found ${candidates.length} files with LFS extensions.\n`);
 
   if (candidates.length === 0) {
