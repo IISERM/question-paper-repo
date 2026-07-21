@@ -636,6 +636,26 @@ footer p {
   margin: 0.5rem 0;
 }
 
+.footer-report {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-report a {
+  color: var(--footer-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+
+.footer-report a:hover {
+  opacity: 1;
+}
+
 .footer-links {
   margin: 1rem 0;
 }

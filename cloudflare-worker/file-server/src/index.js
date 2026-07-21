@@ -399,26 +399,32 @@ async function handleFileServe(request, env, url) {
 
     console.log(`[file-serve] path="${filePath}" oid="${oid}" sig=${sig ? "present" : "none"} exp=${exp || "none"}`);
 
-    if (sig && exp) {
-      // Signed URL mode: validate signature before serving
-      if (!env.SIGNING_SECRET) {
-        console.error("[file-serve] SIGNING_SECRET not configured");
-        return new Response(
-          JSON.stringify({ error: "Server configuration error: SIGNING_SECRET not set" }),
-          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
-      const validation = await validateSignedUrl(filePath, oid, sig, exp, env.SIGNING_SECRET);
-      if (!validation.valid) {
-        console.log(`[file-serve] Validation failed: ${validation.error}`);
-        return new Response(
-          JSON.stringify({ error: validation.error }),
-          { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
-      console.log("[file-serve] Signature validation passed");
+    // Require a valid signature for every file request
+    if (!sig || !exp) {
+      console.log("[file-serve] Missing signature or expiry");
+      return new Response(
+        JSON.stringify({ error: "Authentication required" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
-    // If no sig/exp params: fall through to existing behavior (backward compat during rollout)
+
+    if (!env.SIGNING_SECRET) {
+      console.error("[file-serve] SIGNING_SECRET not configured");
+      return new Response(
+        JSON.stringify({ error: "Server configuration error: SIGNING_SECRET not set" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const validation = await validateSignedUrl(filePath, oid, sig, exp, env.SIGNING_SECRET);
+    if (!validation.valid) {
+      console.log(`[file-serve] Validation failed: ${validation.error}`);
+      return new Response(
+        JSON.stringify({ error: validation.error }),
+        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    console.log("[file-serve] Signature validation passed");
 
     // ── LFS file: serve from R2 ───────────────────────────────
     try {
