@@ -727,6 +727,16 @@ async function handleUploadFile(request, env, headers) {
           "Please add an [[r2_buckets]] binding to wrangler.toml."
         );
       }
+
+      // Enforce max file size (10 MB — generous enough for PDF scans)
+      const MAX_FILE_SIZE = 10 * 1024 * 1024;
+      const decodedSize = (content.length * 3) / 4; // base64 overhead
+      if (decodedSize > MAX_FILE_SIZE) {
+        throw new Error(
+          `File "${fileName}" is too large (${(decodedSize / (1024 * 1024)).toFixed(1)} MB). Max allowed: 10 MB.`
+        );
+      }
+
       console.log(`📦 LFS-tracked file detected: ${fileName}`);
       const { pointer, oid, size, binary } = await createLFSPointer(content);
 
@@ -1304,6 +1314,16 @@ async function handleDirectContribution(request, env, headers) {
               "Please add an [[r2_buckets]] binding to wrangler.toml."
             );
           }
+
+          // Enforce max file size (10 MB — generous enough for PDF scans)
+          const MAX_FILE_SIZE = 10 * 1024 * 1024;
+          const decodedSize = (content.length * 3) / 4; // base64 overhead
+          if (decodedSize > MAX_FILE_SIZE) {
+            throw new Error(
+              `File "${name}" is too large (${(decodedSize / (1024 * 1024)).toFixed(1)} MB). Max allowed: 10 MB.`
+            );
+          }
+
           console.log(`  📦 LFS-tracked: ${name}`);
           const { pointer, oid, size, binary } = await createLFSPointer(content);
 
