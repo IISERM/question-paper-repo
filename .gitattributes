@@ -1,19 +1,31 @@
-# Git LFS tracking — matches worker LFS_EXTENSIONS
-# Binary files tracked by LFS are stored as pointers in git,
-# with actual content in the Cloudflare R2 bucket via custom worker.
+# All binary content is stored in Cloudflare R2 via QPR-LFS-R2 pointers.
+# The git-lfs filter is intentionally DISABLED — git-lfs is not used for storage.
+#
+# The `filter=lfs` lines are stripped to prevent git-lfs from intercepting
+# our custom QPR-LFS-R2 pointer files. Files committed as QPR pointers
+# are served from R2 via the qpr-file-server worker.
+#
+# New files added via the contribution portal are uploaded to R2 and
+# committed as QPR-LFS-R2 pointers — git-lfs is never involved.
+#
+# The `:(attr:filter=lfs)` git grep attribute still works for identifying
+# binary files by extension in scripts/r2-sync-cleanup.js.
+#
+# All globs below intentionally have filter=lfs stripped.
+# DO NOT re-add `filter=lfs diff=lfs merge=lfs` to these lines.
 
-*.pdf filter=lfs diff=lfs merge=lfs -text
-*.doc filter=lfs diff=lfs merge=lfs -text
-*.docx filter=lfs diff=lfs merge=lfs -text
-*.ppt filter=lfs diff=lfs merge=lfs -text
-*.pptx filter=lfs diff=lfs merge=lfs -text
-*.xls filter=lfs diff=lfs merge=lfs -text
-*.xlsx filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.jpeg filter=lfs diff=lfs merge=lfs -text
-*.png filter=lfs diff=lfs merge=lfs -text
-*.gif filter=lfs diff=lfs merge=lfs -text
-*.webp filter=lfs diff=lfs merge=lfs -text
-*.bmp filter=lfs diff=lfs merge=lfs -text
-*.svg filter=lfs diff=lfs merge=lfs -text
-*.zip filter=lfs diff=lfs merge=lfs -text
+*.pdf -text
+*.doc -text
+*.docx -text
+*.ppt -text
+*.pptx -text
+*.xls -text
+*.xlsx -text
+*.jpg -text
+*.jpeg -text
+*.png -text
+*.gif -text
+*.webp -text
+*.bmp -text
+*.svg -text
+*.zip -text

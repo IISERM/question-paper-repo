@@ -102,14 +102,13 @@ function listR2Objects() {
 function extractLfsOids() {
   log("Extracting LFS pointer OIDs from git repo...");
 
-  // Use git grep with attr filter to only search LFS-tracked files.
-  // This is dynamic — it reads .gitattributes to know which files have filter=lfs.
+  // Use git grep with extension-based file matching since .gitattributes
+  // no longer has filter=lfs (QPR-LFS-R2 pointers bypass git-lfs entirely).
   let output;
   try {
-    // Match both formats: QPR-LFS-R2 ("oid:sha256:...") and std git-lfs ("oid sha256:...")
     output = execSync(
-      `git grep -hE '^oid[: ] sha256:' -- ':(attr:filter=lfs)'`,
-      { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }
+      `git grep -hE '^oid[: ] sha256:' -- '*.pdf' '*.doc' '*.docx' '*.ppt' '*.pptx' '*.xls' '*.xlsx' '*.jpg' '*.jpeg' '*.png' '*.gif' '*.webp' '*.bmp' '*.svg' '*.zip'`,
+      { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], maxBuffer: 10 * 1024 * 1024 }
     );
   } catch (e) {
     // git grep returns exit code 1 if no matches found — that's OK

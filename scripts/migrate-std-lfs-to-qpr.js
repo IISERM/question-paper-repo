@@ -48,46 +48,30 @@ const LFS_EXTENSIONS = new Set([
 function findStdLfsPointers() {
   log("Finding standard git-lfs pointer files in HEAD...");
 
-  let lfsFiles;
+  // Use git grep on HEAD (working tree is smudged binary, not pointer text)
+  let output;
   try {
-    lfsFiles = execSync(
-      `git ls-files`,
+    output = execSync(
+      `git grep -l '^version https://git-lfs.github.com/spec' HEAD -- '*.pdf' '*.doc' '*.docx' '*.ppt' '*.pptx' '*.xls' '*.xlsx' '*.jpg' '*.jpeg' '*.png' '*.gif' '*.webp' '*.bmp' '*.svg' '*.zip'`,
       { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], maxBuffer: 10 * 1024 * 1024 }
-    ).trim().split("\n");
+    ).trim();
   } catch (e) {
-    throw new Error(`git ls-files failed: ${e.message}`);
-  }
-
-  // Filter to LFS extensions
-  const candidates = lfsFiles.filter(f => {
-    const ext = path.extname(f).toLowerCase().replace(".", "");
-    return LFS_EXTENSIONS.has(ext);
-  });
-
-  log(`  ${candidates.length} LFS-tracked files. Checking pointers...`);
-
-  const stdLfsFiles = [];
-  for (const file of candidates) {
-    try {
-      const content = execSync(
-        `git cat-file -p "HEAD:${file}"`,
-        { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], maxBuffer: 1024 }
-      );
-      if (content.startsWith("version https://git-lfs.github.com/spec")) {
-        stdLfsFiles.push(file);
-      }
-    } catch {
-      // File may not exist in HEAD (new file), skip
+    // git grep returns exit code 1 if no matches found
+    if (e.status === 1 && (!e.stderr || e.stderr.length === 0)) {
+      output = "";
+    } else {
+      throw new Error(`git grep failed: ${e.stderr || e.message}`);
     }
   }
 
-  log(`  Found ${stdLfsFiles.length} files with standard git-lfs pointers.`);
+  const files = output ? output.split("\n").filter(Boolean) : [];
+  log(`  Found ${files.length} files with standard git-lfs pointers.`);
 
   if (LIMIT > 0) {
     log(`  Limiting to first ${LIMIT} files.`);
-    return stdLfsFiles.slice(0, LIMIT);
+    return files.slice(0, LIMIT);
   }
-  return stdLfsFiles;
+  return files;
 }
 
 // ── Helpers ──────────────────────────────────────────────────────
