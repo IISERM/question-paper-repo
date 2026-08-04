@@ -2,24 +2,21 @@
 /**
  * Migrate standard git-lfs pointer files to QPR-LFS-R2 format.
  *
- * Designed to run in GitHub Actions with actions/checkout@v4 (lfs:true),
- * which auto-smudges LFS files so they're binary in the working tree.
+ * Downloads binary content from GitHub LFS API (by OID), uploads to R2,
+ * and swaps standard LFS pointers for QPR-LFS-R2 pointers.
  *
- * Steps:
- *  1. Find all std-lfs pointer files via git cat-file
- *  2. Read smudged binary content from working tree
- *  3. Hash binary to verify OID matches pointer
- *  4. Upload binary to R2 via file-server worker
- *  5. Replace file with QPR-LFS-R2 pointer
+ * Does NOT rely on git-lfs smudge — works with .gitattributes
+ * stripped of filter=lfs.
  *
  * Usage:
  *   node scripts/migrate-std-lfs-to-qpr.js
  *
  * Env vars:
  *   FILE_SERVER_URL  - Base URL of the LFS file-server worker
- *   DRY_RUN=1        - Preview only, no changes
- *   CONCURRENCY=N    - Max parallel uploads (default: 5)
- *   LIMIT=N          - Limit to N files (default: 0 = all)
+ *   GITHUB_TOKEN      - GitHub token (for LFS API auth)
+ *   DRY_RUN=1         - Preview only, no changes
+ *   CONCURRENCY=N     - Max parallel operations (default: 5)
+ *   LIMIT=N           - Limit to N files (default: 0 = all)
  */
 
 const fs = require("fs");
@@ -29,11 +26,15 @@ const { execSync } = require("child_process");
 
 const FILE_SERVER_URL =
   process.env.FILE_SERVER_URL || "https://qpr-file-server.turingclub.workers.dev";
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
 const CONCURRENCY = Math.max(1, parseInt(process.env.CONCURRENCY || "5", 10) || 5);
 const LIMIT = parseInt(process.env.LIMIT || "0", 10) || 0;
 const DRY_RUN = process.env.DRY_RUN === "1";
 const UPLOAD_RETRIES = 3;
 const QPR_HEADER = "# QPR-LFS-R2 v1";
+
+const GITHUB_REPO = "IISERM/question-paper-repo";
+const GITHUB_LFS_BATCH = `https://github.com/${GITHUB_REPO}.git/info/lfs/objects/batch`;
 
 function log(...args) { console.log(...args); }
 function warn(...args) { console.warn(...args); }
@@ -48,8 +49,6 @@ const LFS_EXTENSIONS = new Set([
 function findStdLfsPointers() {
   log("Finding standard git-lfs pointer files in HEAD...");
 
-  // Use git ls-tree + git cat-file — the working tree has smudged binaries
-  // so we can't grep it directly. Check each LFS-extension blob in HEAD.
   let allBlobs;
   try {
     allBlobs = execSync(
@@ -65,14 +64,13 @@ function findStdLfsPointers() {
     return LFS_EXTENSIONS.has(ext);
   });
   log(`  ${candidates.length} LFS-tracked files in HEAD.`);
-  log(`  Checking for standard git-lfs pointers (this may take a moment)...`);
+  log(`  Checking for standard git-lfs pointers...`);
 
   const batchSize = 500;
   const stdLfsFiles = [];
 
   for (let i = 0; i < candidates.length; i += batchSize) {
     const batch = candidates.slice(i, i + batchSize);
-    // cat-file --batch reads from stdin
     const input = batch.map(f => `HEAD:${f}`).join("\n") + "\n";
     try {
       const output = execSync(`git cat-file --batch`, {
@@ -81,22 +79,17 @@ function findStdLfsPointers() {
         stdio: ["pipe", "pipe", "pipe"],
         maxBuffer: 50 * 1024 * 1024,
       });
-      // Parse: "<object> <type> <size>\n<content>" for each
       const entries = output.split(/(?=^[0-9a-f]{40} )/m);
       let idx = 0;
       for (const entry of entries) {
         if (!entry.trim() || idx >= batch.length) continue;
-        // Check if the blob content starts with the std-lfs header
-        // The content begins after the first newline + object header line
         const lines = entry.split("\n");
-        // First line is "<sha> blob <size>", second line starts the content
         if (lines.length >= 2 && lines[1].startsWith("version https://git-lfs.github.com/spec")) {
           stdLfsFiles.push(batch[idx]);
         }
         idx++;
       }
     } catch (e) {
-      // If batch mode fails, fall back to individual checks
       for (const file of batch) {
         try {
           const content = execSync(
@@ -106,22 +99,19 @@ function findStdLfsPointers() {
           if (content.startsWith("version https://git-lfs.github.com/spec")) {
             stdLfsFiles.push(file);
           }
-        } catch {
-          // file may not exist or be binary, skip
-        }
+        } catch { /* skip */ }
       }
     }
     log(`  ... ${Math.min(i + batchSize, candidates.length)}/${candidates.length} scanned, ${stdLfsFiles.length} found`);
   }
 
   log(`  Found ${stdLfsFiles.length} files with standard git-lfs pointers.`);
-  const files = stdLfsFiles;
 
   if (LIMIT > 0) {
     log(`  Limiting to first ${LIMIT} files.`);
-    return files.slice(0, LIMIT);
+    return stdLfsFiles.slice(0, LIMIT);
   }
-  return files;
+  return stdLfsFiles;
 }
 
 // ── Helpers ──────────────────────────────────────────────────────
@@ -133,6 +123,67 @@ function parseStdLfsOid(content) {
 
 function createQprPointer(oid, size) {
   return `${QPR_HEADER}\noid:${oid}\nsize:${size}\n`;
+}
+
+// ── Download from GitHub LFS API ──────────────────────────────────
+
+async function fetchLfsDownloadUrl(oid) {
+  const headers = {
+    "Accept": "application/vnd.git-lfs+json",
+    "Content-Type": "application/vnd.git-lfs+json",
+    "User-Agent": "QPR-Migration",
+  };
+  if (GITHUB_TOKEN) {
+    headers["Authorization"] = `Bearer ${GITHUB_TOKEN}`;
+  }
+
+  const body = JSON.stringify({
+    operation: "download",
+    transfers: ["basic"],
+    objects: [{ oid, size: 0 }],
+  });
+
+  const resp = await fetch(GITHUB_LFS_BATCH, {
+    method: "POST",
+    headers,
+    body,
+    signal: AbortSignal.timeout(30000),
+  });
+
+  if (!resp.ok) {
+    throw new Error(`LFS batch request failed: HTTP ${resp.status}`);
+  }
+
+  const data = await resp.json();
+  const obj = data.objects?.[0];
+  if (obj?.error) {
+    throw new Error(`LFS object error: ${obj.error.code} ${obj.error.message}`);
+  }
+  if (!obj?.actions?.download?.href) {
+    throw new Error(`No download URL in LFS response`);
+  }
+  return obj.actions.download.href;
+}
+
+async function downloadLfsBinary(oid) {
+  // Get signed download URL from GitHub LFS API
+  const downloadUrl = await fetchLfsDownloadUrl(oid);
+
+  const downloadHeaders = {};
+  if (GITHUB_TOKEN) {
+    downloadHeaders["Authorization"] = `Bearer ${GITHUB_TOKEN}`;
+  }
+
+  const resp = await fetch(downloadUrl, {
+    headers: downloadHeaders,
+    signal: AbortSignal.timeout(120000),
+  });
+
+  if (!resp.ok) {
+    throw new Error(`LFS download failed: HTTP ${resp.status}`);
+  }
+
+  return Buffer.from(await resp.arrayBuffer());
 }
 
 // ── Upload to R2 ─────────────────────────────────────────────────
@@ -155,7 +206,7 @@ async function uploadToR2(oid, binaryContent) {
         warn(`    Retry ${attempt}/${UPLOAD_RETRIES} in ${delay}ms... (HTTP ${resp.status})`);
         await new Promise(r => setTimeout(r, delay));
       } else {
-        throw new Error(`HTTP ${resp.status}: ${text.slice(0, 200)}`);
+        throw new Error(`R2 upload HTTP ${resp.status}: ${text.slice(0, 200)}`);
       }
     } catch (e) {
       if (attempt < UPLOAD_RETRIES) {
@@ -185,30 +236,20 @@ async function migrateOne(filePath) {
       return { status: "ERROR", message: "Could not parse OID from pointer", path: relPath };
     }
 
-    // Check working tree — might already be migrated (QPR pointer)
+    // Already migrated?
     try {
       const wt = fs.readFileSync(relPath, "utf-8");
       if (wt.startsWith(QPR_HEADER)) {
         return { status: "SKIPPED", message: "Already QPR-LFS-R2", path: relPath };
       }
-    } catch {
-      // Can't read as utf-8 — it's binary, good
-    }
+    } catch { /* binary, keep going */ }
 
-    // 2. Read smudged binary from working tree
-    const binaryContent = fs.readFileSync(relPath);
+    // 2. Download binary from GitHub LFS
+    log(`  ${relPath} — downloading from GitHub LFS (${expectedOid})`);
+    const binaryContent = await downloadLfsBinary(expectedOid);
+
     if (binaryContent.length === 0) {
-      return { status: "ERROR", message: "Empty file", path: relPath };
-    }
-
-    // Check: if working tree still has std-lfs pointer text (lfs smudge failed)
-    const head = binaryContent.slice(0, 8).toString("utf-8");
-    if (head === "version ") {
-      return {
-        status: "ERROR",
-        message: "Still a pointer — LFS smudge failed. Check that checkout has lfs:true and token has repo scope.",
-        path: relPath,
-      };
+      return { status: "ERROR", message: "Empty download", path: relPath };
     }
 
     // 3. Verify OID matches
@@ -219,18 +260,20 @@ async function migrateOne(filePath) {
     }
     const size = binaryContent.length;
 
-    log(`  ${relPath} → ${oid} (${(size / 1024).toFixed(1)} KB)`);
+    log(`    Verified: ${(size / 1024).toFixed(1)} KB`);
 
     if (DRY_RUN) {
       return { status: "DRY_RUN", oid, size, path: relPath };
     }
 
     // 4. Upload to R2
+    log(`    Uploading to R2...`);
     await uploadToR2(oid, binaryContent);
 
     // 5. Replace file with QPR pointer
     fs.writeFileSync(relPath, createQprPointer(oid, size), "utf-8");
 
+    log(`    ✅`);
     return { status: "OK", oid, size, path: relPath };
   } catch (error) {
     return { status: "ERROR", message: error.message, path: relPath };
@@ -241,10 +284,15 @@ async function migrateOne(filePath) {
 
 async function main() {
   log("=== Standard LFS → QPR-LFS-R2 Migration ===\n");
-  log(`File server : ${FILE_SERVER_URL}`);
-  log(`Concurrency : ${CONCURRENCY}`);
-  if (LIMIT > 0) log(`Limit       : ${LIMIT} files`);
-  if (DRY_RUN) log("DRY RUN     : No files will be modified\n");
+  log(`File server  : ${FILE_SERVER_URL}`);
+  log(`GitHub LFS   : ${GITHUB_REPO}`);
+  log(`Concurrency  : ${CONCURRENCY}`);
+  if (LIMIT > 0) log(`Limit        : ${LIMIT} files`);
+  if (DRY_RUN) log("DRY RUN      : No files will be modified\n");
+
+  if (!GITHUB_TOKEN) {
+    warn("WARNING: GITHUB_TOKEN not set. LFS downloads may be rate-limited.");
+  }
 
   const files = findStdLfsPointers();
   if (files.length === 0) {
@@ -285,11 +333,17 @@ async function main() {
   log(`Skipped  : ${skipped}`);
   log(`Errors   : ${errors}`);
 
+  const totalSize = results
+    .filter(r => r.size)
+    .reduce((s, r) => s + r.size, 0);
+  log(`Total data uploaded: ${(totalSize / (1024 ** 3)).toFixed(2)} GB`);
+
   const summary = [
     `# Migration Report`,
     `# Generated: ${new Date().toISOString()}`,
     `# Elapsed: ${elapsed}s`,
     `# Migrated: ${migrated} | Skipped: ${skipped} | Errors: ${errors}`,
+    `# Total data: ${(totalSize / (1024 ** 3)).toFixed(2)} GB`,
     `#`,
     ...results.map(r =>
       `${r.status} | ${r.path} | ${r.oid || ""} | ${r.size ? (r.size / 1024).toFixed(1) + " KB" : ""} | ${r.message || ""}`

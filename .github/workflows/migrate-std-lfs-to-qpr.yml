@@ -22,16 +22,12 @@ permissions:
 jobs:
   migrate:
     runs-on: ubuntu-latest
-    env:
-      GIT_LFS_SKIP_SMUDGE: "0"
-      GIT_LFS_SKIP_PUSH: "1"
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          lfs: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -40,6 +36,7 @@ jobs:
 
       - name: Run migration
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://qpr-file-server.turingclub.workers.dev' }}
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
           CONCURRENCY: ${{ github.event.inputs.concurrency || '5' }}
