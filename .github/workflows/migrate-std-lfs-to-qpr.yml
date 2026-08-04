@@ -1,4 +1,4 @@
-name: Migrate Std LFS to QPR-LFS-R2
+name: Fix QPR Binary Uploads
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ permissions:
   contents: write
 
 jobs:
-  migrate:
+  fix:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,22 +28,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          lfs: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      # .gitattributes on main has filter=lfs stripped.
-      # Temporarily restore it so git lfs pull knows which files to smudge.
-      # We strip again before committing QPR pointers.
-      - name: Restore LFS attributes and pull smudged binaries
+      # Temporarily restore filter=lfs so git-lfs recognizes files
+      - name: Restore LFS attributes
         run: |
           sed -i 's/ -text/ filter=lfs diff=lfs merge=lfs -text/' .gitattributes
-          git lfs pull
-          echo "LFS pull complete. Binary files should now be smudged."
 
-      - name: Run migration
+      - name: Run fix
         env:
           FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://qpr-file-server.turingclub.workers.dev' }}
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
@@ -51,12 +48,12 @@ jobs:
           LIMIT: ${{ github.event.inputs.limit || '0' }}
         run: node scripts/migrate-std-lfs-to-qpr.js
 
-      - name: Upload migration report
+      - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: std-lfs-migration-report
-          path: scripts/std-lfs-migration-report.txt
+          name: qpr-binary-fix-report
+          path: scripts/qpr-binary-fix-report.txt
           if-no-files-found: ignore
 
       - name: Commit and push
@@ -69,19 +66,17 @@ jobs:
             exit 0
           fi
 
-          # Strip LFS attributes — QPR pointer text must not be intercepted
           sed -i 's/ filter=lfs diff=lfs merge=lfs//g' .gitattributes
           git config --local filter.lfs.clean cat
           git config --local filter.lfs.smudge cat
-
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
           CHANGED=$(git diff --name-only)
           FILE_COUNT=$(echo "$CHANGED" | wc -l)
-          echo "$FILE_COUNT files changed, first 20:"
+          echo "$FILE_COUNT files changed"
           echo "$CHANGED" | head -20
 
           git add .
-          git commit -m "Migrate standard git-lfs pointers to QPR-LFS-R2 format ($FILE_COUNT files)"
+          git commit -m "Fix QPR-LFS-R2 pointer sizes after binary re-upload ($FILE_COUNT files)"
           git push
