@@ -1,0 +1,37 @@
+name: R2 Orphan Cleanup
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — preview only, no deletion'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  r2-sync-cleanup:
+    runs-on: ubuntu-latest
+    env:
+      GIT_LFS_SKIP_SMUDGE: "1"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install wrangler
+        working-directory: cloudflare-worker/file-server
+        run: npm install
+
+      - name: Run R2 sync cleanup
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          DRY_RUN: ${{ github.event.inputs.dry_run != 'false' && '1' || '0' }}
+        run: node scripts/r2-sync-cleanup.js

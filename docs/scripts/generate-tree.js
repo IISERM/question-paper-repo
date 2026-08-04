@@ -71,9 +71,10 @@ async function isLFSPointer(sha) {
   // GitHub API returns blob content as base64 encoded
   const content = Buffer.from(data.content, data.encoding || "base64").toString("utf-8");
 
+  // Only treat QPR-LFS-R2 pointers as own LFS files (served from R2).
+  // Standard git-lfs pointers will fall through to GitHub raw URLs.
   if (content.startsWith("# QPR-LFS-R2") ||
-      content.startsWith("version https://qpr-lfs-r2.internal/spec") ||
-      content.startsWith("version https://git-lfs.github.com/spec")) {
+      content.startsWith("version https://qpr-lfs-r2.internal/spec")) {
     const lines = content.split("\n");
     const oidMatch = lines[1] && lines[1].match(/^oid[: ]sha256:([a-f0-9]{64})/);
     if (oidMatch) {

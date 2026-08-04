@@ -1,0 +1,81 @@
+name: Migrate Std LFS to QPR-LFS-R2
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — preview only, no changes'
+        type: boolean
+        default: false
+      concurrency:
+        description: 'Max parallel uploads'
+        required: false
+        default: '5'
+      limit:
+        description: 'Limit to N files (0 = all)'
+        required: false
+        default: '0'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    env:
+      GIT_LFS_SKIP_SMUDGE: "0"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          lfs: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run migration
+        env:
+          FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://qpr-file-server.turingclub.workers.dev' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
+          CONCURRENCY: ${{ github.event.inputs.concurrency || '5' }}
+          LIMIT: ${{ github.event.inputs.limit || '0' }}
+        run: node scripts/migrate-std-lfs-to-qpr.js
+
+      - name: Upload migration report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: std-lfs-migration-report
+          path: scripts/std-lfs-migration-report.txt
+          if-no-files-found: ignore
+
+      - name: Commit and push changes
+        if: github.event.inputs.dry_run != 'true'
+        env:
+          GIT_LFS_SKIP_PUSH: "1"
+        run: |
+          # Disable LFS clean filter — we want QPR pointer text committed as-is
+          git config --local --unset filter.lfs.process 2>/dev/null || true
+          git config --local filter.lfs.clean cat
+          git config --local filter.lfs.smudge cat
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          CHANGED=$(git diff --name-only)
+          FILE_COUNT=$(echo "$CHANGED" | wc -l)
+
+          echo "$FILE_COUNT files changed:"
+          echo "$CHANGED" | head -20
+
+          git add .
+          git commit -m "Migrate standard git-lfs pointers to QPR-LFS-R2 format ($FILE_COUNT files)"
+          git push

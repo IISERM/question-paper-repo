@@ -42,3 +42,4 @@ out/
 
 docs/data.json
 scripts/lfs-migration-report.txt
+.commandcode
