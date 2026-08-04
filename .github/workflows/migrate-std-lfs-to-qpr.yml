@@ -16,11 +16,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      # Restore correct QPR-LFS-R2 pointers from the original migration commit
-      # (53103ea). These point to real binaries already stored in R2.
-      # Later migrations corrupted the OIDs by hashing the pointer text instead
-      # of the binary, giving fake OIDs like sha256:0e1ffb07... with size=105.
-      - name: Restore correct QPR pointers from 53103ea
+      # Restore correct QPR-LFS-R2 pointers from the original migration merge
+      # commit (f08f5c4). These point to real binaries already stored in R2.
+      # Commit 53103ea (the previous source) is AFTER .gitattributes was restored
+      # with filter=lfs, which smudged files back to binary.
+      - name: Restore correct QPR pointers from f08f5c4
         run: |
           echo "Finding files with broken QPR pointers..."
           BROKEN_FILES=$(git grep -l '^# QPR-LFS-R2' HEAD -- \
@@ -31,15 +31,14 @@ jobs:
           FIXED=0
           SKIPPED=0
           for file in $BROKEN_FILES; do
-            # Strip HEAD: prefix if present
             file="${file#HEAD:}"
 
-            # Check if commit 53103ea has a QPR pointer for this file
-            CONTENT=$(git cat-file -p "53103ea:$file" 2>/dev/null | head -3)
+            # Check if merge commit f08f5c4 has a correct QPR pointer
+            CONTENT=$(git cat-file -p "f08f5c4:$file" 2>/dev/null | head -3)
             if echo "$CONTENT" | grep -q "^# QPR-LFS-R2"; then
               SIZE=$(echo "$CONTENT" | grep "^size:" | cut -d: -f2)
               if [ "$SIZE" -gt 500 ] 2>/dev/null; then
-                git checkout "53103ea" -- "$file"
+                git checkout "f08f5c4" -- "$file"
                 FIXED=$((FIXED + 1))
               else
                 SKIPPED=$((SKIPPED + 1))
