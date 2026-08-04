@@ -16,13 +16,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      # Restore correct QPR-LFS-R2 pointers from the original migration merge
-      # commit (f08f5c4). These point to real binaries already stored in R2.
-      # Commit 53103ea (the previous source) is AFTER .gitattributes was restored
-      # with filter=lfs, which smudged files back to binary.
-      - name: Restore correct QPR pointers from f08f5c4
+      - name: Recover binaries from git history and fix pointers
         run: |
-          echo "Finding files with broken QPR pointers..."
+          echo "Finding remaining broken QPR pointers (< 1 KB)..."
+
           BROKEN_FILES=$(git grep -l '^# QPR-LFS-R2' HEAD -- \
             '*.pdf' '*.doc' '*.docx' '*.ppt' '*.pptx' \
             '*.xls' '*.xlsx' '*.jpg' '*.jpeg' '*.png' \
@@ -30,23 +27,57 @@ jobs:
 
           FIXED=0
           SKIPPED=0
+          NO_BINARY=0
+
           while IFS= read -r file; do
             [ -z "$file" ] && continue
             file="${file#HEAD:}"
-            CONTENT=$(git cat-file -p "f08f5c4:$file" 2>/dev/null | head -3)
-            if echo "$CONTENT" | grep -q "^# QPR-LFS-R2"; then
-              SIZE=$(echo "$CONTENT" | grep "^size:" | cut -d: -f2)
-              if [ "$SIZE" -gt 500 ] 2>/dev/null; then
-                git checkout "f08f5c4" -- "$file"
-                FIXED=$((FIXED + 1))
-              else
-                SKIPPED=$((SKIPPED + 1))
-              fi
-            else
+            CURRENT_SIZE=$(git cat-file -p "HEAD:$file" 2>/dev/null | grep "^size:" | cut -d: -f2)
+            if [ -n "$CURRENT_SIZE" ] && [ "$CURRENT_SIZE" -ge 1000 ] 2>/dev/null; then
               SKIPPED=$((SKIPPED + 1))
+              continue
+            fi
+
+            FIRST_BINARY=""
+            for commit in $(git log --all --reverse --oneline -- "$file" | cut -d' ' -f1); do
+              blob_type=$(git cat-file -t "${commit}:$file" 2>/dev/null)
+              if [ "$blob_type" != "blob" ]; then continue; fi
+              first_bytes=$(git cat-file -p "${commit}:$file" 2>/dev/null | head -c 8)
+              case "$first_bytes" in
+                "%PDF"*|$'\x89PNG'*|$'\xff\xd8\xff'*|"PK"*|$'\xd0\xcf\x11\xe0'*)
+                  FIRST_BINARY="$commit"; break ;;
+              esac
+            done
+
+            if [ -z "$FIRST_BINARY" ]; then
+              echo "  ??? $file: no binary found in git history"
+              NO_BINARY=$((NO_BINARY + 1))
+              continue
+            fi
+
+            git cat-file -p "${FIRST_BINARY}:$file" > /tmp/recovered 2>/dev/null
+            RECOVERED_SIZE=$(wc -c < /tmp/recovered)
+            HASH=$(sha256sum /tmp/recovered | cut -d' ' -f1)
+            OID="sha256:$HASH"
+
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+              -X PUT "https://qpr-file-server.turingclub.workers.dev/lfs/objects/$OID" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @/tmp/recovered)
+
+            if [ "$HTTP_CODE" = "200" ]; then
+              printf '# QPR-LFS-R2 v1\noid:%s\nsize:%s\n' "$OID" "$RECOVERED_SIZE" > "$file"
+              echo "  ✅ $file: ${RECOVERED_SIZE} bytes -> $OID"
+              FIXED=$((FIXED + 1))
+            else
+              echo "  ❌ $file: upload HTTP $HTTP_CODE"
             fi
           done <<< "$BROKEN_FILES"
-          echo "Fixed: $FIXED, Skipped: $SKIPPED"
+
+          echo ""
+          echo "Fixed: $FIXED"
+          echo "Skipped (already OK): $SKIPPED"
+          echo "No binary in history: $NO_BINARY"
 
       - name: Commit and push
         run: |
@@ -62,5 +93,13 @@ jobs:
           echo "$FILE_COUNT files changed"
 
           git add .
-          git commit -m "Restore correct QPR-LFS-R2 pointers from original migration ($FILE_COUNT files)"
-          git push
+          git commit -m "Recover correct QPR-LFS-R2 pointers from git history binaries ($FILE_COUNT files)"
+
+          for i in 1 2 3; do
+            if git pull --rebase && git push; then
+              echo "Push succeeded on attempt $i"
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1
