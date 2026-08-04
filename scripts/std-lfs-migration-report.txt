@@ -1,0 +1,1587 @@
+# Migration Report
+# Generated: 2026-08-04T04:52:25.297Z
+# Elapsed: 5.2s
+# Migrated: 2 | Skipped: 1580 | Errors: 0
+#
+SKIPPED | BIO/101/2023/Bio101-Topic 1-Chemistry of water (By Dr. Rajesh Ramchandran).ppt |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/101/2023/Bio101-Topic 2-Macromolecules(By Dr Rajesh Ramchandran).ppt |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/101/2023/Carbohydrates and Lipids.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/101/2023/Cell Signalling.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/101/2023/Evolution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/101/2023/Immunology.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/101/2023/Intro to Cells .pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/101/2023/Nucleic Acid.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/101/2023/Proteins.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2017/Midsems (1) ms17.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2017/Midsems (2) ms17.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2018/Mid Sem 1 ms18 with answers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2018/MidSem 2 ms18 with answers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2019/Part 1_ MS 19 End Semester Examination.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2019/Part 2_ MS 19 End Semester Examination.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2019/Part 3_ MS 19 End Semester Examination.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2019/Practice Problems/Practice Problems Set 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2019/Practice Problems/Practice Problems Set 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2019/Practice Problems/Practice problems Set 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2019/Practice Problems/Solns Practice Problems Set 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2024/Help_session/BIO102 Help Session - 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2024/Help_session/BIO102 Help Session - 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2024/Help_session/BIO102 Help Session - 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2024/Help_session/BIO102 Help Session - 4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2024/Help_session/BIO102 Help Session - 5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2024/Help_session/BIO102 Help Session - 7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2024/Help_session/BIO102 Help Session - 8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Exercises/Conceptual Questions Set 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Exercises/HWE_Drill_Problems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Exercises/HWE_Drill_Problems_Answer Key.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Exercises/HWE_Practice_Problems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Exercises/HWE_Problems_Answer_Key.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Exercises/Migration_and_Drift Practice problems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Exercises/Practice Examination BIO 102.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Exercises/conceptual questions set 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Exercises/practice problem set 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/MID_SEM_01_QP.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Midsem/Mid Sem 1 Student Answer Key.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Midsem/Mid Semester 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Midsem/Mid Semester Examination 1 QP.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Midsem/Mid_Sem_2_Answer_Key.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Notes/Frequency_dependent_selection_and_mutation.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Notes/Migration_and_Drift.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Notes/Neutral_Theory_of_Molecular_Evolution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Notes/Speciation.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Population Genetics (Notes)/Population Genetics 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Population Genetics (Notes)/Population Genetics 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Quantitative Genetics (Notes)/Quantitative_Genetics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Quiz/Class Test 2 2026 Answer Key.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Quiz/Class test 1 2026 Answer Key.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Quiz/Class test 3 2026 Answer Key.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Quiz/Practive_Problems_QG_Molecular_Evolution_Mutation_Drift.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/Quiz/QG_etc_practice_problem_Answer_Key.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/conceptual questions set 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/2026/practice problems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/1-Rajesh-Cell division.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/10-Rajesh-Regulation of Gene Expression in Bacteria.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/11-Rajesh-Regulation of transcription in Eukaryotes.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/13-Rajesh-Animal development.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/2-Rajesh-Mitosis.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/3-Rajesh-Meiosis.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/4-Rajesh-Chromosomes and inheritance.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/5-Rajesh-Cell cycle control.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/6-Rajesh-Molecular basis of inheritance.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/7-Rajesh-Central Dogma.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/8-Rajesh-Prokaryotic Transcription.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/9-Rajesh-Eukaryotic Transcription and Translation.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/Joginder-Development Biology_Lec 1.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/Joginder-Development Biology_Lec 2.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/Joginder-Development Biology_Lec 3.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/LectureNotes/Joginder-Development Biology_Lec 4.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/Weekly Highlights/Week 1 Highlights.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/Weekly Highlights/Week 11 onwards - Evolution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/Weekly Highlights/Week 2 Highlights.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/Weekly Highlights/Week 3 Highlights.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/Weekly Highlights/Week 4 Highlights.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/Weekly Highlights/Week 5 Highlights.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/Weekly Highlights/Week 7 Highlights.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/102/unknown/Weekly Highlights/Week 9-10 Highlights combined.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/2023/MS23_BIO111_Lab Manual (2).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/Protocols/bio1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/Protocols/bio2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/Protocols/bio3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/Protocols/bio4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/Protocols/bio5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/Protocols/bio6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/Protocols/bio7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/Protocols/bio8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/111/Protocols/bio9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/112/2026/Reading material/Chi_Square_Tests_in_Genetics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/112/2026/Reading material/Drosophila_Crosses (1).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/112/2026/Reading material/Quantitative_Genetics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/112/Protocols/P1,2 Media and Buffers_final_2015.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/112/Protocols/P10 Induction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/112/Protocols/P3,6 Transformation of E. coli_2019.docx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/112/Protocols/P4 Plasmid_Isolation_from_E._coli_final_2015.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/112/Protocols/P7,8 PCR.docx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/112/Protocols/P9 Restriction Enzymes Digestion and GE.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/201/2025/Mid sem/20251015_134518(1).jpg |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/201/2025/Mid sem/20251015_134533.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/201/2025/Mid sem/20251015_134541.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/201/2025/Mid sem/20251015_134553.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/202/2020/Class Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/202/2020/Measurement of Biodiversity.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/202/2025/Midsem/BIO202 Midsem 1 Solutions 2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/202/2025/Midsem/BIO202 Midsem 2 Solved 2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/204/2025/Midsem/BIO204 PYQ.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/204/2026/Endsem/BIO204_Endsem_2026_Solved.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/204/2026/Midsem/MidSem1-bio204-solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/204/2026/Midsem/MidSem2-bio204-solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/204/2026/Midsem/bio204 bioinfo Shashi.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/212/unknown/Channa.xlsx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/212/unknown/Life Table of Balanus.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/212/unknown/population.docx |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/302/2023/Endsem/Scanned_Doc_2026-05-19.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/304/2023/Midsem/Scanned_Doc_2026-05-19.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/306/2024/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/401/2024/Endsem/Bio 401 (2024).jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/401/2025/Endsem/401 bio endsem.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/401/2025/Midsem/Bio401 2nd Mid Sem.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/401/2025/Midsem/bio 401 midsem 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/411/2022/Endsem/bio 411QP_solutions-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/411/2025/Endsem/ENDSEM-MCQ-bio411-solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/411/2025/Endsem/EndSemester-BIO411-solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/411/2025/Midsem/1st-MidSemester-solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | BIO/411/2025/Midsem/MidSemester-2-solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2023/question_papers/CHM101_2023_endsem.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/1. Lecture Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/15-9-24.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/19-10-24.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/2. Lecture Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/28-9-24.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/3. Lecture Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/7-9-24.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/9-11-24.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/Acid_Base_HSAB.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/Bonding.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/2025/Midsem/chm101_midsem_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/unknown/Nomenclature.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/unknown/Slides/1-2_nomenclature.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/unknown/Slides/3-7_Isomerism.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/unknown/Slides/8-13_SN-Elimination.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/unknown/Slides/Addition.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/unknown/Slides/Coordination_Chem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/unknown/Slides/VBT_MOT.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/unknown/Slides/carbon monoxide.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/101/unknown/WhatsApp Image 2018-11-29 at 9.39.18 PM.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2017/Assignment- 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2017/Assignment- 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2017/CHM102-Assign 4.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2017/CHM102-Assign 5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2017/CHM102-Assign 6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2017/CHM102-Assign 7.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2017/CHM102-Assign 8.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2018/problem-sub1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2018/problemset1-p-in-a-b.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2018/problemset2-operators.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2018/surprise1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2018/tutorial1-operators.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2018/tutorial2-av-herm.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2022/Endsems1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2022/Endsems2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2022/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2022/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/Assignments/CHM102 Practice problems set-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/Assignments/CHM102-Problem set 3 - Stereochemistry-Aromaticity-Energy profiles-solutions-Lecture 42.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/Assignments/CHM102-Problem set 3 - Stereochemistry-EnergyProfiles-Aromaticity.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/Assignments/CHM102-Problem set 4 - Reactive intermediates and reactivity aspects-solutions-Lecture 41.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/Assignments/CHM102-Problem set 4 - Reactive intermediates and reactivity aspects.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/Assignments/Practice problems set-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/Assignments/assignment1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/1lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/2lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/3lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/4a lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/4b lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/5 lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/6 lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/7 lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/8 lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/ClassNotes/9 lec.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2024/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Lecture Slides/CHM102-Lecture slides - classes 01-04 - 09012026 - Course details-Intro-OC in life-Nomeclature.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Lecture Slides/CHM102-Lecture slides - classes 09-10- 22-23012026 - Field effect-resonance-hyperconjugation.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Lecture Slides/CHM102-Lecture slides - classes 11-13- 28-30012026 - Hyperconjugation-Tautomerism-Problemset-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Lecture Slides/CHM102-Lecture slides-classes 11-15-02-2027-Aromaticity-Acidity-Basicity-Conformations.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Lecture Slides/Lecture 6-8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Lecture Slides/Lecture-5 Nomenclature of heterocyclic compounds .pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Lecture notes/CHM102-Lecture slides-class 18-20-03-2026-Conformational analysis-Stereochemistry.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Lecture notes/CHM102-Lecture slides-class 26-02-2026-Conformational analysis (1).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Lecture notes/CHM102-Lecture slides-classes 18 and 25-02-2027-Conformational analysis.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Practice material/CHM102 Problems set-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Practice material/CHM102 problems set-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Practice material/CHM102 problems set-2-solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Practice material/CHM102-Practice problems-Nomeclature.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Practice material/CHM102-Problem set 3 - Stereochemistry-EnergyProfiles.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/2026/Practice material/CHM102-Problem set 4-Reactive Intermediates-Reactivity-Selectivity.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/unknown/Assignment 2 (1).jpg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/unknown/Assignment 2 (2).jpg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/unknown/Assignment 2 (3).jpg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/unknown/Assignment 2 (4).jpg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/102/unknown/term_symbols for p2.doc |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/111/LabManuals/1_1_melting_point_and_organic.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/111/LabManuals/1_2_old_organic.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/111/LabManuals/2_1_Acid_radical_protocol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/111/LabManuals/2_2_sodium_carbonate_anion_tests.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/111/LabManuals/2_3_common_anion_tests.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/111/LabManuals/3_basic_radicals.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/111/LabManuals/Final.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/126CHM112protocolFeb22016.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/216CHM112 PROTOCOL (2).docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/223Estimation of Ca2 from mixture.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/301Iodometry_MS15.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/315CHM112 PROTOCOL.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/CHM112 PROTOCOL (2).docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/CHM112 PROTOCOL-15th March.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/CHM112protocol19Jan2016.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/CHM112protocolFeb22016.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/Estimation of Ca2 from mixture.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/Formula used in solving numerical problems on volumetric analysis.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/Gravimetric Analysis.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/Iodometry_MS15.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/112/LabManuals/Titrimetric Determination of Alkanity_SR.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2014/Midsem/MS2 2014.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2021/End-Sem 2021_ANS KEY.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2021/Endsems 2021.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2021/Mid-SEM_CHM201_2021.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2022/201 Endsems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2022/Midsems 1 2022.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2022/Midsems 2 2022.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2024/Midsem/CHM201 Midsem 2 2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2025/Assignments/Endsem-sample question (1).docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2025/Assignments/Preparatory Assignments CHM 201-1.docx |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2025/Assignments/Spectral-problems-assignment.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2025/Endsem/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2025/Midsem/CHM201 Midsem 1 2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/2025/Midsem/CHM201 Midsem 2 2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/unknown/CHM 201_Introduction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/201/unknown/Term states for p2 configuration.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_7_Updated.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2019/Assignments/CHM202_Assignment_9_Updated.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2021/Chem Endsems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2022/Chem Midems 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2022/Chem Midsems 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2022/chm 202 midsem 2 answer key .pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2025/Endsem/chm202endsem2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2025/Midsem/CHM202 MS1 2025.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/2025/Midsem/CHM202 Midsem 2 2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/202/unknown/Solutions_of_assignments_1-4_CHM202.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/203/2025/Endsem/Endsem Paper 2025.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/203/2025/Midsem/MidSem1(2025).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/203/2026/Endsem/Ans Key_ES-CHm 203-May 2026.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/203/2026/Endsem/ES exam_CHM 203_May 2026.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/203/2026/Midsem/MS1 2026.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/203/2026/Midsem/MS2 Paper.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2025/Endsem/Endsem Paper 2024-25.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Asignment_Molecular weight.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Assignment polymer.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Assignment-Molecular Interactions and Liquids.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Assignment-Surface.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Week 1 Assignment Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Week 1 Assignment.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Week 5 Assignment 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Week 5 Assignment 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Week 5 Assignment 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Week 6 Assignment 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Week 6 Assignment 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Assignments/Week 7 Assignment.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Endsem/CHM204 Endsem 2026.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Midsem/Solved MS1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/204/2026/Midsem/Solved MS2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/301/2025/Quantum_Chem_301_Q_P.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/302/2025/Organic_Chem_302_Question_Papers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/303/2025/Inorganic_Chem_303_Q_P_&_Quiz.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | CHM/306/2026/transition metal complex.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_Patil_lecture1_Contents and Evaluation scheme.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture12.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture13.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture14.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/EES102Sinha_lecture9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/Lectures 15-17_Water- cycle, conservation, harvesting, treatment, footprint.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/Lectures 18-20_Natural Biogeochemical cycles  influence of anthropogenic activities.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Lecture Slides/Lectures 21-23_Managing our waste.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Midsem/IMG_20260205_192441.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | EES/102/2026/Quiz/QUIZ 1&2 EES 102 2026.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/201/2024/Study Material/1IDC 203_new1-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/201/2024/Study Material/Desert Region & Wind Erosion_.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/201/2024/Study Material/EES 201_11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/201/2024/Study Material/EES 201_12_F.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/201/2024/Study Material/EES 201_Aug 2024 updated.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/201/2024/Study Material/Glacial Landforms_.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/201/2024/Study Material/Hydrological Cycle.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Aerosols.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/AtmtransportEES202Four.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/EESstratosphericandtropOzonecgemees202handouts.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Elninoslide.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Extrahandoutfromlectureonradiationandaerosols.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Handoutofslidesforsomefigurescontentnotintextbook.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/IPCC full report 2007.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Midsems/EES202midssem1_2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Midsems/midsemtwo2024_EES202.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/NAAQS.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/OZONE CHEMISTRY.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Practice Questions/Chapter 1 practice problems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Practice Questions/numericalquestionsforpractise.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Textbook Solutions/docu062709_solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Tutorials/EES202Tutorial.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/202/2024/Tutorials/Tutorial Session 11102024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lec-1_Introduction_1.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lec-1_Introduction_2.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lec-1_Introduction_3.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lec-1_Introduction_4.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lec-4_ppt.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lec-5_ppt.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-10a.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-11a.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-12a.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-13a.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-14a.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-15a.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-16.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-17a.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-18a.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-19a.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-22.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-6.ppt.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-7a.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-8.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture-9.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture_Tutorial1_ICPMS.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/203/2025/Study Material/Lecture_Tutorial1_ICPMS_revised.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | EES/204/2025/Assignments/Assignment_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Patil_Biogeochemical cycling of elements_The Global carbon cycle24-27.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Patil_Large scale eutrophication and food production37.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Patil_Lithosphere22-23.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Patil_Phosphorous cycle32.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Patil_Sulfur cycle29-31.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Patil_The Mercury cycle33.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Patil_The Nitogen cycle27-29.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Patil_The coupling of biogeochemical cycles36.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Patil_Trace metals cycling34-35.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture01_Sunil.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture09.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture12.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture13.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture14.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture16.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture17.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture18.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture19.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture20.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/EES301Sinha_lecture21.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/Endsem/EES301_Endsem2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/Midsems/Midsem1_EES301.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/301/2025/Midsems/Midsem2_EES301.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/311/2025/Endsem/EES311_Endsem2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/403/2025/1_2_3_4_5_6_merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/403/2025/Lect1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/403/2025/Lect2&3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/403/2025/lect4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Midsems/EES404_Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Midsems/EES404_Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/10_ABL.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/11_Thermodynamics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/6-General_Circulation_.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/6. GCM_Notes_Into.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/7_Cloudbasics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/8_Meteorology_Basics_Chapter.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/8_Monsoons_.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/9_Radiation_Physics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/Atmospheric-Dynamics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/404/2025/Study Material/Ozone_Hole.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/640/2026/2nd Midsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | EES/640/2026/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/101/2024/class_slides/Argument _HSS101_2011 conv.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/101/2024/class_slides/Course Outline_Prashant_270824.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/101/2024/class_slides/Gerald Graff, Cathy Birkenstein - They Say, I Say_ The Moves That Matter in Academic Writing-W. W. Norton & Company (2009)-169-220.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/101/2024/class_slides/Ill Matched Partners_Claire Kehrwald Cook - Line by line_ how to edit your own writing-Houghton Mifflin (1985)-54-74.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/101/2024/class_slides/Know your English.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/101/2024/class_slides/vocabulary conv.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/101/2025/Midsem/HSS101_MIDSEM_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Lectures/Lecture_10_HSS_102_HoS.docx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Lectures/Lecture_1_RB_HSS 102.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Lectures/Lecture_2_RB_HSS 102.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Lectures/Lecture_3_RB_HSS 102.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Lectures/Lecture_4.docx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Lectures/Lecture_5,6.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Lectures/Lecture_7.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Lectures/Lecture_8_RB_HSS_102.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Lectures/Lectures 12, 13_HSS 102_HoS.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2022/Papers/Endsems.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2025/Notes/HSS102_Economics_Complete_Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2026/Assignments/Set 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2026/Assignments/Set 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2026/Assignments/Set 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2026/Midsem 1/IMG_20260204_162221_Converted.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2026/Notes/4. HSS102_08.04.2026_Types of Goods.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2026/Notes/5. HSS102_10.04.2026_Optimization-Production.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2026/Notes/6. HSS102_15.04.2026_Production.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2026/Notes/7. HSS102_17.04.2026_Cost.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/102/2026/Notes/Theory of Demand, Supply and Market Equilibrium.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/201/2025/End sem/HSS201_EndSem_Solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/201/2025/Mid sem/HSS_201[with ans-key].pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/201/2025/Midsem/HSS201 Midsem 1 2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/201/2025/Midsem/HSS201 Midsem 2 2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/202/Lecture_7_RB_HSS 102.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/202/Lecture_8_RB_HSS_102.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/202/Papers 2022/HSS Midsems 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/202/Papers 2022/HSS Midsems 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/640/IMG20220824170305.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/640/IMG20220824170311.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/640/Screenshot_2022-08-24-16-58-08-28_e46acc4301d552178f1fc7f923d8665c.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/640/Screenshot_2022-08-24-16-58-15-66_e46acc4301d552178f1fc7f923d8665c.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/640/Screenshot_2022-08-24-16-58-22-57_e46acc4301d552178f1fc7f923d8665c.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/640/Screenshot_2022-08-24-16-58-36-36_e46acc4301d552178f1fc7f923d8665c.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/640/Screenshot_2022-08-24-16-58-51-60_e46acc4301d552178f1fc7f923d8665c.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/642/2025/Midsem/HS642-MS2.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | HSS/658/2026/Endsem/endsem_loneliness.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/101/2025/Endsem/IDC 101 end sem 2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220509-IDC102-Lecture1-Introduction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220509-IDC102-Supplement1-Introduction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220509-IDC102-Supplement2-Introduction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220509-IDC102-Supplement3-Introduction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220509-IDC102-Supplement4-LabEquipments.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220509-IDC102-Supplement5-BreadBoard.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220516-IDC102-Lecture2-LabEquipmentsOsxilloscope.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220523-IDC102-Lecture3-Resistor.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220606-IDC102-Lecture5-Inductor.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220606-IDC102-Lecture6-LRC-I.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-20220711-Lecture-8-Transistor.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/102/2022/SJ-IDC102-Lecture9-Boolean.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/201/2026/Midsem/Intro_to_Astro.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/201/2026/Midsem/photo-2026-04-19T18-49-07-257Z.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/202/2018/MidSem 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/202/2018/MidSem 2-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/202/2018/MidSem 2-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/02 Lecture_IDC203.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/03IDC 203_new_1.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/04IDC 203_new_1.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/05IDC 203_new_1.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/08Lecture _IDC203_Minerals_new.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/09Lecture _IDC203.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/1) Mineralogy.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/11Lecture _IDC203_1.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/12Lecture _IDC203_1.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/14IDC.pptx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/2) Sedimentary rocks.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/3) Igneous Petrology.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/Igneous Petrology.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/Metamorphic Rocks.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/203/unknown/Sedimentology.ppt |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2019/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2020/Explanations/2023-01-30-pumping-lemma.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2020/Explanations/2023-02-28-cfg-pumping-lemma.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2020/Explanations/turing-example1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2020/Midsem2-solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2023/Exercises_/2023-01-16-exercise01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2023/Exercises_/2023-01-27-exercise02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2023/Exercises_/2023-02-05-exercise03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2023/Exercises_/2023-02-23-exercise04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2023/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/2023/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/204/unknown/TOC Resources.docx |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/205/2022/Endsems MS21 IDC 205.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/205/2022/Midsems 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/205/2022/Midsems 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/208/2022/Midsems 1 MS 21.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/208/2022/Midsems 2 MS 21.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/214/2025/Endsem/Endsem 2024-25.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/214/2025/Midsem/MS1 2024-25.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/214/2025/Midsem/MS2 2024-25.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/214/2026/Endsem/IDC214 Endsem 2026.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/214/2026/Midsem/IDC214 Midsem 1 2026.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/214/2026/Midsem/IDC214 Midsem 2 2026.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Assignments/Exercise-Set-All.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Assignments/Exercise-Set-MS-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Assignments/Exercise-Set-MS-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Assignments/Task-04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Assignments/Week-03_Task-Appendix.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Assignments/Week-03_Task.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Assignments/Week-04-05_Task.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Assignments/Week-04_Worksheet-26-08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Endsem/IDC216 Endsem 2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Midsem/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/216/2025/Midsem/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/351/unknown/edit/logo.png |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/402/2025/Assignment2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/402/2025/idc402_endsem_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/402/2026/Midsem/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/403/2026/Midsem/IDC403 Protein Engineering MS1.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2024/Endsem/Endsem24.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture1/Lecture1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture10/lectur10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture11/Lecture11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture12/Lecture12.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture13/L13_409.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture14/L14-409-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture15-16/L15-idc409 - L15-idc409.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture17/L17-409-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture18/L18-409-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture19/L19-409-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture20/L20-409-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture21/lecture21-409_25.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture22/lecture22_409_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture23/lecture23_409_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture24/lecture24_409_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture25/Lecture25-409_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture26/Lecture26-409_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture6/document.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture7/Lecture7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture8/Lecture8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/LectureNotes/Lecture9/lecture9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/409/2025/QuestionsMidSemBank.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | IDC/621/2026/Module4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A10.solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A10new.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A11.solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A11new.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A6.solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A7.solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A9.corrected.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2021/Assignment/A9new.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Asignments/Assignment.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Asignments/Practice-Problems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Papers/EndSemester.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Papers/MidsemesterPaper.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-09.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-Discussion-01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-Discussion-02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-Discussion-03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-Discussion-04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-Discussion-05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-Discussion-06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-Discussion-07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-Discussion-08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2022/Tutorials/Tutorial-Discussion-09.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/Lecture Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/Thinking Mathematically 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/Tutorials/t1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/Tutorials/t2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/Tutorials/t3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/Tutorials/t4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/Tutorials/t5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/Tutorials/t6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/Tutorials/t7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2023/excercise sheet.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2024/tutorials_varadharaj/MTH101_tutorial_problems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Assignment & Papers/mth101 Assignment-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Assignment & Papers/mth101 midsem paper.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-12.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-13.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-14.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-16.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-17.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-18.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-19a.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-19b.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-20.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-21.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-22.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-23.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-24.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Lecture Notes/mth101 lecture-9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Tutorials/mth101 tutorial 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Tutorials/mth101 tutorial 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Tutorials/mth101 tutorial 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Tutorials/mth101 tutorial 4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Tutorials/mth101 tutorial 5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Tutorials/mth101 tutorial 6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Tutorials/mth101 tutorial 7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/101/2025/Tutorials/mth101 tutorial-8 (lebelled 9).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW-5 sols.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW-5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW-6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW-7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW2-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW3-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW4-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW6-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW7-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/HW8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/Jan-HW-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/Jan-HW-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/Jan-HW-3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/Jan-HW-4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/MTH-HW-10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/MTH-HW-11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/MTH-HW-8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2016/Assignments/MTH102-HW-9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2018/Assignments/MTH102-HW-3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2018/Assignments/MTH102-HW-4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2018/Assignments/MTH102-HW1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2018/Assignments/MTH102-HW2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2018/Assignments/MTH102-HW5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2018/Assignments/MTH102-HW6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2018/Assignments/MTH102-HW7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2022/Papers/Math 102 Endsems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2022/Papers/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2022/Papers/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2024/Notes/Binomial_Expectation_Variance_Solution_SheldonRoss.docx |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2024/Notes/Notes_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2024/Notes/Notes_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2024/Notes/Notes_3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2024/Notes/Notes_4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2024/Notes/Notes_5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2025-01-23-exercise02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2025-02-13-exercise04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2026-01-09-exercise01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2026-01-28-exercise03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2026-02-20-exercise05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2026-03-20-exercise06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2026-03-27-exercise07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2026-04-08-exercise08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2026-04-17-exercise09.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/Assignments/2026-04-24-exercise10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2025/MTH102 ALL Assignments.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Endsem/MTH102(2026).jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Endsem/MTH102_EndSem2026.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2025-01-23-exercise02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2025-02-13-exercise04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2026-01-09-exercise01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2026-01-28-exercise03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2026-02-20-exercise05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2026-03-20-exercise06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2026-03-27-exercise07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2026-04-08-exercise08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2026-04-17-exercise09.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Exercises/2026-04-24-exercise10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Midsem/IMG_20260205_130350_1_20260205_191951.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Midsem/MTH102_midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/102/2026/Midsem/MTH102_midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW1-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW10-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW11-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW2-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW3-sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW4-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW5-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW6-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW7-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW8-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW9-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/HW9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2019/Assignments/MidTerm1-soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Assignments/2021-09-10-exercise01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Assignments/2021-09-13-exercise02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Assignments/2021-09-24-exercise03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Assignments/2021-10-01-exercise04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Assignments/2021-10-10-exercise05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Assignments/2021-10-10-exercise06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Assignments/2021-10-26-exercise06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Assignments/2021-11-13-exercises07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Assignments/2021-11-30-exercises08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/MTH 201 Midsem .pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2021/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/2022-09-12-exercise02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/2022-10-03-exercise03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/2022-10-11-exercise04 solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/2022-10-11-exercise04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/2022-10-26-exercise05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/2022-11-05-exercise06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/2022-11-19-exercise07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/2022-12-01-exercise08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/exercise01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2022/Exercises/exercise01soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/Assignments/MTH201_Assign_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/Assignments/MTH201_Assign_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/Assignments/MTH201_Assign_3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/Assignments/MTH201_Assign_4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/Assignments/MTH201_Assign_5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/Assignments/MTH201_Assign_6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/Endsem/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/LectureNotes/mth201_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/LectureNotes/mth201_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/LectureNotes/mth201_3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/LectureNotes/mth201_4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/LectureNotes/mth201_5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/LectureNotes/mth201_6_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/Midsem/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2025/Midsem/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/2026/Midsem/photo-2026-04-19T18-36-07-961Z.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises12.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises13.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/exercises9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/201/unknown/CurvesAndSurfaces_ExercisesAndQuizzes/quizzes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/assign1 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/assign11 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/assign2 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/assign3 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/assign4 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/assign5 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/assign6 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/assign7 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/assign8 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/soln1 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/soln11 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/soln2 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/soln3 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/soln4 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/soln5 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/soln6 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/soln7 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/Assignments/soln8 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2016/mid-sem2 ms15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2017/Assignments/Assignment 2 problems and soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2017/Assignments/Assignment 3 problems and solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2017/Assignments/assign3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2017/Assignments/assign4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2017/Assignments/soln4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2018/endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2018/second midsem ms17.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A12.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A4_additional exercises.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A9 v2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A9-solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/A9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/MS17.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/MidSem2_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/Q1 soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/Selected exercises solutions 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/Selected exercises solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/Selectedexercises-solutions3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/Assignments/Solutions to some more problems.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2019/MidSem2_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2020/Assignment_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2022/MathEndsem MS 20.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Assignments/Tut-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Assignments/Tut-2 and 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Assignments/Tut-4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Assignments/t11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Assignments/t6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Assignments/t7(new).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Assignments/t8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Assignments/tut-5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Math Midsems 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2023/Math Midsems 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Assignments/exercise1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Assignments/exercise1B.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Assignments/exercise2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Assignments/exercise3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Endsem/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Midsem/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Midsem/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Notes/week1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Notes/week2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/202/2025/Notes/week3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Endsem/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture09.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture12.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture13.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture14.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture15.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture16.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Lectures/Lecture17.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Midsem/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Question_papers/MTH203_midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Question_papers/MTH203_midsem1_soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Question_papers/MTH203_midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Question_papers/MTH203_midsem2_solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Tutorial/Homework01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Tutorial/Homework02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Tutorial/Tutorial01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Tutorial/Tutorial02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Tutorial/Tutorial03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Tutorial/Tutorial04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Tutorial/Tutorial05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2025/Tutorial/Tutorial06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/203/2026/Midsem/photo-2026-04-19T18-38-25-398Z.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/Kulshrestha, Amit - Lecture notes on Special Orthogonal Matrices.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/Kulshrestha, Amit - MTH204 (Symmetry) Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/MTH204 - Tutorial 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/MTH204 - Tutorial 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/MTH204 - Tutorial 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/MTH204 - Tutorial 4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/MTH204 - Tutorial 5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/MTH204 - Tutorial 6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/MTH204 - Tutorial 7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2025/MTH204 - Tutorial 8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/204/2026/Midsem/mth204 symmetry Tanusree.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Midsem 1 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Midsem 2 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 2 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 3 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 4 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 8 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2025/Tutorial 9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2026/Midsem/math205 analysis Varadhraj.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/205/2026/Midsem/photo-2026-04-19T18-54-36-310Z.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/206/2026/Midsem/midsem 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/206/2026/Midsem/photo-2026-04-19T18-52-11-057Z.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2020/Lecture 1 Real Numbers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2020/Notes 03092020.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2020/Notes 04092020.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2020/Notes 25082020.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2020/Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2020/Problem set 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2023/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2023/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2023/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2024/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2024/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Compact Sets.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Continuous Functions - Part II.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Continuous Functions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Dedekind's Construction of Real Numbers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Exams/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Exams/Midsem 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Exams/Midsem 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Riemann Integration.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/301/2025/Tutorial 9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2020/Assignment/HW1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2020/Handout MTH302.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2020/Lecture1- MTH302.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2020/Lecture2-25082020.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2020/Lecture3-27082020.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2020/Lecture4-31082020.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2020/Lecture5-01092020.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2020/Lecture6-03092020.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2020/Lecture7-07092020.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2023/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2023/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2023/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2024/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2024/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2024/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2025/Exams/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2025/Exams/Midsem 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/302/2025/Exams/Midsem 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2023/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2023/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2023/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2024/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2024/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2024/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Exams/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Exams/Midsem 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Exams/Midsem 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Exercise Sheet 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Exercise Sheet 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Exercise Sheet 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Exercise Sheet 4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Exercise Sheet 5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Midsem 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/2025/Midsem 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/unknown/Assignment-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/unknown/Assignment-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/303/unknown/TextBooks.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/304/2023/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/304/2023/Midsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/304/2024/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/304/2024/Midsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/304/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/304/2025/Midsem 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/304/2025/Midsem 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/305/2024/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/305/2024/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/305/2024/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/305/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/305/2025/MIdsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/305/2025/MIdsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/306/2024/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/306/2024/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/306/2024/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/306/2025/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/306/2025/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/306/2025/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/307/2024/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/307/2024/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/307/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/307/2025/MIdsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/308/2024/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/308/2024/Midsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/308/2024/Midsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/308/2025/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/308/2025/MIdsem 1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/308/2025/MIdsem 2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/401/2025/MTH401_Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/401/2025/MTH401_Midsem1.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/401/2025/MTH401_Midsem2.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/402/2025/MTH402_Endsem.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/402/2025/MTH402_Midsem.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/404/2025/MTH404_Endsem.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/404/2025/MTH404_Midsem.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/407/2025/1st_soln (1).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/407/2025/2nd_soln (1).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/407/2025/Endsem paper.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/407/2025/end-sem_soln (1).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/1 - Introduction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/10 - Several Proofs of the Irreducibility of Cyclotomic Polynomials.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/11 - Finite Fields.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/12 - Dirichlet Characters and Gauss Sums.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/13 - Nisnevich and Lang-Weil estimate.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/14 - Orders in a Number Field.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/15 - Resultants.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/16 - Sums and Products of Algebraic Integers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/17 - Some Results from Commutative Algebra.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/18 - Structure of Finite Commutative Rings.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/19 - Local Fields of characteristic 0.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/2 - Lattices and Matrix Reduction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/20 - Local Fields and Hensel's Lemma -- MIT Notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/3 - Ostrowski's Theorem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/4 - Basics of p-adic numbers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/5 - Algebraic Structure of Q_p.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/6 - Chevalley-Warning Theorem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/7 - Factorisation of Polynomials.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/8 - Derivations and Multiple Factors.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/9 - Cyclotomic Numbers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/End-Semester Exam Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/Quiz 1 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/Quiz 2 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/Quiz 3 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/Quiz 4 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/Quiz 5 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/Quiz 6 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/Quiz 7 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/Quiz 8 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2024/Quiz 9 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/1 - Introduction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/10 - Finite Fields.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/11 - Hensel's Lemma.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/12 - Algebraic Numbers and Algebraic Integers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/13 - Minkowski's Theorem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/14 - Finite Algebras.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/15 - Finite Extensions of the p-adic Numbers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/16 - Tensor Products and Basechange.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/17 - Resultants.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/18 - Hermite-Minkowski Theorem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/2 - Norms on Rational Numbers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/3 - p-adic Numbers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/4 - Multiplicative Structure of Q_p.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/5 - Automorphisms of Q_p.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/6 - Polynomials.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/7 - Noether Normalisation.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/8 - Using Matrices to Solve Polynomial Equations.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/9 - Irreducibility Criteria for Polynomials.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Endsem solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Python Calculations 1 -- X^3 + X^2 - 2X + 8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Python Calculations 2 -- X^3 + 3X + 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Python Calculations 3 - A Cubic Field.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 1 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 10 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 11 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 2 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 3 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 4 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 5 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 6 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 7 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 8 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | MTH/419/2025/Quiz 9 Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/LQ-2-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/Lecture Notes -03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/MS_QA.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/Mechanics 101(Week1-2).pdf.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/Mechanics- 3DPolar.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/PHY101EndSem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/PHY101Worksheet-1-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/PHY101Worksheet-3-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/PHY101Worksheet-5-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/PHY101Worksheet-9-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/PS4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/ProblemSheet2-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/Quiz 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/Quiz-06-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/Quiz-07-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/Quiz-08-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/Quiz1-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2023/Quiz2-merged.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Assignments/PHY101_Assignment_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Assignments/PHY101_Assignment_1_solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Assignments/PHY101_Assignment_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Endsem/PHY101 endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Midsem/PHY101_midsem_2025_Answers.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Midsem/PHY101_midsem_2025_Questions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Notes/Central force color.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Notes/Central force nocolor.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Quiz 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Quiz4 -Relativity.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/101/2025/Relativity .pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Assignment03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Assignment04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Assignment05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Assignment06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Assignment07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Assignment08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Assignment09.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Sols03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Sols04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Sols05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Sols06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Sols07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Sols08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Assignments/Sols09.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Papers/Endsems(1).jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Papers/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2022/Papers/Midsems2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2024/QuestionPaper/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy101_2026_ass1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy101_2026_ass2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy102_2026_ass10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy102_2026_ass3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy102_2026_ass4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy102_2026_ass5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy102_2026_ass6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy102_2026_ass7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy102_2026_ass8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Asiignments/arv_phy102_2026_ass9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Assignments/PHY102_Assignment1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Assignments/PHY102_Assignment2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Assignments/PHY102_Assignment2b.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2025/Assignments/PHY102_Assignment3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignment 1/arv_phy101_2026_ass1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/PHY102 Assignment 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/arv_phy101_2026_ass2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/arv_phy102_2026_ass10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/arv_phy102_2026_ass3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/arv_phy102_2026_ass4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/arv_phy102_2026_ass5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/arv_phy102_2026_ass6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/arv_phy102_2026_ass7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/arv_phy102_2026_ass8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Assignments/arv_phy102_2026_ass9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Quiz/PHY 102 2026 Quiz-1 --- Prof. Aravind.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/102/2026/Quiz/PHY 102 2026 Quiz-2 --- Prof. Aravind.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/111/2024/lab_manual.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/111/2025/Endsem/PHY 111 endsem written exam .pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/111/Lab Manual.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/112/LabManualPHY112.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/112/Papers/Endsems.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2018/Midsems (1).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2018/Midsems (2).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2021/Assignments/PHY201Assignment-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2021/Assignments/PHY201Assignment-3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2021/Assignments/Phy 201 Assignment 3 solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2021/PHY201 Endsem MS20.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2022/Endsems MS21 Phy 201.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2022/Midsems 2 2022.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2022/Notes/Lecture notes 4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2022/Notes/PHY201-2022BeforeMS2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2022/Notes/PHY201-LectureNote2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2022/PHY201 Assignment 2 Solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2022/PHY201.Assignment 1 solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2024/QuestionPapers/EndSem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2024/QuestionPapers/EndSemSolsB.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Assignment01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Assignment02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Assignment03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Assignment04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Assignment05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Assignment06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Assignment07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Assignment08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Sols01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Sols02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Assignments/Sols03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Endsem/EndsemB.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Midsem/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Midsem/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/Notes/classnotesEndsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/QuestionPapers/1stMidSem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/QuestionPapers/2ndMidSem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/QuestionPapers/Sols-1stMidSem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2025/QuestionPapers/Sols-2ndMidSem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/2026/Midsem/IMG_20260420_000126.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Momentum of Light notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial 05 (KL).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-03 (KL).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-04 (KL).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-1_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-2 (KL).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-2_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-3_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-4_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-5_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-6_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/201/unknown/Tutorial Questions/Tutorial-7_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/Assignment1-PHY202.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/Assignment_3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/Assignment_4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/Assignment_5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/Assignment_IA_IIA_Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/Assignments III IV V.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/assignment_1_a.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/assignment_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/assignment_2a.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Assignments/assignment_5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2022/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2025/Assignments/ProbSet1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2025/Assignments/ProbSet2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2025/Assignments/ProbSet3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2025/Assignments/ProbSet4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2025/Assignments/ProbSet5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2025/Assignments/ProbSet6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2025/Endsem/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2025/Midsem/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/2025/Midsem/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/202/unknown/Thermodynamics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/204/2026/Midsem/photo-2026-04-19T18-45-05-740Z.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/204/2026/Midsem/phy204 ms 1.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/211/2025/fresnelbiprism.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/211/2025/melde.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/211/2025/newtonrings.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/211/2025/polarimeter.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/211/2025/resonant_tube.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/211/2025/singleslitdiff.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/211/2025/sonometer.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/211/2025/spectrometer.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2021/midsem1-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2021/midsem1-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2021/sample-solution-midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2021/solution-mid-sem-1-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2021/solution-mid-sem-1-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2022/Quiz2-Solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2022/Quiz2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2022/midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2023/Midsem-1(1).jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2023/Midsem-1(2).jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Assignments/Assignment 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Assignments/Assignment_6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Assignments/Assignment_7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Assignments/assignment_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Quizzes/quiz_1.png |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Quizzes/quiz_3.png |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Quizzes/quiz_4.png |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Quizzes/quiz_5.png |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Quizzes/quiz_6.png |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2024/Quizzes/quiz_7.png |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2025/Midsem/Mid_Sem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2025/Midsem/PHY301 Midsem 1 2025-26.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2025/Midsem/PHY301 Midsem 2 2025-26.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/2025/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/unknown/Assignments/Assignment1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/unknown/Assignments/Assignment2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/unknown/Lecture Notes/Lecture_Note_I.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/unknown/Lecture Notes/Lecture_Note_II.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/301/unknown/Lecture Notes/Lecture_Note_III.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 1 - Problem set.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 1 - Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 2 - Problem set.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 2 - Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 3 - Problem set.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 3 - Solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 4 - Problem set.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 5 - Solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 5 Problem set.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 6 - Problem set.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 6 - Solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 7 - Solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Assignments/Tutorial 7 - problem set.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Endsem_Suppli.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/MS1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/MS2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Midsem.png |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/MidsemSolution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Tutorials/Problem set 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Tutorials/Problem set 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Tutorials/Problem set 3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Tutorials/Problem set 4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Tutorials/Problem set 5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2020/Tutorials/Problem set 7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2023/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2023/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2023/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2024/Endsem/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2024/Endsem/Endsem_Suppli.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2024/Midsem/MS1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2024/Midsem/MS2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2025/Endsem/Endsem2025_Bera.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/302/2025/Mid_&_End_Semester_Exam/Mid_&_End_Semester_Exam.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Assignment01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Assignment02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Assignment03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Assignment04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Assignment05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Assignment06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Assignment07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Assignment08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/EndSemSols.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/MidSem1Sols.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/MidSem2Sols.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Midsem1B.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2023/Midsem2B.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2024/Assignments/Assignment-1-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2024/Assignments/Assignment-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2024/Assignments/Assignment-2_dff8254afe4ee14d86ef89453894dcc7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2024/Assignments/Assignment-3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2024/Assignments/Assignment-4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2024/Assignments/Assignment-5-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2024/Assignments/Assignment-5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2024/Assignments/Assignment-6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2025/Mid_&_End_Semester_Exam/Mid_&_End_Semester_Exam.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2025/Midsem/PHY303 Midsem 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/2025/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/303/unknown/CoordinateSystemReview.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2017/assignment_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2017/assignment_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2017/assignment_3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2017/assignment_4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2017/assignment_5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2017/assignment_6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/Canonical.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/Part_4_grand_canonical.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/Probability.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/Thermodynamics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/assignment_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/assignment_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/assignment_3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/assignment_7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/assignment_canonical.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/assignment_micro_canonical.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/midsem2_solution.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2018/solution_phy304_statmech_midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Exercises_01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Exercises_02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Exercises_03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Exercises_04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Exercises_05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/MidSem-Exam.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Quiz_01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Quiz_02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Quiz_03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Quiz_04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Solution-EndSem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2019/Solution-Quiz4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2021/hw1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2021/hw1_solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2021/hw2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2021/hw2_solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2021/hw3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2021/hw3_solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2021/hw4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2021/hw4_solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2024/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2024/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2024/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/Assignment01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/Assignment02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/Assignment03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/Assignment04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/Assignment05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/Assignment06.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/Assignment07.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/Assignment08.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/Assignment09.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/phy304_endsem_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/phy304_midsem1_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/304/2025/phy304_midsem2_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2022/HW1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2022/Home work 2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2022/misc_interference.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2022/perturb_notes.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/assignment1-2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/assignment2-2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/assignment3-2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/assignment4-2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/assignment5-2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/assignment6-2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/assignment7-2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/assignment8-2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/assignment9-2024.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2024/sakurai_ch5_1_3_4_7_8_9_11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/assignment1-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/assignment10-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/assignment2-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/assignment3-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/assignment4-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/assignment5-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/assignment6-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/assignment7-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/assignment8-2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/phy306_endsem_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/phy306_midsem1_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2025/phy306_midsem2_2025.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2026/Midsem/PHY306-MS1-Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/306/2026/Midsem/PHY306-MS1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/Midsem1_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/Quiz1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/Quiz1_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/Quiz2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/Quiz2_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw1_soln.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw2_solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw3_solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw4_solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw7_solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/hw8_solns.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2019/ms2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/EndsemA.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/EndsemB.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_10_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_1_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_2_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_3_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_4_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_5_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_6_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_7_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_8_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2023/WS_9_2023.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_10.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_11.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_12.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_7.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_8.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/2025/Assignments/Assignment_9.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/unknown/Diff_Int.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/310/unknown/K2(x).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/2023-PHY401-Lecture-10-11-12-MassBindingEnergy.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/2023-PHY401-Lecture-12-13-BindingEnergyLiquidDropmodel.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/2023-PHY401-Lecture-13-14-15-ResultsFromLiquidDropmodel.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/2023-PHY401-Lecture-7-8-9-NuclearProperties.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/2024-Lecture-NuclearDetection-Part-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/2024-Lecture-NuclearDetection-Part-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/2024-Lecture-NuclearDetection-Part-3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/2024-PHY401-NuclearDecay-Reaction.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/2024-PHY401-ShellModel-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/Nuclear and particle physics Solutions to all problems (Brian Robert Martin Graham Shaw).pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2024/SJ2024-PHY401-QuarkModel.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2025/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2025/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2025/Quiz3a.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2025/Quiz3b.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/401/2025/symmetryandgroup.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/402/2024/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/402/2024/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/402/2024/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/402/2024/hw1_Solid_State.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/402/2024/hw2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/402/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/402/2025/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/402/2025/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2019/tutorial1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2019/tutorial2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2019/tutorial3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2019/tutorial4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2019/tutorial5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2019/tutorial6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2024/Assignment1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2024/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2024/Exercise1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2024/Exercise2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2024/Exercise2_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2024/Midsem 1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2024/Midsem1_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2024/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2024/Midsem2_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/Midsem/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/Midsem/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/Midsem/Midsem2_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/ProblemSet/PracticeSet1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/ProblemSet/PracticeSet2a.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/ProblemSet/PracticeSet2b.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/Quiz/Quiz1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/Quiz/Quiz2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/Quiz/Quiz3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/Quiz/Quiz4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/403/2025/Quiz/Quiz4_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/GM COUNTING SYSTEM EXPERIMENTS.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/GR-611M_Instruction-Manual.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/GRS MANUAL .pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/Geiger-Counting-System-GC601A.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/PHY411_endSemExam2024_MS21_Guidelines.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/Phy411_labManual_MS21_LabReportInstructions-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/Phy411_labManual_MS21_experiments-2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/Phy411_labManual_MS21_referencesReading-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/Phy411_lab_manual_MS21_sourcesPrecautionsDose-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/deadTime_411.png |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/saurab_PHY411_GM-Counter-Presentation.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/411/2024/saurab_PHY411_GRS-Presentation-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/412/unknown/6.Lattice dynamics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/412/unknown/Links.docx |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/412/unknown/PHY 412 Lab Experiments.xlsx |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/424/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/424/2025/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2018/Assignment01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2018/Assignment01_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2018/Assignment02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2018/Assignment02_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2018/Assignment03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2018/Assignment03_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2018/Assignment04.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2018/Assignment05.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2024/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/622/2024/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/631/2024/Assignment1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/631/2024/Assignment2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/631/2024/Assignment3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/631/2024/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/631/2024/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/631/2024/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/Assignment1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/Assignment2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/Assignment3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/Assignment4.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/Assignment5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/Assignment6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/GR_EP.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/Problem_sets_General_Relativity.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/Solutions.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/solution3.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/solution4-1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/solution5.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/ExerciseSheets/solution6.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/635/2025/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/637/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/637/2025/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/637/2025/PHY637_midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/638/2024/Midsem1B.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/638/2025/EndsemA.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/638/2025/EndsemA_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/638/2025/Midsem1A.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/638/2025/Midsem1B.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/638/2025/Midsem1_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/638/2025/Midsem2.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/638/2025/Midsem2_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/638/2025/Quiz1_sol.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/644/2023/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/644/2024/Endsem.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/644/2024/Midsem1.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/644/2024/Midsem2.jpg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/644/unknown/LectureNotes01.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/644/unknown/LectureNotes02.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/644/unknown/LectureNotes03.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/644/unknown/Tutorial1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/649/2025/Endsem/PHY649-Advanced Experiments in Physics - LASER and Optics.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/660/2025/Endsem.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/660/2025/Midsem1.pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/669/2025/Endsem..pdf |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/676/2069/logo.jpeg |  |  | Already QPR-LFS-R2
+SKIPPED | PHY/676/6969/specific_heat_table.png |  |  | Already QPR-LFS-R2
+OK | docs/icon.png | sha256:de184bd4005561f76faae78e65d44ef321de8512048ef9787aa83568b405b7de | 13.9 KB | 
+OK | docs/icon_nobg.png | sha256:e4a0d9b51009c99e72c53a7e83b4a9e0f04317614cc8ee2fc4d551591648769e | 13.1 KB | 
