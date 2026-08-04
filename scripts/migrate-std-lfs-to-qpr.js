@@ -48,24 +48,74 @@ const LFS_EXTENSIONS = new Set([
 function findStdLfsPointers() {
   log("Finding standard git-lfs pointer files in HEAD...");
 
-  // Use git grep on HEAD (working tree is smudged binary, not pointer text)
-  let output;
+  // Use git ls-tree + git cat-file — the working tree has smudged binaries
+  // so we can't grep it directly. Check each LFS-extension blob in HEAD.
+  let allBlobs;
   try {
-    output = execSync(
-      `git grep -l '^version https://git-lfs.github.com/spec' HEAD -- '*.pdf' '*.doc' '*.docx' '*.ppt' '*.pptx' '*.xls' '*.xlsx' '*.jpg' '*.jpeg' '*.png' '*.gif' '*.webp' '*.bmp' '*.svg' '*.zip'`,
+    allBlobs = execSync(
+      `git ls-tree -r HEAD --name-only`,
       { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], maxBuffer: 10 * 1024 * 1024 }
-    ).trim();
+    ).trim().split("\n").filter(Boolean);
   } catch (e) {
-    // git grep returns exit code 1 if no matches found
-    if (e.status === 1 && (!e.stderr || e.stderr.length === 0)) {
-      output = "";
-    } else {
-      throw new Error(`git grep failed: ${e.stderr || e.message}`);
-    }
+    throw new Error(`git ls-tree failed: ${e.message}`);
   }
 
-  const files = output ? output.split("\n").filter(Boolean) : [];
-  log(`  Found ${files.length} files with standard git-lfs pointers.`);
+  const candidates = allBlobs.filter(f => {
+    const ext = path.extname(f).toLowerCase().replace(".", "");
+    return LFS_EXTENSIONS.has(ext);
+  });
+  log(`  ${candidates.length} LFS-tracked files in HEAD.`);
+  log(`  Checking for standard git-lfs pointers (this may take a moment)...`);
+
+  const batchSize = 500;
+  const stdLfsFiles = [];
+
+  for (let i = 0; i < candidates.length; i += batchSize) {
+    const batch = candidates.slice(i, i + batchSize);
+    // cat-file --batch reads from stdin
+    const input = batch.map(f => `HEAD:${f}`).join("\n") + "\n";
+    try {
+      const output = execSync(`git cat-file --batch`, {
+        input,
+        encoding: "utf8",
+        stdio: ["pipe", "pipe", "pipe"],
+        maxBuffer: 50 * 1024 * 1024,
+      });
+      // Parse: "<object> <type> <size>\n<content>" for each
+      const entries = output.split(/(?=^[0-9a-f]{40} )/m);
+      let idx = 0;
+      for (const entry of entries) {
+        if (!entry.trim() || idx >= batch.length) continue;
+        // Check if the blob content starts with the std-lfs header
+        // The content begins after the first newline + object header line
+        const lines = entry.split("\n");
+        // First line is "<sha> blob <size>", second line starts the content
+        if (lines.length >= 2 && lines[1].startsWith("version https://git-lfs.github.com/spec")) {
+          stdLfsFiles.push(batch[idx]);
+        }
+        idx++;
+      }
+    } catch (e) {
+      // If batch mode fails, fall back to individual checks
+      for (const file of batch) {
+        try {
+          const content = execSync(
+            `git cat-file -p "HEAD:${file}"`,
+            { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], maxBuffer: 1024 }
+          );
+          if (content.startsWith("version https://git-lfs.github.com/spec")) {
+            stdLfsFiles.push(file);
+          }
+        } catch {
+          // file may not exist or be binary, skip
+        }
+      }
+    }
+    log(`  ... ${Math.min(i + batchSize, candidates.length)}/${candidates.length} scanned, ${stdLfsFiles.length} found`);
+  }
+
+  log(`  Found ${stdLfsFiles.length} files with standard git-lfs pointers.`);
+  const files = stdLfsFiles;
 
   if (LIMIT > 0) {
     log(`  Limiting to first ${LIMIT} files.`);
