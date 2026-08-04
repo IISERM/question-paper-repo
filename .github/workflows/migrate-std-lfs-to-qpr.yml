@@ -1,20 +1,7 @@
-name: Fix QPR Binary Uploads
+name: Fix QPR Pointers
 
 on:
   workflow_dispatch:
-    inputs:
-      dry_run:
-        description: 'Dry run — preview only, no changes'
-        type: boolean
-        default: false
-      concurrency:
-        description: 'Max parallel uploads'
-        required: false
-        default: '5'
-      limit:
-        description: 'Limit to N files (0 = all)'
-        required: false
-        default: '0'
 
 permissions:
   contents: write
@@ -22,61 +9,60 @@ permissions:
 jobs:
   fix:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          lfs: true
+          fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # Temporarily restore filter=lfs so git-lfs recognizes files
-      - name: Restore LFS attributes
+      # Restore correct QPR-LFS-R2 pointers from the original migration commit
+      # (53103ea). These point to real binaries already stored in R2.
+      # Later migrations corrupted the OIDs by hashing the pointer text instead
+      # of the binary, giving fake OIDs like sha256:0e1ffb07... with size=105.
+      - name: Restore correct QPR pointers from 53103ea
         run: |
-          sed -i 's/ -text/ filter=lfs diff=lfs merge=lfs -text/' .gitattributes
+          echo "Finding files with broken QPR pointers..."
+          BROKEN_FILES=$(git grep -l '^# QPR-LFS-R2' HEAD -- \
+            '*.pdf' '*.doc' '*.docx' '*.ppt' '*.pptx' \
+            '*.xls' '*.xlsx' '*.jpg' '*.jpeg' '*.png' \
+            '*.gif' '*.webp' '*.bmp' '*.svg' '*.zip')
 
-      - name: Run fix
-        env:
-          FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://qpr-file-server.turingclub.workers.dev' }}
-          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
-          CONCURRENCY: ${{ github.event.inputs.concurrency || '5' }}
-          LIMIT: ${{ github.event.inputs.limit || '0' }}
-        run: node scripts/migrate-std-lfs-to-qpr.js
+          FIXED=0
+          SKIPPED=0
+          for file in $BROKEN_FILES; do
+            # Strip HEAD: prefix if present
+            file="${file#HEAD:}"
 
-      - name: Upload report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: qpr-binary-fix-report
-          path: scripts/qpr-binary-fix-report.txt
-          if-no-files-found: ignore
+            # Check if commit 53103ea has a QPR pointer for this file
+            CONTENT=$(git cat-file -p "53103ea:$file" 2>/dev/null | head -3)
+            if echo "$CONTENT" | grep -q "^# QPR-LFS-R2"; then
+              SIZE=$(echo "$CONTENT" | grep "^size:" | cut -d: -f2)
+              if [ "$SIZE" -gt 500 ] 2>/dev/null; then
+                git checkout "53103ea" -- "$file"
+                FIXED=$((FIXED + 1))
+              else
+                SKIPPED=$((SKIPPED + 1))
+              fi
+            else
+              SKIPPED=$((SKIPPED + 1))
+            fi
+          done
+          echo "Fixed: $FIXED, Skipped: $SKIPPED"
 
       - name: Commit and push
-        if: github.event.inputs.dry_run != 'true'
-        env:
-          GIT_LFS_SKIP_PUSH: "1"
         run: |
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          sed -i 's/ filter=lfs diff=lfs merge=lfs//g' .gitattributes
-          git config --local filter.lfs.clean cat
-          git config --local filter.lfs.smudge cat
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-          CHANGED=$(git diff --name-only)
-          FILE_COUNT=$(echo "$CHANGED" | wc -l)
+          FILE_COUNT=$(git diff --name-only | wc -l)
           echo "$FILE_COUNT files changed"
-          echo "$CHANGED" | head -20
 
           git add .
-          git commit -m "Fix QPR-LFS-R2 pointer sizes after binary re-upload ($FILE_COUNT files)"
+          git commit -m "Restore correct QPR-LFS-R2 pointers from original migration ($FILE_COUNT files)"
           git push
