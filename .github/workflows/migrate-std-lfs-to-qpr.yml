@@ -34,9 +34,17 @@ jobs:
         with:
           node-version: '20'
 
+      # .gitattributes on main has filter=lfs stripped.
+      # Temporarily restore it so git lfs pull knows which files to smudge.
+      # We strip again before committing QPR pointers.
+      - name: Restore LFS attributes and pull smudged binaries
+        run: |
+          sed -i 's/ -text/ filter=lfs diff=lfs merge=lfs -text/' .gitattributes
+          git lfs pull
+          echo "LFS pull complete. Binary files should now be smudged."
+
       - name: Run migration
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE_SERVER_URL: ${{ secrets.LFS_FILE_SERVER_URL || 'https://qpr-file-server.turingclub.workers.dev' }}
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
           CONCURRENCY: ${{ github.event.inputs.concurrency || '5' }}
@@ -53,31 +61,27 @@ jobs:
 
       - name: Commit and push
         if: github.event.inputs.dry_run != 'true'
+        env:
+          GIT_LFS_SKIP_PUSH: "1"
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit."
             exit 0
           fi
+
+          # Strip LFS attributes — QPR pointer text must not be intercepted
+          sed -i 's/ filter=lfs diff=lfs merge=lfs//g' .gitattributes
+          git config --local filter.lfs.clean cat
+          git config --local filter.lfs.smudge cat
+
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
 
           CHANGED=$(git diff --name-only)
           FILE_COUNT=$(echo "$CHANGED" | wc -l)
           echo "$FILE_COUNT files changed, first 20:"
           echo "$CHANGED" | head -20
 
-          # Strip LFS patterns from .gitattributes so git doesn't
-          # re-intercept our QPR pointer text with the clean filter.
-          # This avoids GitHub's GH008 LFS object check.
-          sed -i 's/filter=lfs diff=lfs merge=lfs //g' .gitattributes
-
-          # Also neuter the clean filter to be safe
-          git config --local filter.lfs.clean cat
-          git config --local filter.lfs.smudge cat
-
-          # Stage everything including the stripped .gitattributes
           git add .
-
-          git commit -m "Migrate binary files to QPR-LFS-R2 pointers ($FILE_COUNT files)"
+          git commit -m "Migrate standard git-lfs pointers to QPR-LFS-R2 format ($FILE_COUNT files)"
           git push
