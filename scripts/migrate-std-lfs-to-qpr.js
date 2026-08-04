@@ -174,13 +174,16 @@ async function migrateOne(filePath) {
       return { status: "ERROR", message: "Could not parse OID from pointer", path: relPath };
     }
 
-    // 2. Check if already migrated in working tree
+    // 2. Check if HEAD already has QPR pointer (committed state)
     try {
-      const wt = fs.readFileSync(relPath, "utf-8");
-      if (wt.startsWith(QPR_HEADER)) {
-        return { status: "SKIPPED", message: "Already QPR-LFS-R2", path: relPath };
+      const headContent = execSync(
+        `git cat-file -p "HEAD:${relPath}"`,
+        { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], maxBuffer: 1024 }
+      );
+      if (headContent.startsWith(QPR_HEADER)) {
+        return { status: "SKIPPED", message: "Already committed as QPR-LFS-R2", path: relPath };
       }
-    } catch { /* binary, proceed */ }
+    } catch { /* file not in HEAD yet, proceed */ }
 
     // 3. Read smudged binary from working tree
     const binaryContent = fs.readFileSync(relPath);
