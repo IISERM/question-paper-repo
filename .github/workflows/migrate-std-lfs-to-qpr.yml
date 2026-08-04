@@ -30,10 +30,9 @@ jobs:
 
           FIXED=0
           SKIPPED=0
-          for file in $BROKEN_FILES; do
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
             file="${file#HEAD:}"
-
-            # Check if merge commit f08f5c4 has a correct QPR pointer
             CONTENT=$(git cat-file -p "f08f5c4:$file" 2>/dev/null | head -3)
             if echo "$CONTENT" | grep -q "^# QPR-LFS-R2"; then
               SIZE=$(echo "$CONTENT" | grep "^size:" | cut -d: -f2)
@@ -46,7 +45,7 @@ jobs:
             else
               SKIPPED=$((SKIPPED + 1))
             fi
-          done
+          done <<< "$BROKEN_FILES"
           echo "Fixed: $FIXED, Skipped: $SKIPPED"
 
       - name: Commit and push
