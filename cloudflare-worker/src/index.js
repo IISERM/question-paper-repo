@@ -243,6 +243,10 @@ async function handleRequest(request, env) {
       return handleSignFile(request, env, responseHeaders);
     }
 
+    if (url.pathname === "/api/sign-files") {
+      return handleSignFiles(request, env, responseHeaders);
+    }
+
     if (url.pathname === "/api/pageview") {
       return handlePageView(request, env, responseHeaders);
     }
@@ -407,6 +411,33 @@ async function handleCheckFork(request, env, headers) {
 }
 
 /**
+ * Import the HMAC-SHA256 signing key from the raw secret.
+ * Shared by single-file and batch signing so signatures stay byte-identical.
+ */
+async function importSigningKey(secret) {
+  const encoder = new TextEncoder();
+  return crypto.subtle.importKey(
+    "raw", encoder.encode(secret),
+    { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
+  );
+}
+
+/**
+ * Sign a single file and return its signed URL.
+ * `key` must be the CryptoKey from importSigningKey(env.SIGNING_SECRET).
+ */
+async function signFile(filePath, oid, expiry, env, key) {
+  const encoder = new TextEncoder();
+  const input = `${filePath}|${oid}|${expiry}`;
+  const sigBytes = await crypto.subtle.sign("HMAC", key, encoder.encode(input));
+  const signature = Array.from(new Uint8Array(sigBytes))
+    .map(b => b.toString(16).padStart(2, "0")).join("");
+
+  const fileServerUrl = env.FILE_SERVER_URL || "https://qpr-file-server.turingclub.workers.dev";
+  return `${fileServerUrl}/file/${encodeURIComponent(filePath)}?oid=${encodeURIComponent(oid)}&sig=${signature}&exp=${expiry}`;
+}
+
+/**
  * Sign a file URL for authenticated users.
  * Validates the Firebase ID token, then returns a time-limited signed URL.
  *
@@ -460,19 +491,8 @@ async function handleSignFile(request, env, headers) {
 
     // Generate signed URL (expires in 5 minutes)
     const expiry = Math.floor(Date.now() / 1000) + 300;
-    const input = `${filePath}|${oid}|${expiry}`;
-    const encoder = new TextEncoder();
-    const key = await crypto.subtle.importKey(
-      "raw", encoder.encode(env.SIGNING_SECRET),
-      { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
-    );
-    const sigBytes = await crypto.subtle.sign("HMAC", key, encoder.encode(input));
-    const signature = Array.from(new Uint8Array(sigBytes))
-      .map(b => b.toString(16).padStart(2, "0")).join("");
-
-    // Construct the signed URL
-    const fileServerUrl = env.FILE_SERVER_URL || "https://qpr-file-server.turingclub.workers.dev";
-    const signedUrl = `${fileServerUrl}/file/${encodeURIComponent(filePath)}?oid=${encodeURIComponent(oid)}&sig=${signature}&exp=${expiry}`;
+    const key = await importSigningKey(env.SIGNING_SECRET);
+    const signedUrl = await signFile(filePath, oid, expiry, env, key);
 
     return new Response(
       JSON.stringify({ signedUrl }),
@@ -488,6 +508,120 @@ async function handleSignFile(request, env, headers) {
     console.error("Sign-file error:", error);
     return new Response(
       JSON.stringify({ error: "Failed to sign file URL" }),
+      { status: 500, headers: { ...headers, "Content-Type": "application/json" } }
+    );
+  }
+}
+
+/**
+ * Sign multiple file URLs for authenticated users (batch).
+ * Validates the Firebase ID token, then returns time-limited signed URLs
+ * for each file. Used by "Download Folder as ZIP".
+ *
+ * POST /api/sign-files
+ * Body: { token: string, files: Array<{ path: string, oid: string }> }
+ * Returns: { signedUrls: Array<{ path, oid, signedUrl, expiresAt }> }
+ */
+async function handleSignFiles(request, env, headers) {
+  if (request.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { ...headers, "Content-Type": "application/json" },
+    });
+  }
+
+  try {
+    const { token, files } = await request.json();
+
+    if (!token || typeof token !== "string" || token.trim() === "") {
+      return new Response(
+        JSON.stringify({ error: "Missing required field: token" }),
+        { status: 400, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (!Array.isArray(files) || files.length === 0) {
+      return new Response(
+        JSON.stringify({ error: "Missing required field: files (non-empty array)" }),
+        { status: 400, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    for (const file of files) {
+      if (
+        !file ||
+        typeof file.path !== "string" || file.path.trim() === "" ||
+        typeof file.oid !== "string" || file.oid.trim() === ""
+      ) {
+        return new Response(
+          JSON.stringify({ error: "Each file must have non-empty 'path' and 'oid'" }),
+          { status: 400, headers: { ...headers, "Content-Type": "application/json" } }
+        );
+      }
+    }
+
+    const MAX_FILES_PER_BATCH = 100;
+    if (files.length > MAX_FILES_PER_BATCH) {
+      return new Response(
+        JSON.stringify({ error: "Too many files" }),
+        { status: 413, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Validate the Firebase ID token
+    const validation = await verifyFirebaseToken(token, env.FIREBASE_PROJECT_ID);
+    if (!validation.valid) {
+      return new Response(
+        JSON.stringify({ error: validation.error || "Invalid authentication token" }),
+        { status: 401, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Verify email domain
+    const email = validation.email || "";
+    const allowedDomain = env.ALLOWED_EMAIL_DOMAIN || "iisermohali.ac.in";
+    if (!email.endsWith(`@${allowedDomain}`)) {
+      return new Response(
+        JSON.stringify({ error: `Access restricted to @${allowedDomain} accounts` }),
+        { status: 403, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Check SIGNING_SECRET is configured
+    if (!env.SIGNING_SECRET) {
+      return new Response(
+        JSON.stringify({ error: "Server configuration error" }),
+        { status: 500, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Import the HMAC key once, then sign all files with a shared expiry (5 min).
+    const expiry = Math.floor(Date.now() / 1000) + 300;
+    const key = await importSigningKey(env.SIGNING_SECRET);
+
+    const signedUrls = [];
+    for (const file of files) {
+      signedUrls.push({
+        path: file.path,
+        oid: file.oid,
+        signedUrl: await signFile(file.path, file.oid, expiry, env, key),
+        expiresAt: expiry,
+      });
+    }
+
+    return new Response(
+      JSON.stringify({ signedUrls }),
+      { status: 200, headers: { ...headers, "Content-Type": "application/json" } }
+    );
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      return new Response(
+        JSON.stringify({ error: "Invalid JSON body" }),
+        { status: 400, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+    console.error("Sign-files error:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to sign file URLs" }),
       { status: 500, headers: { ...headers, "Content-Type": "application/json" } }
     );
   }

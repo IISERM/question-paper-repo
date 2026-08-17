@@ -1,3 +1,6 @@
+// Maximum number of files allowed in a single "Download Folder" request.
+const MAX_FOLDER_DOWNLOAD_FILES = 80;
+
 // THEME MANAGEMENT
 function initThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
@@ -234,6 +237,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   function renderCurrentView(path) {
     treeEl.innerHTML = "";
 
+    // Always clear any previous "Download Folder" button/error so it never
+    // persists when navigating to a different folder (idempotent).
+    removeFolderDownloadButton();
+
     let currentFolder = null;
     if (path) {
       currentFolder = findFolderByPath(fullData.folders, path);
@@ -263,6 +270,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Add new breadcrumb
     addBreadcrumbs(path);
+
+    // Show the "Download Folder" button only for year folders (exactly 3 path
+    // segments, e.g. "EES/202/2024") with a sane file count.
+    const pathSegments = path ? path.split("/").filter(Boolean) : [];
+    if (currentFolder && pathSegments.length === 3) {
+      const { files, count } = collectFolderFiles(currentFolder);
+      if (count >= 1 && count <= MAX_FOLDER_DOWNLOAD_FILES) {
+        createFolderDownloadButton(currentFolder, files);
+      }
+    }
 
     // Determine items to show
     let itemsToRender = currentFolder
@@ -361,6 +378,209 @@ function findFolderByPath(folders, path) {
     current = folder.children;
   }
   return folder;
+}
+
+/**
+ * Recursively walks a folder's `children`, counting file nodes and collecting
+ * their metadata. Returns `{ files, count }` where `files` is
+ * `[{ path, oid, name }]` for every node with `isFile === true` (oid is the
+ * node's `lfsOid`, possibly null if the file has no LFS backing).
+ */
+function collectFolderFiles(folder) {
+  const files = [];
+
+  function walk(nodes) {
+    if (!nodes) return;
+    for (const node of nodes) {
+      if (node.isFile === true) {
+        files.push({
+          path: node.path,
+          oid: node.lfsOid || null,
+          name: node.name,
+        });
+      } else if (node.children) {
+        walk(node.children);
+      }
+    }
+  }
+
+  walk(folder ? folder.children : []);
+  return { files, count: files.length };
+}
+
+// --- FOLDER DOWNLOAD (client-side ZIP) ---
+
+// Remove the "Download Folder" button + any inline error message. Idempotent:
+// safe to call on every render even when no button exists.
+function removeFolderDownloadButton() {
+  const btn = document.getElementById("download-folder-btn");
+  if (btn) btn.remove();
+  const err = document.getElementById("download-folder-error");
+  if (err) err.remove();
+}
+
+// Create the "Download Folder" button and append it to the intro section.
+function createFolderDownloadButton(folder, fileList) {
+  const intro = document.querySelector(".intro-section");
+  if (!intro) return;
+
+  const button = document.createElement("button");
+  button.id = "download-folder-btn";
+  button.className = "btn-primary download-folder-btn";
+  button.type = "button";
+  button.setAttribute("aria-label", "Download folder as a ZIP archive");
+
+  // Download icon
+  const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  icon.setAttribute("class", "download-folder-btn-icon");
+  icon.setAttribute("width", "16");
+  icon.setAttribute("height", "16");
+  icon.setAttribute("viewBox", "0 0 16 16");
+  icon.setAttribute("fill", "currentColor");
+  icon.innerHTML =
+    '<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>';
+
+  // Spinner (hidden by default)
+  const spinner = document.createElement("span");
+  spinner.className = "download-folder-btn-spinner";
+  spinner.setAttribute("aria-hidden", "true");
+
+  // Label
+  const label = document.createElement("span");
+  label.className = "download-folder-btn-label";
+  label.textContent = "Download Folder";
+
+  button.appendChild(icon);
+  button.appendChild(spinner);
+  button.appendChild(label);
+
+  button.addEventListener("click", () =>
+    handleFolderDownload(button, folder, fileList)
+  );
+
+  intro.appendChild(button);
+}
+
+function showFolderDownloadError(message) {
+  const intro = document.querySelector(".intro-section");
+  if (!intro) return;
+
+  // Replace any existing inline error to avoid stacking
+  removeFolderDownloadError();
+
+  const err = document.createElement("p");
+  err.id = "download-folder-error";
+  err.className = "download-folder-error";
+  err.textContent = message;
+  intro.appendChild(err);
+}
+
+function removeFolderDownloadError() {
+  const err = document.getElementById("download-folder-error");
+  if (err) err.remove();
+}
+
+async function handleFolderDownload(button, folder, fileList) {
+  const label = button.querySelector(".download-folder-btn-label");
+  const spinner = button.querySelector(".download-folder-btn-spinner");
+  const icon = button.querySelector(".download-folder-btn-icon");
+
+  const setLoading = (loading) => {
+    button.disabled = loading;
+    if (icon) icon.style.display = loading ? "none" : "";
+    if (spinner) spinner.style.display = loading ? "inline-block" : "none";
+  };
+
+  removeFolderDownloadError();
+  setLoading(true);
+  label.textContent = "Preparing…";
+
+  try {
+    if (typeof JSZip === "undefined") {
+      throw new Error(
+        "ZIP library failed to load. Please refresh the page and try again."
+      );
+    }
+
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      throw new Error("Please sign in to download this folder.");
+    }
+    const token = await user.getIdToken();
+
+    // Only send files that actually have an LFS OID (defensive: all files are
+    // R2-backed now, but never assume).
+    const files = fileList.filter((f) => f.oid);
+    if (files.length === 0) {
+      throw new Error("No downloadable files in this folder.");
+    }
+
+    const nameByPath = {};
+    for (const f of files) nameByPath[f.path] = f.name;
+
+    const requestFiles = files.map((f) => ({ path: f.path, oid: f.oid }));
+
+    const resp = await fetch(`${QPR_CONFIG.WORKER_URL}/api/sign-files`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, files: requestFiles }),
+    });
+
+    if (!resp.ok) {
+      const errorBody = await resp
+        .json()
+        .catch(() => ({ error: `Server error: ${resp.status}` }));
+      throw new Error(
+        errorBody.error || `Failed to prepare download (${resp.status}).`
+      );
+    }
+
+    const { signedUrls } = await resp.json();
+
+    if (!Array.isArray(signedUrls) || signedUrls.length === 0) {
+      throw new Error("No signed URLs returned. Please try again.");
+    }
+
+    const zip = new JSZip();
+
+    for (const entry of signedUrls) {
+      const fileResp = await fetch(entry.signedUrl);
+      if (!fileResp.ok) {
+        throw new Error(
+          `Failed to download "${entry.path}": HTTP ${fileResp.status}.`
+        );
+      }
+      const buf = await fileResp.arrayBuffer();
+
+      // Year-folder files are direct children, so use `file.name` as the zip
+      // entry name (e.g. "Quiz 3.pdf"). Fall back to the path leaf if missing.
+      const entryName = nameByPath[entry.path] || entry.path.split("/").pop();
+      zip.file(entryName, buf);
+    }
+
+    label.textContent = "Zipping…";
+    const blob = await zip.generateAsync({ type: "blob" });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${folder.name}.zip`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error("Folder download failed:", err);
+    showFolderDownloadError(
+      err && err.message ? err.message : "Download failed. Please try again."
+    );
+    label.textContent = "Failed";
+    setTimeout(() => {
+      label.textContent = "Download Folder";
+    }, 2500);
+  } finally {
+    setLoading(false);
+  }
 }
 
 // DOM ELEMENT CREATION

@@ -546,6 +546,37 @@ main {
   font-weight: 500;
 }
 
+/* Download Folder button */
+.download-folder-btn {
+  margin-top: 1rem;
+}
+
+.download-folder-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.download-folder-btn-icon {
+  flex-shrink: 0;
+}
+
+.download-folder-btn-spinner {
+  display: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--text-on-primary);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.download-folder-error {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
 /* Stats */
 .quick-stats {
   margin: 3rem 0;
