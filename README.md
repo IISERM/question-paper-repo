@@ -22,7 +22,9 @@ An archive of question papers and exercise sheets from IISER Mohali courses, col
 ## What's Here
 
 Course-wise folders containing past quizzes, minors, majors, endsems, and exercise sheets.
-‼️ Theres no actual data here only pointers exist and the repo exists only for indexing, please login to the website to view
+
+‼️ Theres no actual data here only pointers exist and the repo exists only for indexing, please login to the website to view.
+
 **Formats:** PDF (preferred), images (PNG/JPG), office docs (DOCX), and occasional ZIP files.
 
 ---
