@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-09T13:55:28.826Z",
+  "last_updated": "2026-09-15T01:19:41.322Z",
   "total_contributors": 39,
   "contributors": [
     {
@@ -11,20 +11,20 @@
       "commits": 127
     },
     {
+      "username": "BALAKUMARAN S",
+      "name": "BALAKUMARAN S",
+      "email": "ms25062@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
+      "profile_url": null,
+      "commits": 125
+    },
+    {
       "username": "Jasmeen Kaur",
       "name": "Jasmeen Kaur",
       "email": "ms23199@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=Jasmeen%20Kaur&background=random&size=200",
       "profile_url": null,
       "commits": 122
-    },
-    {
-      "username": "BALAKUMARAN S",
-      "name": "BALAKUMARAN S",
-      "email": "ms25062@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
-      "profile_url": null,
-      "commits": 111
     },
     {
       "username": "HARSH VARDHAN SHRESHTH",
