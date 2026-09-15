@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-15T01:19:41.322Z",
-  "total_contributors": 39,
+  "last_updated": "2026-09-15T20:33:00.321Z",
+  "total_contributors": 40,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -233,6 +233,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "RAHUL KUMAR",
+      "name": "RAHUL KUMAR",
+      "email": "ms24035@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=RAHUL%20KUMAR&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "Antu Biswas",
