@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-15T20:33:00.321Z",
-  "total_contributors": 40,
+  "last_updated": "2026-09-16T16:43:00.025Z",
+  "total_contributors": 41,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -121,6 +121,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=ACHALESH%20NIMBIWAL&background=random&size=200",
       "profile_url": null,
       "commits": 6
+    },
+    {
+      "username": "ANANYA SHYAM",
+      "name": "ANANYA SHYAM",
+      "email": "ms25072@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=ANANYA%20SHYAM&background=random&size=200",
+      "profile_url": null,
+      "commits": 5
     },
     {
       "username": "Maninder Singh",
