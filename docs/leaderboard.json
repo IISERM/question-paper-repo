@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-17T12:14:02.314Z",
+  "last_updated": "2026-09-17T12:25:13.525Z",
   "total_contributors": 41,
   "contributors": [
     {
@@ -27,20 +27,20 @@
       "commits": 122
     },
     {
+      "username": "SASHVATH KRISHNAN S",
+      "name": "SASHVATH KRISHNAN S",
+      "email": "ms24243@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=SASHVATH%20KRISHNAN%20S&background=random&size=200",
+      "profile_url": null,
+      "commits": 106
+    },
+    {
       "username": "HARSH VARDHAN SHRESHTH",
       "name": "HARSH VARDHAN SHRESHTH",
       "email": "ms24085@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=HARSH%20VARDHAN%20SHRESHTH&background=random&size=200",
       "profile_url": null,
       "commits": 99
-    },
-    {
-      "username": "SASHVATH KRISHNAN S",
-      "name": "SASHVATH KRISHNAN S",
-      "email": "ms24243@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=SASHVATH%20KRISHNAN%20S&background=random&size=200",
-      "profile_url": null,
-      "commits": 70
     },
     {
       "username": "MANVENDRA SINGH",
@@ -57,6 +57,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
       "profile_url": null,
       "commits": 46
+    },
+    {
+      "username": "ANANYA SHYAM",
+      "name": "ANANYA SHYAM",
+      "email": "ms25072@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=ANANYA%20SHYAM&background=random&size=200",
+      "profile_url": null,
+      "commits": 30
     },
     {
       "username": "VISHESH",
@@ -81,14 +89,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=NIKUNJ%20MUNDHRA&background=random&size=200",
       "profile_url": null,
       "commits": 9
-    },
-    {
-      "username": "ANANYA SHYAM",
-      "name": "ANANYA SHYAM",
-      "email": "ms25072@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=ANANYA%20SHYAM&background=random&size=200",
-      "profile_url": null,
-      "commits": 8
     },
     {
       "username": "RAGHAVENDRA N.D SALIAN",
@@ -169,6 +169,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=ARGHA%20PATRA&background=random&size=200",
       "profile_url": null,
       "commits": 3
+    },
+    {
+      "username": "TAMAGHNA DEY",
+      "name": "TAMAGHNA DEY",
+      "email": "ms24205@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=TAMAGHNA%20DEY&background=random&size=200",
+      "profile_url": null,
+      "commits": 2
     },
     {
       "username": "MEHAL KUMAR",
@@ -271,14 +279,6 @@
       "name": "Nithin Rajesh",
       "email": "ms23086@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=Nithin%20Rajesh&background=random&size=200",
-      "profile_url": null,
-      "commits": 1
-    },
-    {
-      "username": "TAMAGHNA DEY",
-      "name": "TAMAGHNA DEY",
-      "email": "ms24205@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=TAMAGHNA%20DEY&background=random&size=200",
       "profile_url": null,
       "commits": 1
     },
