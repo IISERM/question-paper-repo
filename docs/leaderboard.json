@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-08-17T07:13:33.169Z",
-  "total_contributors": 38,
+  "last_updated": "2026-09-17T03:13:22.410Z",
+  "total_contributors": 41,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -11,12 +11,20 @@
       "commits": 127
     },
     {
+      "username": "BALAKUMARAN S",
+      "name": "BALAKUMARAN S",
+      "email": "ms25062@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
+      "profile_url": null,
+      "commits": 125
+    },
+    {
       "username": "Jasmeen Kaur",
       "name": "Jasmeen Kaur",
       "email": "ms23199@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=Jasmeen%20Kaur&background=random&size=200",
       "profile_url": null,
-      "commits": 108
+      "commits": 122
     },
     {
       "username": "HARSH VARDHAN SHRESHTH",
@@ -25,14 +33,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=HARSH%20VARDHAN%20SHRESHTH&background=random&size=200",
       "profile_url": null,
       "commits": 99
-    },
-    {
-      "username": "BALAKUMARAN S",
-      "name": "BALAKUMARAN S",
-      "email": "ms25062@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
-      "profile_url": null,
-      "commits": 78
     },
     {
       "username": "SASHVATH KRISHNAN S",
@@ -89,6 +89,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=RAGHAVENDRA%20N.D%20SALIAN&background=random&size=200",
       "profile_url": null,
       "commits": 8
+    },
+    {
+      "username": "ANANYA SHYAM",
+      "name": "ANANYA SHYAM",
+      "email": "ms25072@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=ANANYA%20SHYAM&background=random&size=200",
+      "profile_url": null,
+      "commits": 7
     },
     {
       "username": "Melwin Haris",
@@ -233,6 +241,22 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "RAHUL KUMAR",
+      "name": "RAHUL KUMAR",
+      "email": "ms24035@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=RAHUL%20KUMAR&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
+    },
+    {
+      "username": "Antu Biswas",
+      "name": "Antu Biswas",
+      "email": "ms23066@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Antu%20Biswas&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "Gokul2406",
