@@ -41,6 +41,18 @@ function die(msg, code = 1) {
   process.exit(code);
 }
 
+function formatBytes(bytes) {
+  if (!Number.isFinite(bytes) || bytes < 0) return "0 B";
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  let i = 0;
+  let n = bytes;
+  while (n >= 1024 && i < units.length - 1) {
+    n /= 1024;
+    i++;
+  }
+  return `${n.toFixed(n >= 10 || i === 0 ? 0 : 1)} ${units[i]}`;
+}
+
 function wrangler(cmd) {
   try {
     return execSync(`npx wrangler ${cmd}`, {
@@ -71,6 +83,7 @@ async function listR2Objects() {
   log("Listing R2 objects via Cloudflare REST API (paginated)...");
 
   const keys = new Set();
+  const sizes = new Map(); // key -> size (bytes)
   let cursor = undefined;
   let page = 0;
 
@@ -116,6 +129,7 @@ async function listR2Objects() {
     for (const obj of objects) {
       if (obj && typeof obj.key === "string") {
         keys.add(obj.key);
+        sizes.set(obj.key, typeof obj.size === "number" ? obj.size : 0);
       }
     }
 
@@ -136,7 +150,7 @@ async function listR2Objects() {
   }
 
   log(`Found ${keys.size} object(s) in R2 (${nonOidKeys.length} non-OID).`);
-  return { keys, nonOidKeys: new Set(nonOidKeys) };
+  return { keys, sizes, nonOidKeys: new Set(nonOidKeys) };
 }
 
 // ────────────────────────────────────────────────────────────────────
@@ -207,7 +221,7 @@ async function main() {
   log("");
 
   // 1. List R2
-  const { keys: r2Keys, nonOidKeys } = await listR2Objects();
+  const { keys: r2Keys, sizes, nonOidKeys } = await listR2Objects();
 
   // 2. Extract LFS OIDs from repo
   const lfsOids = extractLfsOids();
@@ -218,8 +232,14 @@ async function main() {
     (key) => OID_PATTERN.test(key) && !lfsOids.has(key)
   );
 
+  const orphanTotalBytes = orphans.reduce(
+    (sum, key) => sum + (sizes.get(key) || 0),
+    0
+  );
+
   log("");
   log(`Orphans (in R2 but not in git): ${orphans.length}`);
+  log(`Total orphan size: ${formatBytes(orphanTotalBytes)}`);
 
   if (orphans.length === 0) {
     log("R2 is in sync with git. Nothing to do.");
