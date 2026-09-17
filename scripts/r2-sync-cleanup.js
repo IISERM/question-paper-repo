@@ -147,10 +147,17 @@ function extractLfsOids() {
 
   // Use git grep with extension-based file matching since .gitattributes
   // no longer has filter=lfs (QPR-LFS-R2 pointers bypass git-lfs entirely).
+  //
+  // Pointer format is custom (NOT standard git-lfs). A QPR-LFS-R2 pointer is:
+  //   # QPR-LFS-R2 v1
+  //   oid:sha256:<64 hex>     ← note: NO space between "oid:" and "sha256:"
+  //   size:<bytes>
+  // The regex uses `[: ]?` (optional separator) so it matches `oid:sha256:`
+  // as well as the standard git-lfs `oid sha256:` form.
   let output;
   try {
     output = execSync(
-      `git grep -hE '^oid[: ] sha256:' -- '*.pdf' '*.doc' '*.docx' '*.ppt' '*.pptx' '*.xls' '*.xlsx' '*.jpg' '*.jpeg' '*.png' '*.gif' '*.webp' '*.bmp' '*.svg' '*.zip'`,
+      `git grep -hE '^oid[: ]?sha256:' -- '*.pdf' '*.doc' '*.docx' '*.ppt' '*.pptx' '*.xls' '*.xlsx' '*.jpg' '*.jpeg' '*.png' '*.gif' '*.webp' '*.bmp' '*.svg' '*.zip'`,
       { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], maxBuffer: 10 * 1024 * 1024 }
     );
   } catch (e) {
