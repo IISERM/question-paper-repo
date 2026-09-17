@@ -21,6 +21,13 @@ const DRY_RUN = process.env.DRY_RUN !== "0";
 const WRANGLER_DIR = process.env.WRANGLER_DIR || "cloudflare-worker/file-server";
 const OID_PATTERN = /^sha256:[a-f0-9]{64}$/;
 
+// Cloudflare R2 REST API settings.
+// account_id is not secret (already committed in wrangler.toml); allow env override.
+const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID || "2a541d3bfd006a6bafac02bc4760031c";
+const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
+const BUCKET = "qpr-lfs";
+const API_BASE = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/r2/buckets/${BUCKET}/objects`;
+
 function log(...args) {
   console.log(...args);
 }
@@ -51,37 +58,73 @@ function wrangler(cmd) {
 
 // ────────────────────────────────────────────────────────────────────
 // Step 1: List all objects in R2
+// --------------------------------------------------------------------
+// wrangler v4 has NO `r2 object list` command, so we list via the
+// Cloudflare REST API (the same API wrangler uses internally) and
+// paginate with the cursor until is_truncated is false.
 // ────────────────────────────────────────────────────────────────────
-function listR2Objects() {
-  log("Listing R2 objects (this may take a moment)...");
-  const output = wrangler("r2 object list qpr-lfs --json --no-cursor");
-
-  let data;
-  try {
-    data = JSON.parse(output);
-  } catch (e) {
-    die(`Failed to parse wrangler output: ${e.message}\nOutput: ${output.slice(0, 500)}`);
+async function listR2Objects() {
+  if (!API_TOKEN) {
+    die("CLOUDFLARE_API_TOKEN is not set");
   }
 
-  // Handle various wrangler output shapes:
-  // - Array of strings: ["sha256:abc...", "sha256:def..."]
-  // - Array of objects: [{key: "...", size: ...}, ...]
-  // - Object with result/keys: {result: [...], ...}
-  let items;
-  if (Array.isArray(data)) {
-    items = data;
-  } else if (data && Array.isArray(data.result)) {
-    items = data.result;
-  } else if (data && Array.isArray(data.keys)) {
-    items = data.keys;
-  } else {
-    die(`Unexpected wrangler output format. Data keys: ${Object.keys(data || {}).join(", ")}`);
-  }
+  log("Listing R2 objects via Cloudflare REST API (paginated)...");
 
   const keys = new Set();
-  for (const item of items) {
-    const key = typeof item === "string" ? item : (item.key || item.name || String(item));
-    keys.add(key);
+  let cursor = undefined;
+  let page = 0;
+
+  while (true) {
+    page++;
+    const url = cursor
+      ? `${API_BASE}?per_page=1000&cursor=${encodeURIComponent(cursor)}`
+      : `${API_BASE}?per_page=1000`;
+
+    log(`  Fetching page ${page}...`);
+
+    let resp;
+    try {
+      resp = await fetch(url, {
+        headers: { Authorization: `Bearer ${API_TOKEN}` },
+      });
+    } catch (e) {
+      die(`REST list request failed: ${e.message}`);
+    }
+
+    if (!resp.ok) {
+      const body = await resp.text();
+      die(`REST list failed (HTTP ${resp.status}): ${body.slice(0, 500)}`);
+    }
+
+    let data;
+    try {
+      data = await resp.json();
+    } catch (e) {
+      die(`Failed to parse REST list response: ${e.message}`);
+    }
+
+    if (!data || data.success !== true) {
+      const errs = (data && data.errors) || [];
+      die(
+        `Cloudflare API error: ${
+          errs.map((e) => e.message).join("; ") || JSON.stringify(data).slice(0, 500)
+        }`
+      );
+    }
+
+    const objects = data.result || [];
+    for (const obj of objects) {
+      if (obj && typeof obj.key === "string") {
+        keys.add(obj.key);
+      }
+    }
+
+    const info = data.result_info || {};
+    if (info.is_truncated && info.cursor) {
+      cursor = info.cursor;
+    } else {
+      break;
+    }
   }
 
   // Warn about non-OID-format keys
@@ -137,7 +180,10 @@ function extractLfsOids() {
 // ────────────────────────────────────────────────────────────────────
 function deleteOrphan(oid) {
   try {
-    wrangler(`r2 object delete "qpr-lfs/${oid}"`);
+    // --remote is required: without it wrangler operates on local
+    // Miniflare storage, not the real bucket. --force skips any
+    // interactive confirmation prompt (which would hang CI).
+    wrangler(`r2 object delete --remote --force "qpr-lfs/${oid}"`);
     return true;
   } catch (e) {
     warn(`  Failed: ${e.message}`);
@@ -154,7 +200,7 @@ async function main() {
   log("");
 
   // 1. List R2
-  const { keys: r2Keys, nonOidKeys } = listR2Objects();
+  const { keys: r2Keys, nonOidKeys } = await listR2Objects();
 
   // 2. Extract LFS OIDs from repo
   const lfsOids = extractLfsOids();
