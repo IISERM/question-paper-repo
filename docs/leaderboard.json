@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-16T16:43:00.025Z",
+  "last_updated": "2026-09-17T03:01:33.412Z",
   "total_contributors": 41,
   "contributors": [
     {
@@ -107,6 +107,14 @@
       "commits": 7
     },
     {
+      "username": "ANANYA SHYAM",
+      "name": "ANANYA SHYAM",
+      "email": "ms25072@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=ANANYA%20SHYAM&background=random&size=200",
+      "profile_url": null,
+      "commits": 6
+    },
+    {
       "username": "SHIVANSH SINGH",
       "name": "SHIVANSH SINGH",
       "email": "ms25031@iisermohali.ac.in",
@@ -121,14 +129,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=ACHALESH%20NIMBIWAL&background=random&size=200",
       "profile_url": null,
       "commits": 6
-    },
-    {
-      "username": "ANANYA SHYAM",
-      "name": "ANANYA SHYAM",
-      "email": "ms25072@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=ANANYA%20SHYAM&background=random&size=200",
-      "profile_url": null,
-      "commits": 5
     },
     {
       "username": "Maninder Singh",
