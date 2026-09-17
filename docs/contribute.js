@@ -499,11 +499,26 @@ window.removeFile = function (groupId, index) {
   }
 };
 
+function hasAllowedExtension(filename) {
+  const ext = filename.split(".").pop().toLowerCase();
+  return CONFIG.ALLOWED_EXTENSIONS.includes(ext);
+}
+
 window.updateFileName = function (groupId, index, newName) {
   const group = state.uploadGroups.find((g) => g.id === groupId);
-  if (group && newName.trim()) {
-    group.fileNames[index] = newName.trim();
+  if (!group) return;
+  const trimmed = (newName || "").trim();
+  if (!trimmed || !hasAllowedExtension(trimmed)) {
+    if (trimmed) {
+      alert(
+        `"${trimmed}" is missing a valid file extension. ` +
+        `Please keep an extension such as .pdf, .png, or .docx.`
+      );
+    }
+    updateFileListUI(groupId, group.files, group); // revert the edited input
+    return;
   }
+  group.fileNames[index] = trimmed;
 };
 
 // ==========================================
@@ -1215,6 +1230,18 @@ function validateForm() {
   const hasFiles = state.uploadGroups.some((g) => g.files.length > 0);
   if (!hasFiles)
     return { valid: false, message: "Please select at least one file." };
+
+  for (const group of state.uploadGroups) {
+    for (let i = 0; i < group.files.length; i++) {
+      const name = group.fileNames[i] || group.files[i].name;
+      if (!hasAllowedExtension(name)) {
+        return {
+          valid: false,
+          message: `"${name}" is missing a valid file extension. Please rename it (e.g. add .pdf) before submitting.`,
+        };
+      }
+    }
+  }
 
   for (const group of state.uploadGroups) {
     if (group.files.length > 0) {
