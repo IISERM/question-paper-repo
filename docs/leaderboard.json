@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-17T13:25:08.336Z",
-  "total_contributors": 41,
+  "last_updated": "2026-09-20T07:45:33.174Z",
+  "total_contributors": 42,
   "contributors": [
     {
       "username": "Manu A Sankaran",
@@ -43,20 +43,20 @@
       "commits": 99
     },
     {
+      "username": "SIDDHANT PANDA",
+      "name": "SIDDHANT PANDA",
+      "email": "ms24129@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
+      "profile_url": null,
+      "commits": 59
+    },
+    {
       "username": "MANVENDRA SINGH",
       "name": "MANVENDRA SINGH",
       "email": "ms25137@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=MANVENDRA%20SINGH&background=random&size=200",
       "profile_url": null,
       "commits": 55
-    },
-    {
-      "username": "SIDDHANT PANDA",
-      "name": "SIDDHANT PANDA",
-      "email": "ms24129@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
-      "profile_url": null,
-      "commits": 46
     },
     {
       "username": "ANANYA SHYAM",
@@ -131,6 +131,14 @@
       "commits": 6
     },
     {
+      "username": "KAMAL GODARA",
+      "name": "KAMAL GODARA",
+      "email": "ms25071@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=KAMAL%20GODARA&background=random&size=200",
+      "profile_url": null,
+      "commits": 4
+    },
+    {
       "username": "Maninder Singh",
       "name": "Maninder Singh",
       "email": "ms23074@iisermohali.ac.in",
@@ -155,6 +163,22 @@
       "commits": 4
     },
     {
+      "username": "TAMAGHNA DEY",
+      "name": "TAMAGHNA DEY",
+      "email": "ms24205@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=TAMAGHNA%20DEY&background=random&size=200",
+      "profile_url": null,
+      "commits": 3
+    },
+    {
+      "username": "MEHAL KUMAR",
+      "name": "MEHAL KUMAR",
+      "email": "ms25152@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=MEHAL%20KUMAR&background=random&size=200",
+      "profile_url": null,
+      "commits": 3
+    },
+    {
       "username": "Tanmayii Tushar Kolhe",
       "name": "Tanmayii Tushar Kolhe",
       "email": "ms23034@iisermohali.ac.in",
@@ -169,22 +193,6 @@
       "avatar_url": "https://ui-avatars.com/api/?name=ARGHA%20PATRA&background=random&size=200",
       "profile_url": null,
       "commits": 3
-    },
-    {
-      "username": "TAMAGHNA DEY",
-      "name": "TAMAGHNA DEY",
-      "email": "ms24205@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=TAMAGHNA%20DEY&background=random&size=200",
-      "profile_url": null,
-      "commits": 2
-    },
-    {
-      "username": "MEHAL KUMAR",
-      "name": "MEHAL KUMAR",
-      "email": "ms25152@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=MEHAL%20KUMAR&background=random&size=200",
-      "profile_url": null,
-      "commits": 2
     },
     {
       "username": "ARNAB NANDI",
