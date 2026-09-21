@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-21T11:27:41.486Z",
+  "last_updated": "2026-09-21T11:32:16.520Z",
   "total_contributors": 42,
   "contributors": [
     {
@@ -32,7 +32,7 @@
       "email": "ms24243@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=SASHVATH%20KRISHNAN%20S&background=random&size=200",
       "profile_url": null,
-      "commits": 109
+      "commits": 111
     },
     {
       "username": "HARSH VARDHAN SHRESHTH",
@@ -48,7 +48,7 @@
       "email": "ms24129@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
       "profile_url": null,
-      "commits": 59
+      "commits": 65
     },
     {
       "username": "MANVENDRA SINGH",
@@ -83,20 +83,20 @@
       "commits": 16
     },
     {
+      "username": "RAGHAVENDRA N.D SALIAN",
+      "name": "RAGHAVENDRA N.D SALIAN",
+      "email": "ms25099@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=RAGHAVENDRA%20N.D%20SALIAN&background=random&size=200",
+      "profile_url": null,
+      "commits": 9
+    },
+    {
       "username": "NIKUNJ MUNDHRA",
       "name": "NIKUNJ MUNDHRA",
       "email": "ms24249@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=NIKUNJ%20MUNDHRA&background=random&size=200",
       "profile_url": null,
       "commits": 9
-    },
-    {
-      "username": "RAGHAVENDRA N.D SALIAN",
-      "name": "RAGHAVENDRA N.D SALIAN",
-      "email": "ms25099@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=RAGHAVENDRA%20N.D%20SALIAN&background=random&size=200",
-      "profile_url": null,
-      "commits": 8
     },
     {
       "username": "Melwin Haris",
