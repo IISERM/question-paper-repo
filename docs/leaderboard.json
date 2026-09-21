@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-21T11:32:16.520Z",
+  "last_updated": "2026-09-21T11:34:23.054Z",
   "total_contributors": 42,
   "contributors": [
     {
@@ -81,6 +81,14 @@
       "avatar_url": "https://github.com/ArnavMetrani.png",
       "profile_url": "https://github.com/ArnavMetrani",
       "commits": 16
+    },
+    {
+      "username": "MEHAL KUMAR",
+      "name": "MEHAL KUMAR",
+      "email": "ms25152@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=MEHAL%20KUMAR&background=random&size=200",
+      "profile_url": null,
+      "commits": 15
     },
     {
       "username": "RAGHAVENDRA N.D SALIAN",
@@ -167,14 +175,6 @@
       "name": "TAMAGHNA DEY",
       "email": "ms24205@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=TAMAGHNA%20DEY&background=random&size=200",
-      "profile_url": null,
-      "commits": 3
-    },
-    {
-      "username": "MEHAL KUMAR",
-      "name": "MEHAL KUMAR",
-      "email": "ms25152@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=MEHAL%20KUMAR&background=random&size=200",
       "profile_url": null,
       "commits": 3
     },
