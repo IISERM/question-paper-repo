@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-22T02:32:35.267Z",
-  "total_contributors": 42,
+  "last_updated": "2026-09-22T02:37:02.206Z",
+  "total_contributors": 44,
   "contributors": [
     {
       "username": "Jasmeen Kaur",
@@ -65,6 +65,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=ANANYA%20SHYAM&background=random&size=200",
       "profile_url": null,
       "commits": 31
+    },
+    {
+      "username": "Koushik Vijaya Kumar",
+      "name": "Koushik Vijaya Kumar",
+      "email": "ms23127@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Koushik%20Vijaya%20Kumar&background=random&size=200",
+      "profile_url": null,
+      "commits": 28
     },
     {
       "username": "VISHESH",
@@ -257,6 +265,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "SHIKHAR SETH",
+      "name": "SHIKHAR SETH",
+      "email": "ms25042@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=SHIKHAR%20SETH&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "RAHUL KUMAR",
