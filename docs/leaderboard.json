@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-22T02:37:02.206Z",
-  "total_contributors": 44,
+  "last_updated": "2026-10-04T07:28:54.114Z",
+  "total_contributors": 45,
   "contributors": [
     {
       "username": "Jasmeen Kaur",
@@ -11,20 +11,20 @@
       "commits": 162
     },
     {
+      "username": "BALAKUMARAN S",
+      "name": "BALAKUMARAN S",
+      "email": "ms25062@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
+      "profile_url": null,
+      "commits": 129
+    },
+    {
       "username": "Manu A Sankaran",
       "name": "Manu A Sankaran",
       "email": "ms23029@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=Manu%20A%20Sankaran&background=random&size=200",
       "profile_url": null,
       "commits": 127
-    },
-    {
-      "username": "BALAKUMARAN S",
-      "name": "BALAKUMARAN S",
-      "email": "ms25062@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=BALAKUMARAN%20S&background=random&size=200",
-      "profile_url": null,
-      "commits": 125
     },
     {
       "username": "SASHVATH KRISHNAN S",
@@ -48,7 +48,7 @@
       "email": "ms24129@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
       "profile_url": null,
-      "commits": 65
+      "commits": 80
     },
     {
       "username": "MANVENDRA SINGH",
@@ -177,6 +177,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Parvesh%20Garg&background=random&size=200",
       "profile_url": null,
       "commits": 4
+    },
+    {
+      "username": "Kunal Rana",
+      "name": "Kunal Rana",
+      "email": "ms23078@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Kunal%20Rana&background=random&size=200",
+      "profile_url": null,
+      "commits": 3
     },
     {
       "username": "TAMAGHNA DEY",
