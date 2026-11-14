@@ -59,15 +59,56 @@ function renderLeaderboard(data) {
   const date = new Date(last_updated);
   updatedEl.textContent = `Last updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-  // Get top 3 for podium
-  const top3 = contributors.slice(0, 3);
-  const remaining = contributors.slice(3, 5); // Show only 5 total (3 + 2)
-
   // Render podium (top 3)
+  const top3 = contributors.slice(0, 3);
   renderPodium(top3);
 
-  // Render remaining contributors
-  renderList(remaining, 4); // Start rank from 4
+  const DEFAULT_LIST_LIMIT = 7; // Top 3 on podium + 7 in list = Top 10
+  let isExpanded = false;
+
+  const containerEl = document.getElementById("leaderboard-container");
+
+  // Remove existing toggle button if re-rendering
+  const existingToggle = document.querySelector(".leaderboard-toggle-wrapper");
+  if (existingToggle) existingToggle.remove();
+
+  function updateList() {
+    const listContributors = isExpanded
+      ? contributors.slice(3)
+      : contributors.slice(3, 3 + DEFAULT_LIST_LIMIT);
+    renderList(listContributors, 4);
+  }
+
+  updateList();
+
+  // If there are more than 10 contributors, show toggle button
+  if (contributors.length > 3 + DEFAULT_LIST_LIMIT) {
+    const toggleWrapper = document.createElement("div");
+    toggleWrapper.className = "leaderboard-toggle-wrapper";
+
+    const toggleBtn = document.createElement("button");
+    toggleBtn.id = "leaderboard-toggle-btn";
+    toggleBtn.className = "btn-leaderboard-toggle";
+    toggleBtn.type = "button";
+    toggleBtn.textContent = `Show All (${contributors.length} contributors)`;
+
+    toggleBtn.addEventListener("click", () => {
+      isExpanded = !isExpanded;
+      updateList();
+      toggleBtn.textContent = isExpanded
+        ? "Show Less"
+        : `Show All (${contributors.length} contributors)`;
+    });
+
+    toggleWrapper.appendChild(toggleBtn);
+
+    const footerEl = document.querySelector(".leaderboard-footer");
+    if (footerEl) {
+      containerEl.insertBefore(toggleWrapper, footerEl);
+    } else {
+      containerEl.appendChild(toggleWrapper);
+    }
+  }
 }
 
 /**

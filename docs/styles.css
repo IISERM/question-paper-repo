@@ -2224,6 +2224,39 @@ code {
   margin-left: 0.25rem;
 }
 
+.leaderboard-toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-leaderboard-toggle {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.btn-leaderboard-toggle:hover {
+  background: var(--surface-hover, rgba(255, 255, 255, 0.08));
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.btn-leaderboard-toggle:active {
+  transform: translateY(0);
+}
+
 .leaderboard-footer {
   margin-top: 2rem;
   padding-top: 1.5rem;

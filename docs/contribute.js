@@ -1264,6 +1264,12 @@ function validateForm() {
 async function handleDirectContribution(prTitle, prDescription) {
   showProgress("Starting direct contribution...", 0);
   try {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      throw new Error("You must be signed in with your IISER Mohali email to contribute.");
+    }
+    const idToken = await user.getIdToken();
+
     const uploadGroupsData = state.uploadGroups.map((group) => ({
       folderPath: getFolderPath(group.id),
       files: group.files.map((file, index) => ({
@@ -1311,8 +1317,12 @@ async function handleDirectContribution(prTitle, prDescription) {
         `${CONFIG.WORKER_URL}/api/contribute-direct`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${idToken}`,
+          },
           body: JSON.stringify({
+            token: idToken,
             userEmail: state.userEmail,
             userName: state.userName,
             uploadGroups: batchUploadGroups,

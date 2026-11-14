@@ -115,9 +115,8 @@ async function verifyFirebaseToken(idToken, projectId) {
         return { valid: false, error: "Invalid token signature" };
       }
     } else {
-      // x509 fallback — skip sig verification for now (already checked exp+aud+iss)
-      // In production, implement proper x509 cert → JWK conversion
-      console.warn("Firebase token signature not verified (x509 key — use JWK endpoint)");
+      console.error("Firebase token verification failed: key is not an RSA JWK");
+      return { valid: false, error: "Token signature verification unavailable" };
     }
 
     return { valid: true, email: payload.email };
@@ -1265,7 +1264,16 @@ async function handleDirectContribution(request, env, headers) {
   }
 
   try {
-    const data = await request.json();
+    let data;
+    try {
+      data = await request.json();
+    } catch {
+      return new Response(JSON.stringify({ error: "Invalid JSON body" }), {
+        status: 400,
+        headers: { ...headers, "Content-Type": "application/json" },
+      });
+    }
+
     const {
       userEmail,
       userName,
@@ -1276,39 +1284,20 @@ async function handleDirectContribution(request, env, headers) {
       branchName: existingBranch, // Optional: if continuing from previous batch
       shouldCreatePR = true, // Whether to create PR at the end
       batchInfo, // Optional: { current: 1, total: 3 }
-    } = data;
-    
-    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-    console.log("📥 Direct contribution request received");
-    console.log("  User:", userName, `(${userEmail})`);
-    
-    // Frontend dropdown ensures correct folder names, just use as-is
-    const uploadGroups = originalUploadGroups;
-    const correctedUploadGroupsForPR = uploadGroupsForPR;
-    
-    console.log("\n  Existing branch:", existingBranch || "NONE (will create new)");
-    console.log("  Should create PR:", shouldCreatePR);
-    console.log("  Upload groups (this batch):", uploadGroups.length);
-    console.log(
-      "  Files in this batch:",
-      uploadGroups.reduce((sum, g) => sum + g.files.length, 0)
-    );
-    if (correctedUploadGroupsForPR) {
-      console.log(
-        "  Complete file list for PR:",
-        correctedUploadGroupsForPR.reduce((sum, g) => sum + g.files.length, 0),
-        "files"
-      );
-    }
-    if (batchInfo) {
-      console.log("  Batch info:", `${batchInfo.current}/${batchInfo.total}`);
-    }
-    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    } = data || {};
 
-    // Validate required fields
-    if (!userEmail || !userName || !uploadGroups) {
+    // Validate required fields early before accessing properties
+    if (
+      !userEmail ||
+      typeof userEmail !== "string" ||
+      !userName ||
+      typeof userName !== "string" ||
+      !Array.isArray(originalUploadGroups)
+    ) {
       return new Response(
-        JSON.stringify({ error: "Missing required fields" }),
+        JSON.stringify({
+          error: "Missing or invalid required fields: userEmail, userName, uploadGroups (array)",
+        }),
         {
           status: 400,
           headers: { ...headers, "Content-Type": "application/json" },
@@ -1317,7 +1306,7 @@ async function handleDirectContribution(request, env, headers) {
     }
 
     // prTitle only required if creating PR
-    if (shouldCreatePR && !prTitle) {
+    if (shouldCreatePR && (!prTitle || typeof prTitle !== "string" || prTitle.trim() === "")) {
       return new Response(
         JSON.stringify({ error: "PR title required when creating PR" }),
         {
@@ -1327,9 +1316,45 @@ async function handleDirectContribution(request, env, headers) {
       );
     }
 
+    // Extract authentication token (from Authorization header or body)
+    const authHeader = request.headers.get("Authorization");
+    const token =
+      authHeader && authHeader.startsWith("Bearer ")
+        ? authHeader.slice(7).trim()
+        : data.token || data.idToken;
+
+    if (!token || typeof token !== "string" || token.trim() === "") {
+      return new Response(
+        JSON.stringify({
+          error: "Authentication required. Please sign in with your institute email.",
+        }),
+        { status: 401, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Validate the Firebase ID token
+    const validation = await verifyFirebaseToken(token, env.FIREBASE_PROJECT_ID);
+    if (!validation.valid) {
+      return new Response(
+        JSON.stringify({ error: validation.error || "Invalid authentication token" }),
+        { status: 401, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Verify token email matches supplied userEmail
+    const tokenEmail = (validation.email || "").toLowerCase().trim();
+    if (tokenEmail !== userEmail.toLowerCase().trim()) {
+      return new Response(
+        JSON.stringify({
+          error: "Authenticated user email does not match userEmail in request",
+        }),
+        { status: 403, headers: { ...headers, "Content-Type": "application/json" } }
+      );
+    }
+
     // Validate email domain
     const allowedDomain = env.ALLOWED_EMAIL_DOMAIN || "iisermohali.ac.in";
-    if (!userEmail.endsWith(`@${allowedDomain}`)) {
+    if (!tokenEmail.endsWith(`@${allowedDomain}`)) {
       return new Response(
         JSON.stringify({
           error: `Only ${allowedDomain} email addresses are allowed`,
@@ -1340,6 +1365,36 @@ async function handleDirectContribution(request, env, headers) {
         }
       );
     }
+
+    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    console.log("📥 Direct contribution request received");
+    console.log("  User:", userName, `(${userEmail})`);
+
+    // Frontend dropdown ensures correct folder names, just use as-is
+    const uploadGroups = originalUploadGroups;
+    const correctedUploadGroupsForPR = uploadGroupsForPR;
+
+    console.log("\n  Existing branch:", existingBranch || "NONE (will create new)");
+    console.log("  Should create PR:", shouldCreatePR);
+    console.log("  Upload groups (this batch):", uploadGroups.length);
+    console.log(
+      "  Files in this batch:",
+      uploadGroups.reduce((sum, g) => sum + (Array.isArray(g.files) ? g.files.length : 0), 0)
+    );
+    if (correctedUploadGroupsForPR && Array.isArray(correctedUploadGroupsForPR)) {
+      console.log(
+        "  Complete file list for PR:",
+        correctedUploadGroupsForPR.reduce(
+          (sum, g) => sum + (Array.isArray(g.files) ? g.files.length : 0),
+          0
+        ),
+        "files"
+      );
+    }
+    if (batchInfo) {
+      console.log("  Batch info:", `${batchInfo.current}/${batchInfo.total}`);
+    }
+    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
     const batchLog = batchInfo
       ? ` (batch ${batchInfo.current}/${batchInfo.total})`

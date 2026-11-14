@@ -162,39 +162,54 @@ document.addEventListener("DOMContentLoaded", async () => {
       const urlParams = new URLSearchParams(window.location.search);
       renderCurrentView(urlParams.get("path") || "");
 
-      // 4. Setup Search Listener
-      searchInput.addEventListener("input", (e) => {
-        const query = e.target.value.trim();
+      // 4. Setup Search Listener with Debouncing
+      let searchDebounceTimeout = null;
+      const handleSearch = (immediate = false) => {
+        const query = searchInput.value.trim();
 
-        if (query.length > 0) {
-          // Search Mode
-          clearSearchBtn.style.display = "block";
-          const results = searchRepository(allItems, query);
+        const executeSearch = () => {
+          if (query.length > 0) {
+            // Search Mode
+            clearSearchBtn.style.display = "block";
+            const results = searchRepository(allItems, query);
 
-          treeEl.innerHTML = "";
-          treeEl.classList.add("search-mode");
+            treeEl.innerHTML = "";
+            treeEl.classList.add("search-mode");
 
-          if (results.length === 0) {
-            treeEl.innerHTML =
-              '<p class="empty-message">No matching items found.</p>';
+            if (results.length === 0) {
+              treeEl.innerHTML =
+                '<p class="empty-message">No matching items found.</p>';
+            } else {
+              // Render top 100 results for performance
+              renderSearchResults(results.slice(0, 100), treeEl);
+            }
           } else {
-            // Render top 100 results for performance
-            renderSearchResults(results.slice(0, 100), treeEl);
-          }
-        } else {
-          // Restore Navigation Mode
-          clearSearchBtn.style.display = "none";
-          treeEl.classList.remove("search-mode");
+            // Restore Navigation Mode
+            clearSearchBtn.style.display = "none";
+            treeEl.classList.remove("search-mode");
 
-          // Get current path from URL state, not input
-          const currentUrlParams = new URLSearchParams(window.location.search);
-          renderCurrentView(currentUrlParams.get("path") || "");
+            // Get current path from URL state, not input
+            const currentUrlParams = new URLSearchParams(window.location.search);
+            renderCurrentView(currentUrlParams.get("path") || "");
+          }
+        };
+
+        if (searchDebounceTimeout) {
+          clearTimeout(searchDebounceTimeout);
         }
-      });
+
+        if (immediate || query.length === 0) {
+          executeSearch();
+        } else {
+          searchDebounceTimeout = setTimeout(executeSearch, 150);
+        }
+      };
+
+      searchInput.addEventListener("input", () => handleSearch(false));
 
       clearSearchBtn.addEventListener("click", () => {
         searchInput.value = "";
-        searchInput.dispatchEvent(new Event("input"));
+        handleSearch(true);
       });
     } catch (error) {
       console.error("Error:", error);
