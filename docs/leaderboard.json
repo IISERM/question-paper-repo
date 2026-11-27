@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-16T13:05:18.946Z",
-  "total_contributors": 52,
+  "last_updated": "2026-11-27T15:40:16.456Z",
+  "total_contributors": 53,
   "contributors": [
     {
       "username": "Jasmeen Kaur",
@@ -48,7 +48,7 @@
       "email": "ms24129@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
       "profile_url": null,
-      "commits": 89
+      "commits": 91
     },
     {
       "username": "MANVENDRA SINGH",
@@ -155,6 +155,14 @@
       "commits": 6
     },
     {
+      "username": "TAMAGHNA DEY",
+      "name": "TAMAGHNA DEY",
+      "email": "ms24205@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=TAMAGHNA%20DEY&background=random&size=200",
+      "profile_url": null,
+      "commits": 5
+    },
+    {
       "username": "Arsh Dhir",
       "name": "Arsh Dhir",
       "email": "ms24025@iisermohali.ac.in",
@@ -215,14 +223,6 @@
       "name": "Kunal Rana",
       "email": "ms23078@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=Kunal%20Rana&background=random&size=200",
-      "profile_url": null,
-      "commits": 3
-    },
-    {
-      "username": "TAMAGHNA DEY",
-      "name": "TAMAGHNA DEY",
-      "email": "ms24205@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=TAMAGHNA%20DEY&background=random&size=200",
       "profile_url": null,
       "commits": 3
     },
@@ -305,6 +305,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "Chahat Pandita",
+      "name": "Chahat Pandita",
+      "email": "ms23005@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Chahat%20Pandita&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "Ritvik Edoliya",
