@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-27T15:40:16.456Z",
-  "total_contributors": 53,
+  "last_updated": "2026-11-27T15:51:25.264Z",
+  "total_contributors": 57,
   "contributors": [
     {
       "username": "Jasmeen Kaur",
@@ -35,20 +35,20 @@
       "commits": 113
     },
     {
+      "username": "SIDDHANT PANDA",
+      "name": "SIDDHANT PANDA",
+      "email": "ms24129@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
+      "profile_url": null,
+      "commits": 100
+    },
+    {
       "username": "HARSH VARDHAN SHRESHTH",
       "name": "HARSH VARDHAN SHRESHTH",
       "email": "ms24085@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=HARSH%20VARDHAN%20SHRESHTH&background=random&size=200",
       "profile_url": null,
       "commits": 99
-    },
-    {
-      "username": "SIDDHANT PANDA",
-      "name": "SIDDHANT PANDA",
-      "email": "ms24129@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=SIDDHANT%20PANDA&background=random&size=200",
-      "profile_url": null,
-      "commits": 91
     },
     {
       "username": "MANVENDRA SINGH",
@@ -64,7 +64,7 @@
       "email": "ms25072@iisermohali.ac.in",
       "avatar_url": "https://ui-avatars.com/api/?name=ANANYA%20SHYAM&background=random&size=200",
       "profile_url": null,
-      "commits": 37
+      "commits": 42
     },
     {
       "username": "Koushik Vijaya Kumar",
@@ -105,6 +105,14 @@
       "avatar_url": "https://ui-avatars.com/api/?name=SHIVANSH%20SINGH&background=random&size=200",
       "profile_url": null,
       "commits": 12
+    },
+    {
+      "username": "Arsh Dhir",
+      "name": "Arsh Dhir",
+      "email": "ms24025@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Arsh%20Dhir&background=random&size=200",
+      "profile_url": null,
+      "commits": 11
     },
     {
       "username": "RAGHAVENDRA N.D SALIAN",
@@ -155,18 +163,18 @@
       "commits": 6
     },
     {
-      "username": "TAMAGHNA DEY",
-      "name": "TAMAGHNA DEY",
-      "email": "ms24205@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=TAMAGHNA%20DEY&background=random&size=200",
+      "username": "Satyabrata Patra",
+      "name": "Satyabrata Patra",
+      "email": "ms23131@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Satyabrata%20Patra&background=random&size=200",
       "profile_url": null,
       "commits": 5
     },
     {
-      "username": "Arsh Dhir",
-      "name": "Arsh Dhir",
-      "email": "ms24025@iisermohali.ac.in",
-      "avatar_url": "https://ui-avatars.com/api/?name=Arsh%20Dhir&background=random&size=200",
+      "username": "TAMAGHNA DEY",
+      "name": "TAMAGHNA DEY",
+      "email": "ms24205@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=TAMAGHNA%20DEY&background=random&size=200",
       "profile_url": null,
       "commits": 5
     },
@@ -305,6 +313,30 @@
       "avatar_url": "https://ui-avatars.com/api/?name=Somesh%20Sharma&background=random&size=200",
       "profile_url": null,
       "commits": 2
+    },
+    {
+      "username": "AASHNA HARDIK KOTECHA",
+      "name": "AASHNA HARDIK KOTECHA",
+      "email": "ms25183@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=AASHNA%20HARDIK%20KOTECHA&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
+    },
+    {
+      "username": "KSHITIJ PRAVIN SALUNKE",
+      "name": "KSHITIJ PRAVIN SALUNKE",
+      "email": "ms24024@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=KSHITIJ%20PRAVIN%20SALUNKE&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
+    },
+    {
+      "username": "Vansh Kumar",
+      "name": "Vansh Kumar",
+      "email": "ms26125@iisermohali.ac.in",
+      "avatar_url": "https://ui-avatars.com/api/?name=Vansh%20Kumar&background=random&size=200",
+      "profile_url": null,
+      "commits": 1
     },
     {
       "username": "Chahat Pandita",
