@@ -75,7 +75,7 @@ Top contributors based on commit count:
 | 🥈 | BALAKUMARAN S | 152 |
 | 🥉 | Manu A Sankaran | 127 |
 | 4 | SASHVATH KRISHNAN S | 113 |
-| 5 | SIDDHANT PANDA | 100 |
+| 5 | HARSH VARDHAN SHRESHTH | 104 |
 
-*Last updated: 2026-11-27 15:51:25 UTC*
+*Last updated: 2026-11-27 16:23:00 UTC*
 
